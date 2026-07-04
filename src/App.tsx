@@ -1,3 +1,4 @@
+import { Navigation } from "@/components/layout/Navigation/Navigation"
 import { Hero } from "@/components/sections/Hero/Hero"
 import { Work } from "@/components/sections/Work/Work"
 import { EditorialQuote } from "@/components/sections/EditorialQuote/EditorialQuote"
@@ -8,6 +9,7 @@ import { SelectedThoughts } from "@/components/sections/SelectedThoughts/Selecte
 function App() {
   return (
     <>
+      <Navigation />
       <Hero />
       <Work />
       <EditorialQuote />

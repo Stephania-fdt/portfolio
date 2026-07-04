@@ -35,3 +35,6 @@ __pycache__/
 /playwright/.cache/
 e2e/**/*-snapshots/*-actual.png
 e2e/**/*-snapshots/*-diff.png
+
+*storybook.log
+storybook-static
