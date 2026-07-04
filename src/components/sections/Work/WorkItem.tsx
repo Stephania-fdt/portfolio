@@ -46,7 +46,7 @@ function WorkItem({ project, index, reverse }: WorkItemProps) {
 
       <div className="md:basis-3/5">
         <div className="flex aspect-[4/3] w-full items-center justify-center border border-border bg-secondary/50">
-          <span className="font-mono text-xs tracking-widest text-muted-foreground/70 uppercase">
+          <span className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
             Fig. {formatNumeral(index)}
           </span>
         </div>

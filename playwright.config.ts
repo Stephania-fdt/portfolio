@@ -13,10 +13,9 @@ export default defineConfig({
   use: {
     baseURL: BASE_URL,
     trace: "on-first-retry",
-    // The app itself honors prefers-reduced-motion (see index.css) — reusing
-    // that existing behavior keeps screenshots deterministic instead of
-    // racing framer-motion's entrance animations.
-    reducedMotion: "reduce",
+    // prefers-reduced-motion is emulated per-test in e2e/fixtures.ts, not
+    // here — this context option doesn't reliably reach the test `page`
+    // fixture in this Playwright version.
   },
 
   projects: [

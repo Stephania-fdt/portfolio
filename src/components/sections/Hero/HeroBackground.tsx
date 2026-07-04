@@ -28,7 +28,7 @@ function HeroBackground() {
               reference can't drift when copy elsewhere changes height. */}
           <div className="absolute top-section left-4 flex origin-left -rotate-90 items-center gap-2">
             <span className="h-px w-3 bg-muted-foreground/25" />
-            <span className="font-mono text-2xs tracking-widest text-muted-foreground/80 uppercase">
+            <span className="font-mono text-2xs tracking-widest text-muted-foreground uppercase">
               {heroContent.title}
             </span>
             <span className="h-px w-3 bg-muted-foreground/25" />
