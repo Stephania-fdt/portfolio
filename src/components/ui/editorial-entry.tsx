@@ -18,6 +18,10 @@ type EditorialEntryProps = {
   sentence: string | string[]
   children?: React.ReactNode
   className?: string
+  /** Extra classes on the `<h3>` itself — e.g. a hover color transition
+   *  driven by a `group` ancestor outside this component (WorkItem's
+   *  whole-card hover). Optional: every other caller leaves it unset. */
+  titleClassName?: string
 }
 
 function EditorialEntry({
@@ -28,6 +32,7 @@ function EditorialEntry({
   sentence,
   children,
   className,
+  titleClassName,
 }: EditorialEntryProps) {
   const paragraphs = Array.isArray(sentence) ? sentence : [sentence]
 
@@ -57,7 +62,9 @@ function EditorialEntry({
         </div>
       ) : null}
 
-      <h3 className="mt-4 text-5xl font-bold md:text-6xl">{title}</h3>
+      <h3 className={cn("mt-4 text-5xl font-bold md:text-6xl", titleClassName)}>
+        {title}
+      </h3>
 
       <div className="mt-5 max-w-xl space-y-4 text-xl text-foreground md:text-2xl">
         {paragraphs.map((paragraph) => (

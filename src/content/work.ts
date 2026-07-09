@@ -1,3 +1,5 @@
+import harmonyMockup from "@/assets/case-studies/harmony/mockup.png"
+
 export type WorkProject = {
   title: string
   category: string
@@ -12,6 +14,14 @@ export type WorkProject = {
    */
   signalTechnologies?: string[]
   href: string
+  /**
+   * A real project artifact, not a mockup or stock image — same rule as
+   * `CaseStudyImage` (see `content/case-studies/types.ts`). Optional and
+   * deliberately rare: most entries don't have one yet, and the preview
+   * card's "plate" placeholder is the honest default until real material
+   * exists, not a gap to paper over.
+   */
+  previewImage?: string
 }
 
 export const workProjects: WorkProject[] = [
@@ -48,6 +58,7 @@ export const workProjects: WorkProject[] = [
     ],
     signalTechnologies: ["Design Thinking", "UX Research"],
     href: "/work/harmony",
+    previewImage: harmonyMockup,
   },
   {
     title: "WellPack",
