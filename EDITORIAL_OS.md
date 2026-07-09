@@ -20,6 +20,23 @@ EDITORIAL_OS is the highest authority in this repository. No specialist may cont
 
 ---
 
+## Governance Documents
+
+Four permanent references, each with a distinct job. EDITORIAL_OS remains the operational authority between them — where any of the other three appear to conflict with this document, this document wins.
+
+| Document                      | Governs                                                                                                                                                                                                                                                                                                                     |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `EDITORIAL_OS.md` (this file) | _How the studio works_ — process, hierarchy, coding standards, review gates.                                                                                                                                                                                                                                                |
+| `PORTFOLIO_CONSTITUTION.md`   | _What the portfolio is trying to be felt as_ — narrative architecture, chapter structure, the manifesto behind the chapters.                                                                                                                                                                                                |
+| `PRODUCT_VISION.md`           | The approved product-strategy decisions per section (Hero, Selected Work) — what each section must communicate and why, independent of its current implementation state.                                                                                                                                                    |
+| `docs/01-MANIFESTO.md`        | The Design Manifesto — referred to elsewhere as "DESIGN_MANIFESTO"; this is the one real file that name points to. (A stray, empty, untracked directory literally named `.claude/DESIGN_MANIFESTO.md` also exists in this repo — it is not this document, carries no content, and is a leftover artifact, not a reference.) |
+
+One governing test from `PORTFOLIO_CONSTITUTION.md` binds every future decision in this studio, not only narrative ones: **does this make the portfolio feel more like Stéphania?** If the answer is no, reject it.
+
+**Status: all four frozen as of 2026-07-08.** Frozen means settled, not unreadable — still the reference for every future decision, but not open for casual revision. Reopening any of them requires the same deliberateness that created them, not an incidental edit made in passing while doing something else. This does not freeze the portfolio itself — only these governance documents. The portfolio is the product, and every sprint from here improves it.
+
+---
+
 ## 1. Philosophy
 
 This is not a résumé site — it's a premium editorial magazine that happens to be about one Product Designer. Every decision, at every layer, exists to protect that feeling: the narrative arc a reader moves through (§7.1), the restraint in what's _not_ built (§7.6), the discipline of a token system over arbitrary values, the refusal to ship an inaccessible or sluggish interface in the name of speed. The AI Product Studio's entire specialist structure exists to hold that bar under pressure — across many small requests, many sessions, many contributors (human or AI) — not just to hold it once.

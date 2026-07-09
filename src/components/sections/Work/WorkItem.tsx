@@ -1,8 +1,10 @@
 import { ArrowRight } from "lucide-react"
+import { Link } from "react-router-dom"
 
 import { cn } from "@/lib/utils"
 import { formatNumeral } from "@/lib/numerals"
 import { EditorialEntry } from "@/components/ui/editorial-entry"
+import { caseStudies } from "@/content/case-studies"
 import type { WorkProject } from "@/content/work"
 
 type WorkItemProps = {
@@ -13,6 +15,11 @@ type WorkItemProps = {
 }
 
 function WorkItem({ project, index, reverse }: WorkItemProps) {
+  // A project only links to a case study once one has actually been
+  // written — a promised page that doesn't exist is worse than no link.
+  const slug = project.href.replace("/work/", "")
+  const hasCaseStudy = slug in caseStudies
+
   return (
     <div
       className={cn(
@@ -28,19 +35,33 @@ function WorkItem({ project, index, reverse }: WorkItemProps) {
           sentence={project.sentence}
         >
           <p className="mt-6 font-mono text-xs tracking-wide text-muted-foreground">
-            {project.technologies.join(" · ")}
+            {project.technologies.map((tech, i) => (
+              <span key={tech}>
+                {i > 0 && " · "}
+                <span
+                  className={cn(
+                    project.signalTechnologies?.includes(tech) &&
+                      "font-medium text-foreground",
+                  )}
+                >
+                  {tech}
+                </span>
+              </span>
+            ))}
           </p>
 
-          <a
-            href={project.href}
-            className="group mt-8 inline-flex items-center gap-2 text-sm font-medium tracking-tight text-foreground"
-          >
-            Read Case Study
-            <ArrowRight
-              aria-hidden="true"
-              className="size-4 transition-transform duration-(--duration-fast) ease-standard group-hover:translate-x-0.5"
-            />
-          </a>
+          {hasCaseStudy ? (
+            <Link
+              to={project.href}
+              className="group mt-8 inline-flex items-center gap-2 text-sm font-medium tracking-tight text-brand"
+            >
+              Read Case Study
+              <ArrowRight
+                aria-hidden="true"
+                className="size-4 transition-transform duration-(--duration-fast) ease-standard group-hover:translate-x-0.5"
+              />
+            </Link>
+          ) : null}
         </EditorialEntry>
       </div>
 

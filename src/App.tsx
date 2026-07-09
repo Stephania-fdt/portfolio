@@ -1,21 +1,19 @@
+import { Route, Routes } from "react-router-dom"
+
 import { Navigation } from "@/components/layout/Navigation/Navigation"
-import { Hero } from "@/components/sections/Hero/Hero"
-import { Work } from "@/components/sections/Work/Work"
-import { EditorialQuote } from "@/components/sections/EditorialQuote/EditorialQuote"
-import { DesignPrinciples } from "@/components/sections/DesignPrinciples/DesignPrinciples"
-import { TheProcess } from "@/components/sections/Process/TheProcess"
-import { SelectedThoughts } from "@/components/sections/SelectedThoughts/SelectedThoughts"
+import { ScrollManager } from "@/components/layout/ScrollManager"
+import { Home } from "@/pages/Home"
+import { CaseStudy } from "@/pages/CaseStudy/CaseStudy"
 
 function App() {
   return (
     <>
+      <ScrollManager />
       <Navigation />
-      <Hero />
-      <Work />
-      <EditorialQuote />
-      <DesignPrinciples />
-      <TheProcess />
-      <SelectedThoughts />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/work/:slug" element={<CaseStudy />} />
+      </Routes>
     </>
   )
 }

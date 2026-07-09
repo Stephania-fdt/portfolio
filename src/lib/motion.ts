@@ -12,12 +12,16 @@ export const DURATION = {
   fast: 0.15,
   standard: 0.25,
   slow: 0.4,
+  /** Atmosphere only — background/construction reveals, never content a
+   *  visitor is waiting to read or act on. See Architected Light. */
+  atmosphere: 0.7,
 } as const
 
 export const transition = {
   fast: { duration: DURATION.fast, ease: EASE_STANDARD },
   standard: { duration: DURATION.standard, ease: EASE_STANDARD },
   slow: { duration: DURATION.slow, ease: EASE_STANDARD },
+  atmosphere: { duration: DURATION.atmosphere, ease: EASE_STANDARD },
 } satisfies Record<string, Transition>
 
 /** Distance (px) content travels in enter/exit transitions. Kept small — motion should be felt, not seen. */
@@ -31,6 +35,16 @@ export const fadeIn: Variants = {
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: FADE_OFFSET },
   visible: { opacity: 1, y: 0, transition: transition.standard },
+}
+
+/**
+ * Same fadeUp, held a beat longer — for the one deliberate emphasis moment
+ * (Selected Work's lead entry), not a new motion vocabulary. Reuses the
+ * existing `slow` duration token; nothing here is a new value.
+ */
+export const fadeUpSlow: Variants = {
+  hidden: { opacity: 0, y: FADE_OFFSET },
+  visible: { opacity: 1, y: 0, transition: transition.slow },
 }
 
 /**

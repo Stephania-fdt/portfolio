@@ -5,55 +5,81 @@ import { cn } from "@/lib/utils"
 import { Container, containerVariants } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
 import { HeroBackground } from "@/components/sections/Hero/HeroBackground"
-import { fadeUp, staggerContainer } from "@/lib/motion"
+import { transition } from "@/lib/motion"
 import { heroContent } from "@/content/hero"
 
+/** Distance (px) the Hero's own reveals travel — slightly more than the
+ *  sitewide FADE_OFFSET (12px) since these are larger, slower beats, not
+ *  small UI transitions. */
+const REVEAL_OFFSET = 16
+
 /**
- * Deterministic 3-row grid — no ratio balancing. Row 1 (auto) is the
- * editorial column in plain document flow; row 2 (1fr) is the only
- * flexible thing in this layout and holds no element; row 3 (auto) is
- * the scroll cue. The name's position is a fixed offset (`pt-section`)
- * from the top, never a function of how tall anything below it is.
+ * Sprint 12 — the Hero rebuilt as its own editorial composition rather
+ * than the site's shared `fadeUp`/`staggerContainer` rhythm. Every other
+ * section keeps that shared vocabulary; the Hero earns a bespoke one
+ * because it's the one moment asked to feel authored rather than
+ * systematic. Hand-tuned, uneven delays (not a fixed stagger interval) so
+ * the byline, the claim, and the CTA land as three distinct beats with
+ * their own weight — a pause you can feel, not a metronome.
  */
 function Hero() {
   const shouldReduceMotion = useReducedMotion()
+
+  const reveal = (delay: number, offset = REVEAL_OFFSET) => ({
+    initial: shouldReduceMotion ? false : { opacity: 0, y: offset },
+    animate: { opacity: 1, y: 0 },
+    transition: { ...transition.slow, delay: shouldReduceMotion ? 0 : delay },
+  })
 
   return (
     <section
       id="hero"
       aria-label="Introduction"
-      className="relative grid min-h-dvh w-full grid-rows-[auto_1fr_auto] overflow-hidden pt-section pb-6"
+      className="relative grid min-h-dvh w-full overflow-hidden md:grid-cols-[65fr_35fr]"
     >
-      <HeroBackground />
-
-      <Container size="content" className="relative row-start-1">
-        <motion.div
-          initial={shouldReduceMotion ? false : "hidden"}
-          animate="visible"
-          variants={staggerContainer}
-        >
-          <motion.h1
-            variants={fadeUp}
-            className="text-hero font-bold tracking-hero"
+      <div className="grid grid-rows-[auto_1fr_auto] pt-section pb-6">
+        <Container size="content" className="row-start-1">
+          {/* Byline demoted to a masthead credit line, not a sentence —
+              the scale drop from here to the claim below is the first
+              beat of editorial tension: small, precise, then enormous. */}
+          <motion.p
+            {...reveal(0)}
+            className="text-xs font-medium tracking-widest text-foreground uppercase md:text-sm"
           >
             {heroContent.name}
-          </motion.h1>
+            <span className="text-muted-foreground">
+              {" "}
+              — {heroContent.title}
+            </span>
+          </motion.p>
 
-          {/* Single measured wrapper — the reading column's width is declared
-              once here; nothing below repeats its own max-w-xl. */}
-          <div className="max-w-xl">
-            <motion.p
-              variants={fadeUp}
-              className="mt-6 font-mono text-xl leading-snug text-primary md:text-2xl"
+          {/* The claim is allowed to run wider than the reading column
+              beneath it (max-w-3xl vs. max-w-xl) — headlines outrunning
+              body measure is a real editorial convention, not an accident. */}
+          <h1 className="mt-10 max-w-3xl">
+            <motion.span
+              {...reveal(0.15)}
+              className="block text-3xl font-medium text-muted-foreground md:text-4xl"
             >
-              {heroContent.statement.primary}{" "}
-              <br className="hidden md:inline" />
+              {heroContent.statement.primary}
+            </motion.span>
+            <motion.span
+              initial={
+                shouldReduceMotion ? false : { opacity: 0, y: 22, scale: 0.98 }
+              }
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                ...transition.slow,
+                delay: shouldReduceMotion ? 0 : 0.32,
+              }}
+              className="mt-1 block origin-left text-6xl leading-[0.9] font-bold tracking-tightest md:text-7xl"
+            >
               {heroContent.statement.secondary}
-            </motion.p>
+            </motion.span>
+          </h1>
 
-            {/* The big pause: declaration (name + statement) to reading
-                (value prop + CTA) is one register change, not three even steps. */}
-            <motion.div variants={fadeUp} className="mt-20 space-y-4">
+          <div className="max-w-xl">
+            <motion.div {...reveal(0.55)} className="mt-16 space-y-4">
               <p className="text-lg text-foreground md:text-xl">
                 {heroContent.valueProposition.lead}
               </p>
@@ -63,8 +89,8 @@ function Hero() {
             </motion.div>
 
             <motion.div
-              variants={fadeUp}
-              className="mt-8 flex flex-wrap items-center gap-4"
+              {...reveal(0.7)}
+              className="mt-10 flex flex-wrap items-center gap-5"
             >
               <Button asChild size="lg">
                 <a href={heroContent.primaryCta.href}>
@@ -75,35 +101,54 @@ function Hero() {
                   />
                 </a>
               </Button>
-              <Button asChild variant="outline" size="lg">
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-muted-foreground/70 hover:border-muted-foreground"
+              >
                 <a href={heroContent.secondaryCta.href}>
                   {heroContent.secondaryCta.label}
                 </a>
               </Button>
             </motion.div>
           </div>
+        </Container>
+
+        {/* Row 2 (the 1fr track) is intentionally empty — no spacer element. */}
+
+        {/* Flush with the same left edge as the byline and headline above
+            it, not centered under the column — every other element in
+            this composition sits on that edge, so a centered cue was the
+            one thing that read as generic "website UI" rather than part
+            of the same authored page. Arrives last, after the CTAs, so it
+            reads as the composition's own closing beat. */}
+        <motion.div
+          aria-hidden="true"
+          initial={shouldReduceMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            ...transition.slow,
+            delay: shouldReduceMotion ? 0 : 0.9,
+          }}
+          className={cn(
+            containerVariants({ size: "content" }),
+            "row-start-3 flex flex-col items-start gap-3",
+          )}
+        >
+          <span className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
+            Scroll
+          </span>
+          <span className="relative h-10 w-px overflow-hidden bg-border">
+            {/* Slow, soft — a breath, not a loading bar. Neutral tone on
+                purpose: the brand color already spoke once, in the primary
+                CTA a few lines above this; the cue doesn't need to repeat it. */}
+            <span className="absolute inset-x-0 top-0 h-1/2 w-full animate-scroll-cue bg-muted-foreground/70" />
+          </span>
         </motion.div>
-      </Container>
-
-      {/* Row 2 (the 1fr track) is intentionally empty — no spacer element. */}
-
-      <div
-        aria-hidden="true"
-        className={cn(containerVariants({ size: "content" }), "row-start-3")}
-      >
-        {/* Same max-w-xl measure as the text column above, so the cue is
-            centered under the column — not under the full-width container. */}
-        <div className="max-w-xl">
-          <div className="flex flex-col items-center gap-3">
-            <span className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-              Scroll
-            </span>
-            <span className="relative h-10 w-px overflow-hidden bg-border">
-              <span className="absolute inset-x-0 top-0 h-1/2 w-full animate-scroll-cue bg-accent" />
-            </span>
-          </div>
-        </div>
       </div>
+
+      <HeroBackground />
     </section>
   )
 }

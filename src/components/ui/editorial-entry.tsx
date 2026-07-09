@@ -46,8 +46,11 @@ function EditorialEntry({
               {formatNumeral(index, numeral)}
             </span>
           ) : null}
+          {/* Sans, not mono — same Architected Light rule as SectionKicker:
+              mono stays reserved for construction/technical moments, and
+              a category · year caption isn't one. */}
           {eyebrow ? (
-            <span className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
+            <span className="font-sans text-xs tracking-widest text-brand uppercase">
               {eyebrow}
             </span>
           ) : null}
