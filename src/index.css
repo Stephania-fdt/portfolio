@@ -92,12 +92,6 @@
   /* is waiting on to read or act. See Architected Light, Sprint 11.4.   */
   --duration-atmosphere: 700ms;
 
-  /* Values duplicated (not var()-referenced) — Tailwind reads --animate-*  */
-  /* shorthands literally, it doesn't resolve nested custom properties.    */
-  /* Slow, soft ease — the site's own --ease-standard is tuned for quick   */
-  /* UI feedback (buttons, hovers), which reads mechanical on a 1.8s loop. */
-  --animate-scroll-cue: scroll-cue 3.6s ease-in-out infinite;
-
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -268,23 +262,6 @@
   --sidebar-accent-foreground: #faf8f5;
   --sidebar-border: rgba(250, 248, 245, 0.1);
   --sidebar-ring: #92a8d1;
-}
-
-@keyframes scroll-cue {
-  0% {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-  15% {
-    opacity: 1;
-  }
-  85% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(200%);
-  }
 }
 
 /* ------------------------------------------------------------------ */

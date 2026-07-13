@@ -117,12 +117,15 @@ function Hero() {
 
         {/* Row 2 (the 1fr track) is intentionally empty — no spacer element. */}
 
-        {/* Flush with the same left edge as the byline and headline above
-            it, not centered under the column — every other element in
-            this composition sits on that edge, so a centered cue was the
-            one thing that read as generic "website UI" rather than part
-            of the same authored page. Arrives last, after the CTAs, so it
-            reads as the composition's own closing beat. */}
+        {/* Sprint 13.1 — a margin annotation, not a UI widget: stacked
+            upright letters (the vertical-label convention of a technical
+            drawing's axis note or a book spine, not a sideways sentence),
+            flush with the same left edge as everything above it. A "Scroll"
+            that reads sideways takes a beat to parse — that pause is the
+            point; it's found, not announced. The line breathes in place
+            (opacity only, ~5s, starts well after arrival) instead of a
+            segment sliding through a track — nothing here should read as
+            a loading bar. */}
         <motion.div
           aria-hidden="true"
           initial={shouldReduceMotion ? false : { opacity: 0 }}
@@ -133,17 +136,32 @@ function Hero() {
           }}
           className={cn(
             containerVariants({ size: "content" }),
-            "row-start-3 flex flex-col items-start gap-3",
+            "row-start-3 flex items-start gap-3",
           )}
         >
-          <span className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-            Scroll
+          <span className="relative h-16 w-px bg-border">
+            <motion.span
+              className="absolute inset-0 w-full origin-top bg-muted-foreground"
+              animate={
+                shouldReduceMotion ? undefined : { opacity: [0.35, 0.85, 0.35] }
+              }
+              transition={
+                shouldReduceMotion
+                  ? undefined
+                  : {
+                      duration: 4.8,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1.6,
+                    }
+              }
+            />
+            {/* A drafted terminator, not an arrowhead — the mark a ruler
+                or a dimension line ends on. */}
+            <span className="absolute -bottom-px left-1/2 h-px w-2 -translate-x-1/2 bg-border" />
           </span>
-          <span className="relative h-10 w-px overflow-hidden bg-border">
-            {/* Slow, soft — a breath, not a loading bar. Neutral tone on
-                purpose: the brand color already spoke once, in the primary
-                CTA a few lines above this; the cue doesn't need to repeat it. */}
-            <span className="absolute inset-x-0 top-0 h-1/2 w-full animate-scroll-cue bg-muted-foreground/70" />
+          <span className="font-mono text-2xs tracking-widest text-muted-foreground uppercase [text-orientation:upright] [writing-mode:vertical-rl]">
+            Scroll
           </span>
         </motion.div>
       </div>
