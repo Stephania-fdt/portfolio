@@ -36,7 +36,7 @@ function Navigation() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-(--duration-standard) ease-standard",
         scrolled
-          ? "border-border bg-background/75 backdrop-blur-sm backdrop-saturate-150"
+          ? "border-border bg-background/95 backdrop-blur-md backdrop-saturate-150"
           : "border-transparent bg-transparent",
       )}
     >
