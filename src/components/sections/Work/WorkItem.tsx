@@ -14,6 +14,8 @@ type WorkItemProps = {
   index: number
   /** Mirrors the image to the opposite side — Work's one alternating-rhythm device. */
   reverse?: boolean
+  /** The SPF case study anchors the section with a wider editorial plate. */
+  isLead?: boolean
 }
 
 /**
@@ -24,7 +26,7 @@ type WorkItemProps = {
  * title react to that same hover through Tailwind's `group`, even though
  * neither is a descendant of the link itself.
  */
-function WorkItem({ project, index, reverse }: WorkItemProps) {
+function WorkItem({ project, index, reverse, isLead = false }: WorkItemProps) {
   const shouldReduceMotion = useReducedMotion()
   // A project only links to a case study once one has actually been
   // written — a promised page that doesn't exist is worse than no link.
@@ -35,20 +37,21 @@ function WorkItem({ project, index, reverse }: WorkItemProps) {
     <div
       className={cn(
         "group relative flex flex-col gap-10 md:flex-row md:items-center md:gap-16",
+        isLead && "md:gap-20 lg:gap-24",
         reverse && "md:flex-row-reverse",
       )}
     >
-      <div className="md:basis-2/5">
+      <div className={cn(isLead ? "md:basis-[38%]" : "md:basis-2/5")}>
         <EditorialEntry
           index={index}
           eyebrow={`${project.category} · ${project.year}`}
           title={project.title}
           sentence={project.sentence}
-          titleClassName={
-            hasCaseStudy
-              ? "transition-colors duration-(--duration-standard) ease-standard group-hover:text-brand"
-              : undefined
-          }
+          titleClassName={cn(
+            isLead && "text-6xl md:text-7xl",
+            hasCaseStudy &&
+              "transition-colors duration-(--duration-standard) ease-standard group-hover:text-brand",
+          )}
         >
           <p className="mt-6 font-mono text-xs tracking-wide text-muted-foreground">
             {project.technologies.map((tech, i) => (
@@ -75,7 +78,7 @@ function WorkItem({ project, index, reverse }: WorkItemProps) {
               to={project.href}
               className="mt-8 inline-flex items-center gap-2 text-sm font-medium tracking-tight text-brand after:absolute after:inset-0 after:content-['']"
             >
-              Read Case Study
+              View Case Study
               <ArrowRight
                 aria-hidden="true"
                 className="size-4 transition-transform duration-(--duration-fast) ease-standard group-hover:translate-x-0.5"
@@ -85,14 +88,15 @@ function WorkItem({ project, index, reverse }: WorkItemProps) {
         </EditorialEntry>
       </div>
 
-      <div className="md:basis-3/5">
+      <div className={cn(isLead ? "md:basis-[62%]" : "md:basis-3/5")}>
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, scale: 1.03 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-10% 0px" }}
           transition={transition.slow}
           className={cn(
-            "flex aspect-[4/3] w-full items-center justify-center overflow-hidden border border-border bg-secondary/50 shadow-xs transition-shadow duration-(--duration-standard) ease-standard",
+            "flex w-full items-center justify-center overflow-hidden border border-border bg-secondary/50 shadow-xs transition-shadow duration-(--duration-standard) ease-standard",
+            isLead ? "aspect-[16/10] md:aspect-[16/11]" : "aspect-[4/3]",
             hasCaseStudy && "group-hover:shadow-md",
           )}
         >

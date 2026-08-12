@@ -1,4 +1,6 @@
 import harmonyMockup from "@/assets/case-studies/harmony/mockup.png"
+import spfPortalPreview from "@/assets/case-studies/spf/product/Desktop - 54.png"
+import wellpackWebsitePreview from "@/assets/case-studies/wellpack/02-brand/supports/Declinaisaon_siteweb.png"
 
 export type WorkProject = {
   title: string
@@ -26,11 +28,11 @@ export type WorkProject = {
 
 export const workProjects: WorkProject[] = [
   {
-    title: "Belgian Ministry of Foreign Affairs Design System",
-    category: "Design System",
+    title: "SPF Affaires étrangères",
+    category: "Product Design · Design System",
     year: "2023–present",
     sentence:
-      "Built a scalable Design System improving consistency, accessibility and collaboration across government digital services.",
+      "Built a scalable Design System for Belgian federal services, embedding accessibility, shared standards and collaboration with development teams.",
     technologies: [
       "Figma",
       "Angular Material",
@@ -41,6 +43,7 @@ export const workProjects: WorkProject[] = [
     ],
     signalTechnologies: ["WCAG", "Design Tokens"],
     href: "/work/spf-design-system",
+    previewImage: spfPortalPreview,
   },
   {
     title: "Harmony",
@@ -75,6 +78,7 @@ export const workProjects: WorkProject[] = [
     ],
     signalTechnologies: ["UX Research", "Design Briefs"],
     href: "/work/wellpack",
+    previewImage: wellpackWebsitePreview,
   },
   {
     title: "Femmes d'Influence",

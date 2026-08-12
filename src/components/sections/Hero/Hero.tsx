@@ -1,10 +1,10 @@
 import { motion, useReducedMotion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 
-import { cn } from "@/lib/utils"
-import { Container, containerVariants } from "@/components/ui/container"
+import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
 import { HeroBackground } from "@/components/sections/Hero/HeroBackground"
+import { ScrollIndicator } from "@/components/sections/Hero/ScrollIndicator"
 import { transition } from "@/lib/motion"
 import { heroContent } from "@/content/hero"
 
@@ -35,9 +35,9 @@ function Hero() {
     <section
       id="hero"
       aria-label="Introduction"
-      className="relative grid min-h-dvh w-full overflow-hidden md:grid-cols-[65fr_35fr]"
+      className="relative grid min-h-dvh w-full overflow-x-hidden md:grid-cols-[58fr_42fr] lg:grid-cols-[65fr_35fr]"
     >
-      <div className="grid grid-rows-[auto_1fr_auto] pt-section pb-6">
+      <div className="grid min-h-dvh grid-rows-[auto_1fr_auto] pt-section pb-6">
         <Container size="content" className="row-start-1">
           {/* Byline demoted to a masthead credit line, not a sentence —
               the scale drop from here to the claim below is the first
@@ -117,54 +117,10 @@ function Hero() {
 
         {/* Row 2 (the 1fr track) is intentionally empty — no spacer element. */}
 
-        {/* Sprint 13.1 — a margin annotation, not a UI widget: stacked
-            upright letters (the vertical-label convention of a technical
-            drawing's axis note or a book spine, not a sideways sentence),
-            flush with the same left edge as everything above it. A "Scroll"
-            that reads sideways takes a beat to parse — that pause is the
-            point; it's found, not announced. The line breathes in place
-            (opacity only, ~5s, starts well after arrival) instead of a
-            segment sliding through a track — nothing here should read as
-            a loading bar. */}
-        <motion.div
-          aria-hidden="true"
-          initial={shouldReduceMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            ...transition.slow,
-            delay: shouldReduceMotion ? 0 : 0.9,
-          }}
-          className={cn(
-            containerVariants({ size: "content" }),
-            "row-start-3 flex items-start gap-3",
-          )}
-        >
-          <span className="relative h-16 w-px bg-border">
-            <motion.span
-              className="absolute inset-0 w-full origin-top bg-muted-foreground"
-              animate={
-                shouldReduceMotion ? undefined : { opacity: [0.35, 0.85, 0.35] }
-              }
-              transition={
-                shouldReduceMotion
-                  ? undefined
-                  : {
-                      duration: 4.8,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1.6,
-                    }
-              }
-            />
-            {/* A drafted terminator, not an arrowhead — the mark a ruler
-                or a dimension line ends on. */}
-            <span className="absolute -bottom-px left-1/2 h-px w-2 -translate-x-1/2 bg-border" />
-          </span>
-          <span className="font-mono text-2xs tracking-widest text-muted-foreground uppercase [text-orientation:upright] [writing-mode:vertical-rl]">
-            Scroll
-          </span>
-        </motion.div>
+        <ScrollIndicator />
       </div>
+
+      <p className="sr-only md:hidden">{heroContent.signature}</p>
 
       <HeroBackground />
     </section>

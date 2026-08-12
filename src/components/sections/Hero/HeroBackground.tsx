@@ -48,8 +48,8 @@ function HeroBackground() {
         }}
       />
 
-      <div className="absolute inset-0 flex items-center justify-center p-12">
-        <div className="flex flex-col items-start gap-6">
+      <div className="absolute inset-0 flex items-center justify-center p-6 lg:p-12">
+        <div className="flex flex-col items-start gap-4 lg:gap-6">
           <SignatureMark letter={initial} />
 
           {/* The signature — arrives last, on purpose. Everything else in
@@ -62,7 +62,7 @@ function HeroBackground() {
               ...transition.atmosphere,
               delay: shouldReduceMotion ? 0 : 0.85,
             }}
-            className="max-w-[22rem] text-sm leading-relaxed text-muted-foreground italic"
+            className="max-w-[12rem] text-sm leading-relaxed text-muted-foreground italic lg:max-w-[22rem]"
           >
             {heroContent.signature}
           </motion.p>
@@ -73,7 +73,7 @@ function HeroBackground() {
         aria-hidden="true"
         className="absolute top-section right-8 font-mono text-2xs tracking-widest text-muted-foreground"
       >
-        Nº 01
+        N° 01
       </span>
 
       {/* Grain sits on top, last — a texture over the whole composition,

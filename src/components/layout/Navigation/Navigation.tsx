@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
+import { IndexNavigation } from "@/components/layout/Navigation/IndexNavigation"
 import { useScrolled } from "@/hooks/use-scrolled"
 import { useActiveSection } from "@/hooks/use-active-section"
 import { navigationContent } from "@/content/navigation"
@@ -43,7 +44,7 @@ function Navigation() {
       <Container size="wide">
         <nav
           aria-label="Primary"
-          className="grid h-16 grid-cols-[1fr_auto_1fr] items-center md:h-20"
+          className="grid h-16 grid-cols-[1fr_auto] items-center gap-2 sm:gap-4 md:h-20 md:grid-cols-[1fr_auto_1fr] md:gap-0"
         >
           <Link
             to="/#hero"
@@ -73,20 +74,23 @@ function Navigation() {
             })}
           </ul>
 
-          <Button
-            asChild
-            variant="outline"
-            size="sm"
-            className="justify-self-end border-muted-foreground/70 hover:border-muted-foreground"
-          >
-            <Link to={`/${navigationContent.cta.href}`}>
-              {navigationContent.cta.label}
-              <ArrowRight
-                aria-hidden="true"
-                className="transition-transform duration-(--duration-fast) ease-standard group-hover:translate-x-0.5"
-              />
-            </Link>
-          </Button>
+          <div className="flex items-center gap-3 justify-self-end min-[375px]:gap-4 min-[390px]:gap-6 sm:gap-8 md:gap-0">
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="border-muted-foreground/70 hover:border-muted-foreground"
+            >
+              <Link to={`/${navigationContent.cta.href}`}>
+                {navigationContent.cta.label}
+                <ArrowRight
+                  aria-hidden="true"
+                  className="transition-transform duration-(--duration-fast) ease-standard group-hover:translate-x-0.5"
+                />
+              </Link>
+            </Button>
+            <IndexNavigation />
+          </div>
         </nav>
       </Container>
     </header>

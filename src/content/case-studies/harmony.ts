@@ -53,10 +53,9 @@ export const harmonyCaseStudy: CaseStudy = {
       ],
     },
     {
-      heading: "From structure to interface",
+      heading: "From structure to wireframe",
       paragraphs: [
         "Only once the structure held did we let ourselves move into wireframes, then UI, then prototypes — in that order, deliberately. It would have been faster to start sketching interfaces the moment the research was done. It would also have meant designing on top of a structure we hadn't actually tested, which is exactly the trap the earlier research was meant to help us avoid.",
-        "The visual identity had its own discipline running alongside this. Harmony's positioning — French, made in France — needed to show up in more than a tagline. We carried that through the interface and the communication around it, while keeping the product modern, accessible, and easy to use rather than leaning on heritage cues that would have dated it immediately. Brand consistency wasn't a separate pass at the end; it was considered at every stage, from the research through to the interface itself.",
       ],
       images: [
         {
@@ -65,6 +64,14 @@ export const harmonyCaseStudy: CaseStudy = {
           caption:
             "Wireframes — structure tested in grayscale, before a single color decision.",
         },
+      ],
+    },
+    {
+      heading: "From wireframe to interface",
+      paragraphs: [
+        "The visual identity had its own discipline running alongside this. Harmony's positioning — French, made in France — needed to show up in more than a tagline. We carried that through the interface and the communication around it, while keeping the product modern, accessible, and easy to use rather than leaning on heritage cues that would have dated it immediately. Brand consistency wasn't a separate pass at the end; it was considered at every stage, from the research through to the interface itself.",
+      ],
+      images: [
         {
           src: mockup,
           alt: "High-fidelity mockups of Harmony's homepage, product page, and category page, showing the finished visual design in the brand's teal and dark green palette.",

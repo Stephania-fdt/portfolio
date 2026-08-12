@@ -12,9 +12,22 @@ function Work() {
 
   return (
     <Section id="work" aria-label="Selected Work">
-      <SectionKicker>Selected Work</SectionKicker>
+      <div className="flex items-center gap-4">
+        <span
+          aria-hidden="true"
+          className="font-mono text-2xs text-muted-foreground"
+        >
+          01
+        </span>
+        <SectionKicker className="flex-1">Selected Work</SectionKicker>
+      </div>
 
-      <div className="mt-20 divide-y divide-border">
+      <p className="mt-8 max-w-2xl text-xl leading-relaxed text-foreground md:text-2xl">
+        A selection of product systems, services and research methods shaped
+        with real teams, constraints and the people who use them in mind.
+      </p>
+
+      <div className="mt-section-sm divide-y divide-border">
         {workProjects.map((project, index) => {
           // The lead entry (index 0, the strongest proof point) gets more
           // room and a slower arrival — sequence and space, never color,
@@ -37,6 +50,7 @@ function Work() {
                 project={project}
                 index={index}
                 reverse={index % 2 === 1}
+                isLead={isLead}
               />
             </motion.div>
           )
