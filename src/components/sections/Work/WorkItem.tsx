@@ -14,8 +14,17 @@ type WorkItemProps = {
   index: number
   /** Mirrors the image to the opposite side — Work's one alternating-rhythm device. */
   reverse?: boolean
-  /** The SPF case study anchors the section with a wider editorial plate. */
-  isLead?: boolean
+  /**
+   * Editorial weight, in descending order. "lead" (SPF) is the section's
+   * one dominant plate — wider image column, larger title, the slow
+   * motion beat. "secondary" (the Portfolio entry) is a real second proof
+   * point — more room to breathe than the rest — expressed through space
+   * and image presence only, never through title size or motion pacing,
+   * so it can't visually compete with "lead". "standard" is everything
+   * else. Space/sequence/motion carry the hierarchy — never color, per
+   * the approved Product Vision.
+   */
+  tier?: "lead" | "secondary" | "standard"
 }
 
 /**
@@ -26,12 +35,22 @@ type WorkItemProps = {
  * title react to that same hover through Tailwind's `group`, even though
  * neither is a descendant of the link itself.
  */
-function WorkItem({ project, index, reverse, isLead = false }: WorkItemProps) {
+function WorkItem({
+  project,
+  index,
+  reverse,
+  tier = "standard",
+}: WorkItemProps) {
   const shouldReduceMotion = useReducedMotion()
+  const isLead = tier === "lead"
+  const isSecondary = tier === "secondary"
   // A project only links to a case study once one has actually been
   // written — a promised page that doesn't exist is worse than no link.
+  // Two sources: the generic `content/case-studies` registry (heading +
+  // paragraphs, rendered by `pages/CaseStudy`), or a hand-built route
+  // like the Portfolio case study, flagged directly on the project.
   const slug = project.href.replace("/work/", "")
-  const hasCaseStudy = slug in caseStudies
+  const hasCaseStudy = slug in caseStudies || project.hasCaseStudy === true
 
   return (
     <div
@@ -96,7 +115,9 @@ function WorkItem({ project, index, reverse, isLead = false }: WorkItemProps) {
           transition={transition.slow}
           className={cn(
             "flex w-full items-center justify-center overflow-hidden border border-border bg-secondary/50 shadow-xs transition-shadow duration-(--duration-standard) ease-standard",
-            isLead ? "aspect-[16/10] md:aspect-[16/11]" : "aspect-[4/3]",
+            isLead && "aspect-[16/10] md:aspect-[16/11]",
+            isSecondary && "aspect-[16/10]",
+            !isLead && !isSecondary && "aspect-[4/3]",
             hasCaseStudy && "group-hover:shadow-md",
           )}
         >

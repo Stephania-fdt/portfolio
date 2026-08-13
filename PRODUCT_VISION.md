@@ -2,7 +2,7 @@
 
 Consolidation of the Product Vision decisions already approved in prior sprints. Nothing below is new strategy or reinterpretation — this is the existing source of truth, persisted. Where a decision has since been implemented in code, its status is noted; the decision itself is unchanged from when it was approved.
 
-**Status: frozen as of 2026-07-08**, alongside `EDITORIAL_OS.md`, `PORTFOLIO_CONSTITUTION.md`, and `docs/01-MANIFESTO.md` (the Design Manifesto).
+**Status: frozen as of 2026-07-08**, alongside `EDITORIAL_OS.md`, `PORTFOLIO_CONSTITUTION.md`, and `docs/01-MANIFESTO.md` (the Design Manifesto). One section has since been deliberately reopened: **Selected Work's project hierarchy was revised 2026-08-13** (below) — a direct, explicit decision by the portfolio's owner, the same bar the freeze itself requires for reopening anything here.
 
 ---
 
@@ -26,18 +26,21 @@ Consolidation of the Product Vision decisions already approved in prior sprints.
 
 **Status: partially implemented (Sprint 3).** `Work.tsx` gives SPF (index 0) more vertical space (`py-section` vs. `py-section-sm`) and a slower entrance (`fadeUpSlow` vs. `fadeUp`) than the other projects — point 1 is real. Points 2 and 4 are not: no real project images exist for any project, and "Read Case Study" links still point to routes that don't exist. Point 5 was respected — no new brand-color usage was added.
 
-### Project hierarchy — added 2026-07-08, updated 2026-07-09
+### Project hierarchy — added 2026-07-08, updated 2026-07-09, revised 2026-08-13
 
-**The Belgian Ministry of Foreign Affairs Design System is the permanent flagship project of this portfolio.** It best represents her current professional level: ownership, Design System strategy, accessibility, collaboration with developers, and organizational impact. This is not a default (first project happens to lead) — it's an explicit, standing editorial rule.
+**The Belgian Ministry of Foreign Affairs Design System is the permanent flagship project of this portfolio.** It best represents her current professional level: ownership, Design System strategy, accessibility, collaboration with developers, and organizational impact. This is not a default (first project happens to lead) — it's an explicit, standing editorial rule. Unchanged by the 2026-08-13 revision below.
 
-Every other project added to Selected Work is secondary to SPF by design. Each serves a different, complementary purpose, not a competing one:
+**Current order (2026-08-13):**
 
-1. **SPF — Enterprise Product Design, Design System, Accessibility, Governance.** Professional maturity and leadership.
-2. **Harmony — End-to-end Product Creation.** Product discovery, UX research, Design Thinking, information architecture, prototyping, testing, and collaborative product creation.
-3. **WellPack — Research-driven Marketing Design.** Research methodology, evidence-driven design, transforming market understanding into actionable design briefs, and creating repeatable UX research processes rather than one-off deliverables. _Not_ a business-impact case — WellPack has no quantified business metrics available (the team that held that data never shared it with Marketing), and this portfolio does not claim outcomes it can't verify. Its value is demonstrated through decision quality, not numbers.
-4. **Femmes d'Influence — Branding, Community & Product Growth.**
+1. **SPF — Enterprise Product Design, Design System, Accessibility, Governance.** Professional maturity and leadership. Keeps the lead-position treatment: structural prominence, first sequence, the slower motion beat.
+2. **This portfolio (Stéphania — Portfolio) — Product Design, Design Systems, Accessibility, AI-assisted workflow, front-end implementation.** The second proof point, added because it's the one place her current practice shows up as one shipped, complete product rather than a described skill. Given real editorial prominence — more space than the standard entries, a wider image plate — but deliberately _not_ the lead treatment: standard title size, standard motion pace, so it reads as strong without competing with SPF.
+3. **Harmony — End-to-end Product Creation.** Product discovery, UX research, Design Thinking, information architecture, prototyping, testing, and collaborative product creation.
+4. **WellPack — Research-driven Marketing Design.** Research methodology, evidence-driven design, transforming market understanding into actionable design briefs, and creating repeatable UX research processes rather than one-off deliverables. _Not_ a business-impact case — WellPack has no quantified business metrics available (the team that held that data never shared it with Marketing), and this portfolio does not claim outcomes it can't verify. Its value is demonstrated through decision quality, not numbers.
+5. **Joga Aura — Luxury E-commerce, Shopify Implementation.** Real 2026 client delivery, UX/UI through to build.
 
-Any future implementation that gives a non-SPF project the lead-position treatment (structural prominence, first sequence, the slower motion beat) contradicts this rule. SPF keeps that treatment regardless of how many other projects are added.
+**Superseded (removed from Selected Work 2026-08-13):** Femmes d'Influence and Sunrex. Both remain real projects and may return to the portfolio elsewhere later; this revision only concerns Selected Work's five-project sequence. As with the WellPack correction below, removal reflects a deliberate editorial call by the portfolio's owner, not evidence that either project's underlying work was found lacking.
+
+Any future implementation that gives a non-SPF project the lead-position treatment (structural prominence, first sequence, the slower motion beat) contradicts this rule. SPF keeps that treatment regardless of how many other projects are added. The Portfolio entry's "secondary" treatment (space and image presence only, never title size or motion pace) is the one sanctioned exception to "every other project is equal weight" — see above.
 
 **Standing principle, generalized beyond WellPack**: a project's stated role in this hierarchy must match what its real evidence actually proves. If evidence-gathering reveals a mismatch — as it did for WellPack, originally positioned as "business impact" with no impact evidence to support it — the role gets corrected to fit the evidence, not the other way around. This portfolio does not overclaim.
 

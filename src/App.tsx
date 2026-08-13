@@ -6,6 +6,7 @@ import { Home } from "@/pages/Home"
 import { CaseStudy } from "@/pages/CaseStudy/CaseStudy"
 import { SPFCaseStudy } from "@/pages/case-studies/SPF/SPFCaseStudy"
 import { WellPackCaseStudy } from "@/pages/case-studies/WellPack/WellPackCaseStudy"
+import { PortfolioCaseStudy } from "@/pages/case-studies/Portfolio/PortfolioCaseStudy"
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
             This checks the new chapter-by-chapter structure separately,
             reachable only at /preview, until it's ready to promote. */}
         <Route path="/work/wellpack/preview" element={<WellPackCaseStudy />} />
+        {/* Portfolio (Project 02) has no generic-registry entry to protect —
+            unlike SPF/WellPack above, this is a brand-new case study, so it
+            goes live directly at its real URL rather than behind /preview. */}
+        <Route path="/work/portfolio" element={<PortfolioCaseStudy />} />
         <Route path="/work/:slug" element={<CaseStudy />} />
       </Routes>
     </>

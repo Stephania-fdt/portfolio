@@ -29,10 +29,14 @@ function Work() {
 
       <div className="mt-section-sm divide-y divide-border">
         {workProjects.map((project, index) => {
-          // The lead entry (index 0, the strongest proof point) gets more
-          // room and a slower arrival — sequence and space, never color,
-          // per the approved Product Vision.
-          const isLead = index === 0
+          // index 0 (SPF) is the section's one dominant plate — more room
+          // and a slower arrival. index 1 (the Portfolio entry) is a real
+          // second proof point — more room to breathe than the rest — but
+          // keeps the standard title size and motion pace so it can't
+          // compete with SPF. Everything else is even weight. Sequence and
+          // space carry this, never color, per the approved Product Vision.
+          const tier =
+            index === 0 ? "lead" : index === 1 ? "secondary" : "standard"
 
           return (
             <motion.div
@@ -40,17 +44,17 @@ function Work() {
               initial={shouldReduceMotion ? false : "hidden"}
               whileInView="visible"
               viewport={{ once: true, margin: "-10% 0px" }}
-              variants={isLead ? fadeUpSlow : fadeUp}
+              variants={tier === "lead" ? fadeUpSlow : fadeUp}
               className={cn(
                 "first:pt-0 last:pb-0",
-                isLead ? "py-section" : "py-section-sm",
+                tier === "standard" ? "py-section-sm" : "py-section",
               )}
             >
               <WorkItem
                 project={project}
                 index={index}
                 reverse={index % 2 === 1}
-                isLead={isLead}
+                tier={tier}
               />
             </motion.div>
           )
