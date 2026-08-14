@@ -13,17 +13,12 @@ import { Accessibility } from "@/pages/case-studies/SPF/Accessibility"
 import { Reflection } from "@/pages/case-studies/SPF/Reflection"
 
 /**
- * Sprint 18.1 — infrastructure only, reachable at
- * `/work/spf-design-system/preview` (not the live case-study URL — see
- * that route's comment in App.tsx for why). Assembles the ten sections
- * in the order Sprint 18 will actually write into. Every section
- * currently shows its own "awaiting assets" checklist since nothing has
- * been exported from Figma yet — that's expected, not a bug, until real
- * files land in `src/assets/case-studies/spf/`.
+ * The canonical SPF case study at `/work/spf-design-system`. It assembles
+ * the detailed asset-driven chapters in their published reading order.
  */
 function SPFCaseStudy() {
   useEffect(() => {
-    document.title = "SPF Design System (preview) — Stéphania"
+    document.title = "SPF Design System — Stéphania"
   }, [])
 
   return (

@@ -16,3 +16,15 @@ export const contactContent: ContactContent = {
     "Feel free to reach out directly on LinkedIn — just mention that you found me through my portfolio.",
   linkedin: "https://www.linkedin.com/in/stephania-fordant",
 }
+
+function getContactContent(language: "en" | "fr"): ContactContent {
+  return language === "fr"
+    ? {
+        ...contactContent,
+        statement:
+          "N’hésitez pas à me contacter directement sur LinkedIn — indiquez simplement que vous avez découvert mon profil via mon portfolio.",
+      }
+    : contactContent
+}
+
+export { getContactContent }

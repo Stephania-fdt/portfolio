@@ -6,7 +6,8 @@ import { Section } from "@/components/ui/section"
 import { EditorialList } from "@/components/ui/editorial-list"
 import { fadeUp } from "@/lib/motion"
 import { transition } from "@/lib/motion"
-import { aboutContent } from "@/content/about"
+import { getAboutContent } from "@/content/about"
+import { useLanguage } from "@/i18n"
 
 /**
  * `/about` — a real, standalone page (not a hash anchor), reachable from
@@ -19,11 +20,13 @@ import { aboutContent } from "@/content/about"
  * visual language, no new component.
  */
 function About() {
+  const { language, copy } = useLanguage()
+  const aboutContent = getAboutContent(language)
   const shouldReduceMotion = useReducedMotion()
 
   useEffect(() => {
-    document.title = "About — Stéphania Fordant | Product Designer"
-  }, [])
+    document.title = copy.meta.aboutTitle
+  }, [copy.meta.aboutTitle])
 
   const items = aboutContent.chapters.map((chapter) => ({
     eyebrow: chapter.eyebrow,
@@ -53,7 +56,7 @@ function About() {
             already uses for the identical reason: an sr-only heading
             keeps the H1 → H2 → H3 hierarchy correct for screen readers
             without adding a visible element sighted users don't need. */}
-        <h2 className="sr-only">Chapters</h2>
+        <h2 className="sr-only">{copy.common.chapters}</h2>
         <EditorialList items={items} />
 
         {/* The closing statement — same left-aligned italic pull-quote

@@ -8,6 +8,7 @@ import { transition } from "@/lib/motion"
 import { EditorialEntry } from "@/components/ui/editorial-entry"
 import { caseStudies } from "@/content/case-studies"
 import type { WorkProject } from "@/content/work"
+import { useLanguage } from "@/i18n"
 
 type WorkItemProps = {
   project: WorkProject
@@ -25,6 +26,8 @@ type WorkItemProps = {
    * the approved Product Vision.
    */
   tier?: "lead" | "secondary" | "standard"
+  /** `/work` is the canonical index, so every listed project keeps its route link. */
+  linkToProject?: boolean
 }
 
 /**
@@ -40,17 +43,20 @@ function WorkItem({
   index,
   reverse,
   tier = "standard",
+  linkToProject = false,
 }: WorkItemProps) {
+  const { copy } = useLanguage()
   const shouldReduceMotion = useReducedMotion()
   const isLead = tier === "lead"
   const isSecondary = tier === "secondary"
-  // A project only links to a case study once one has actually been
-  // written — a promised page that doesn't exist is worse than no link.
-  // Two sources: the generic `content/case-studies` registry (heading +
-  // paragraphs, rendered by `pages/CaseStudy`), or a hand-built route
-  // like the Portfolio case study, flagged directly on the project.
+  // Home links only projects with completed case studies. The canonical
+  // `/work` index intentionally exposes every project's existing route.
+  // Completed studies come from either the generic registry (heading +
+  // paragraphs, rendered by `pages/CaseStudy`) or a hand-built route like
+  // Portfolio's, flagged directly on the project.
   const slug = project.href.replace("/work/", "")
-  const hasCaseStudy = slug in caseStudies || project.hasCaseStudy === true
+  const hasCaseStudy =
+    linkToProject || slug in caseStudies || project.hasCaseStudy === true
 
   return (
     <div
@@ -100,7 +106,7 @@ function WorkItem({
               to={project.href}
               className="mt-8 inline-flex items-center gap-2 text-sm font-medium tracking-tight text-brand after:absolute after:inset-0 after:content-['']"
             >
-              View Case Study
+              {copy.common.viewCaseStudy}
               <ArrowRight
                 aria-hidden="true"
                 className="size-4 transition-transform duration-(--duration-fast) ease-standard group-hover:translate-x-0.5"

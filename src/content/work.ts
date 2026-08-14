@@ -27,7 +27,7 @@ export type WorkProject = {
    * invented). Optional and only set for projects with a real case-study
    * page to display it on (`CaseStudy.tsx` renders it under the eyebrow) —
    * the Portfolio entry has its own hand-built Hero with the same
-   * information already, and Joga Aura has no case study yet.
+   * information already.
    */
   roleContext?: string
   /**
@@ -76,6 +76,7 @@ export const workProjects: WorkProject[] = [
     signalTechnologies: ["WCAG", "Design Tokens"],
     href: "/work/spf-design-system",
     previewImage: spfHomeThumbnail,
+    hasCaseStudy: true,
   },
   {
     title: "Stéphania — Portfolio",
@@ -133,11 +134,14 @@ export const workProjects: WorkProject[] = [
     signalTechnologies: ["UX Research", "Design Briefs"],
     href: "/work/wellpack",
     previewImage: wellpackHomeThumbnail,
+    hasCaseStudy: true,
   },
   {
     title: "Joga Aura",
     category: "E-commerce · Product Design · Shopify",
     year: "2026",
+    roleContext:
+      "Product Design · UX/UI · Art Direction · Shopify implementation",
     sentence:
       "Designed and built a luxury e-commerce experience for Joga Aura, from UX/UI design through Shopify implementation, with a focus on clarity, trust and conversion.",
     technologies: ["Shopify", "Figma", "UX/UI Design", "SEO"],
@@ -146,3 +150,74 @@ export const workProjects: WorkProject[] = [
     previewImage: jogaAuraHomeThumbnail,
   },
 ]
+
+const featuredProjectHrefs = [
+  "/work/spf-design-system",
+  "/work/harmony",
+  "/work/portfolio",
+] as const
+
+/** Curated Home preview, derived from the complete `/work` archive. */
+export const featuredWorkProjects = featuredProjectHrefs.map((href) => {
+  const project = workProjects.find((item) => item.href === href)
+
+  if (!project) throw new Error(`Featured project not found: ${href}`)
+  return project
+})
+
+function getWorkProjects(language: "en" | "fr"): WorkProject[] {
+  if (language === "en") return workProjects
+
+  const frenchCopy: Record<
+    string,
+    Pick<WorkProject, "category" | "sentence" | "roleContext">
+  > = {
+    "/work/spf-design-system": {
+      category: "Product Design · Design System · Accessibilité",
+      roleContext: "Product Designer · Institution fédérale belge",
+      sentence:
+        "Création et gouvernance d’un Design System évolutif pour une institution fédérale belge, avec des standards partagés et une accessibilité fondée sur les WCAG.",
+    },
+    "/work/portfolio": {
+      category: "Product Design · Design System · Front-end · Workflow IA",
+      sentence:
+        "Conception et développement de ce portfolio de bout en bout : Design System sur mesure, front-end accessible et responsive, amélioré par des workflows assistés par IA.",
+    },
+    "/work/harmony": {
+      category: "Product Design",
+      roleContext:
+        "Product Designer · Équipe de 4, start-up française de bracelets connectés",
+      sentence:
+        "Participation à un projet de bracelet connecté destiné au marché français, de la recherche utilisateur à la conception d’interface et aux tests.",
+    },
+    "/work/wellpack": {
+      category: "Marketing Design",
+      roleContext: "UX Researcher · Équipe marketing B2B SaaS",
+      sentence:
+        "Conception d’une méthode de recherche reproductible transformant les demandes clients en briefs de landing pages fondés sur des données pour des campagnes B2B.",
+    },
+    "/work/joga-aura": {
+      category: "E-commerce · Product Design · Shopify",
+      roleContext:
+        "Product Design · UX/UI · Direction artistique · Implémentation Shopify",
+      sentence:
+        "Conception et développement d’une expérience e-commerce haut de gamme pour Joga Aura, de l’UX/UI à l’implémentation Shopify, centrée sur la clarté, la confiance et la conversion.",
+    },
+  }
+
+  return workProjects.map((project) => ({
+    ...project,
+    ...frenchCopy[project.href],
+  }))
+}
+
+function getFeaturedWorkProjects(language: "en" | "fr"): WorkProject[] {
+  const projects = getWorkProjects(language)
+  return featuredProjectHrefs.map((href) => {
+    const project = projects.find((item) => item.href === href)
+    if (!project) throw new Error(`Featured project not found: ${href}`)
+    return project
+  })
+}
+
+export { getWorkProjects, getFeaturedWorkProjects }

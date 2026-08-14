@@ -9,9 +9,7 @@ import { Proof } from "@/pages/case-studies/WellPack/Proof"
 import { Reflection } from "@/pages/case-studies/WellPack/Reflection"
 
 /**
- * WellPack — reachable at `/work/wellpack/preview`. The real, live
- * WellPack case study (`/work/wellpack`, `content/case-studies/wellpack.ts`,
- * seven text sections) stays exactly as it is, untouched by this preview.
+ * The canonical WellPack case study at `/work/wellpack`.
  *
  * Seven chapters now: the original six-chapter Editorial Blueprint (Hero
  * / The Challenge / The Method / From Method to Brief / Proof Without a
@@ -23,7 +21,7 @@ import { Reflection } from "@/pages/case-studies/WellPack/Reflection"
  */
 function WellPackCaseStudy() {
   useEffect(() => {
-    document.title = "WellPack (preview) — Stéphania"
+    document.title = "WellPack — Stéphania"
   }, [])
 
   return (

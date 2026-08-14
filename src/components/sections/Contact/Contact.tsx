@@ -5,7 +5,8 @@ import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
 import { Button } from "@/components/ui/button"
 import { fadeUp } from "@/lib/motion"
-import { contactContent } from "@/content/contact"
+import { getContactContent } from "@/content/contact"
+import { useLanguage } from "@/i18n"
 
 /**
  * The Epilogue — the site's closing chapter and the real target for the
@@ -18,11 +19,13 @@ import { contactContent } from "@/content/contact"
  * primary button.
  */
 function Contact() {
+  const { language, copy } = useLanguage()
+  const contactContent = getContactContent(language)
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <Section id="contact" aria-label="Contact" spacing="sm">
-      <SectionKicker>Contact</SectionKicker>
+    <Section id="contact" aria-label={copy.common.contact} spacing="sm">
+      <SectionKicker>{copy.common.contact}</SectionKicker>
 
       <motion.div
         initial={shouldReduceMotion ? false : "hidden"}
@@ -42,7 +45,7 @@ function Contact() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Connect on LinkedIn
+              {copy.common.connectLinkedIn}
               <ArrowRight
                 aria-hidden="true"
                 className="transition-transform duration-(--duration-fast) ease-standard group-hover:translate-x-0.5"

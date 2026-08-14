@@ -20,8 +20,7 @@ import { Learnings } from "@/pages/case-studies/Portfolio/Learnings"
 
 /**
  * Reachable at `/work/portfolio` — the real, live case study for Project
- * 02 in Selected Work, unlike the SPF/WellPack chapter builds still
- * staged at `/preview`. Fourteen chapters: Hero, Challenge, Objectives,
+ * 02 in Selected Work. Fourteen chapters: Hero, Challenge, Objectives,
  * Process, Information Architecture, Design System, Accessibility,
  * AI-Assisted Workflow, Front-end Implementation, Responsive Design,
  * Testing & Validation, Iteration, Outcome, Learnings. Accessibility
@@ -40,7 +39,7 @@ function PortfolioCaseStudy() {
     <article>
       <Container size="content" className="pt-8">
         <Link
-          to="/#work"
+          to="/work"
           className="group inline-flex items-center gap-2 text-sm font-medium tracking-tight text-muted-foreground transition-colors duration-(--duration-fast) ease-standard hover:text-brand"
         >
           <ArrowLeft

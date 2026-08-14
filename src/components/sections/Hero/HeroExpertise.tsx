@@ -3,7 +3,8 @@ import { Accessibility, Layers, PenTool, Search } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 
 import { transition } from "@/lib/motion"
-import { heroContent } from "@/content/hero"
+import { getHeroContent } from "@/content/hero"
+import { useLanguage } from "@/i18n"
 
 /**
  * Presentation only — content stays pure data in `content/hero.ts`. Reuses
@@ -32,8 +33,9 @@ const EXPERTISE_ICONS: Record<string, LucideIcon> = {
  * an explicit constraint here.
  */
 function HeroExpertise() {
+  const { language } = useLanguage()
   const shouldReduceMotion = useReducedMotion()
-  const { expertise } = heroContent
+  const { expertise } = getHeroContent(language)
 
   return (
     <motion.div

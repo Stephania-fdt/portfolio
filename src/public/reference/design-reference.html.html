@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<template id="__bundler_thumbnail" data-bg-color="#faf8f5">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%"><rect width="100" height="100" fill="#faf8f5"></rect><text x="50" y="66" text-anchor="middle" font-family="Georgia,serif" font-weight="600" font-size="44" fill="#590f29">S</text></svg>
+</template>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&amp;display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#faf8f5;color:#141414;font-family:"Inter",ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+a{color:inherit;text-decoration:none}
+a:hover{color:#590f29}
+::selection{background:#590f29;color:#faf8f5}
+:focus-visible{outline:2px solid #590f29;outline-offset:3px;border-radius:2px}
+@keyframes tick{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes drift{0%{transform:translateY(0)}50%{transform:translateY(6px)}100%{transform:translateY(0)}}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+
+<div style="position:relative;overflow-x:hidden">
+
+<header style="position:fixed;inset:0 0 auto 0;z-index:60;background:rgba(250,248,245,0.86);backdrop-filter:blur(10px) saturate(150%);border-bottom:1px solid #ece8e2">
+<div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem;height:4.25rem;padding:0 clamp(1.25rem,3vw,2.5rem)">
+<a href="#hero" style="justify-self:start;display:flex;align-items:baseline;gap:0.6rem">
+<span style="font-family:'General Sans',sans-serif;font-size:0.95rem;font-weight:600;letter-spacing:-0.02em">Stéphania</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.14em;text-transform:uppercase;color:#6e6a63">Product Designer</span>
+</a>
+<nav aria-label="Primary" style="justify-self:center">
+<ul style="display:flex;align-items:center;gap:2.25rem;margin:0;padding:0;list-style:none">
+<li><a href="#work" style="font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.16em;text-transform:uppercase;color:#141414;padding-bottom:2px;border-bottom:1px solid #590f29">Work</a></li>
+<li><a href="#systems" style="font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.16em;text-transform:uppercase;color:#6e6a63;padding-bottom:2px;border-bottom:1px solid transparent" style-hover="color:#141414;border-bottom-color:#590f29">Systems</a></li>
+<li><a href="#access" style="font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.16em;text-transform:uppercase;color:#6e6a63;padding-bottom:2px;border-bottom:1px solid transparent" style-hover="color:#141414;border-bottom-color:#590f29">Accessibility</a></li>
+<li><a href="#process" style="font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.16em;text-transform:uppercase;color:#6e6a63;padding-bottom:2px;border-bottom:1px solid transparent" style-hover="color:#141414;border-bottom-color:#590f29">Approach</a></li>
+</ul>
+</nav>
+<div style="justify-self:end;display:flex;align-items:center;gap:1.25rem">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;color:#6e6a63">{{ clock }}</span>
+<a href="#contact" style="display:inline-flex;align-items:center;gap:0.5rem;height:2.25rem;padding:0 1rem;border:1px solid #590f29;color:#590f29;font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#590f29;color:#faf8f5">Work with me <span aria-hidden="true">↗</span></a>
+</div>
+</div>
+</header>
+
+<section id="hero" onMouseMove="{{ onHeroMove }}" onMouseLeave="{{ onHeroLeave }}" data-screen-label="Hero" style="position:relative;min-height:100vh;padding-top:4.25rem;display:grid;grid-template-columns:3.25rem 1fr;border-bottom:1px solid #ece8e2">
+
+<div aria-hidden="true" style="position:absolute;inset:4.25rem 0 0 0;pointer-events:none;overflow:hidden">
+<div style="position:absolute;inset:-2rem;background-image:repeating-linear-gradient(to right,#e7e2da 0,#e7e2da 1px,transparent 1px,transparent 8.3333%);opacity:0.9;transition:transform 600ms cubic-bezier(0.22,1,0.36,1);transform:{{ gridShiftX }}"></div>
+<div style="position:absolute;inset:-2rem;background-image:repeating-linear-gradient(to bottom,#efeae2 0,#efeae2 1px,transparent 1px,transparent 7.5rem);transition:transform 900ms cubic-bezier(0.22,1,0.36,1);transform:{{ gridShiftY }}"></div>
+</div>
+
+<div style="position:relative;border-right:1px solid #ece8e2;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:1.75rem 0 1.5rem">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.2em;color:#590f29">01</span>
+<span style="writing-mode:vertical-rl;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.34em;text-transform:uppercase;color:#6e6a63">Portfolio — Edition 2026</span>
+<span aria-hidden="true" style="display:block;width:1px;height:4.5rem;background:#6e6a63;animation:drift 4s ease-in-out infinite"></span>
+</div>
+
+<div style="position:relative;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,0.92fr)">
+
+
+
+<div style="display: flex; flex-direction: column; justify-content: center; gap: 2.5rem; padding: clamp(3rem,7vh,6rem) clamp(1.5rem,4vw,4rem)">
+<div style="display:flex;align-items:center;gap:1rem">
+<span style="height:1px;width:2.5rem;background:#590f29"></span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.22em;text-transform:uppercase;color:#141414">Product Designer</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.14em;color:#6e6a63">Brussels · since 2021</span>
+</div>
+
+<h1 style="margin:0;font-family:'General Sans',sans-serif;font-size:clamp(2.6rem,4.6vw,4.9rem);line-height:0.94;font-weight:600;letter-spacing:-0.035em;text-wrap:balance">
+<span style="display:block;font-weight:400;color:#6e6a63;font-size:clamp(1.35rem,1.9vw,2rem);line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.1rem">Building scalable products through</span>
+<span style="display:block">Design Systems,</span>
+<span style="display:block;color:#590f29">Accessibility</span>
+<span style="display:block">&amp; AI.</span>
+</h1>
+
+<div style="max-width:34rem;display:flex;flex-direction:column;gap:1rem;border-left:1px solid #ece8e2;padding-left:1.5rem">
+<p style="margin:0;font-size:1.0625rem;line-height:1.6;color:#141414">I transform complex problems into simple, accessible and scalable digital products.</p>
+<p style="margin:0;font-size:1.0625rem;line-height:1.6;color:#6e6a63">I build the systems that help teams design faster, collaborate better and create lasting impact.</p>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem">
+<a href="#work" style="display:inline-flex;align-items:center;gap:0.75rem;height:3rem;padding:0 1.5rem;background:#590f29;color:#faf8f5;font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.16em;text-transform:uppercase" style-hover="background:#4c0d23">Selected work <span aria-hidden="true">↘</span></a>
+<a href="#contact" style="display:inline-flex;align-items:center;gap:0.6rem;height:3rem;font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.16em;text-transform:uppercase;color:#141414;border-bottom:1px solid #141414" style-hover="color:#590f29;border-bottom-color:#590f29">Let's talk</a>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.14em;color:#6e6a63">05 projects · 01 federal design system</span>
+</div>
+</div><div style="position: relative; border-left: 1px solid #ece8e2; display: flex; align-items: center; justify-content: center; padding: clamp(1.5rem,3vw,3rem)">
+<div style="position:absolute;top:1.5rem;left:1.5rem;right:1.5rem;display:flex;flex-wrap:wrap;gap:0.5rem 1.5rem;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.14em;color:#6e6a63">
+<span>SPECIMEN — S · General Sans 600</span>
+<span>x {{ readX }} · y {{ readY }}</span>
+</div>
+
+<div aria-hidden="true" style="position:relative;width:100%;max-width:32rem;aspect-ratio:1">
+<svg viewBox="0 0 100 100" style="width:100%;height:100%;overflow:visible" preserveAspectRatio="xMidYMid meet">
+<rect x="6" y="6" width="88" height="88" fill="none" stroke="#e2ddd4" stroke-width="0.3"></rect>
+<line x1="28.3" y1="6" x2="28.3" y2="94" stroke="#ece8e2" stroke-width="0.15"></line>
+<line x1="50" y1="6" x2="50" y2="94" stroke="#ece8e2" stroke-width="0.15"></line>
+<line x1="71.7" y1="6" x2="71.7" y2="94" stroke="#ece8e2" stroke-width="0.15"></line>
+<line x1="6" y1="28.3" x2="94" y2="28.3" stroke="#ece8e2" stroke-width="0.15"></line>
+<line x1="6" y1="50" x2="94" y2="50" stroke="#ece8e2" stroke-width="0.15"></line>
+<line x1="6" y1="71.7" x2="94" y2="71.7" stroke="#ece8e2" stroke-width="0.15"></line>
+
+<g style="transition:transform 500ms cubic-bezier(0.22,1,0.36,1);transform:{{ letterShift }}">
+<text x="50" y="78" text-anchor="middle" dominant-baseline="alphabetic" font-family="'General Sans',sans-serif" font-weight="600" font-size="72" fill="#590f29" opacity="0.14">S</text>
+<text x="50" y="78" text-anchor="middle" dominant-baseline="alphabetic" font-family="'General Sans',sans-serif" font-weight="600" font-size="72" fill="none" stroke="#590f29" stroke-width="0.22">S</text>
+</g>
+
+<g stroke="#6e6a63" stroke-width="0.28">
+<line x1="10" y1="30" x2="90" y2="30" stroke-dasharray="1.2 2"></line>
+<line x1="10" y1="44" x2="90" y2="44" stroke-dasharray="1.2 2"></line>
+<line x1="10" y1="78" x2="90" y2="78" stroke-dasharray="1.2 2"></line>
+<line x1="10" y1="86" x2="90" y2="86" stroke-dasharray="0.6 1.6"></line>
+<line x1="30" y1="24" x2="30" y2="86" stroke-dasharray="1.2 2"></line>
+<line x1="70" y1="24" x2="70" y2="86" stroke-dasharray="1.2 2"></line>
+</g>
+<g font-family="'IBM Plex Mono',monospace" font-size="2.3" fill="#6e6a63">
+<text x="10" y="28.2">cap-height</text>
+<text x="10" y="42.2">x-height</text>
+<text x="10" y="76.2">baseline</text>
+<text x="10" y="89.6">descender</text>
+<text x="72" y="22.4" fill="#590f29">General Sans · 600</text>
+</g>
+<g stroke="#590f29" stroke-width="0.5">
+<line x1="30" y1="78" x2="30" y2="82"></line>
+<line x1="70" y1="78" x2="70" y2="82"></line>
+<line x1="30" y1="80" x2="70" y2="80" stroke-width="0.22"></line>
+</g>
+<text x="50" y="84.6" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="2.1" fill="#590f29">40 units</text>
+<g stroke="#6e6a63" stroke-width="0.3" opacity="0.5">
+<line x1="10.5" y1="8" x2="10.5" y2="13"></line>
+<line x1="8" y1="10.5" x2="13" y2="10.5"></line>
+<circle cx="10.5" cy="10.5" r="2.4" fill="none" stroke-width="0.22"></circle>
+</g>
+</svg>
+
+<div style="position:absolute;inset:0;pointer-events:none;transition:opacity 300ms ease;opacity:{{ crossOpacity }}">
+<div style="position:absolute;top:0;bottom:0;width:1px;background:rgba(89,15,41,0.45);left:{{ crossX }}"></div>
+<div style="position:absolute;left:0;right:0;height:1px;background:rgba(89,15,41,0.45);top:{{ crossY }}"></div>
+<div style="position:absolute;transform:translate(0.5rem,0.5rem);font-family:'IBM Plex Mono',monospace;font-size:0.5625rem;letter-spacing:0.1em;color:#590f29;left:{{ crossX }};top:{{ crossY }}">{{ readX }} / {{ readY }}</div>
+</div>
+</div>
+
+<div style="position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;display:flex;justify-content:space-between;align-items:flex-end;gap:1rem">
+<p style="margin:0;max-width:15rem;font-size:0.8125rem;line-height:1.55;font-style:italic;color:#6e6a63">I believe great products are built when people understand each other before they build together.</p>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.18em;color:#6e6a63;animation:tick 3.2s ease-in-out infinite">Scroll ↓</span>
+</div>
+</div>
+</div>
+</section>
+
+<section aria-label="Positioning" style="border-bottom:1px solid #ece8e2;padding:clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,4rem)">
+<div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:end">
+<div style="grid-column:span 5;display:flex;flex-direction:column;gap:1.25rem">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.2em;text-transform:uppercase;color:#6e6a63">02 — Positioning</span>
+<p style="margin:0;font-family:'General Sans',sans-serif;font-size:clamp(1.6rem,2.3vw,2.4rem);line-height:1.12;letter-spacing:-0.03em;font-weight:500;text-wrap:pretty">A product designer who builds the system, not just the screen — and the accessibility standard that keeps it honest.</p>
+</div>
+<div style="grid-column:7 / span 6;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#ece8e2;border:1px solid #ece8e2">
+<div style="background:#faf8f5;padding:1.5rem 1.5rem 1.75rem;display:flex;flex-direction:column;gap:0.5rem">
+<span style="font-family:'General Sans',sans-serif;font-size:2.6rem;line-height:1;font-weight:600;letter-spacing:-0.04em">2023</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;text-transform:uppercase;color:#590f29">Federal design system</span>
+<span style="font-size:0.8125rem;line-height:1.5;color:#6e6a63">Built and governed for a Belgian federal institution — still running.</span>
+</div>
+<div style="background:#faf8f5;padding:1.5rem 1.5rem 1.75rem;display:flex;flex-direction:column;gap:0.5rem">
+<span style="font-family:'General Sans',sans-serif;font-size:2.6rem;line-height:1;font-weight:600;letter-spacing:-0.04em">WCAG</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;text-transform:uppercase;color:#590f29">Accessibility, embedded</span>
+<span style="font-size:0.8125rem;line-height:1.5;color:#6e6a63">Audits and standards written into components, not appended as reports.</span>
+</div>
+<div style="background:#faf8f5;padding:1.5rem 1.5rem 1.75rem;display:flex;flex-direction:column;gap:0.5rem">
+<span style="font-family:'General Sans',sans-serif;font-size:2.6rem;line-height:1;font-weight:600;letter-spacing:-0.04em">05</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;text-transform:uppercase;color:#590f29">Shipped products</span>
+<span style="font-size:0.8125rem;line-height:1.5;color:#6e6a63">Public sector, hardware startup, B2B SaaS, e-commerce.</span>
+</div>
+<div style="background:#faf8f5;padding:1.5rem 1.5rem 1.75rem;display:flex;flex-direction:column;gap:0.5rem">
+<span style="font-family:'General Sans',sans-serif;font-size:2.6rem;line-height:1;font-weight:600;letter-spacing:-0.04em">AI</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;text-transform:uppercase;color:#590f29">Assisted workflow</span>
+<span style="font-size:0.8125rem;line-height:1.5;color:#6e6a63">This portfolio designed and coded end to end with AI in the loop.</span>
+</div>
+</div>
+</div>
+</section>
+
+<section id="work" data-screen-label="Selected work" style="padding:clamp(3.5rem,7vw,6rem) clamp(1.5rem,4vw,4rem) clamp(4rem,8vw,7rem);border-bottom:1px solid #ece8e2">
+<div style="display:flex;align-items:baseline;gap:1.5rem;margin-bottom:clamp(2.5rem,5vw,4rem)">
+<h2 style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#590f29">03 — Selected Work</h2>
+<span aria-hidden="true" style="height:1px;flex:1;background:#ece8e2"></span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;color:#6e6a63">01 / 05</span>
+</div>
+
+<article style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:end;margin-bottom:clamp(3.5rem,7vw,6rem)">
+<div style="grid-column:span 4;display:flex;flex-direction:column;gap:1.25rem">
+<div style="display:flex;align-items:flex-start;gap:1rem">
+<span style="font-family:'General Sans',sans-serif;font-size:clamp(3.5rem,6vw,6rem);line-height:0.8;font-weight:600;letter-spacing:-0.05em;color:#590f29">01</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;line-height:1.5;letter-spacing:0.14em;text-transform:uppercase;color:#6e6a63">Product Design<br>Design System<br>Accessibility<br>2023 — present</span>
+</div>
+<h3 style="margin:0;font-family:'General Sans',sans-serif;font-size:clamp(2rem,3vw,3.1rem);line-height:1;font-weight:600;letter-spacing:-0.035em;text-wrap:balance">SPF Affaires étrangères</h3>
+<p style="margin:0;font-size:1rem;line-height:1.6;color:#141414;max-width:26rem">Built and governed a scalable Design System for a Belgian federal institution — embedding WCAG-based accessibility and shared standards through close, earned collaboration with developers.</p>
+<div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.1em;padding:0.3rem 0.55rem;border:1px solid #590f29;color:#590f29">RESEARCH</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.1em;padding:0.3rem 0.55rem;border:1px solid #ece8e2;color:#6e6a63">UX</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.1em;padding:0.3rem 0.55rem;border:1px solid #ece8e2;color:#6e6a63">UI</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.1em;padding:0.3rem 0.55rem;border:1px solid #590f29;color:#590f29">DESIGN SYSTEM</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.1em;padding:0.3rem 0.55rem;border:1px solid #590f29;color:#590f29">ACCESSIBILITY</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.1em;padding:0.3rem 0.55rem;border:1px solid #ece8e2;color:#6e6a63">IMPACT</span>
+</div>
+<a href="#work" style="display:inline-flex;align-items:center;gap:0.6rem;font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.16em;text-transform:uppercase;color:#590f29;border-bottom:1px solid #590f29;align-self:flex-start;padding-bottom:3px">Read the case study <span aria-hidden="true">↗</span></a>
+</div>
+<figure style="grid-column:6 / span 8;margin:0;position:relative;margin-right:calc(clamp(1.5rem,4vw,4rem) * -1)">
+<div style="border:1px solid #ece8e2;background:#f1ede6;overflow:hidden;aspect-ratio:16/9">
+<img src="src/assets/case-studies/spf/product/desktop-54.png" alt="SPF Affaires étrangères — portal interface built on the design system" style="width:100%;height:100%;object-fit:cover;object-position:top">
+</div>
+<figcaption style="position:absolute;top:-1.6rem;left:0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;text-transform:uppercase;color:#6e6a63">Plate 01 — Portal, desktop</figcaption>
+</figure>
+</article>
+
+<article style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:center;margin-bottom:clamp(3.5rem,7vw,6rem)">
+<figure style="grid-column:span 5;margin:0;position:relative">
+<div style="border:1px solid #ece8e2;background:#f1ede6;overflow:hidden;aspect-ratio:4/3">
+<img src="src/assets/case-studies/portfolio/hero-preview.png" alt="Stéphania — portfolio homepage" style="width:100%;height:100%;object-fit:cover;object-position:top">
+</div>
+<figcaption style="margin-top:0.75rem;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;text-transform:uppercase;color:#6e6a63">Plate 02 — Homepage</figcaption>
+</figure>
+<div style="grid-column:7 / span 5;display:flex;flex-direction:column;gap:1.1rem">
+<div style="display:flex;align-items:baseline;gap:1rem">
+<span style="font-family:'General Sans',sans-serif;font-size:2.75rem;line-height:0.85;font-weight:600;letter-spacing:-0.045em;color:#590f29">02</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.14em;text-transform:uppercase;color:#6e6a63">Product Design · Front-end · AI Workflow · 2026 — present</span>
+</div>
+<h3 style="margin:0;font-family:'General Sans',sans-serif;font-size:clamp(1.8rem,2.4vw,2.5rem);line-height:1.02;font-weight:600;letter-spacing:-0.035em">Stéphania — Portfolio</h3>
+<p style="margin:0;font-size:1rem;line-height:1.6;color:#141414;max-width:28rem">Designed and built this portfolio itself, end to end — from a bespoke design system through to accessible, responsive front-end code, shaped iteratively through AI-assisted workflows.</p>
+<p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.08em;color:#6e6a63">Figma · React · TypeScript · Tailwind CSS · <span style="color:#141414">Claude Code</span> · <span style="color:#141414">WCAG</span></p>
+<a href="#work" style="display:inline-flex;align-items:center;gap:0.6rem;font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.16em;text-transform:uppercase;color:#590f29;border-bottom:1px solid #590f29;align-self:flex-start;padding-bottom:3px">Read the case study <span aria-hidden="true">↗</span></a>
+</div>
+</article>
+
+<article style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:end;margin-bottom:clamp(3.5rem,7vw,6rem)">
+<div style="grid-column:span 3;display:flex;flex-direction:column;gap:0.9rem">
+<span style="font-family:'General Sans',sans-serif;font-size:2.75rem;line-height:0.85;font-weight:600;letter-spacing:-0.045em;color:#590f29">03</span>
+<h3 style="margin:0;font-family:'General Sans',sans-serif;font-size:clamp(1.6rem,2vw,2.1rem);line-height:1.02;font-weight:600;letter-spacing:-0.03em">Harmony</h3>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.14em;text-transform:uppercase;color:#6e6a63">Product Design · 2022</span>
+<p style="margin:0;font-size:0.9375rem;line-height:1.6;color:#6e6a63">A four-person team taking a connected bracelet to the French market — research through interface design and testing.</p>
+</div>
+<figure style="grid-column:4 / span 9;margin:0;margin-right:calc(clamp(1.5rem,4vw,4rem) * -1)">
+<div style="border:1px solid #ece8e2;background:#f1ede6;overflow:hidden;aspect-ratio:21/9">
+<img src="src/assets/case-studies/harmony/mockup.png" alt="Harmony — connected bracelet app screens" style="width:100%;height:100%;object-fit:cover;object-position:center">
+</div>
+<figcaption style="margin-top:0.75rem;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;text-transform:uppercase;color:#6e6a63">Plate 03 — App, mockup</figcaption>
+</figure>
+</article>
+
+<div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem">
+<article style="grid-column:span 5;display:flex;flex-direction:column;gap:1rem">
+<div style="border:1px solid #ece8e2;background:#f1ede6;overflow:hidden;aspect-ratio:3/2">
+<img src="src/assets/case-studies/wellpack/02-brand/supports/Declinaisaon_siteweb.png" alt="WellPack — landing page system" style="width:100%;height:100%;object-fit:cover;object-position:top">
+</div>
+<div style="display:flex;align-items:baseline;gap:0.85rem">
+<span style="font-family:'General Sans',sans-serif;font-size:1.9rem;line-height:1;font-weight:600;letter-spacing:-0.04em;color:#590f29">04</span>
+<h3 style="margin:0;font-family:'General Sans',sans-serif;font-size:1.5rem;line-height:1;font-weight:600;letter-spacing:-0.03em">WellPack</h3>
+</div>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.14em;text-transform:uppercase;color:#6e6a63">UX Research · Marketing Design · 2021 — 2023</span>
+<p style="margin:0;font-size:0.9375rem;line-height:1.6;color:#6e6a63;max-width:24rem">A repeatable research methodology turning client requests into evidence-based landing page briefs.</p>
+</article>
+<article style="grid-column:8 / span 5;display:flex;flex-direction:column;gap:1rem;padding-top:clamp(2rem,5vw,4.5rem)">
+<div style="border:1px solid #ece8e2;background:#f1ede6;overflow:hidden;aspect-ratio:3/2">
+<img src="src/assets/case-studies/joga-aura/product.png" alt="Joga Aura — e-commerce product page" style="width:100%;height:100%;object-fit:cover;object-position:top">
+</div>
+<div style="display:flex;align-items:baseline;gap:0.85rem">
+<span style="font-family:'General Sans',sans-serif;font-size:1.9rem;line-height:1;font-weight:600;letter-spacing:-0.04em;color:#590f29">05</span>
+<h3 style="margin:0;font-family:'General Sans',sans-serif;font-size:1.5rem;line-height:1;font-weight:600;letter-spacing:-0.03em">Joga Aura</h3>
+</div>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.14em;text-transform:uppercase;color:#6e6a63">E-commerce · Shopify · 2026</span>
+<p style="margin:0;font-size:0.9375rem;line-height:1.6;color:#6e6a63;max-width:24rem">A luxury e-commerce experience from UX/UI through Shopify implementation — clarity, trust, conversion.</p>
+</article>
+</div>
+</section>
+
+<section id="systems" data-screen-label="Systems specimen" style="padding:clamp(3.5rem,7vw,6rem) clamp(1.5rem,4vw,4rem);border-bottom:1px solid #ece8e2">
+<div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start">
+<div style="grid-column:span 4;display:flex;flex-direction:column;gap:1.5rem;position:sticky;top:6rem">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.22em;text-transform:uppercase;color:#590f29">04 — Design Systems</span>
+<h2 style="margin:0;font-family:'General Sans',sans-serif;font-size:clamp(2.2rem,3.4vw,3.6rem);line-height:0.98;font-weight:600;letter-spacing:-0.04em">Systems,<br>not screens.</h2>
+<p style="margin:0;font-size:1rem;line-height:1.65;color:#6e6a63;max-width:24rem">Every decision should make the next hundred decisions easier. Below: the actual tokens and components this portfolio is built from — the same discipline I bring to a federal design system.</p>
+<div role="tablist" aria-label="Specimen view" style="display:flex;gap:0;border:1px solid #ece8e2;align-self:flex-start">
+<button type="button" role="tab" aria-selected="{{ isTokens }}" onClick="{{ showTokens }}" style="appearance:none;background:{{ tokensBg }};color:{{ tokensFg }};border:0;border-right:1px solid #ece8e2;padding:0.65rem 1.1rem;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer">Tokens</button>
+<button type="button" role="tab" aria-selected="{{ isComponents }}" onClick="{{ showComponents }}" style="appearance:none;background:{{ componentsBg }};color:{{ componentsFg }};border:0;border-right:1px solid #ece8e2;padding:0.65rem 1.1rem;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer">Components</button>
+<button type="button" role="tab" aria-selected="{{ isGrid }}" onClick="{{ showGrid }}" style="appearance:none;background:{{ gridBg }};color:{{ gridFg }};border:0;padding:0.65rem 1.1rem;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer">Grid</button>
+</div>
+</div>
+
+<div style="grid-column:6 / span 7;border:1px solid #ece8e2;background:#ffffff">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1.25rem;border-bottom:1px solid #ece8e2;background:#faf8f5">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;text-transform:uppercase;color:#6e6a63">specimen / {{ tabLabel }}</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;color:#590f29">v1.4</span>
+</div>
+
+<sc-if value="{{ isTokens }}" hint-placeholder-val="{{ true }}">
+<div style="padding:1.75rem 1.5rem;display:flex;flex-direction:column;gap:2rem">
+<div>
+<p style="margin:0 0 0.9rem;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.18em;text-transform:uppercase;color:#6e6a63">Color — 6 tokens</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#ece8e2;border:1px solid #ece8e2">
+<div style="background:#fff;padding:0.9rem"><div style="height:3.25rem;background:#faf8f5;border:1px solid #ece8e2"></div><p style="margin:0.65rem 0 0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#141414">background</p><p style="margin:0.15rem 0 0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#6e6a63">#faf8f5</p></div>
+<div style="background:#fff;padding:0.9rem"><div style="height:3.25rem;background:#141414"></div><p style="margin:0.65rem 0 0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#141414">foreground</p><p style="margin:0.15rem 0 0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#6e6a63">#141414 · 16.2:1</p></div>
+<div style="background:#fff;padding:0.9rem"><div style="height:3.25rem;background:#590f29"></div><p style="margin:0.65rem 0 0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#141414">brand</p><p style="margin:0.15rem 0 0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#6e6a63">#590f29 · 12.9:1</p></div>
+<div style="background:#fff;padding:0.9rem"><div style="height:3.25rem;background:#35404a"></div><p style="margin:0.65rem 0 0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#141414">primary</p><p style="margin:0.15rem 0 0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#6e6a63">#35404a</p></div>
+<div style="background:#fff;padding:0.9rem"><div style="height:3.25rem;background:#e7ded3"></div><p style="margin:0.65rem 0 0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#141414">secondary</p><p style="margin:0.15rem 0 0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#6e6a63">#e7ded3</p></div>
+<div style="background:#fff;padding:0.9rem"><div style="height:3.25rem;background:#6e6a63"></div><p style="margin:0.65rem 0 0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#141414">muted-fg</p><p style="margin:0.15rem 0 0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#6e6a63">#6e6a63 · 5.1:1</p></div>
+</div>
+</div>
+<div>
+<p style="margin:0 0 0.9rem;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.18em;text-transform:uppercase;color:#6e6a63">Type scale — fluid</p>
+<div style="display:flex;flex-direction:column">
+<div style="display:flex;align-items:baseline;gap:1.25rem;border-top:1px solid #ece8e2;padding:0.7rem 0"><span style="width:5rem;flex:none;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#6e6a63">7xl / 700</span><span style="font-family:'General Sans',sans-serif;font-size:2.6rem;line-height:1;font-weight:600;letter-spacing:-0.04em">Headline</span></div>
+<div style="display:flex;align-items:baseline;gap:1.25rem;border-top:1px solid #ece8e2;padding:0.7rem 0"><span style="width:5rem;flex:none;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#6e6a63">4xl / 500</span><span style="font-family:'General Sans',sans-serif;font-size:1.7rem;line-height:1.1;font-weight:500;letter-spacing:-0.025em">Section title</span></div>
+<div style="display:flex;align-items:baseline;gap:1.25rem;border-top:1px solid #ece8e2;padding:0.7rem 0"><span style="width:5rem;flex:none;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#6e6a63">base / 400</span><span style="font-size:1rem;line-height:1.6">Body copy set for reading — 66 characters to the line.</span></div>
+<div style="display:flex;align-items:baseline;gap:1.25rem;border-top:1px solid #ece8e2;padding:0.7rem 0"><span style="width:5rem;flex:none;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;color:#6e6a63">2xs / mono</span><span style="font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.16em;text-transform:uppercase;color:#6e6a63">Technical annotation</span></div>
+</div>
+</div>
+<div>
+<p style="margin:0 0 0.9rem;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.18em;text-transform:uppercase;color:#6e6a63">Spacing — 8pt base</p>
+<div style="display:flex;align-items:flex-end;gap:0.75rem">
+<div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem"><div style="width:0.5rem;height:0.5rem;background:#590f29"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:0.5625rem;color:#6e6a63">8</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem"><div style="width:1rem;height:1rem;background:#590f29;opacity:0.85"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:0.5625rem;color:#6e6a63">16</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem"><div style="width:1.5rem;height:1.5rem;background:#590f29;opacity:0.7"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:0.5625rem;color:#6e6a63">24</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem"><div style="width:2.5rem;height:2.5rem;background:#590f29;opacity:0.55"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:0.5625rem;color:#6e6a63">40</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem"><div style="width:4rem;height:4rem;background:#590f29;opacity:0.4"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:0.5625rem;color:#6e6a63">64</span></div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isComponents }}" hint-placeholder-val="{{ false }}">
+<div style="padding:1.75rem 1.5rem;display:flex;flex-direction:column;gap:1.75rem">
+<div style="display:flex;flex-direction:column;gap:0.9rem">
+<p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.18em;text-transform:uppercase;color:#6e6a63">Buttons — 3 variants · 3 sizes</p>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.85rem">
+<button type="button" style="height:3rem;padding:0 1.5rem;border:0;background:#590f29;color:#faf8f5;font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:500;border-radius:0.3rem;cursor:pointer" style-hover="background:#4c0d23">Primary</button>
+<button type="button" style="height:3rem;padding:0 1.5rem;border:1px solid #ece8e2;background:transparent;color:#141414;font-size:0.875rem;font-weight:500;border-radius:0.3rem;cursor:pointer" style-hover="background:#f1ede6">Outline</button>
+<button type="button" style="height:2.5rem;padding:0 1.1rem;border:0;background:#e7ded3;color:#35404a;font-size:0.8125rem;font-weight:500;border-radius:0.3rem;cursor:pointer">Secondary</button>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.5625rem;letter-spacing:0.1em;color:#6e6a63">min target 44px</span>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem">
+<label style="display:flex;flex-direction:column;gap:0.5rem"><span style="font-size:0.8125rem;font-weight:500">Email</span><input type="email" placeholder="you@studio.com" style="height:2.75rem;padding:0 0.85rem;border:1px solid #ece8e2;border-radius:0.3rem;background:#faf8f5;font-family:'Inter',sans-serif;font-size:0.875rem;color:#141414"><span style="font-family:'IBM Plex Mono',monospace;font-size:0.5625rem;letter-spacing:0.1em;color:#6e6a63">label + hint, never placeholder-only</span></label>
+<div style="display:flex;flex-direction:column;gap:0.5rem"><span style="font-size:0.8125rem;font-weight:500">Focus state</span><div style="height:2.75rem;border:1px solid #ece8e2;border-radius:0.3rem;background:#faf8f5;outline:2px solid #590f29;outline-offset:3px;display:flex;align-items:center;padding:0 0.85rem;font-size:0.875rem;color:#6e6a63">Visible, never suppressed</div><span style="font-family:'IBM Plex Mono',monospace;font-size:0.5625rem;letter-spacing:0.1em;color:#6e6a63">outline 2px · offset 3px</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:0.9rem">
+<p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.18em;text-transform:uppercase;color:#6e6a63">Tags · status</p>
+<div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+<span style="padding:0.35rem 0.6rem;background:#f7edf1;color:#590f29;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.1em;border:1px solid rgba(89,15,41,0.55)">AA PASS</span>
+<span style="padding:0.35rem 0.6rem;background:#f1ede6;color:#6e6a63;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.1em">TOKEN</span>
+<span style="padding:0.35rem 0.6rem;background:#e7ded3;color:#35404a;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.1em">DEPRECATED</span>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid #ece8e2;padding-top:1rem;font-family:'IBM Plex Mono',monospace;font-size:0.5625rem;letter-spacing:0.12em;text-transform:uppercase;color:#6e6a63"><span>Tokens → components, one source</span><span style="color:#590f29">Governed</span></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isGrid }}" hint-placeholder-val="{{ false }}">
+<div style="padding:1.75rem 1.5rem;display:flex;flex-direction:column;gap:1.5rem">
+<p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.18em;text-transform:uppercase;color:#6e6a63">Grid — 12 columns · 24px gutter</p>
+<div style="display:grid;grid-template-columns:repeat(12,1fr);gap:0.5rem;height:11rem">
+<div style="background:rgba(89,15,41,0.08);border-top:2px solid #590f29"></div><div style="background:rgba(89,15,41,0.08)"></div><div style="background:rgba(89,15,41,0.08)"></div><div style="background:rgba(89,15,41,0.08)"></div><div style="background:rgba(20,20,20,0.04)"></div><div style="background:rgba(20,20,20,0.04)"></div><div style="background:rgba(20,20,20,0.04)"></div><div style="background:rgba(20,20,20,0.04)"></div><div style="background:rgba(20,20,20,0.04)"></div><div style="background:rgba(20,20,20,0.04)"></div><div style="background:rgba(20,20,20,0.04)"></div><div style="background:rgba(20,20,20,0.04);border-top:2px solid #590f29"></div>
+</div>
+<div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:0.5625rem;letter-spacing:0.12em;color:#6e6a63"><span>col 01</span><span>editorial span 4 / 8</span><span>col 12</span></div>
+<p style="margin:0;font-size:0.9375rem;line-height:1.6;color:#6e6a63;max-width:30rem">The grid is the identity: the same 12 columns govern the hero, the work plates and this specimen — asymmetry comes from how content is placed on it, never from abandoning it.</p>
+</div>
+</sc-if>
+</div>
+</div>
+</section>
+
+<section id="access" data-screen-label="Accessibility" style="padding:clamp(3.5rem,7vw,6rem) clamp(1.5rem,4vw,4rem);border-bottom:1px solid #ece8e2;background:#f1ede6">
+<div style="display:flex;align-items:baseline;gap:1.5rem;margin-bottom:clamp(2rem,4vw,3rem)">
+<h2 style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#590f29">05 — Accessibility</h2>
+<span aria-hidden="true" style="height:1px;flex:1;background:#e2ddd4"></span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:start">
+<p style="grid-column:span 6;margin:0;font-family:'General Sans',sans-serif;font-size:clamp(2rem,3.6vw,3.5rem);line-height:1;font-weight:600;letter-spacing:-0.04em">Accessibility is part of the design, not a report at the end.</p>
+<div style="grid-column:8 / span 5;display:flex;flex-direction:column;gap:1.25rem">
+<p style="margin:0;font-size:1rem;line-height:1.65;color:#6e6a63">Audits, recommendations and WCAG-based standards — written into the components a team actually uses, so the accessible option is the default one.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#e2ddd4;border:1px solid #e2ddd4">
+<div style="background:#f1ede6;padding:0.85rem 1rem"><p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.14em;color:#590f29">WCAG AA</p><p style="margin:0.3rem 0 0;font-size:0.8125rem;color:#6e6a63">Minimum, everywhere</p></div>
+<div style="background:#f1ede6;padding:0.85rem 1rem"><p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.14em;color:#590f29">CONTRAST</p><p style="margin:0.3rem 0 0;font-size:0.8125rem;color:#6e6a63">12.9:1 brand on ivory</p></div>
+<div style="background:#f1ede6;padding:0.85rem 1rem"><p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.14em;color:#590f29">KEYBOARD</p><p style="margin:0.3rem 0 0;font-size:0.8125rem;color:#6e6a63">Every path, no traps</p></div>
+<div style="background:#f1ede6;padding:0.85rem 1rem"><p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.14em;color:#590f29">SEMANTICS</p><p style="margin:0.3rem 0 0;font-size:0.8125rem;color:#6e6a63">Landmarks, real headings</p></div>
+<div style="background:#f1ede6;padding:0.85rem 1rem"><p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.14em;color:#590f29">FOCUS</p><p style="margin:0.3rem 0 0;font-size:0.8125rem;color:#6e6a63">2px · offset 3px</p></div>
+<div style="background:#f1ede6;padding:0.85rem 1rem"><p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.14em;color:#590f29">MOTION</p><p style="margin:0.3rem 0 0;font-size:0.8125rem;color:#6e6a63">Reduced-motion honoured</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="process" data-screen-label="Approach" style="padding:clamp(3.5rem,7vw,6rem) clamp(1.5rem,4vw,4rem);border-bottom:1px solid #ece8e2">
+<div style="display:flex;align-items:baseline;gap:1.5rem;margin-bottom:clamp(2rem,4vw,3rem)">
+<h2 style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#590f29">06 — Approach</h2>
+<span aria-hidden="true" style="height:1px;flex:1;background:#ece8e2"></span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.16em;color:#6e6a63">05 stages</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#ece8e2;border-top:1px solid #ece8e2;border-bottom:1px solid #ece8e2">
+<div style="background:#faf8f5;padding:1.5rem 1.25rem 2rem;display:flex;flex-direction:column;gap:0.85rem" style-hover="background:#f7edf1">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.18em;color:#590f29">I</span>
+<h3 style="margin:0;font-family:'General Sans',sans-serif;font-size:1.35rem;font-weight:600;letter-spacing:-0.03em">Discover</h3>
+<p style="margin:0;font-size:0.875rem;line-height:1.6;color:#6e6a63">Listening — to users, to data, to the constraints nobody wrote down.</p>
+</div>
+<div style="background:#faf8f5;padding:1.5rem 1.25rem 2rem;display:flex;flex-direction:column;gap:0.85rem" style-hover="background:#f7edf1">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.18em;color:#590f29">II</span>
+<h3 style="margin:0;font-family:'General Sans',sans-serif;font-size:1.35rem;font-weight:600;letter-spacing:-0.03em">Frame</h3>
+<p style="margin:0;font-size:0.875rem;line-height:1.6;color:#6e6a63">Complexity is rarely the problem — ambiguity is. Scattered inputs into one point of view.</p>
+</div>
+<div style="background:#faf8f5;padding:1.5rem 1.25rem 2rem;display:flex;flex-direction:column;gap:0.85rem" style-hover="background:#f7edf1">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.18em;color:#590f29">III</span>
+<h3 style="margin:0;font-family:'General Sans',sans-serif;font-size:1.35rem;font-weight:600;letter-spacing:-0.03em">Design</h3>
+<p style="margin:0;font-size:0.875rem;line-height:1.6;color:#6e6a63">Components, patterns and language that stay coherent as the product grows.</p>
+</div>
+<div style="background:#faf8f5;padding:1.5rem 1.25rem 2rem;display:flex;flex-direction:column;gap:0.85rem" style-hover="background:#f7edf1">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.18em;color:#590f29">IV</span>
+<h3 style="margin:0;font-family:'General Sans',sans-serif;font-size:1.35rem;font-weight:600;letter-spacing:-0.03em">Validate</h3>
+<p style="margin:0;font-size:0.875rem;line-height:1.6;color:#6e6a63">Design is a hypothesis until it meets real people. Accessibility is part of "working".</p>
+</div>
+<div style="background:#faf8f5;padding:1.5rem 1.25rem 2rem;display:flex;flex-direction:column;gap:0.85rem" style-hover="background:#f7edf1">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.18em;color:#590f29">V</span>
+<h3 style="margin:0;font-family:'General Sans',sans-serif;font-size:1.35rem;font-weight:600;letter-spacing:-0.03em">Scale</h3>
+<p style="margin:0;font-size:0.875rem;line-height:1.6;color:#6e6a63">Finished when a team can carry it forward without me — docs, tokens, shared language.</p>
+</div>
+</div>
+</section>
+
+<section id="contact" data-screen-label="Contact" style="padding:clamp(4rem,8vw,7rem) clamp(1.5rem,4vw,4rem) 2rem">
+<div style="display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;align-items:end">
+<div style="grid-column:span 7;display:flex;flex-direction:column;gap:1.75rem">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.22em;text-transform:uppercase;color:#590f29">07 — Contact</span>
+<p style="margin:0;font-family:'General Sans',sans-serif;font-size:clamp(2.2rem,4vw,4rem);line-height:0.98;font-weight:600;letter-spacing:-0.04em">Let's build the system<br>your product deserves.</p>
+<p style="margin:0;max-width:30rem;font-size:1rem;line-height:1.65;color:#6e6a63">Reach out directly on LinkedIn — just mention that you found me through my portfolio.</p>
+<a href="https://www.linkedin.com/in/stephania-fordant" target="_blank" rel="noopener noreferrer" style="align-self:flex-start;display:inline-flex;align-items:center;gap:0.75rem;height:3.25rem;padding:0 1.75rem;background:#590f29;color:#faf8f5;font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;letter-spacing:0.16em;text-transform:uppercase" style-hover="background:#4c0d23">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+</div>
+<div style="grid-column:10 / span 3;display:flex;flex-direction:column;gap:0.75rem;font-family:'IBM Plex Mono',monospace;font-size:0.625rem;letter-spacing:0.14em;text-transform:uppercase;color:#6e6a63">
+<span style="color:#141414">Colophon</span>
+<span>General Sans · Inter · IBM Plex Mono</span>
+<span>Ivory #faf8f5 · Burgundy #590f29</span>
+<span>12 columns · 8pt base</span>
+<span>WCAG AA · reduced motion</span>
+</div>
+</div>
+<div style="margin-top:clamp(3rem,6vw,5rem);border-top:1px solid #ece8e2;padding-top:1.25rem;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:0.5625rem;letter-spacing:0.16em;text-transform:uppercase;color:#6e6a63">
+<span>Stéphania — Product Designer</span>
+<span>Edition 2026 · N° 01</span>
+<span>{{ clock }}</span>
+</div>
+</section>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showCrosshair&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero specimen&quot;},&quot;defaultSpecimenTab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;tokens&quot;,&quot;components&quot;,&quot;grid&quot;],&quot;default&quot;:&quot;components&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Design system&quot;}}">
+class Component extends DCLogic {
+  state = { mx: 0.5, my: 0.42, inside: false, tab: null, clock: "" }
+
+  componentDidMount() {
+    this.setClock()
+    this.timer = setInterval(() => this.setClock(), 30000)
+  }
+  componentWillUnmount() { clearInterval(this.timer) }
+
+  setClock() {
+    const d = new Date()
+    const t = d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
+    this.setState({ clock: "BRU " + t })
+  }
+
+  renderVals() {
+    const { mx, my, inside } = this.state
+    const tab = this.state.tab ?? (this.props.defaultSpecimenTab ?? "tokens")
+    const crosshair = this.props.showCrosshair ?? true
+    const dx = (mx - 0.5), dy = (my - 0.5)
+    const tabStyle = (name) => ({
+      bg: tab === name ? "#590f29" : "transparent",
+      fg: tab === name ? "#faf8f5" : "#6e6a63",
+    })
+    const tk = tabStyle("tokens"), cp = tabStyle("components"), gd = tabStyle("grid")
+    return {
+      clock: this.state.clock,
+      onHeroMove: (e) => {
+        const r = e.currentTarget.getBoundingClientRect()
+        this.setState({
+          mx: Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)),
+          my: Math.min(1, Math.max(0, (e.clientY - r.top) / r.height)),
+          inside: true,
+        })
+      },
+      onHeroLeave: () => this.setState({ inside: false }),
+      gridShiftX: `translateX(${(-dx * 16).toFixed(2)}px)`,
+      gridShiftY: `translateY(${(-dy * 12).toFixed(2)}px)`,
+      letterShift: `translate(${(dx * 9).toFixed(2)}px, ${(dy * 7).toFixed(2)}px) skewX(${(-dx * 3).toFixed(2)}deg)`,
+      crossOpacity: inside && crosshair ? "1" : "0",
+      crossX: (mx * 100).toFixed(1) + "%",
+      crossY: (my * 100).toFixed(1) + "%",
+      readX: (mx * 100).toFixed(1),
+      readY: (my * 100).toFixed(1),
+      isTokens: tab === "tokens",
+      isComponents: tab === "components",
+      isGrid: tab === "grid",
+      tabLabel: tab,
+      tokensBg: tk.bg, tokensFg: tk.fg,
+      componentsBg: cp.bg, componentsFg: cp.fg,
+      gridBg: gd.bg, gridFg: gd.fg,
+      showTokens: () => this.setState({ tab: "tokens" }),
+      showComponents: () => this.setState({ tab: "components" }),
+      showGrid: () => this.setState({ tab: "grid" }),
+    }
+  }
+}
+</script>
+</body>
+</html>

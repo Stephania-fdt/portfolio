@@ -5,14 +5,17 @@ import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
 import { IndexNavigation } from "@/components/layout/Navigation/IndexNavigation"
+import { LanguageSwitcher } from "@/components/layout/Navigation/LanguageSwitcher"
 import { useScrolled } from "@/hooks/use-scrolled"
 import { useActiveSection } from "@/hooks/use-active-section"
 import {
   navigationContent,
+  getNavigationContent,
   resolveNavHref,
   isNavLinkActive,
 } from "@/content/navigation"
 import { heroContent } from "@/content/hero"
+import { useLanguage } from "@/i18n"
 
 /**
  * Module-level, not computed per render — useActiveSection depends on this
@@ -37,6 +40,8 @@ const SECTION_IDS = navigationContent.links
  * bleed-through reads richer/warmer instead of just softened.
  */
 function Navigation() {
+  const { language } = useLanguage()
+  const navigation = getNavigationContent(language)
   const scrolled = useScrolled(8)
   const activeId = useActiveSection(SECTION_IDS)
   const { pathname } = useLocation()
@@ -63,7 +68,7 @@ function Navigation() {
           </Link>
 
           <ul className="hidden items-center gap-8 md:flex">
-            {navigationContent.links.map((link) => {
+            {navigation.links.map((link) => {
               const isActive = isNavLinkActive(link.href, pathname, activeId)
 
               return (
@@ -83,15 +88,16 @@ function Navigation() {
             })}
           </ul>
 
-          <div className="flex items-center gap-3 justify-self-end min-[375px]:gap-4 min-[390px]:gap-6 sm:gap-8 md:gap-0">
+          <div className="flex items-center gap-3 justify-self-end min-[375px]:gap-4 min-[390px]:gap-6 sm:gap-8 md:gap-3">
+            <LanguageSwitcher className="hidden md:flex" />
             <Button
               asChild
               variant="outline"
               size="sm"
               className="border-muted-foreground/70 hover:border-muted-foreground"
             >
-              <Link to={resolveNavHref(navigationContent.cta.href)}>
-                {navigationContent.cta.label}
+              <Link to={resolveNavHref(navigation.cta.href)}>
+                {navigation.cta.label}
                 <ArrowRight
                   aria-hidden="true"
                   className="transition-transform duration-(--duration-fast) ease-standard group-hover:translate-x-0.5"

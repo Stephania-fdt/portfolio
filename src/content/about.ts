@@ -76,3 +76,68 @@ export const aboutContent: AboutContent = {
     "Tech enthusiast by choice.",
   ],
 }
+
+function getAboutContent(language: "en" | "fr"): AboutContent {
+  if (language === "en") return aboutContent
+  return {
+    heading: "À propos de moi",
+    chapters: [
+      {
+        eyebrow: "Introduction",
+        title:
+          "Concevoir avec curiosité. Construire avec la technologie. Créer avec intention.",
+        paragraphs: [
+          "Je suis Product Designer et je crée des expériences numériques qui trouvent le bon équilibre entre design, technologie et besoins humains.",
+          "Avec plus de six ans d’expérience dans le numérique, j’ai travaillé en UX/UI et Product Design, de la recherche et la stratégie jusqu’aux interfaces, prototypes, tests et Design Systems.",
+          "Ce qui me motive est de comprendre un problème complexe et les personnes concernées, puis de le transformer en une expérience simple et utile avec les équipes techniques.",
+        ],
+      },
+      {
+        eyebrow: "Au-delà du design",
+        title: "Au-delà du design",
+        paragraphs: [
+          "Ma curiosité pour la technologie m’a naturellement menée au-delà des frontières de la conception d’interfaces.",
+          "Je m’intéresse à la manière dont les produits sont construits, à l’influence des contraintes techniques et aux possibilités qu’ouvre la technologie pour les utilisateurs.",
+          "De Figma et des Design Systems aux Design Tokens, Angular Material, React, TypeScript et aux outils IA, j’aime explorer le terrain où design et technologie se rencontrent.",
+          "Cette culture technique me permet de collaborer étroitement avec les développeurs et de concevoir des solutions belles, réalistes, évolutives et maintenables.",
+        ],
+      },
+      {
+        eyebrow: "Une expérience qui façonne ma pratique",
+        title: "Une expérience qui façonne ma pratique",
+        paragraphs: [
+          "J’ai contribué à des produits et services numériques dans des environnements exigeants, notamment au Service public fédéral Affaires étrangères, autour de la transformation numérique, de l’accessibilité et de la cohérence des interfaces.",
+          "J’y ai participé à la création et à l’évolution d’un Design System, d’un UI Kit Angular Material, de Design Tokens et de pratiques d’accessibilité alignées sur les WCAG et le RGAA.",
+          "J’ai aussi travaillé sur l’e-commerce, la croissance, les services numériques et des produits centrés utilisateur, ce qui m’a donné une vision large du cycle de vie produit.",
+        ],
+      },
+      {
+        eyebrow: "Les projets que j’aime",
+        title: "Les projets que j’aime",
+        paragraphs: [
+          "Ce qui m’enthousiasme dans un projet, c’est le chemin qui mène d’une idée à quelque chose que les personnes peuvent réellement utiliser.",
+          "Recherche → Stratégie → Architecture → Wireframes → UI → Design System → Prototype → Tests → Itération.",
+          "J’apprécie particulièrement les projets où le design a un impact réel : simplifier des parcours complexes, rendre les services numériques plus accessibles ou transformer une idée en produit utile.",
+          "En parallèle de mon activité professionnelle, je développe aussi des projets personnels pour expérimenter de nouvelles idées à l’intersection du Product Design, de la technologie et de l’innovation.",
+        ],
+      },
+      {
+        eyebrow: "Ma manière de penser",
+        title: "Ma manière de penser",
+        paragraphs: [
+          "Je ne conçois pas simplement des écrans.",
+          "Je cherche à comprendre pourquoi un produit existe, pour qui il est conçu et comment il peut véritablement améliorer une expérience.",
+          "Pour moi, un excellent produit doit être utile, accessible, intuitif, techniquement réfléchi et agréable à utiliser.",
+          "Et je crois que les meilleurs produits naissent lorsque designers, développeurs, équipes produit et utilisateurs construisent ensemble.",
+        ],
+      },
+    ],
+    conclusion: [
+      "Curieuse par nature.",
+      "Designer par passion.",
+      "Enthousiaste de la tech par choix.",
+    ],
+  }
+}
+
+export { getAboutContent }

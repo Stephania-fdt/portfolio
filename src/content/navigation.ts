@@ -20,12 +20,27 @@ export type NavigationContent = {
  */
 export const navigationContent: NavigationContent = {
   links: [
-    { label: "Work", href: "#work" },
+    { label: "Work", href: "/work" },
     { label: "About", href: "/about" },
-    { label: "Experience", href: "#process" },
+    { label: "Experience", href: "/experience" },
     { label: "Contact", href: "#contact" },
   ],
   cta: { label: "Let's talk", href: "#contact" },
+}
+
+function getNavigationContent(language: "en" | "fr"): NavigationContent {
+  if (language === "fr") {
+    return {
+      links: [
+        { label: "Projets", href: "/work" },
+        { label: "À propos", href: "/about" },
+        { label: "Expérience", href: "/experience" },
+        { label: "Contact", href: "#contact" },
+      ],
+      cta: { label: "Échangeons", href: "#contact" },
+    }
+  }
+  return navigationContent
 }
 
 /**
@@ -51,4 +66,4 @@ function isNavLinkActive(
   return href.startsWith("#") ? activeId === href.slice(1) : pathname === href
 }
 
-export { resolveNavHref, isNavLinkActive }
+export { resolveNavHref, isNavLinkActive, getNavigationContent }

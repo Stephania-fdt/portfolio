@@ -1,145 +1,188 @@
 import { useEffect } from "react"
-import { Link, useParams } from "react-router-dom"
 import { ArrowLeft } from "lucide-react"
+import { Link, useParams } from "react-router-dom"
 
-import { cn } from "@/lib/utils"
-import { Section } from "@/components/ui/section"
+import { CaseStudyFacts } from "@/components/ui/case-study-facts"
+import { CaseStudyHero } from "@/components/ui/case-study-hero"
 import { Container } from "@/components/ui/container"
-import { caseStudies } from "@/content/case-studies"
-import { workProjects } from "@/content/work"
+import { Section } from "@/components/ui/section"
+import { SectionKicker } from "@/components/ui/section-kicker"
+import { getCaseStudies } from "@/content/case-studies"
+import { getWorkProjects } from "@/content/work"
+import { formatNumeral } from "@/lib/numerals"
+import { cn } from "@/lib/utils"
+import { useLanguage } from "@/i18n"
 
-/**
- * `/work/:slug`. Only reachable, in normal use, via a `WorkItem` link that
- * already confirmed a case study exists for this slug (see WorkItem.tsx) —
- * the not-found branch below exists for direct/typed URLs, not the happy path.
- */
+/** Canonical generic case-study route, assembled from the shared editorial system. */
 function CaseStudy() {
+  const { language, copy } = useLanguage()
   const { slug } = useParams<{ slug: string }>()
+  const caseStudies = getCaseStudies(language)
+  const workProjects = getWorkProjects(language)
   const caseStudy = slug ? caseStudies[slug] : undefined
-  const project = workProjects.find((p) => p.href === `/work/${slug}`)
+  const project = workProjects.find(
+    (project) => project.href === `/work/${slug}`,
+  )
 
   useEffect(() => {
     document.title = project
       ? `${project.title} — Stéphania`
       : "Case study — Stéphania"
-  }, [project])
+  }, [project, copy.meta.caseFallbackTitle])
 
   if (!caseStudy || !project) {
     return (
       <Section spacing="md">
         <Container size="narrow">
-          <p className="text-lg text-foreground">
-            This case study doesn't exist yet.
-          </p>
+          <p className="text-lg text-foreground">{copy.meta.missingCase}</p>
           <Link
-            to="/#work"
+            to="/work"
             className="mt-6 inline-flex items-center gap-2 text-sm font-medium tracking-tight text-brand"
           >
             <ArrowLeft aria-hidden="true" className="size-4" />
-            Back to Selected Work
+            {copy.common.backToWork}
           </Link>
         </Container>
       </Section>
     )
   }
 
+  const heroMeta = [
+    project.roleContext ? { label: "Role", value: project.roleContext } : null,
+    { label: "Year", value: project.year },
+    project.technologies.length > 0
+      ? { label: "Tools", value: project.technologies.join(" · ") }
+      : null,
+  ].filter((item): item is { label: string; value: string } => item !== null)
+
   return (
     <article>
-      <Section spacing="md">
-        <Container size="narrow">
-          <Link
-            to="/#work"
-            className="group inline-flex items-center gap-2 text-sm font-medium tracking-tight text-muted-foreground transition-colors duration-(--duration-fast) ease-standard hover:text-brand"
-          >
-            <ArrowLeft
-              aria-hidden="true"
-              className="size-4 transition-transform duration-(--duration-fast) ease-standard group-hover:-translate-x-0.5"
-            />
-            Selected Work
-          </Link>
+      <Container size="content" className="pt-8">
+        <Link
+          to="/work"
+          className="group inline-flex items-center gap-2 text-sm font-medium tracking-tight text-muted-foreground transition-colors duration-(--duration-fast) ease-standard hover:text-brand"
+        >
+          <ArrowLeft
+            aria-hidden="true"
+            className="size-4 transition-transform duration-(--duration-fast) ease-standard group-hover:-translate-x-0.5"
+          />
+          {copy.common.backToWork}
+        </Link>
+      </Container>
 
-          <p className="mt-10 font-sans text-xs tracking-widest text-brand uppercase">
-            {project.category} · {project.year}
-          </p>
+      <CaseStudyHero
+        eyebrow={project.category}
+        title={project.title}
+        summary={project.sentence}
+        meta={heroMeta}
+        image={caseStudy.heroImage}
+      />
 
-          <h1 className="mt-4 text-5xl font-bold md:text-6xl">
-            {project.title}
-          </h1>
+      {caseStudy.sections.map((section, sectionIndex) => {
+        const isClosingSection = sectionIndex === caseStudy.sections.length - 1
+        const processColumns =
+          section.processSteps && section.processSteps.length <= 4
+            ? "lg:grid-cols-4"
+            : "lg:grid-cols-5"
 
-          {/* Scannable in a few seconds: who she was on this project, and
-              for whom — the one fact the category/year eyebrow above
-              doesn't already carry. Same quiet, secondary voice as the
-              eyebrow, one step down in emphasis (muted, not brand). */}
-          {project.roleContext ? (
-            <p className="mt-3 font-sans text-sm tracking-wide text-muted-foreground">
-              {project.roleContext}
-            </p>
-          ) : null}
+        return (
+          <Section key={section.heading} id={`${slug}-${sectionIndex}`}>
+            <Container size="content">
+              <SectionKicker>{section.heading}</SectionKicker>
 
-          <div className="mt-16 space-y-16">
-            {caseStudy.sections.map((section, sectionIndex) => {
-              // The closing section's last paragraph is where every case
-              // study lands on its own version of the same belief the
-              // Hero states once, in different words each time (Sprint
-              // 11.4) — never the Hero's exact sentence, same voice.
-              const isClosingSection =
-                sectionIndex === caseStudy.sections.length - 1
+              <div className="mt-8 max-w-2xl space-y-4">
+                {section.paragraphs.map((paragraph, paragraphIndex) => {
+                  const isReflection =
+                    isClosingSection &&
+                    paragraphIndex === section.paragraphs.length - 1
 
-              return (
-                <section key={section.heading}>
-                  <div className="max-w-xl">
-                    <h2 className="text-2xl font-bold md:text-3xl">
-                      {section.heading}
-                    </h2>
-                    <div className="mt-4 space-y-4">
-                      {section.paragraphs.map((paragraph, paragraphIndex) => {
-                        const isReflection =
-                          isClosingSection &&
-                          paragraphIndex === section.paragraphs.length - 1
+                  return (
+                    <p
+                      key={paragraph}
+                      className={cn(
+                        "text-lg leading-relaxed text-foreground",
+                        isReflection &&
+                          "text-xl leading-snug font-medium italic md:text-2xl",
+                      )}
+                    >
+                      {paragraph}
+                    </p>
+                  )
+                })}
+              </div>
 
-                        return (
-                          <p
-                            key={paragraph}
-                            className={cn(
-                              "text-lg leading-relaxed text-foreground",
-                              isReflection && "text-xl italic md:text-2xl",
-                            )}
-                          >
-                            {paragraph}
-                          </p>
-                        )
-                      })}
-                    </div>
-                  </div>
+              {section.facts && section.facts.length > 0 ? (
+                <CaseStudyFacts facts={section.facts} />
+              ) : null}
 
-                  {/* Images get the full (narrow) container width, not the
-                      text column's max-w-xl — a cramped multi-page screenshot
-                      is illegible; body text at that width is not. */}
-                  {section.images && section.images.length > 0 ? (
-                    <div className="mt-8 space-y-8">
-                      {section.images.map((image) => (
-                        <figure key={image.src}>
-                          <img
-                            src={image.src}
-                            alt={image.alt}
-                            loading="lazy"
-                            className="w-full border border-border"
-                          />
-                          {image.caption ? (
-                            <figcaption className="mt-3 font-mono text-xs tracking-widest text-muted-foreground uppercase">
-                              {image.caption}
-                            </figcaption>
-                          ) : null}
-                        </figure>
-                      ))}
-                    </div>
-                  ) : null}
-                </section>
-              )
-            })}
-          </div>
-        </Container>
-      </Section>
+              {section.images && section.images.length > 0 ? (
+                <div
+                  className={cn(
+                    "mt-10",
+                    section.imageLayout === "two-up" ||
+                      section.imageLayout === "comparison"
+                      ? "grid gap-8 md:grid-cols-2"
+                      : section.imageLayout === "three-up"
+                        ? "grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+                        : "space-y-10",
+                  )}
+                >
+                  {section.images.map((image) => (
+                    <figure
+                      key={`${image.src}-${image.label ?? image.caption}`}
+                    >
+                      <div
+                        className={cn(
+                          "overflow-hidden border border-border bg-secondary/50",
+                          image.selected && "border-brand",
+                        )}
+                      >
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          loading="lazy"
+                          className="h-auto w-full"
+                        />
+                      </div>
+                      {image.label || image.caption ? (
+                        <figcaption className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
+                          {image.label ? <span>{image.label}</span> : null}
+                          {image.label && image.caption ? " — " : null}
+                          {image.caption ? <span>{image.caption}</span> : null}
+                        </figcaption>
+                      ) : null}
+                    </figure>
+                  ))}
+                </div>
+              ) : null}
+
+              {section.processSteps && section.processSteps.length > 0 ? (
+                <ol
+                  data-case-study-process
+                  className={cn(
+                    "mt-10 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2",
+                    processColumns,
+                  )}
+                >
+                  {section.processSteps.map((step, stepIndex) => (
+                    <li key={step.title} className="bg-background p-6 md:p-8">
+                      <p className="font-mono text-2xs tracking-widest text-brand uppercase">
+                        {formatNumeral(stepIndex)}
+                      </p>
+                      <p className="mt-3 text-lg font-bold text-foreground">
+                        {step.title}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        {step.description}
+                      </p>
+                    </li>
+                  ))}
+                </ol>
+              ) : null}
+            </Container>
+          </Section>
+        )
+      })}
     </article>
   )
 }

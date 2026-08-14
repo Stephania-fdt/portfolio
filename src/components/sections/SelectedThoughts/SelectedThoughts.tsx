@@ -1,7 +1,8 @@
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
 import { EditorialList } from "@/components/ui/editorial-list"
-import { selectedThoughts } from "@/content/thoughts"
+import { getSelectedThoughts } from "@/content/thoughts"
+import { useLanguage } from "@/i18n"
 
 /**
  * A collection of essays, not a numbered sequence — numeral suppressed
@@ -10,6 +11,8 @@ import { selectedThoughts } from "@/content/thoughts"
  * Same rhythm as Design Principles and The Process, no new pattern.
  */
 function SelectedThoughts() {
+  const { language } = useLanguage()
+  const selectedThoughts = getSelectedThoughts(language)
   const items = selectedThoughts.map((thought) => ({
     eyebrow: thought.category,
     title: thought.headline,
@@ -17,8 +20,15 @@ function SelectedThoughts() {
   }))
 
   return (
-    <Section id="thoughts" aria-label="Selected Thoughts">
-      <SectionKicker>Selected Thoughts</SectionKicker>
+    <Section
+      id="thoughts"
+      aria-label={
+        language === "fr" ? "Réflexions sélectionnées" : "Selected Thoughts"
+      }
+    >
+      <SectionKicker>
+        {language === "fr" ? "Réflexions sélectionnées" : "Selected Thoughts"}
+      </SectionKicker>
       <EditorialList items={items} numeral={false} />
     </Section>
   )

@@ -91,3 +91,52 @@ export const heroContent: HeroContent = {
     ],
   },
 }
+
+function getHeroContent(language: "en" | "fr"): HeroContent {
+  if (language === "en") return heroContent
+
+  return {
+    ...heroContent,
+    statement: {
+      primary: "Créer des produits évolutifs grâce aux",
+      secondary: "Design Systems, à l’accessibilité et à l’IA",
+    },
+    valueProposition: {
+      lead: "Je transforme des problématiques complexes en produits numériques simples, accessibles et évolutifs.",
+      support:
+        "Je conçois les systèmes qui aident les équipes à créer plus vite, mieux collaborer et générer un impact durable.",
+    },
+    primaryCta: { label: "Voir mes projets", href: "#work" },
+    secondaryCta: { label: "Échangeons", href: "#contact" },
+    signature:
+      "Je crois que les grands produits naissent lorsque les personnes se comprennent avant de construire ensemble.",
+    expertise: {
+      eyebrow: "Expertise",
+      heading: "Ce que j’apporte aux produits numériques",
+      items: [
+        {
+          title: "Product Design",
+          description:
+            "De la recherche à l’interface, je crée des expériences numériques intuitives et utiles.",
+        },
+        {
+          title: "Design Systems",
+          description:
+            "Je construis des systèmes accessibles, cohérents et évolutifs qui aident les équipes à concevoir et livrer plus vite.",
+        },
+        {
+          title: "UX Research",
+          description:
+            "J’utilise la recherche, les tests et les retours terrain pour ancrer les décisions produit dans les besoins réels.",
+        },
+        {
+          title: "Accessibility",
+          description:
+            "Je conçois des expériences inclusives alignées sur les principes d’accessibilité WCAG.",
+        },
+      ],
+    },
+  }
+}
+
+export { getHeroContent }

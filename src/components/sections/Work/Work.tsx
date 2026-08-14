@@ -1,34 +1,31 @@
 import { motion, useReducedMotion } from "framer-motion"
+import { ArrowRight } from "lucide-react"
+import { Link } from "react-router-dom"
 
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
+import { Button } from "@/components/ui/button"
 import { WorkItem } from "@/components/sections/Work/WorkItem"
 import { fadeUp, fadeUpSlow } from "@/lib/motion"
-import { workProjects } from "@/content/work"
+import { getFeaturedWorkProjects } from "@/content/work"
 import { cn } from "@/lib/utils"
+import { useLanguage } from "@/i18n"
 
 function Work() {
+  const { language, copy } = useLanguage()
+  const featuredWorkProjects = getFeaturedWorkProjects(language)
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <Section id="work" aria-label="Selected Work">
-      <div className="flex items-center gap-4">
-        <span
-          aria-hidden="true"
-          className="font-mono text-2xs text-muted-foreground"
-        >
-          01
-        </span>
-        <SectionKicker className="flex-1">Selected Work</SectionKicker>
-      </div>
+    <Section id="work" aria-label={copy.common.selectedWork}>
+      <SectionKicker>{copy.common.selectedWork}</SectionKicker>
 
       <p className="mt-8 max-w-2xl text-xl leading-relaxed text-foreground md:text-2xl">
-        A selection of product systems, services and research methods shaped
-        with real teams, constraints and the people who use them in mind.
+        {copy.work.intro}
       </p>
 
-      <div className="mt-section-sm divide-y divide-border">
-        {workProjects.map((project, index) => {
+      <div data-work-preview className="mt-section-sm divide-y divide-border">
+        {featuredWorkProjects.map((project, index) => {
           // index 0 (SPF) is the section's one dominant plate — more room
           // and a slower arrival. index 1 (the Portfolio entry) is a real
           // second proof point — more room to breathe than the rest — but
@@ -36,7 +33,11 @@ function Work() {
           // compete with SPF. Everything else is even weight. Sequence and
           // space carry this, never color, per the approved Product Vision.
           const tier =
-            index === 0 ? "lead" : index === 1 ? "secondary" : "standard"
+            index === 0
+              ? "lead"
+              : project.href === "/work/portfolio"
+                ? "secondary"
+                : "standard"
 
           return (
             <motion.div
@@ -66,6 +67,18 @@ function Work() {
             </motion.div>
           )
         })}
+      </div>
+
+      <div className="mt-section-sm flex justify-center">
+        <Button asChild size="lg">
+          <Link to="/work">
+            {copy.common.viewAllWork}
+            <ArrowRight
+              aria-hidden="true"
+              className="transition-transform duration-(--duration-fast) ease-standard group-hover:translate-x-0.5"
+            />
+          </Link>
+        </Button>
       </div>
     </Section>
   )

@@ -1,7 +1,6 @@
 import { harmonyCaseStudy } from "@/content/case-studies/harmony"
-import { spfCaseStudy } from "@/content/case-studies/spf"
+import { jogaAuraCaseStudy } from "@/content/case-studies/joga-aura"
 import type { CaseStudy } from "@/content/case-studies/types"
-import { wellpackCaseStudy } from "@/content/case-studies/wellpack"
 
 /**
  * Keyed by slug, not by array index — `WorkItem` checks this registry to
@@ -10,9 +9,49 @@ import { wellpackCaseStudy } from "@/content/case-studies/wellpack"
  * go to is worse than no link at all.
  */
 export const caseStudies: Record<string, CaseStudy> = {
-  [spfCaseStudy.slug]: spfCaseStudy,
   [harmonyCaseStudy.slug]: harmonyCaseStudy,
-  [wellpackCaseStudy.slug]: wellpackCaseStudy,
+  [jogaAuraCaseStudy.slug]: jogaAuraCaseStudy,
 }
+
+const frenchHeadings: Record<string, string> = {
+  Overview: "Vue d’ensemble",
+  "The challenge": "Le défi",
+  "Research & discovery": "Recherche & découverte",
+  "Understanding the user": "Comprendre les utilisateurs",
+  "Information architecture": "Architecture de l’information",
+  "UX design": "Conception UX",
+  "Testing & validation": "Tests & validation",
+  "My role": "Mon rôle",
+  "The process in brief": "Le processus en bref",
+  "What I took from it": "Ce que j’en retiens",
+  "Art direction": "Direction artistique",
+  "From direction to experience": "De la direction à l’expérience",
+  Wireframing: "Wireframing",
+  "Coming Soon exploration": "Exploration Coming Soon",
+  "From structure to final UI": "De la structure à l’interface finale",
+  "Visual identity in the product": "L’identité visuelle dans le produit",
+  "E-commerce & product experience": "E-commerce & expérience produit",
+  "Responsive delivery": "Déclinaison responsive",
+  "Figma → Shopify": "Figma → Shopify",
+  "Outcome & reflection": "Résultat & réflexion",
+}
+
+function getCaseStudies(language: "en" | "fr"): Record<string, CaseStudy> {
+  if (language === "en") return caseStudies
+  return Object.fromEntries(
+    Object.entries(caseStudies).map(([slug, study]) => [
+      slug,
+      {
+        ...study,
+        sections: study.sections.map((section) => ({
+          ...section,
+          heading: frenchHeadings[section.heading] ?? section.heading,
+        })),
+      },
+    ]),
+  )
+}
+
+export { getCaseStudies }
 
 export type { CaseStudy, CaseStudySection } from "@/content/case-studies/types"

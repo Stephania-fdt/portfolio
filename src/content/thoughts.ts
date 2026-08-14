@@ -41,3 +41,42 @@ export const selectedThoughts: SelectedThought[] = [
     ],
   },
 ]
+
+function getSelectedThoughts(language: "en" | "fr"): SelectedThought[] {
+  if (language === "en") return selectedThoughts
+  return [
+    {
+      category: "Sur les Design Systems",
+      headline: "Un Design System est un produit, pas un livrable.",
+      paragraphs: [
+        "La plupart des Design Systems échouent au moment de leur livraison : ils sont traités comme une passation unique plutôt que comme un produit vivant avec ses utilisateurs, sa roadmap et ses responsables.",
+        "Je les construis avec la même rigueur que les produits destinés aux clients : recherche, itération, documentation et une équipe qui les porte après le lancement.",
+      ],
+    },
+    {
+      category: "Sur l’IA",
+      headline: "L’IA réduit la friction, pas le jugement.",
+      paragraphs: [
+        "La tentation avec l’IA est de la laisser décider. Ma règle est inverse : elle retire la friction autour d’une décision pour me laisser davantage de temps pour la prendre réellement.",
+      ],
+    },
+    {
+      category: "Sur l’accessibilité",
+      headline: "Le design accessible, c’est simplement du design bien fait.",
+      paragraphs: [
+        "Traiter l’accessibilité comme un chantier séparé pousse les équipes à ajouter l’empathie après coup. Elle doit exister dans la première esquisse, pas dans le dernier audit.",
+      ],
+    },
+    {
+      category: "Sur la stratégie produit",
+      headline:
+        "Les bonnes décisions de design sont des décisions de stratégie.",
+      paragraphs: [
+        "L’interface est le lieu où la stratégie d’un produit tient ou s’effondre : priorités, arbitrages et modèle économique deviennent visibles dès qu’une personne l’utilise.",
+        "Je ne conçois pas une fois la stratégie définie. Je conçois pour aider à la définir.",
+      ],
+    },
+  ]
+}
+
+export { getSelectedThoughts }

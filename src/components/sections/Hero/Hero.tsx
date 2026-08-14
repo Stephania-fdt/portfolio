@@ -7,7 +7,8 @@ import { HeroBackground } from "@/components/sections/Hero/HeroBackground"
 import { HeroExpertise } from "@/components/sections/Hero/HeroExpertise"
 import { ScrollIndicator } from "@/components/sections/Hero/ScrollIndicator"
 import { transition } from "@/lib/motion"
-import { heroContent } from "@/content/hero"
+import { getHeroContent } from "@/content/hero"
+import { useLanguage } from "@/i18n"
 
 /** Distance (px) the Hero's own reveals travel — slightly more than the
  *  sitewide FADE_OFFSET (12px) since these are larger, slower beats, not
@@ -24,6 +25,8 @@ const REVEAL_OFFSET = 16
  * their own weight — a pause you can feel, not a metronome.
  */
 function Hero() {
+  const { language, copy } = useLanguage()
+  const heroContent = getHeroContent(language)
   const shouldReduceMotion = useReducedMotion()
 
   const reveal = (delay: number, offset = REVEAL_OFFSET) => ({
@@ -35,7 +38,7 @@ function Hero() {
   return (
     <section
       id="hero"
-      aria-label="Introduction"
+      aria-label={copy.common.introduction}
       className="relative grid min-h-dvh w-full overflow-x-hidden md:grid-cols-[58fr_42fr] lg:grid-cols-[65fr_35fr]"
     >
       <div className="grid min-h-dvh grid-rows-[auto_1fr_auto] pt-section pb-6">

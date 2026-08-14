@@ -4,7 +4,8 @@ import { Container } from "@/components/ui/container"
 import { Quote } from "@/components/ui/quote"
 import { GhostMark } from "@/components/ui/ghost-mark"
 import { fadeUp } from "@/lib/motion"
-import { editorialQuote } from "@/content/quote"
+import { getEditorialQuote } from "@/content/quote"
+import { useLanguage } from "@/i18n"
 
 /**
  * A deliberate pause between Selected Work and Design Principles — no
@@ -12,6 +13,8 @@ import { editorialQuote } from "@/content/quote"
  * section exists to be wordless, not another labeled chapter.
  */
 function EditorialQuote() {
+  const { language } = useLanguage()
+  const editorialQuote = getEditorialQuote(language)
   const shouldReduceMotion = useReducedMotion()
 
   return (

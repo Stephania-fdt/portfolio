@@ -1,88 +1,267 @@
-import { motion, useReducedMotion } from "framer-motion"
+import { useState, type MouseEvent } from "react"
+import { useReducedMotion } from "framer-motion"
 
-import { SignatureMark } from "@/components/ui/signature-mark"
 import { heroContent } from "@/content/hero"
-import { transition } from "@/lib/motion"
+
+type MousePosition = {
+  x: number
+  y: number
+  inside: boolean
+}
+
+const EASE_STANDARD = "cubic-bezier(0.22, 1, 0.36, 1)"
 
 /**
- * SVG turbulence, tiled — the one "micro luxury" texture (Sprint 11.2,
- * regrained Sprint 11.4), kept scoped to this composition and nowhere near
- * the reading column. No image asset, no network request: pure CSS/SVG.
- * A lower base frequency than before plus a contrast-boosting color matrix
- * turns smooth uniform noise into coarser, irregular speckle — closer to
- * paper/print grain than screen static.
- */
-const GRAIN_TEXTURE =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch' seed='7'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 -1.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
-
-/**
- * The right 35% of the Hero (Sprint 11.2, elevated Sprint 12, given a
- * voice Sprint 11.4) — a quiet architectural composition, not a
- * photograph: a coarse field grid (the page's own layout made visible),
- * the studio's SignatureMark nested inside it (a finer grid, one register
- * down — the module inside the module), a folio number, and — the one
- * real sentence in the whole composition — Stéphania's own signature
- * line, sitting in the margin the way an architect signs a drawing.
- * Hidden below `md`, same precedent this component has always used — a
- * small viewport gets the words, not the composition around them.
- *
- * `aria-hidden` moves from the wrapper onto each individually decorative
- * child (grid, folio number, grain) rather than the whole subtree — the
- * signature line is authored content, not texture, and has to reach a
- * screen reader same as any other real sentence on the page.
+ * The Hero's type specimen, ported from `reference/design-reference.html`.
+ * Its interaction is intentionally local: coordinate state is measured from
+ * this plate alone, so it never affects the reading column or page layout.
  */
 function HeroBackground() {
   const shouldReduceMotion = useReducedMotion()
-  const initial = heroContent.name.charAt(0)
+  const [mouse, setMouse] = useState<MousePosition>({
+    x: 0.5,
+    y: 0.42,
+    inside: false,
+  })
+
+  const dx = mouse.x - 0.5
+  const dy = mouse.y - 0.5
+  const gridShiftX = `translateX(${(-dx * 16).toFixed(2)}px)`
+  const gridShiftY = `translateY(${(-dy * 12).toFixed(2)}px)`
+  const letterShift = `translate(${(dx * 9).toFixed(2)}px, ${(dy * 7).toFixed(2)}px) skewX(${(-dx * 3).toFixed(2)}deg)`
+  const crossX = `${(mouse.x * 100).toFixed(1)}%`
+  const crossY = `${(mouse.y * 100).toFixed(1)}%`
+  const readX = (mouse.x * 100).toFixed(1)
+  const readY = (mouse.y * 100).toFixed(1)
+  const crosshairVisible = mouse.inside && !shouldReduceMotion
+
+  const onHeroMove = (event: MouseEvent<HTMLDivElement>) => {
+    if (shouldReduceMotion) return
+
+    const rect = event.currentTarget.getBoundingClientRect()
+    const clamp = (value: number) => Math.min(1, Math.max(0, value))
+    setMouse({
+      x: clamp((event.clientX - rect.left) / rect.width),
+      y: clamp((event.clientY - rect.top) / rect.height),
+      inside: true,
+    })
+  }
+
+  const onHeroLeave = () => {
+    if (!shouldReduceMotion) {
+      setMouse((current) => ({ ...current, inside: false }))
+    }
+  }
 
   return (
-    <div className="relative hidden overflow-hidden border-l border-border md:block">
-      {/* Construction grid — a design-system grid made visible, not applied
-          decoratively. Four columns, five rows, one hairline each. */}
+    <div
+      data-hero-specimen
+      onMouseMove={onHeroMove}
+      onMouseLeave={onHeroLeave}
+      className="relative hidden overflow-hidden border-l border-border md:flex md:items-center md:justify-center"
+    >
       <div
         aria-hidden="true"
-        className="absolute inset-0 opacity-60"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(to right, var(--color-border) 0, var(--color-border) 1px, transparent 1px, transparent 25%), repeating-linear-gradient(to bottom, var(--color-border) 0, var(--color-border) 1px, transparent 1px, transparent 20%)",
-        }}
-      />
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+      >
+        <div
+          data-hero-grid-x
+          className="absolute -inset-8 opacity-90"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(to right, #e7e2da 0, #e7e2da 1px, transparent 1px, transparent 8.3333%)",
+            transition: shouldReduceMotion
+              ? undefined
+              : `transform 600ms ${EASE_STANDARD}`,
+            transform: shouldReduceMotion ? undefined : gridShiftX,
+          }}
+        />
+        <div
+          data-hero-grid-y
+          className="absolute -inset-8"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(to bottom, #efeae2 0, #efeae2 1px, transparent 1px, transparent 7.5rem)",
+            transition: shouldReduceMotion
+              ? undefined
+              : `transform 900ms ${EASE_STANDARD}`,
+            transform: shouldReduceMotion ? undefined : gridShiftY,
+          }}
+        />
+      </div>
 
-      <div className="absolute inset-0 flex items-center justify-center p-6 lg:p-12">
-        <div className="flex flex-col items-start gap-4 lg:gap-6">
-          <SignatureMark letter={initial} />
+      <div className="absolute top-6 right-6 left-6 z-10 flex flex-wrap justify-between gap-x-6 gap-y-2 font-mono text-2xs tracking-wider text-muted-foreground">
+        <span>SPECIMEN — S · General Sans 600</span>
+        <span>
+          x {readX} · y {readY}
+        </span>
+      </div>
 
-          {/* The signature — arrives last, on purpose. Everything else in
-              this composition has already settled by the time this
-              appears, so finding it reads as a discovery, not a label. */}
-          <motion.p
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              ...transition.atmosphere,
-              delay: shouldReduceMotion ? 0 : 0.85,
+      <div
+        aria-hidden="true"
+        className="relative z-10 aspect-square w-full max-w-[32rem]"
+      >
+        <svg
+          viewBox="0 0 100 100"
+          className="h-full w-full overflow-visible"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <rect
+            x="6"
+            y="6"
+            width="88"
+            height="88"
+            fill="none"
+            stroke="#e2ddd4"
+            strokeWidth="0.3"
+          />
+          {[28.3, 50, 71.7].map((position) => (
+            <line
+              key={`vertical-${position}`}
+              x1={position}
+              y1="6"
+              x2={position}
+              y2="94"
+              stroke="#ece8e2"
+              strokeWidth="0.15"
+            />
+          ))}
+          {[28.3, 50, 71.7].map((position) => (
+            <line
+              key={`horizontal-${position}`}
+              x1="6"
+              y1={position}
+              x2="94"
+              y2={position}
+              stroke="#ece8e2"
+              strokeWidth="0.15"
+            />
+          ))}
+
+          <g
+            data-hero-letter
+            style={{
+              transition: shouldReduceMotion
+                ? undefined
+                : `transform 500ms ${EASE_STANDARD}`,
+              transform: shouldReduceMotion ? undefined : letterShift,
+              transformOrigin: "center",
             }}
-            className="max-w-[12rem] text-sm leading-relaxed text-muted-foreground italic lg:max-w-[22rem]"
           >
-            {heroContent.signature}
-          </motion.p>
+            <text
+              x="50"
+              y="78"
+              textAnchor="middle"
+              dominantBaseline="alphabetic"
+              fontFamily="'General Sans', sans-serif"
+              fontWeight="600"
+              fontSize="72"
+              fill="#590f29"
+              opacity="0.14"
+            >
+              S
+            </text>
+            <text
+              x="50"
+              y="78"
+              textAnchor="middle"
+              dominantBaseline="alphabetic"
+              fontFamily="'General Sans', sans-serif"
+              fontWeight="600"
+              fontSize="72"
+              fill="none"
+              stroke="#590f29"
+              strokeWidth="0.22"
+            >
+              S
+            </text>
+          </g>
+
+          <g stroke="#6e6a63" strokeWidth="0.28">
+            <line x1="10" y1="30" x2="90" y2="30" strokeDasharray="1.2 2" />
+            <line x1="10" y1="44" x2="90" y2="44" strokeDasharray="1.2 2" />
+            <line x1="10" y1="78" x2="90" y2="78" strokeDasharray="1.2 2" />
+            <line x1="10" y1="86" x2="90" y2="86" strokeDasharray="0.6 1.6" />
+            <line x1="30" y1="24" x2="30" y2="86" strokeDasharray="1.2 2" />
+            <line x1="70" y1="24" x2="70" y2="86" strokeDasharray="1.2 2" />
+          </g>
+          <g
+            fontFamily="'IBM Plex Mono', monospace"
+            fontSize="2.3"
+            fill="#6e6a63"
+          >
+            <text x="10" y="28.2">
+              cap-height
+            </text>
+            <text x="10" y="42.2">
+              x-height
+            </text>
+            <text x="10" y="76.2">
+              baseline
+            </text>
+            <text x="10" y="89.6">
+              descender
+            </text>
+            <text x="72" y="22.4" fill="#590f29">
+              General Sans · 600
+            </text>
+          </g>
+          <g stroke="#590f29" strokeWidth="0.5">
+            <line x1="30" y1="78" x2="30" y2="82" />
+            <line x1="70" y1="78" x2="70" y2="82" />
+            <line x1="30" y1="80" x2="70" y2="80" strokeWidth="0.22" />
+          </g>
+          <text
+            x="50"
+            y="84.6"
+            textAnchor="middle"
+            fontFamily="'IBM Plex Mono', monospace"
+            fontSize="2.1"
+            fill="#590f29"
+          >
+            40 units
+          </text>
+          <g stroke="#6e6a63" strokeWidth="0.3" opacity="0.5">
+            <line x1="10.5" y1="8" x2="10.5" y2="13" />
+            <line x1="8" y1="10.5" x2="13" y2="10.5" />
+            <circle
+              cx="10.5"
+              cy="10.5"
+              r="2.4"
+              fill="none"
+              strokeWidth="0.22"
+            />
+          </g>
+        </svg>
+
+        <div
+          data-hero-crosshair
+          className="pointer-events-none absolute inset-0"
+          style={{
+            opacity: crosshairVisible ? 1 : 0,
+            transition: shouldReduceMotion ? undefined : "opacity 300ms ease",
+          }}
+        >
+          <div
+            className="absolute top-0 bottom-0 w-px bg-brand/45"
+            style={{ left: crossX }}
+          />
+          <div
+            className="absolute right-0 left-0 h-px bg-brand/45"
+            style={{ top: crossY }}
+          />
+          <div
+            className="absolute translate-x-2 translate-y-2 font-mono text-[0.5625rem] tracking-wider text-brand"
+            style={{ left: crossX, top: crossY }}
+          >
+            {readX} / {readY}
+          </div>
         </div>
       </div>
 
-      <span
-        aria-hidden="true"
-        className="absolute top-section right-8 font-mono text-2xs tracking-widest text-muted-foreground"
-      >
-        N° 01
-      </span>
-
-      {/* Grain sits on top, last — a texture over the whole composition,
-          multiplied in rather than replacing anything beneath it. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-[0.04] mix-blend-multiply"
-        style={{ backgroundImage: GRAIN_TEXTURE }}
-      />
+      <p className="absolute right-6 bottom-6 left-6 z-10 max-w-[15rem] text-[0.8125rem] leading-[1.55] text-muted-foreground italic">
+        {heroContent.signature}
+      </p>
     </div>
   )
 }

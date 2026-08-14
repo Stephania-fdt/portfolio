@@ -27,7 +27,7 @@ export const processStages: ProcessStage[] = [
   {
     title: "Validate",
     sentence:
-      "Design is a hypothesis until it meets real people. I test early, test often, and treat accessibility as a non-negotiable part of what \"working\" means.",
+      'Design is a hypothesis until it meets real people. I test early, test often, and treat accessibility as a non-negotiable part of what "working" means.',
   },
   {
     title: "Scale",
@@ -35,3 +35,36 @@ export const processStages: ProcessStage[] = [
       "The work isn't finished when it ships — it's finished when a team can carry it forward without me. Documentation, tokens and shared language are what make that possible.",
   },
 ]
+
+function getProcessStages(language: "en" | "fr"): ProcessStage[] {
+  if (language === "en") return processStages
+  return [
+    {
+      title: "Découvrir",
+      sentence:
+        "Chaque projet commence par l’écoute : des utilisateurs, des données et des contraintes que personne n’a formulées. Je préfère comprendre le problème plutôt que d’aller trop vite vers une mauvaise solution.",
+    },
+    {
+      title: "Cadrer",
+      sentence:
+        "La complexité est rarement le problème ; l’ambiguïté l’est. Je transforme des éléments dispersés en une vision claire et partagée avant de concevoir le moindre écran.",
+    },
+    {
+      title: "Concevoir",
+      sentence:
+        "Je conçois des systèmes, pas des écrans isolés : composants, patterns et langage restent cohérents à mesure que le produit grandit.",
+    },
+    {
+      title: "Valider",
+      sentence:
+        "Le design est une hypothèse jusqu’à sa rencontre avec de vraies personnes. Je teste tôt, souvent, et traite l’accessibilité comme une exigence non négociable.",
+    },
+    {
+      title: "Faire évoluer",
+      sentence:
+        "Le travail n’est pas terminé à la mise en ligne : il l’est lorsqu’une équipe peut le poursuivre sans moi. Documentation, tokens et langage partagé rendent cela possible.",
+    },
+  ]
+}
+
+export { getProcessStages }

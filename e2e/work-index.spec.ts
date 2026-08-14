@@ -1,0 +1,137 @@
+import { expect, test } from "./fixtures"
+
+const projectTitles = [
+  "SPF Affaires étrangères",
+  "Stéphania — Portfolio",
+  "Harmony",
+  "WellPack",
+  "Joga Aura",
+]
+
+test("Home presents only the three curated work projects", async ({ page }) => {
+  await page.goto("/")
+
+  const preview = page.locator("#work [data-work-preview] > div")
+  await expect(preview).toHaveCount(3)
+  await expect(
+    preview.nth(0).getByRole("heading", { name: "SPF Affaires étrangères" }),
+  ).toBeVisible()
+  await expect(
+    preview.nth(1).getByRole("heading", { name: "Harmony" }),
+  ).toBeVisible()
+  await expect(
+    preview.nth(2).getByRole("heading", { name: "Stéphania — Portfolio" }),
+  ).toBeVisible()
+  await expect(page.locator("#work")).not.toContainText("WellPack")
+  await expect(page.locator("#work")).not.toContainText("Joga Aura")
+  const workCta = page.getByRole("link", { name: /View all my work/i })
+  const contactCta = page.getByRole("link", { name: /Connect on LinkedIn/i })
+  await expect(workCta).toHaveAttribute("href", "/work")
+  await expect(workCta).toHaveAttribute(
+    "class",
+    (await contactCta.getAttribute("class")) ?? "",
+  )
+})
+
+for (const width of [375, 1440]) {
+  test(`Home work CTA is centered at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 })
+    await page.goto("/")
+
+    const button = page.getByRole("link", { name: /View all my work/i })
+    const box = await button.boundingBox()
+    if (!box) throw new Error("Work CTA is not visible.")
+
+    expect(Math.abs(box.x + box.width / 2 - width / 2)).toBeLessThanOrEqual(1)
+  })
+}
+
+test("Work is a complete five-project editorial index", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 })
+  await page.goto("/work")
+
+  await expect(page.locator("main")).toBeVisible()
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: "Selected projects, systems and digital experiences.",
+    }),
+  ).toBeVisible()
+
+  const projects = page.locator("[data-work-projects] > div")
+  await expect(projects).toHaveCount(5)
+  for (const title of projectTitles) {
+    await expect(page.getByRole("heading", { name: title })).toBeVisible()
+  }
+
+  const caseStudyLinks = page.locator("[data-work-projects] a[href^='/work/']")
+  await expect(caseStudyLinks).toHaveCount(5)
+})
+
+test("Work navigation uses the archive route on desktop and mobile", async ({
+  page,
+}) => {
+  await page.goto("/")
+  await expect(
+    page.getByRole("navigation", { name: "Primary" }).getByRole("link", {
+      name: "Work",
+    }),
+  ).toHaveAttribute("href", "/work")
+
+  await page.setViewportSize({ width: 375, height: 812 })
+  await page.getByRole("button", { name: "Open navigation" }).click()
+  await expect(
+    page
+      .getByRole("navigation", { name: "Index" })
+      .getByRole("link", { name: "WORK" }),
+  ).toHaveAttribute("href", "/work")
+})
+
+for (const [path, heading] of [
+  ["/work/spf-design-system", "Building a Scalable Government Design System"],
+  ["/work/portfolio", "Stéphania — Portfolio"],
+  ["/work/harmony", "Harmony"],
+  ["/work/wellpack", "WellPack"],
+]) {
+  test(`project route ${path} renders its canonical case study`, async ({
+    page,
+  }) => {
+    await page.goto(path)
+    await expect(
+      page.getByRole("heading", { level: 1, name: heading }),
+    ).toBeVisible()
+  })
+}
+
+test("Joga Aura's canonical route renders its complete case study", async ({
+  page,
+}) => {
+  await page.goto("/work/joga-aura")
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Joga Aura" }),
+  ).toBeVisible()
+})
+
+for (const [legacyPath, canonicalPath] of [
+  ["/work/spf-design-system/preview", "/work/spf-design-system"],
+  ["/work/harmony/preview", "/work/harmony"],
+  ["/work/wellpack/preview", "/work/wellpack"],
+]) {
+  test(`${legacyPath} redirects to its canonical route`, async ({ page }) => {
+    await page.goto(legacyPath)
+    await expect(page).toHaveURL(new RegExp(`${canonicalPath}$`))
+  })
+}
+
+for (const width of [375, 768, 1440]) {
+  test(`Work index does not overflow at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 })
+    await page.goto("/work")
+
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= window.innerWidth,
+      ),
+    ).toBe(true)
+  })
+}
