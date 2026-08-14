@@ -28,7 +28,7 @@ function EditorialList({ items, numeral, className }: EditorialListProps) {
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <div className={cn("mt-20 divide-y divide-border", className)}>
+    <div className={cn("mt-14 divide-y divide-border", className)}>
       {items.map((item, index) => (
         <motion.div
           key={item.title}

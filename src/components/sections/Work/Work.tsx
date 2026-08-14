@@ -47,7 +47,14 @@ function Work() {
               variants={tier === "lead" ? fadeUpSlow : fadeUp}
               className={cn(
                 "first:pt-0 last:pb-0",
-                tier === "standard" ? "py-section-sm" : "py-section",
+                // Only "lead" gets the large chapter-level rhythm — that's
+                // the one place Product Vision asks for structural
+                // prominence. "secondary" already gets its extra room from
+                // WorkItem's own wider image/aspect treatment, so giving it
+                // the same outer padding as "lead" was pure duplicated
+                // vertical space, not a second signal of hierarchy (density
+                // polish pass — no image, copy, order, or hierarchy change).
+                tier === "lead" ? "py-section" : "py-section-sm",
               )}
             >
               <WorkItem

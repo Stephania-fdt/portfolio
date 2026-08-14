@@ -6,6 +6,7 @@ import { EditorialQuote } from "@/components/sections/EditorialQuote/EditorialQu
 import { DesignPrinciples } from "@/components/sections/DesignPrinciples/DesignPrinciples"
 import { TheProcess } from "@/components/sections/Process/TheProcess"
 import { SelectedThoughts } from "@/components/sections/SelectedThoughts/SelectedThoughts"
+import { Contact } from "@/components/sections/Contact/Contact"
 import { heroContent } from "@/content/hero"
 
 /**
@@ -26,6 +27,7 @@ function Home() {
       <DesignPrinciples />
       <TheProcess />
       <SelectedThoughts />
+      <Contact />
     </>
   )
 }

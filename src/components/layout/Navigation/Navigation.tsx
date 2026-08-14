@@ -48,7 +48,7 @@ function Navigation() {
         >
           <Link
             to="/#hero"
-            className="justify-self-start font-heading text-sm font-medium tracking-tight text-foreground"
+            className="inline-flex min-h-11 items-center justify-self-start font-heading text-sm font-medium tracking-tight text-foreground"
           >
             {heroContent.name}
           </Link>

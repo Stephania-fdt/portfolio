@@ -66,6 +66,16 @@ function CaseStudy() {
             {project.title}
           </h1>
 
+          {/* Scannable in a few seconds: who she was on this project, and
+              for whom — the one fact the category/year eyebrow above
+              doesn't already carry. Same quiet, secondary voice as the
+              eyebrow, one step down in emphasis (muted, not brand). */}
+          {project.roleContext ? (
+            <p className="mt-3 font-sans text-sm tracking-wide text-muted-foreground">
+              {project.roleContext}
+            </p>
+          ) : null}
+
           <div className="mt-16 space-y-16">
             {caseStudy.sections.map((section, sectionIndex) => {
               // The closing section's last paragraph is where every case

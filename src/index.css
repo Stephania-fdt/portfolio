@@ -65,7 +65,12 @@
   /* numeric scale. Generous, breathable rhythm for an editorial layout.*/
   --spacing-container: clamp(1.25rem, 4vw, 4rem);
   --spacing-section: clamp(5rem, 10vw, 9rem);
-  --spacing-section-sm: clamp(2.5rem, 6vw, 5rem);
+  /* Tightened ~20% (Sprint "final polish") — this step carries the
+     repeated, scan-heavy rhythm (Work's standard entries, every
+     EditorialList item), so trimming it speeds recruiter scanning without
+     touching --spacing-section's larger, more deliberate chapter/hero/
+     lead-entry pauses. */
+  --spacing-section-sm: clamp(2rem, 5vw, 4rem);
 
   /* Container widths */
   --container-narrow: 48rem;

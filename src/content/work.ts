@@ -19,6 +19,15 @@ export type WorkProject = {
   signalTechnologies?: string[]
   href: string
   /**
+   * "Role · Context" in one short line — who she was on this project and
+   * for whom, verified against that project's own case-study prose (never
+   * invented). Optional and only set for projects with a real case-study
+   * page to display it on (`CaseStudy.tsx` renders it under the eyebrow) —
+   * the Portfolio entry has its own hand-built Hero with the same
+   * information already, and Joga Aura has no case study yet.
+   */
+  roleContext?: string
+  /**
    * A real project artifact, not a mockup or stock image — same rule as
    * `CaseStudyImage` (see `content/case-studies/types.ts`). Optional and
    * deliberately rare: most entries don't have one yet, and the preview
@@ -50,6 +59,7 @@ export const workProjects: WorkProject[] = [
     title: "SPF Affaires étrangères",
     category: "Product Design · Design System · Accessibility",
     year: "2023–present",
+    roleContext: "Product Designer · Belgian Federal Institution",
     sentence:
       "Built and governed a scalable Design System for a Belgian federal institution — embedding WCAG-based accessibility and shared standards through close, earned collaboration with developers.",
     technologies: [
@@ -87,6 +97,8 @@ export const workProjects: WorkProject[] = [
     title: "Harmony",
     category: "Product Design",
     year: "2022",
+    roleContext:
+      "Product Designer · Team of 4, French connected-bracelet startup",
     sentence:
       "Part of a four-person team taking a connected bracelet to the French market — from user research through interface design and testing.",
     technologies: [
@@ -105,6 +117,7 @@ export const workProjects: WorkProject[] = [
     title: "WellPack",
     category: "Marketing Design",
     year: "2021–2023",
+    roleContext: "UX Researcher · B2B SaaS Marketing team",
     sentence:
       "Designed a repeatable research methodology turning client requests into evidence-based landing page briefs for B2B marketing campaigns.",
     technologies: [

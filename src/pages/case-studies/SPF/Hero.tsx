@@ -23,7 +23,7 @@ function Hero() {
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <header className="pt-section">
+    <header className="overflow-x-hidden pt-section">
       <Container size="content">
         <motion.p
           initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}

@@ -10,14 +10,21 @@ import { workProjects } from "@/content/work"
 /**
  * Portfolio case study — Chapter 5, Information Architecture. Two real
  * data sources, not invented lists: `content/navigation.ts` for the
- * top-level structure (two of its four links are honestly marked as not
- * built yet, matching that file's own "forward declaration" comment —
- * this chapter doesn't pretend otherwise), and `content/work.ts` for the
- * Selected Work order, which stays exactly what's live today.
+ * top-level structure, and `content/work.ts` for the Selected Work order,
+ * which stays exactly what's live today. All four top-level links resolve
+ * to a real section — "About" and "Experience" deliberately reuse Design
+ * Principles and The Process rather than invent new chapters (see
+ * `content/navigation.ts`'s own comment for why), and Contact is a real,
+ * minimal closing section rather than a promised one.
  */
 function InformationArchitecture() {
   const shouldReduceMotion = useReducedMotion()
-  const builtSections = new Set(["#work"])
+  const builtSections = new Set([
+    "#work",
+    "#principles",
+    "#process",
+    "#contact",
+  ])
 
   return (
     <Section id="portfolio-ia">
@@ -27,11 +34,12 @@ function InformationArchitecture() {
         <SubsectionText className="mt-8 max-w-2xl text-lg">
           <p>
             The top-level structure is four sections: Work, About, Experience,
-            Contact — a résumé's own order, read as a book instead of a list.
-            Work carries the whole first argument (proof before pitch); About,
-            Experience and Contact are this site&rsquo;s forward-declared next
-            chapters, not yet built — said here plainly rather than implied as
-            finished.
+            Contact — a résumé&rsquo;s own order, read as a book instead of a
+            list. Work carries the whole first argument (proof before pitch).
+            About and Experience are honest reuses, not new chapters: they point
+            to Design Principles and The Process, the two existing sections that
+            already answer what those labels ask for. Contact is real and
+            minimal — one statement, one direct email link, no form.
           </p>
         </SubsectionText>
 

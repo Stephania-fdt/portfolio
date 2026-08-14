@@ -39,11 +39,13 @@ const PRACTICES = [
 ]
 
 /**
- * Portfolio case study — Chapter 9, Accessibility. Grounded in what's
+ * Portfolio case study — Chapter 7, Accessibility. Grounded in what's
  * actually in the codebase — real CSS, real hook usage, a real automated
  * test — not a claimed audit. No certification is claimed because none
  * exists; the automated check that does exist (axe-core, scoped to WCAG
- * A/AA tags) is named for what it is.
+ * A/AA tags) is named for what it is. Placed right after Design System
+ * and before AI-Assisted Workflow/Front-end — accessibility is design
+ * evidence, not a technical afterthought.
  */
 function Accessibility() {
   const shouldReduceMotion = useReducedMotion()

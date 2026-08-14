@@ -15,7 +15,7 @@ const RELATIONSHIPS = [
 ]
 
 /**
- * Portfolio case study — Chapter 8, Front-end Implementation. Only the
+ * Portfolio case study — Chapter 9, Front-end Implementation. Only the
  * technologies actually present in this project — confirmed by direct
  * inspection of `package.json` and the codebase, not a generic stack
  * list. The relationship pairs are the exact structure the brief for

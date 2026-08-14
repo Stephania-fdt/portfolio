@@ -20,18 +20,16 @@ export const selectedThoughts: SelectedThought[] = [
   },
   {
     category: "On AI",
-    headline: "AI should make judgment faster, not replace it.",
+    headline: "AI removes friction, not judgment.",
     paragraphs: [
-      "The temptation with AI is to let it decide. My rule is the opposite: it removes the friction around a decision so a designer can spend that time actually deciding.",
-      "Used well, it buys more exploration and more rigor. Used carelessly, it ships someone else's average taste at scale.",
+      "The temptation with AI is to let it decide. My rule is the opposite: it clears the friction around a decision so I have more time to actually make it, not less reason to.",
     ],
   },
   {
     category: "On Accessibility",
     headline: "Accessible design is just design, done properly.",
     paragraphs: [
-      "I've never met a constraint from accessibility that didn't also produce a clearer, more resilient product for everyone using it.",
-      "Treating it as a separate workstream is how teams end up retrofitting empathy. It belongs in the first sketch, not the final audit.",
+      "Treating accessibility as a separate workstream is how teams end up retrofitting empathy after the fact. It belongs in the first sketch, not the final audit — a decision made with everyone in mind from the start, not corrected for later.",
     ],
   },
   {

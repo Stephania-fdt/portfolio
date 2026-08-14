@@ -55,7 +55,10 @@ function WorkItem({
   return (
     <div
       className={cn(
-        "group relative flex flex-col gap-10 md:flex-row md:items-center md:gap-16",
+        // Mobile-only gap trimmed (10→8): below `md` this is the vertical
+        // space between a card's text block and its stacked image — the
+        // desktop row gap (md:gap-16, lead's md:gap-20/24) is untouched.
+        "group relative flex flex-col gap-8 md:flex-row md:items-center md:gap-16",
         isLead && "md:gap-20 lg:gap-24",
         reverse && "md:flex-row-reverse",
       )}
@@ -117,7 +120,12 @@ function WorkItem({
             "flex w-full items-center justify-center overflow-hidden border border-border bg-secondary/50 shadow-xs transition-shadow duration-(--duration-standard) ease-standard",
             isLead && "aspect-[16/10] md:aspect-[16/11]",
             isSecondary && "aspect-[16/10]",
-            !isLead && !isSecondary && "aspect-[4/3]",
+            // Wider on mobile only (3:2 vs the desktop 4:3) — below `md`
+            // this image stacks full-width under its text, so the ratio
+            // directly sets how tall the card gets; desktop (where the
+            // image sits at 60% column width in the two-column row) is
+            // untouched, same aspect-[4/3] as before.
+            !isLead && !isSecondary && "aspect-[3/2] md:aspect-[4/3]",
             hasCaseStudy && "group-hover:shadow-md",
           )}
         >

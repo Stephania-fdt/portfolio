@@ -31,7 +31,7 @@ const TYPE_TOKENS = [
 const SPACING_TOKENS = [
   { name: "--spacing-container", value: "clamp(1.25rem, 4vw, 4rem)" },
   { name: "--spacing-section", value: "clamp(5rem, 10vw, 9rem)" },
-  { name: "--spacing-section-sm", value: "clamp(2.5rem, 6vw, 5rem)" },
+  { name: "--spacing-section-sm", value: "clamp(2rem, 5vw, 4rem)" },
 ]
 
 const MOTION_TOKENS = [

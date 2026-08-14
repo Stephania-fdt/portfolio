@@ -30,12 +30,11 @@ function Challenge() {
           </p>
           <p>
             I needed something closer to a working demonstration than a gallery:
-            a portfolio that communicated Product thinking, UX/UI expertise,
-            Design System expertise, accessibility, front-end understanding and
-            the ability to work with AI-assisted workflows — not as claims
-            listed in a bio, but as the actual, inspectable structure of the
-            site itself. It couldn&rsquo;t just describe that practice. It had
-            to become an instance of it.
+            a portfolio that communicated Product Design thinking, Design System
+            expertise, accessibility, UX/UI craft, front-end understanding and
+            an AI-assisted workflow — not as claims listed in a bio, but as the
+            actual, inspectable structure of the site itself. It couldn&rsquo;t
+            just describe that practice. It had to become an instance of it.
           </p>
         </SubsectionText>
 

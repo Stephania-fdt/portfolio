@@ -36,7 +36,7 @@ const WORKFLOW_STEPS = [
 ]
 
 /**
- * Portfolio case study — Chapter 7, AI-Assisted Workflow. The five-step
+ * Portfolio case study — Chapter 8, AI-Assisted Workflow. The five-step
  * loop is presented as the actual framework used, then grounded in one
  * real, specific example (the Joga Aura project card) rather than a
  * hypothetical — direction, exploration, review, correction and

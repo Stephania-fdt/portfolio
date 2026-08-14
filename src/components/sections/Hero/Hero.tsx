@@ -72,7 +72,7 @@ function Hero() {
                 ...transition.slow,
                 delay: shouldReduceMotion ? 0 : 0.32,
               }}
-              className="mt-1 block origin-left text-6xl leading-[0.9] font-bold tracking-tightest md:text-7xl"
+              className="mt-1 block origin-left text-5xl leading-[0.9] font-bold tracking-tightest sm:text-6xl md:text-7xl"
             >
               {heroContent.statement.secondary}
             </motion.span>

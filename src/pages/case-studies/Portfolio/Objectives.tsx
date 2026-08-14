@@ -32,9 +32,8 @@ const OBJECTIVES = [
       "Translate design decisions into production-ready front-end code myself.",
   },
   {
-    label: "AI Integration",
-    statement:
-      "Integrate AI into the workflow without delegating design ownership to it.",
+    label: "AI Workflow",
+    statement: "Use AI to accelerate iteration, not to make the decisions.",
   },
   {
     label: "Dual Proof",

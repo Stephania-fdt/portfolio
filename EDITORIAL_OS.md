@@ -100,17 +100,17 @@ A specialist may be invoked directly, skipping the orchestrator, when:
 
 The reading order is deliberate: understand how she thinks before learning where she's worked. The chronological CV (Timeline) is held until the end, on purpose.
 
-| #   | Section               | Role in the story                                                                                                              | Status                               |
-| --- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------ |
-| —   | **Hero**              | The cover. Opens with the name, unpreceded.                                                                                    | ✅                                   |
-| 1   | **Selected Work**     | The proof — signature case studies, shown before anything is explained.                                                        | ✅                                   |
-| 2   | **Editorial Quote**   | A rhythm break / breather between Work and the thinking chapters.                                                              | ✅ (quote text is a draft — see §11) |
-| 3   | **Design Principles** | What she believes.                                                                                                             | ✅ (content is draft — see §11)      |
-| 4   | **The Process**       | How she works (Discover → Frame → Design → Validate → Scale). Editorial, not a diagram.                                        | ✅ (content is draft — see §11)      |
-| 5   | **Selected Thoughts** | Short philosophy statements — Product Design, Design Systems, Accessibility, AI. Replaces a conventional testimonials section. | ✅ (content is draft — see §11)      |
-| 6   | **About**             | The person behind the thinking. The one section where a portrait is appropriate.                                               | —                                    |
-| 7   | **Timeline**          | Career chronology — deliberately last, right before Contact.                                                                   | —                                    |
-| 8   | **Contact**           | The back cover. Closing statement + minimal colophon links.                                                                    | —                                    |
+| #   | Section               | Role in the story                                                                                                              | Status                                                                  |
+| --- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| —   | **Hero**              | The cover. Opens with the name, unpreceded.                                                                                    | ✅                                                                      |
+| 1   | **Selected Work**     | The proof — signature case studies, shown before anything is explained.                                                        | ✅                                                                      |
+| 2   | **Editorial Quote**   | A rhythm break / breather between Work and the thinking chapters.                                                              | ✅ (quote text is a draft — see §11)                                    |
+| 3   | **Design Principles** | What she believes.                                                                                                             | ✅ (content is draft — see §11)                                         |
+| 4   | **The Process**       | How she works (Discover → Frame → Design → Validate → Scale). Editorial, not a diagram.                                        | ✅ (content is draft — see §11)                                         |
+| 5   | **Selected Thoughts** | Short philosophy statements — Product Design, Design Systems, Accessibility, AI. Replaces a conventional testimonials section. | ✅ (content is draft — see §11)                                         |
+| 6   | **About**             | The person behind the thinking. The one section where a portrait is appropriate.                                               | — (nav's "About" points to Design Principles in the meantime — see §11) |
+| 7   | **Timeline**          | Career chronology — deliberately last, right before Contact.                                                                   | — (nav's "Experience" points to The Process in the meantime — see §11)  |
+| 8   | **Contact**           | The back cover. Closing statement + one direct email link.                                                                     | ✅ (mailto, not a form — resolved, see §11)                             |
 
 **Why this order:** Principles → Process → Thoughts form one uninterrupted arc (belief → method → reflection) with no biographical interruption. About and Timeline follow only once that arc is complete.
 
@@ -220,4 +220,4 @@ Nothing is done until both layers below pass — automated tooling and specialis
 - Design Principles: `src/content/principles.ts` holds 4 **draft** convictions in her established voice — needs her real principles before shipping
 - The Process: `src/content/process.ts` holds **draft** passages for all five stages — needs her real approach before shipping
 - Selected Thoughts: `src/content/thoughts.ts` holds 4 **draft** essays (Design Systems, AI, Accessibility, Product Strategy) in her established voice — needs her real convictions before shipping
-- Contact: form vs. mailto-style closing statement — undecided, functional not aesthetic
+- Contact: resolved as a real, minimal section (`components/sections/Contact/`) — mailto over a form, deliberately (see `content/contact.ts`). Still open: a dedicated About (portrait) and Timeline (chronology) haven't been built yet — nav's "About" and "Experience" reuse Design Principles and The Process as honest stand-ins until they are (see `content/navigation.ts`'s own comment).

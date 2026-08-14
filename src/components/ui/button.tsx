@@ -5,7 +5,16 @@ import { Slot } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "group inline-flex shrink-0 items-center justify-center gap-2 rounded-sm text-sm font-medium tracking-tight whitespace-nowrap transition-[background-color,border-color,box-shadow] duration-(--duration-standard) ease-standard outline-none select-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  // No `outline-none` here, deliberately: this codebase's global
+  // `:focus-visible` rule (`index.css`) is what draws the real focus ring
+  // sitewide. A bare `outline-none` utility sits in Tailwind's utilities
+  // layer, which wins the cascade over that base-layer rule regardless of
+  // selector — it was silently deleting the keyboard focus ring on every
+  // Button-rendered control (confirmed via manual keyboard-focus audit,
+  // not caught by axe-core, which can't detect a suppressed-but-technically-
+  // present outline). Native `:focus-visible` semantics already keep mouse
+  // clicks from showing a ring, so nothing else needs to change.
+  "group inline-flex shrink-0 items-center justify-center gap-2 rounded-sm text-sm font-medium tracking-tight whitespace-nowrap transition-[background-color,border-color,box-shadow] duration-(--duration-standard) ease-standard select-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {

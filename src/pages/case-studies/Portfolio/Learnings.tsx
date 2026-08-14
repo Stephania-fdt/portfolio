@@ -13,7 +13,7 @@ const LEARNINGS = [
   },
   {
     statement:
-      "Working with AI without losing design ownership means treating every output as a draft to evaluate, never a decision already made — the discipline is in the review, not in avoiding the tool.",
+      "AI compresses the distance between an idea and a working draft. It doesn't compress the judgment needed to evaluate that draft — that part stayed mine, every time.",
   },
   {
     statement:
