@@ -33,6 +33,19 @@ export type HeroContent = {
    * own closing reflections echo the same philosophy in their own words.
    */
   signature: string
+  /**
+   * Compact expertise block, added directly beneath the two Hero CTAs
+   * (Sprint "Hero expertise addition"). Deliberately part of `HeroContent`,
+   * not its own content file — this is presented as one more beat of the
+   * Hero's own composition, not a separate homepage section. Icon choice
+   * lives in `HeroExpertise.tsx` (presentation, not content) keyed by
+   * `title`.
+   */
+  expertise: {
+    eyebrow: string
+    heading: string
+    items: { title: string; description: string }[]
+  }
 }
 
 export const heroContent: HeroContent = {
@@ -51,4 +64,30 @@ export const heroContent: HeroContent = {
   secondaryCta: { label: "Let's talk", href: "#contact" },
   signature:
     "I believe great products are built when people understand each other before they build together.",
+  expertise: {
+    eyebrow: "Expertise",
+    heading: "What I bring to digital products",
+    items: [
+      {
+        title: "Product Design",
+        description:
+          "From research to interface design, I create intuitive and purposeful digital experiences.",
+      },
+      {
+        title: "Design Systems",
+        description:
+          "I build scalable, accessible and consistent systems that help teams design and ship faster.",
+      },
+      {
+        title: "UX Research",
+        description:
+          "I use research, testing and insights to make product decisions grounded in real user needs.",
+      },
+      {
+        title: "Accessibility",
+        description:
+          "I design inclusive experiences aligned with WCAG accessibility principles.",
+      },
+    ],
+  },
 }

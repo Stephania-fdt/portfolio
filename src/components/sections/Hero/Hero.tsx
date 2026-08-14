@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react"
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
 import { HeroBackground } from "@/components/sections/Hero/HeroBackground"
+import { HeroExpertise } from "@/components/sections/Hero/HeroExpertise"
 import { ScrollIndicator } from "@/components/sections/Hero/ScrollIndicator"
 import { transition } from "@/lib/motion"
 import { heroContent } from "@/content/hero"
@@ -113,6 +114,8 @@ function Hero() {
               </Button>
             </motion.div>
           </div>
+
+          <HeroExpertise />
         </Container>
 
         {/* Row 2 (the 1fr track) is intentionally empty — no spacer element. */}

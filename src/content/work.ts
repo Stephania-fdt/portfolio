@@ -1,8 +1,11 @@
-import harmonyMockup from "@/assets/case-studies/harmony/mockup.png"
-import jogaAuraProductPage from "@/assets/case-studies/joga-aura/product.png"
-import portfolioPreview from "@/assets/case-studies/portfolio/hero-preview.png"
-import spfPortalPreview from "@/assets/case-studies/spf/product/Desktop - 54.png"
-import wellpackWebsitePreview from "@/assets/case-studies/wellpack/02-brand/supports/Declinaisaon_siteweb.png"
+// Home page Selected Work thumbnails — distinct from each project's
+// in-case-study imagery (Hero covers, iteration examples, etc.), which
+// keep their own separate imports elsewhere and are untouched by this set.
+import spfHomeThumbnail from "@/assets/case-studies/spf/home-thumbnail.png"
+import portfolioHomeThumbnail from "@/assets/case-studies/portfolio/home-thumbnail.png"
+import harmonyHomeThumbnail from "@/assets/case-studies/harmony/home-thumbnail.png"
+import wellpackHomeThumbnail from "@/assets/case-studies/wellpack/home-thumbnail.png"
+import jogaAuraHomeThumbnail from "@/assets/case-studies/joga-aura/home-thumbnail.png"
 
 export type WorkProject = {
   title: string
@@ -72,7 +75,7 @@ export const workProjects: WorkProject[] = [
     ],
     signalTechnologies: ["WCAG", "Design Tokens"],
     href: "/work/spf-design-system",
-    previewImage: spfPortalPreview,
+    previewImage: spfHomeThumbnail,
   },
   {
     title: "Stéphania — Portfolio",
@@ -90,7 +93,7 @@ export const workProjects: WorkProject[] = [
     ],
     signalTechnologies: ["Claude Code", "WCAG"],
     href: "/work/portfolio",
-    previewImage: portfolioPreview,
+    previewImage: portfolioHomeThumbnail,
     hasCaseStudy: true,
   },
   {
@@ -111,7 +114,7 @@ export const workProjects: WorkProject[] = [
     ],
     signalTechnologies: ["Design Thinking", "UX Research"],
     href: "/work/harmony",
-    previewImage: harmonyMockup,
+    previewImage: harmonyHomeThumbnail,
   },
   {
     title: "WellPack",
@@ -129,7 +132,7 @@ export const workProjects: WorkProject[] = [
     ],
     signalTechnologies: ["UX Research", "Design Briefs"],
     href: "/work/wellpack",
-    previewImage: wellpackWebsitePreview,
+    previewImage: wellpackHomeThumbnail,
   },
   {
     title: "Joga Aura",
@@ -140,6 +143,6 @@ export const workProjects: WorkProject[] = [
     technologies: ["Shopify", "Figma", "UX/UI Design", "SEO"],
     signalTechnologies: ["Shopify"],
     href: "/work/joga-aura",
-    previewImage: jogaAuraProductPage,
+    previewImage: jogaAuraHomeThumbnail,
   },
 ]

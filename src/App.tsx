@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom"
 import { Navigation } from "@/components/layout/Navigation/Navigation"
 import { ScrollManager } from "@/components/layout/ScrollManager"
 import { Home } from "@/pages/Home"
+import { About } from "@/pages/About/About"
 import { CaseStudy } from "@/pages/CaseStudy/CaseStudy"
 import { SPFCaseStudy } from "@/pages/case-studies/SPF/SPFCaseStudy"
 import { WellPackCaseStudy } from "@/pages/case-studies/WellPack/WellPackCaseStudy"
@@ -15,6 +16,7 @@ function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
         {/* Sprint 18.1 — the real SPF case study (/work/spf-design-system,
             matched below by :slug) stays exactly as it is, complete and
             live. This is a separate, additive preview of the new

@@ -2,7 +2,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 
-import { navigationContent } from "@/content/navigation"
+import { navigationContent, resolveNavHref } from "@/content/navigation"
 import { transition } from "@/lib/motion"
 
 const PANEL_ID = "portfolio-index"
@@ -139,7 +139,7 @@ function IndexNavigation() {
                     className="border-b border-border"
                   >
                     <Link
-                      to={`/${link.href}`}
+                      to={resolveNavHref(link.href)}
                       onClick={close}
                       className="group flex min-h-20 items-center py-4"
                     >

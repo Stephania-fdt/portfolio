@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
@@ -7,14 +7,22 @@ import { Button } from "@/components/ui/button"
 import { IndexNavigation } from "@/components/layout/Navigation/IndexNavigation"
 import { useScrolled } from "@/hooks/use-scrolled"
 import { useActiveSection } from "@/hooks/use-active-section"
-import { navigationContent } from "@/content/navigation"
+import {
+  navigationContent,
+  resolveNavHref,
+  isNavLinkActive,
+} from "@/content/navigation"
 import { heroContent } from "@/content/hero"
 
 /**
  * Module-level, not computed per render — useActiveSection depends on this
  * array by reference, and navigationContent never changes at runtime.
+ * Hash links only: a real route like "/about" isn't a section on the home
+ * page for `useActiveSection`'s IntersectionObserver to track.
  */
-const SECTION_IDS = navigationContent.links.map((link) => link.href.slice(1))
+const SECTION_IDS = navigationContent.links
+  .filter((link) => link.href.startsWith("#"))
+  .map((link) => link.href.slice(1))
 
 /**
  * Fixed, transparent-over-Hero chrome that picks up a blurred surface and
@@ -31,6 +39,7 @@ const SECTION_IDS = navigationContent.links.map((link) => link.href.slice(1))
 function Navigation() {
   const scrolled = useScrolled(8)
   const activeId = useActiveSection(SECTION_IDS)
+  const { pathname } = useLocation()
 
   return (
     <header
@@ -55,12 +64,12 @@ function Navigation() {
 
           <ul className="hidden items-center gap-8 md:flex">
             {navigationContent.links.map((link) => {
-              const isActive = activeId === link.href.slice(1)
+              const isActive = isNavLinkActive(link.href, pathname, activeId)
 
               return (
                 <li key={link.href}>
                   <Link
-                    to={`/${link.href}`}
+                    to={resolveNavHref(link.href)}
                     aria-current={isActive ? "location" : undefined}
                     className={cn(
                       "text-sm font-medium tracking-tight transition-colors duration-(--duration-fast) ease-standard hover:text-brand",
@@ -81,7 +90,7 @@ function Navigation() {
               size="sm"
               className="border-muted-foreground/70 hover:border-muted-foreground"
             >
-              <Link to={`/${navigationContent.cta.href}`}>
+              <Link to={resolveNavHref(navigationContent.cta.href)}>
                 {navigationContent.cta.label}
                 <ArrowRight
                   aria-hidden="true"
