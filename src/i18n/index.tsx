@@ -21,6 +21,9 @@ const copy = {
       closeNavigation: "Close navigation",
       switchToEnglish: "Switch site language to English",
       switchToFrench: "Switch site language to French",
+      chooseLanguage: "Choose language",
+      changeLanguage: "Change language",
+      language: "Language",
     },
     common: {
       selectedWork: "Selected Work",
@@ -66,6 +69,9 @@ const copy = {
       closeNavigation: "Fermer la navigation",
       switchToEnglish: "Passer le site en anglais",
       switchToFrench: "Passer le site en français",
+      chooseLanguage: "Choisir la langue",
+      changeLanguage: "Changer la langue",
+      language: "Langue",
     },
     common: {
       selectedWork: "Projets sélectionnés",

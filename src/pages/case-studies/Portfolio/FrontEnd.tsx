@@ -4,14 +4,38 @@ import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
 import { REVEAL, SubsectionText } from "@/components/ui/case-study-capture"
+import { useLanguage } from "@/i18n"
 
 const RELATIONSHIPS = [
   { from: "Figma", to: "Design direction" },
   { from: "Design System", to: "Visual consistency" },
-  { from: "React / TypeScript", to: "Component architecture" },
+  { from: "React / Vite / TypeScript", to: "Component architecture" },
   { from: "Tailwind", to: "Styling and responsive implementation" },
-  { from: "AI-assisted development", to: "Faster iteration and debugging" },
+  {
+    from: "Git / GitHub / VS Code",
+    to: "Versioning and implementation workflow",
+  },
+  {
+    from: "ChatGPT / Codex / Claude Code",
+    to: "AI-assisted exploration, iteration and code review",
+  },
   { from: "WCAG", to: "Accessibility validation" },
+]
+
+const FRENCH_RELATIONSHIPS = [
+  { from: "Figma", to: "Direction design" },
+  { from: "Design System", to: "Cohérence visuelle" },
+  { from: "React / Vite / TypeScript", to: "Architecture des composants" },
+  { from: "Tailwind CSS", to: "Styles et implémentation responsive" },
+  {
+    from: "Git / GitHub / VS Code",
+    to: "Versionnage et workflow d’implémentation",
+  },
+  {
+    from: "ChatGPT / Codex / Claude Code",
+    to: "Exploration, itération et revue de code assistées par IA",
+  },
+  { from: "WCAG", to: "Validation de l’accessibilité" },
 ]
 
 /**
@@ -22,21 +46,25 @@ const RELATIONSHIPS = [
  * this chapter specified.
  */
 function FrontEnd() {
+  const { language } = useLanguage()
+  const isFrench = language === "fr"
+  const relationships = isFrench ? FRENCH_RELATIONSHIPS : RELATIONSHIPS
   const shouldReduceMotion = useReducedMotion()
 
   return (
     <Section id="portfolio-frontend">
       <Container size="content">
-        <SectionKicker>Front-end Implementation</SectionKicker>
+        <SectionKicker>
+          {isFrench
+            ? "Outils & implémentation"
+            : "Tools & front-end implementation"}
+        </SectionKicker>
 
         <SubsectionText className="mt-8 max-w-2xl text-lg">
           <p>
-            Every design decision on this site had to survive becoming real code
-            — React and TypeScript for the component architecture, Tailwind CSS
-            for styling and responsive behavior, Figma for the design direction
-            that came first. AI-assisted development sits inside that chain as
-            an accelerant, not a separate step; WCAG is where accessibility gets
-            checked, not assumed.
+            {isFrench
+              ? "Chaque décision design devait résister au passage vers du code réel. L’IA intervient dans cette chaîne comme un outil d’exploration, d’assistance et d’accélération ; elle ne remplace ni l’expertise produit ni la validation humaine."
+              : "Every design decision had to survive becoming real code. AI sits inside this chain as a tool for exploration, assistance and acceleration; it does not replace Product Design expertise or human validation."}
           </p>
         </SubsectionText>
 
@@ -44,7 +72,7 @@ function FrontEnd() {
           {...(shouldReduceMotion ? { initial: false } : REVEAL())}
           className="mt-16 max-w-2xl divide-y divide-border border-y border-border"
         >
-          {RELATIONSHIPS.map((item) => (
+          {relationships.map((item) => (
             <div
               key={item.from}
               className="flex flex-col gap-1 py-5 sm:flex-row sm:items-baseline sm:gap-6"

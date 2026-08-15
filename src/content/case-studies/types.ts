@@ -8,10 +8,16 @@ export type CaseStudyImage = {
   label?: string
   /** Marks a client-approved direction without turning it into a decorative badge. */
   selected?: boolean
+  /** Keeps diagram-like assets fully visible inside the shared editorial frame. */
+  contain?: boolean
+  /** Gives the primary screen the full row in an editorial image grid. */
+  featured?: boolean
+  /** Centers a vertical screen at a readable width without cropping it. */
+  portrait?: boolean
 }
 
 export type CaseStudyVisualLayout =
-  "single" | "two-up" | "three-up" | "comparison"
+  "single" | "two-up" | "three-up" | "comparison" | "editorial"
 
 export type CaseStudyProcessStep = {
   title: string
@@ -26,7 +32,16 @@ export type CaseStudyFact = {
 
 export type CaseStudySection = {
   heading: string
+  /** Optional editorial title displayed below the section eyebrow. */
+  title?: string
   paragraphs: string[]
+  /** Section-specific French copy when a direct heading translation is insufficient. */
+  french?: {
+    heading: string
+    title?: string
+    paragraphs: string[]
+    imageAlts?: string[]
+  }
   /**
    * Real project artifacts only — flat, honest screenshots, per the
    * Editorial Assets Bible's Image Rules. Never a device mockup, never
@@ -51,5 +66,11 @@ export type CaseStudy = {
   slug: string
   /** A real final artefact used to establish the project before its story begins. */
   heroImage?: CaseStudyImage
+  /** Optional project-specific destination displayed with the hero metadata. */
+  liveSite?: {
+    href: string
+    label: string
+    frenchLabel: string
+  }
   sections: CaseStudySection[]
 }

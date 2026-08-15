@@ -12,6 +12,7 @@ const productWireframe = publicAsset("wireframes/product-wireframe.webp.png")
 const newsletterWireframe = publicAsset(
   "wireframes/newsletter-wireframe.webp.png",
 )
+const sitemap = publicAsset("sitemap/sitemap.webp.png")
 const comingSoon01 = publicAsset(
   "wireframes/Coming%20Soon-propal1-wireframe.webp.png",
 )
@@ -21,12 +22,16 @@ const comingSoon02 = publicAsset(
 const comingSoon03 = publicAsset(
   "wireframes/Coming%20Soon-propal3-wireframe.webp.png",
 )
-const finalMobileUi = publicAsset(
-  "final-ui/Capture%20d%27%C3%A9cran%202026-08-14%20173458.png",
-)
+const finalMobileUi = publicAsset("final-ui/Mobile.png")
+const finalDesktopUi = publicAsset("final-ui/desktop.png")
 
 export const jogaAuraCaseStudy: CaseStudy = {
   slug: "joga-aura",
+  liveSite: {
+    href: "https://joga-aura.com/",
+    label: "Visit live website",
+    frenchLabel: "Voir le site en ligne",
+  },
   heroImage: {
     src: productPage,
     alt: "Joga Aura's completed Blue Serenity yoga mat product page, showing product imagery and purchase actions.",
@@ -89,26 +94,53 @@ export const jogaAuraCaseStudy: CaseStudy = {
       ],
     },
     {
+      heading: "Information Architecture",
+      title: "Structuring a clear and intuitive shopping experience",
+      paragraphs: [
+        "The sitemap helped define a simple and consistent navigation system, allowing users to discover the brand, understand the product and complete their purchase without unnecessary friction.",
+      ],
+      french: {
+        heading: "Architecture de l’information",
+        title: "Structurer une expérience d’achat claire et intuitive",
+        paragraphs: [
+          "La sitemap a permis de définir une navigation simple et cohérente, afin d’aider les utilisateurs à découvrir la marque, comprendre le produit et finaliser leur achat sans friction inutile.",
+        ],
+        imageAlts: ["Sitemap du site e-commerce Joga Aura"],
+      },
+      imageLayout: "single",
+      images: [
+        {
+          src: sitemap,
+          alt: "Joga Aura e-commerce website sitemap",
+          contain: true,
+        },
+      ],
+    },
+    {
       heading: "Wireframing",
       paragraphs: [
         "Before moving into high-fidelity design, I used wireframes to establish hierarchy, content structure and the key e-commerce interactions. The homepage and product page carried the primary journey; the newsletter provided a supporting acquisition touchpoint.",
       ],
-      imageLayout: "two-up",
+      imageLayout: "editorial",
       images: [
         {
           src: homeWireframe,
-          alt: "Joga Aura homepage wireframe showing a launch-state hero, newsletter form, feature highlights and image-led content sections.",
+          alt: "Full Joga Aura homepage wireframe showing navigation, an image-led hero, brand story, product benefits, FAQ and social content.",
           label: "Homepage wireframe",
+          contain: true,
+          featured: true,
         },
         {
           src: productWireframe,
-          alt: "Joga Aura product-page wireframe showing the product gallery, information hierarchy, specifications and purchase actions.",
+          alt: "Full Joga Aura product-page wireframe showing the gallery, product details, purchase actions, benefits and supporting content.",
           label: "Product-page wireframe",
+          contain: true,
         },
         {
           src: newsletterWireframe,
           alt: "Joga Aura newsletter wireframe with a simple email field, privacy note and notification action.",
           label: "Newsletter · supporting flow",
+          contain: true,
         },
       ],
     },
@@ -142,17 +174,21 @@ export const jogaAuraCaseStudy: CaseStudy = {
       paragraphs: [
         "The final UI kept the hierarchy established in wireframes while carrying the selected visual direction into the customer-facing storefront. The paired artefacts below show the progression from structure to the completed experience.",
       ],
-      imageLayout: "comparison",
+      imageLayout: "editorial",
       images: [
         {
-          src: productWireframe,
-          alt: "Joga Aura product-page wireframe used to structure product information and purchasing actions.",
-          label: "Product page · wireframe",
+          src: finalDesktopUi,
+          alt: "Joga Aura final desktop homepage with editorial navigation, yoga imagery and a Blue Serenity product call to action.",
+          label: "Desktop · final UI",
+          contain: true,
+          featured: true,
         },
         {
-          src: productPage,
-          alt: "Completed Joga Aura Blue Serenity product page with product imagery, specifications and purchase actions.",
-          label: "Product page · final UI",
+          src: finalMobileUi,
+          alt: "Joga Aura final mobile homepage with compact navigation, yoga imagery, brand story and product discovery actions.",
+          label: "Mobile · final UI",
+          contain: true,
+          portrait: true,
         },
       ],
     },

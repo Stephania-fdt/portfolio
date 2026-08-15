@@ -5,6 +5,9 @@ import type { LucideIcon } from "lucide-react"
 import { transition } from "@/lib/motion"
 import { getHeroContent } from "@/content/hero"
 import { useLanguage } from "@/i18n"
+import { Container } from "@/components/ui/container"
+import { SectionKicker } from "@/components/ui/section-kicker"
+import { cn } from "@/lib/utils"
 
 /**
  * Presentation only — content stays pure data in `content/hero.ts`. Reuses
@@ -22,15 +25,9 @@ const EXPERTISE_ICONS: Record<string, LucideIcon> = {
 }
 
 /**
- * The compact expertise block, one beat after the two Hero CTAs (Sprint
- * "Hero expertise addition") — same `reveal`-style single fade-up Hero
- * already uses for each of its own beats, not a new animation pattern.
- * Sits inside the Hero's existing `min-h-dvh` grid, in the row that used
- * to be empty space above `ScrollIndicator` — real content there, not a
- * separate section. Two columns below `lg` (not one): four real
- * descriptions stacked one-per-row measured ~140px taller on a 375px
- * screen than two-per-row does, and "avoid an excessively long Hero" was
- * an explicit constraint here.
+ * A distinct editorial bridge between the Hero and Selected Work: the Hero
+ * establishes the positioning, this section names the four capabilities,
+ * and the projects that follow provide the evidence.
  */
 function HeroExpertise() {
   const { language } = useLanguage()
@@ -38,46 +35,61 @@ function HeroExpertise() {
   const { expertise } = getHeroContent(language)
 
   return (
-    <motion.div
-      initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        ...transition.slow,
-        delay: shouldReduceMotion ? 0 : 0.85,
-      }}
-      className="mt-12 max-w-2xl"
+    <section
+      id="expertise"
+      aria-labelledby="expertise-heading"
+      className="border-y border-border bg-secondary/15 py-10 md:py-16 lg:py-20"
     >
-      <p className="font-sans text-xs tracking-widest text-brand uppercase">
-        {expertise.eyebrow}
-      </p>
-      <h2 className="mt-3 font-heading text-xl font-semibold text-foreground md:text-2xl">
-        {expertise.heading}
-      </h2>
+      <Container size="content">
+        <SectionKicker>{expertise.eyebrow}</SectionKicker>
+        <h3
+          id="expertise-heading"
+          className="mt-5 max-w-2xl font-heading text-2xl font-semibold text-foreground md:text-3xl"
+        >
+          {expertise.heading}
+        </h3>
 
-      <ul className="mt-6 grid grid-cols-2 gap-x-5 gap-y-6 lg:grid-cols-4 lg:gap-x-6">
-        {expertise.items.map((item) => {
-          const Icon = EXPERTISE_ICONS[item.title]
+        <motion.ul
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10% 0px" }}
+          transition={transition.slow}
+          data-expertise-grid
+          className="mt-8 grid md:mt-10 md:grid-cols-2 lg:mt-12 lg:grid-cols-4"
+        >
+          {expertise.items.map((item, index) => {
+            const Icon = EXPERTISE_ICONS[item.title]
 
-          return (
-            <li key={item.title}>
-              {Icon ? (
-                <Icon
-                  aria-hidden="true"
-                  strokeWidth={1.5}
-                  className="size-5 text-brand"
-                />
-              ) : null}
-              <p className="mt-2 font-heading text-sm font-semibold text-foreground">
-                {item.title}
-              </p>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                {item.description}
-              </p>
-            </li>
-          )
-        })}
-      </ul>
-    </motion.div>
+            return (
+              <li
+                key={item.title}
+                className={cn(
+                  "grid grid-cols-[auto_1fr] gap-x-3 border-b border-border py-5 last:border-b-0 md:block md:px-7 md:py-7 md:first:pl-0 lg:border-b-0 lg:border-l lg:first:border-l-0 lg:last:pr-0 md:[&:nth-child(2)]:border-b",
+                  index % 2 === 0 && "md:border-r lg:border-r-0",
+                  index < 2 && "md:border-b",
+                )}
+              >
+                <div className="flex size-6 items-center justify-center md:block">
+                  {Icon ? (
+                    <Icon
+                      aria-hidden="true"
+                      strokeWidth={1.5}
+                      className="size-5 text-brand"
+                    />
+                  ) : null}
+                </div>
+                <p className="font-heading text-base font-semibold text-foreground md:mt-3">
+                  {item.title}
+                </p>
+                <p className="col-start-2 mt-1 max-w-xs text-sm leading-relaxed text-muted-foreground md:col-auto md:mt-2">
+                  {item.description}
+                </p>
+              </li>
+            )
+          })}
+        </motion.ul>
+      </Container>
+    </section>
   )
 }
 

@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react"
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
 import { HeroBackground } from "@/components/sections/Hero/HeroBackground"
-import { HeroExpertise } from "@/components/sections/Hero/HeroExpertise"
 import { ScrollIndicator } from "@/components/sections/Hero/ScrollIndicator"
 import { transition } from "@/lib/motion"
 import { getHeroContent } from "@/content/hero"
@@ -39,7 +38,7 @@ function Hero() {
     <section
       id="hero"
       aria-label={copy.common.introduction}
-      className="relative grid min-h-dvh w-full overflow-x-hidden md:grid-cols-[58fr_42fr] lg:grid-cols-[65fr_35fr]"
+      className="relative isolate grid min-h-dvh w-full overflow-x-hidden md:grid-cols-[58fr_42fr] lg:grid-cols-[65fr_35fr]"
     >
       <div className="grid min-h-dvh grid-rows-[auto_1fr_auto] pt-section pb-6">
         <Container size="content" className="row-start-1">
@@ -117,8 +116,6 @@ function Hero() {
               </Button>
             </motion.div>
           </div>
-
-          <HeroExpertise />
         </Container>
 
         {/* Row 2 (the 1fr track) is intentionally empty — no spacer element. */}

@@ -43,9 +43,21 @@ function getCaseStudies(language: "en" | "fr"): Record<string, CaseStudy> {
       slug,
       {
         ...study,
+        liveSite: study.liveSite
+          ? { ...study.liveSite, label: study.liveSite.frenchLabel }
+          : undefined,
         sections: study.sections.map((section) => ({
           ...section,
-          heading: frenchHeadings[section.heading] ?? section.heading,
+          heading:
+            section.french?.heading ??
+            frenchHeadings[section.heading] ??
+            section.heading,
+          title: section.french?.title ?? section.title,
+          paragraphs: section.french?.paragraphs ?? section.paragraphs,
+          images: section.images?.map((image, imageIndex) => ({
+            ...image,
+            alt: section.french?.imageAlts?.[imageIndex] ?? image.alt,
+          })),
         })),
       },
     ]),

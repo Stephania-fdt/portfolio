@@ -49,25 +49,26 @@ function Navigation() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-(--duration-standard) ease-standard",
-        scrolled
-          ? "border-border bg-background/95 backdrop-blur-md backdrop-saturate-150"
-          : "border-transparent bg-transparent",
+        "fixed inset-x-0 top-0 isolate z-50 border-b bg-background transition-[border-color,backdrop-filter] duration-(--duration-standard) ease-standard",
+        scrolled ? "border-border backdrop-blur-sm" : "border-transparent",
       )}
     >
-      <Container size="wide">
+      <Container size="wide" className="relative z-10">
         <nav
           aria-label="Primary"
-          className="grid h-16 grid-cols-[1fr_auto] items-center gap-2 sm:gap-4 md:h-20 md:grid-cols-[1fr_auto_1fr] md:gap-0"
+          className="grid h-16 grid-cols-[1fr_auto] items-center gap-2 sm:gap-4 lg:h-20 lg:grid-cols-[auto_1fr_auto] lg:gap-8 xl:gap-12"
         >
-          <Link
-            to="/#hero"
-            className="inline-flex min-h-11 items-center justify-self-start font-heading text-sm font-medium tracking-tight text-foreground"
-          >
-            {heroContent.name}
-          </Link>
+          <div className="flex items-center gap-6 xl:gap-8">
+            <Link
+              to="/#hero"
+              className="inline-flex min-h-11 items-center justify-self-start font-heading text-sm font-medium tracking-tight text-foreground"
+            >
+              {heroContent.name}
+            </Link>
+            <LanguageSwitcher className="hidden shrink-0 lg:flex" />
+          </div>
 
-          <ul className="hidden items-center gap-8 md:flex">
+          <ul className="hidden items-center gap-7 justify-self-center lg:flex xl:gap-8">
             {navigation.links.map((link) => {
               const isActive = isNavLinkActive(link.href, pathname, activeId)
 
@@ -89,12 +90,12 @@ function Navigation() {
           </ul>
 
           <div className="flex items-center gap-3 justify-self-end min-[375px]:gap-4 min-[390px]:gap-6 sm:gap-8 md:gap-3">
-            <LanguageSwitcher className="hidden md:flex" />
+            <LanguageSwitcher variant="compact" className="lg:hidden" />
             <Button
               asChild
               variant="outline"
               size="sm"
-              className="border-muted-foreground/70 hover:border-muted-foreground"
+              className="hidden border-muted-foreground/70 hover:border-muted-foreground lg:inline-flex"
             >
               <Link to={resolveNavHref(navigation.cta.href)}>
                 {navigation.cta.label}

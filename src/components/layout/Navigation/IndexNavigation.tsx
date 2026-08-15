@@ -13,6 +13,8 @@ import { useActiveSection } from "@/hooks/use-active-section"
 import { transition } from "@/lib/motion"
 import { useLanguage } from "@/i18n"
 import { LanguageSwitcher } from "@/components/layout/Navigation/LanguageSwitcher"
+import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
 
 const PANEL_ID = "portfolio-index"
 const SECTION_IDS = navigationContent.links
@@ -86,7 +88,7 @@ function IndexNavigation() {
   }, [isOpen])
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         ref={triggerRef}
         type="button"
@@ -204,12 +206,24 @@ function IndexNavigation() {
               </ol>
             </nav>
 
+            <Button asChild variant="outline" size="lg" className="mt-8 w-full">
+              <Link to={resolveNavHref(navigation.cta.href)} onClick={close}>
+                {navigation.cta.label}
+                <ArrowRight aria-hidden="true" />
+              </Link>
+            </Button>
+
             <div className="mt-auto pt-10 font-mono text-2xs tracking-widest text-muted-foreground">
               <p>{copy.common.productDesigner.toUpperCase()}</p>
               <p className="mt-2 tracking-normal normal-case">
                 Design Systems · Accessibility · AI
               </p>
-              <LanguageSwitcher className="mt-6" />
+              <div className="mt-8 border-t border-border pt-6">
+                <p className="mb-3 font-sans text-sm font-medium tracking-normal text-foreground normal-case">
+                  {copy.controls.language}
+                </p>
+                <LanguageSwitcher fullWidth />
+              </div>
             </div>
           </motion.section>
         ) : null}

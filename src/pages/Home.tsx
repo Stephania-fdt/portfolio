@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 
 import { Hero } from "@/components/sections/Hero/Hero"
+import { HeroExpertise } from "@/components/sections/Hero/HeroExpertise"
 import { Positioning } from "@/components/sections/Positioning/Positioning"
 import { Work } from "@/components/sections/Work/Work"
 import { EditorialQuote } from "@/components/sections/EditorialQuote/EditorialQuote"
@@ -26,8 +27,9 @@ function Home() {
   return (
     <>
       <Hero />
-      <Positioning />
+      <HeroExpertise />
       <Work />
+      <Positioning />
       <EditorialQuote />
       <DesignPrinciples />
       <TheProcess />

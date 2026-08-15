@@ -58,7 +58,7 @@ function HeroBackground() {
       data-hero-specimen
       onMouseMove={onHeroMove}
       onMouseLeave={onHeroLeave}
-      className="relative hidden overflow-hidden border-l border-border md:flex md:items-center md:justify-center"
+      className="relative z-0 hidden overflow-hidden border-l border-border md:flex md:items-center md:justify-center"
     >
       <div
         aria-hidden="true"

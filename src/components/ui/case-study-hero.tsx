@@ -1,5 +1,7 @@
 import { motion, useReducedMotion } from "framer-motion"
+import { ExternalLink } from "lucide-react"
 
+import { Button } from "@/components/ui/button"
 import { Container } from "@/components/ui/container"
 import { transition } from "@/lib/motion"
 
@@ -14,6 +16,10 @@ type CaseStudyHeroProps = {
   summary: string
   detail?: string
   meta: CaseStudyHeroMeta[]
+  action?: {
+    href: string
+    label: string
+  }
   image?: {
     src: string
     alt: string
@@ -32,6 +38,7 @@ function CaseStudyHero({
   summary,
   detail,
   meta,
+  action,
   image,
 }: CaseStudyHeroProps) {
   const shouldReduceMotion = useReducedMotion()
@@ -102,6 +109,29 @@ function CaseStudyHero({
                 <span className="text-foreground">{item.value}</span>
               </span>
             ))}
+          </motion.div>
+        ) : null}
+
+        {action ? (
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              ...transition.slow,
+              delay: shouldReduceMotion ? 0 : detail ? 0.48 : 0.42,
+            }}
+            className="mt-6"
+          >
+            <Button
+              asChild
+              size="lg"
+              className="min-h-11 w-full rounded-md bg-[#094C33] px-6 text-[#EDE6CF] transition-all hover:-translate-y-0.5 hover:bg-[#0b6041] hover:text-[#EDE6CF] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#094C33] sm:w-auto"
+            >
+              <a href={action.href} target="_blank" rel="noopener noreferrer">
+                {action.label}
+                <ExternalLink aria-hidden="true" />
+              </a>
+            </Button>
           </motion.div>
         ) : null}
       </Container>

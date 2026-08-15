@@ -76,6 +76,7 @@ function CaseStudy() {
         summary={project.sentence}
         meta={heroMeta}
         image={caseStudy.heroImage}
+        action={caseStudy.liveSite}
       />
 
       {caseStudy.sections.map((section, sectionIndex) => {
@@ -91,6 +92,11 @@ function CaseStudy() {
               <SectionKicker>{section.heading}</SectionKicker>
 
               <div className="mt-8 max-w-2xl space-y-4">
+                {section.title ? (
+                  <h3 className="text-3xl leading-tight font-bold tracking-tight text-foreground md:text-4xl">
+                    {section.title}
+                  </h3>
+                ) : null}
                 {section.paragraphs.map((paragraph, paragraphIndex) => {
                   const isReflection =
                     isClosingSection &&
@@ -122,26 +128,38 @@ function CaseStudy() {
                     section.imageLayout === "two-up" ||
                       section.imageLayout === "comparison"
                       ? "grid gap-8 md:grid-cols-2"
-                      : section.imageLayout === "three-up"
-                        ? "grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
-                        : "space-y-10",
+                      : section.imageLayout === "editorial"
+                        ? "grid gap-8 md:grid-cols-2"
+                        : section.imageLayout === "three-up"
+                          ? "grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+                          : "space-y-10",
                   )}
                 >
                   {section.images.map((image) => (
                     <figure
                       key={`${image.src}-${image.label ?? image.caption}`}
+                      className={cn(
+                        image.featured && "md:col-span-2",
+                        image.portrait &&
+                          "w-full max-w-sm justify-self-center md:col-span-2",
+                      )}
                     >
                       <div
                         className={cn(
                           "overflow-hidden border border-border bg-secondary/50",
                           image.selected && "border-brand",
+                          image.contain &&
+                            "bg-secondary/30 p-4 shadow-xs md:p-6",
                         )}
                       >
                         <img
                           src={image.src}
                           alt={image.alt}
                           loading="lazy"
-                          className="h-auto w-full"
+                          className={cn(
+                            "h-auto w-full",
+                            image.contain && "object-contain",
+                          )}
                         />
                       </div>
                       {image.label || image.caption ? (
