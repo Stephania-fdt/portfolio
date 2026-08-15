@@ -1,5 +1,6 @@
 import customerJourney from "@/assets/case-studies/harmony/customer-journey.png"
 import heatmap from "@/assets/case-studies/harmony/heatmap.png"
+import heroCover from "@/assets/case-studies/harmony/home-thumbnail.png"
 import mockup from "@/assets/case-studies/harmony/mockup.png"
 import siteArchitecture from "@/assets/case-studies/harmony/site-architecture.png"
 import wireframe from "@/assets/case-studies/harmony/wireframe.png"
@@ -8,8 +9,8 @@ import type { CaseStudy } from "@/content/case-studies/types"
 export const harmonyCaseStudy: CaseStudy = {
   slug: "harmony",
   heroImage: {
-    src: mockup,
-    alt: "Harmony's finished connected-bracelet interface, showing the product experience across desktop and mobile screens.",
+    src: heroCover,
+    alt: "Harmony's finished connected-bracelet storefront, shown on a desktop screen with the product and purchase experience.",
   },
   sections: [
     {

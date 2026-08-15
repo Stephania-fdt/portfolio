@@ -6,20 +6,66 @@ import { Button } from "@/components/ui/button"
 import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
-import {
-  certifications,
-  education,
-  expertiseGroups,
-  professionalExperience,
-  tools,
-} from "@/content/experience"
+import { getExperienceContent } from "@/content/experience"
 import { fadeUp, transition } from "@/lib/motion"
+import { useLanguage } from "@/i18n"
 
 function Experience() {
+  const { language } = useLanguage()
+  const content = getExperienceContent(language)
+  const copy =
+    language === "fr"
+      ? {
+          eyebrow: "Expérience — parcours & expertise",
+          title:
+            "Une expérience construite avec les produits, les systèmes et les équipes.",
+          intro:
+            "Plus de 6 ans d’expérience en Product Design, UX/UI, recherche, accessibilité et Design Systems — de la compréhension de problématiques complexes à la conception d’expériences numériques évolutives avec les équipes produit et techniques.",
+          expertise: "Expertise professionnelle",
+          beyond: "Au-delà des projets",
+          philosophy: "Le design est rarement une discipline solitaire.",
+          education: "Formation & apprentissage continu",
+          skills: "Compétences & expertise",
+          skillsIntro:
+            "Un Product Design façonné par la recherche, la pensée systémique et une compréhension concrète de la manière dont les idées deviennent des produits.",
+          certifications: "Certifications & développement",
+          languages: "Langues",
+          profile: "Profil complet",
+          profileTitle: "Envie de voir la version complète ?",
+          profileBody:
+            "Pour le parcours détaillé, la formation et l’expérience professionnelle, vous pouvez télécharger mon CV.",
+          download: "Télécharger mon CV ↓",
+          ariaDownload:
+            "Télécharger le CV Product Designer de Stéphania Fordant au format PDF",
+          tools: "Outils :",
+        }
+      : {
+          eyebrow: "Experience — Career & expertise",
+          title: "Experience built across products, systems and people.",
+          intro:
+            "6+ years working across Product Design, UX/UI, research, accessibility and Design Systems — from understanding complex problems to building scalable digital experiences with product and technical teams.",
+          expertise: "Professional Experience",
+          beyond: "Beyond project delivery",
+          philosophy: "Design is rarely a solo discipline.",
+          education: "Education & continuous learning",
+          skills: "Skills & expertise",
+          skillsIntro:
+            "Product design shaped by research, systems thinking and a practical understanding of how ideas become real products.",
+          certifications: "Certifications & development",
+          languages: "Languages",
+          profile: "Full profile",
+          profileTitle: "Want the complete version?",
+          profileBody:
+            "For the full timeline, education and professional background, you can download my CV.",
+          download: "Download my CV ↓",
+          ariaDownload:
+            "Download Stéphania Fordant's Product Designer CV as a PDF",
+          tools: "Tools:",
+        }
   const shouldReduceMotion = useReducedMotion()
 
   useEffect(() => {
-    document.title = "Experience — Stéphania Fordant | Product Designer"
+    document.title = `${copy.expertise} — Stéphania Fordant | Product Designer`
 
     let description = document.querySelector<HTMLMetaElement>(
       'meta[name="description"]',
@@ -30,8 +76,10 @@ function Experience() {
       document.head.appendChild(description)
     }
     description.content =
-      "Product Designer with 6+ years of experience across UX/UI, Design Systems, accessibility, UX Research and digital product design."
-  }, [])
+      language === "fr"
+        ? "Product Designer avec plus de 6 ans d’expérience en UX/UI, Design Systems, accessibilité, UX Research et conception de produits numériques."
+        : "Product Designer with 6+ years of experience across UX/UI, Design Systems, accessibility, UX Research and digital product design."
+  }, [copy.expertise, language])
 
   return (
     <article>
@@ -44,16 +92,13 @@ function Experience() {
             className="max-w-4xl"
           >
             <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-              Experience — Career & expertise
+              {copy.eyebrow}
             </p>
             <h1 className="mt-6 max-w-3xl text-5xl leading-[0.95] font-bold tracking-tightest md:text-7xl">
-              Experience built across products, systems and people.
+              {copy.title}
             </h1>
             <p className="mt-8 max-w-2xl text-xl leading-relaxed text-foreground md:text-2xl">
-              6+ years working across Product Design, UX/UI, research,
-              accessibility and Design Systems — from understanding complex
-              problems to building scalable digital experiences with product and
-              technical teams.
+              {copy.intro}
             </p>
             <p className="mt-8 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
               Product Design · UX Research · Design Systems · Accessibility
@@ -62,10 +107,10 @@ function Experience() {
         </Container>
       </header>
 
-      <Section aria-label="Professional Experience" spacing="sm">
-        <SectionKicker>Professional Experience</SectionKicker>
+      <Section aria-label={copy.expertise} spacing="sm">
+        <SectionKicker>{copy.expertise}</SectionKicker>
         <ol className="mt-12 border-t border-border">
-          {professionalExperience.map((experience, index) => (
+          {content.professionalExperience.map((experience, index) => (
             <motion.li
               key={`${experience.company}-${experience.period}`}
               initial={shouldReduceMotion ? false : "hidden"}
@@ -131,7 +176,7 @@ function Experience() {
 
         <aside className="mt-section-sm max-w-3xl border-l border-brand pl-6">
           <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-            Beyond project delivery
+            {copy.beyond}
           </p>
           <div className="mt-5 grid gap-6 md:grid-cols-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
@@ -166,14 +211,14 @@ function Experience() {
           variants={fadeUp}
           className="max-w-3xl border-y border-border py-10 text-3xl leading-tight font-medium italic md:text-4xl"
         >
-          Design is rarely a solo discipline.
+          {copy.philosophy}
         </motion.blockquote>
       </Section>
 
-      <Section aria-label="Education and continuous learning" spacing="sm">
-        <SectionKicker>Education & continuous learning</SectionKicker>
+      <Section aria-label={copy.education} spacing="sm">
+        <SectionKicker>{copy.education}</SectionKicker>
         <ol className="mt-12 divide-y divide-border border-t border-border">
-          {education.map((entry) => (
+          {content.education.map((entry) => (
             <li
               key={entry.title}
               className="grid gap-3 py-7 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-8"
@@ -194,14 +239,13 @@ function Experience() {
         </ol>
       </Section>
 
-      <Section aria-label="Skills and expertise" spacing="sm">
-        <SectionKicker>Skills & expertise</SectionKicker>
+      <Section aria-label={copy.skills} spacing="sm">
+        <SectionKicker>{copy.skills}</SectionKicker>
         <p className="mt-8 max-w-2xl text-xl leading-relaxed text-foreground md:text-2xl">
-          Product design shaped by research, systems thinking and a practical
-          understanding of how ideas become real products.
+          {copy.skillsIntro}
         </p>
         <div className="mt-12 divide-y divide-border border-t border-border">
-          {expertiseGroups.map((group) => (
+          {content.expertiseGroups.map((group) => (
             <div
               key={group.title}
               className="grid gap-5 py-7 md:grid-cols-[5rem_minmax(13rem,0.7fr)_minmax(0,1.3fr)] md:gap-8"
@@ -222,14 +266,14 @@ function Experience() {
           ))}
         </div>
         <p className="mt-10 max-w-3xl font-mono text-2xs leading-relaxed tracking-wider text-muted-foreground uppercase">
-          Tools: {tools.join(" · ")}
+          {copy.tools} {content.tools.join(" · ")}
         </p>
       </Section>
 
-      <Section aria-label="Certifications and development" spacing="sm">
-        <SectionKicker>Certifications & development</SectionKicker>
+      <Section aria-label={copy.certifications} spacing="sm">
+        <SectionKicker>{copy.certifications}</SectionKicker>
         <div className="mt-10 grid divide-y divide-border border-y border-border md:grid-cols-3 md:divide-x md:divide-y-0">
-          {certifications.map((certification) => (
+          {content.certifications.map((certification) => (
             <div
               key={certification.title}
               className="py-6 md:px-6 md:first:pl-0"
@@ -243,7 +287,7 @@ function Experience() {
         </div>
         <div className="mt-10 border-l border-brand pl-6">
           <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-            Languages
+            {copy.languages}
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
             English — C1&nbsp;&nbsp;·&nbsp;&nbsp;German — B2
@@ -255,17 +299,16 @@ function Experience() {
         <div className="border-y border-border py-10 md:flex md:items-end md:justify-between md:gap-10">
           <div className="max-w-2xl">
             <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-              Full profile
+              {copy.profile}
             </p>
             <h2
               id="full-profile-title"
               className="mt-5 text-4xl font-bold md:text-5xl"
             >
-              Want the complete version?
+              {copy.profileTitle}
             </h2>
             <p className="mt-5 leading-relaxed text-muted-foreground">
-              For the full timeline, education and professional background, you
-              can download my CV.
+              {copy.profileBody}
             </p>
           </div>
           <Button
@@ -279,7 +322,7 @@ function Experience() {
               download
               aria-label="Download Stéphania Fordant's Product Designer CV as a PDF"
             >
-              Download my CV ↓
+              {copy.download}
             </a>
           </Button>
         </div>
