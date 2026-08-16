@@ -3,7 +3,7 @@
 // keep their own separate imports elsewhere and are untouched by this set.
 import spfHomeThumbnail from "@/assets/case-studies/spf/home-thumbnail.png"
 import portfolioHomeThumbnail from "@/assets/case-studies/portfolio/home-thumbnail.png"
-import harmonyHomeThumbnail from "@/assets/case-studies/harmony/home-thumbnail.png"
+import harmonyHomeThumbnail from "@/assets/case-studies/harmony/home-thumbnail.webp"
 import wellpackHomeThumbnail from "@/assets/case-studies/wellpack/home-thumbnail.png"
 import jogaAuraHomeThumbnail from "@/assets/case-studies/joga-aura/home-thumbnail.png"
 
@@ -42,6 +42,10 @@ export type WorkProject = {
    * exists, not a gap to paper over.
    */
   previewImage?: string
+  previewAlt?: string
+  previewAltFr?: string
+  previewWidth?: number
+  previewHeight?: number
   /**
    * True only once a real, dedicated case-study route exists outside the
    * generic `content/case-studies` registry (`WorkItem` checks both) —
@@ -128,6 +132,12 @@ export const workProjects: WorkProject[] = [
     signalTechnologies: ["Design Thinking", "UX Research"],
     href: "/work/harmony",
     previewImage: harmonyHomeThumbnail,
+    previewAlt:
+      "Harmony connected-bracelet website displayed on a desktop monitor",
+    previewAltFr:
+      "Site du bracelet connecté Harmony affiché sur un écran d’ordinateur",
+    previewWidth: 1600,
+    previewHeight: 900,
   },
   {
     title: "WellPack",

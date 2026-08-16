@@ -34,7 +34,9 @@ function Experience() {
           profileTitle: "Envie de voir la version complète ?",
           profileBody:
             "Pour le parcours détaillé, la formation et l’expérience professionnelle, vous pouvez télécharger mon CV.",
-          download: "Télécharger mon CV ↓",
+          download: "Télécharger mon CV",
+          downloadHref: "/stephania-fordant-product-designer-cv-fr.pdf",
+          downloadFilename: "Stephania-Fordant-Product-Designer-CV-FR.pdf",
           ariaDownload:
             "Télécharger le CV Product Designer de Stéphania Fordant au format PDF",
           tools: "Outils :",
@@ -57,7 +59,9 @@ function Experience() {
           profileTitle: "Want the complete version?",
           profileBody:
             "For the full timeline, education and professional background, you can download my CV.",
-          download: "Download my CV ↓",
+          download: "Download my CV",
+          downloadHref: "/stephania-fordant-product-designer-cv-en.pdf",
+          downloadFilename: "Stephania-Fordant-Product-Designer-CV-EN.pdf",
           ariaDownload:
             "Download Stéphania Fordant's Product Designer CV as a PDF",
           tools: "Tools:",
@@ -318,9 +322,9 @@ function Experience() {
             className="mt-7 border-muted-foreground/70 hover:border-muted-foreground md:mt-0"
           >
             <a
-              href="/stephania-fordant-product-designer-cv.pdf"
-              download
-              aria-label="Download Stéphania Fordant's Product Designer CV as a PDF"
+              href={copy.downloadHref}
+              download={copy.downloadFilename}
+              aria-label={copy.ariaDownload}
             >
               {copy.download}
             </a>

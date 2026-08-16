@@ -45,7 +45,7 @@ function WorkItem({
   tier = "standard",
   linkToProject = false,
 }: WorkItemProps) {
-  const { copy } = useLanguage()
+  const { language, copy } = useLanguage()
   const shouldReduceMotion = useReducedMotion()
   const isLead = tier === "lead"
   const isSecondary = tier === "secondary"
@@ -141,7 +141,14 @@ function WorkItem({
           {project.previewImage ? (
             <img
               src={project.previewImage}
-              alt={`${project.title} — selected interface`}
+              alt={
+                language === "fr" && project.previewAltFr
+                  ? project.previewAltFr
+                  : (project.previewAlt ??
+                    `${project.title} — selected interface`)
+              }
+              width={project.previewWidth}
+              height={project.previewHeight}
               loading="lazy"
               className="h-full w-full object-cover object-top transition-transform duration-(--duration-slow) ease-standard group-hover:scale-[1.03]"
             />

@@ -36,10 +36,8 @@ test("Home presents only the three curated work projects", async ({ page }) => {
   const workCta = page.getByRole("link", { name: /View all my work/i })
   const contactCta = page.getByRole("link", { name: /Connect on LinkedIn/i })
   await expect(workCta).toHaveAttribute("href", "/work")
-  await expect(workCta).toHaveAttribute(
-    "class",
-    (await contactCta.getAttribute("class")) ?? "",
-  )
+  await expect(workCta).toHaveClass(/bg-brand/)
+  await expect(contactCta).toHaveClass(/border-\[#590f29\]/)
 })
 
 test("Project card titles use the French translations", async ({ page }) => {

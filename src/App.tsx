@@ -10,6 +10,7 @@ import { CaseStudy } from "@/pages/CaseStudy/CaseStudy"
 import { SPFCaseStudy } from "@/pages/case-studies/SPF/SPFCaseStudy"
 import { WellPackCaseStudy } from "@/pages/case-studies/WellPack/WellPackCaseStudy"
 import { PortfolioCaseStudy } from "@/pages/case-studies/Portfolio/PortfolioCaseStudy"
+import { Seo } from "@/components/seo/Seo"
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/work/portfolio" element={<PortfolioCaseStudy />} />
         <Route path="/work/:slug" element={<CaseStudy />} />
       </Routes>
+      <Seo />
     </>
   )
 }

@@ -9,7 +9,9 @@ test("experience route has its own title, active navigation and a single H1", as
 }) => {
   await page.goto("/experience")
 
-  await expect(page).toHaveTitle(/Experience — Stéphania Fordant/)
+  await expect(page).toHaveTitle(
+    "Product Design Experience | Stéphania Fordant",
+  )
   await expect(
     page.getByRole("heading", {
       level: 1,

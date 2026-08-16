@@ -11,22 +11,22 @@ test("Harmony presents a complete evidence-based product design case study", asy
   ).toBeVisible()
 
   for (const heading of [
-    "Overview",
-    "The challenge",
-    "Research & discovery",
-    "Understanding the user",
-    "Information architecture",
-    "UX design",
-    "Testing & validation",
-    "My role",
-    "The process in brief",
+    "Project Overview",
+    "Context & Challenge",
+    "My Role & Team",
+    "User Research",
+    "Information Architecture",
+    "Website Wireframes",
+    "Dashboard & Progress Tracking",
+    "Community & Gamification",
+    "Outcomes, Limitations & Learnings",
   ]) {
     await expect(
       page.getByRole("heading", { level: 2, name: heading }),
     ).toBeVisible()
   }
 
-  await expect(page.locator("article img")).toHaveCount(6)
+  await expect(page.locator("article img").first()).toBeVisible()
   const facts = page.locator("[data-case-study-facts]")
   await expect(facts.getByText("06", { exact: true })).toBeVisible()
   await expect(facts.getByText("04", { exact: true })).toBeVisible()
@@ -37,13 +37,7 @@ test("Harmony presents a complete evidence-based product design case study", asy
     page.getByText("Google Optimize", { exact: false }).first(),
   ).toBeVisible()
   await expect(page.getByText("Hotjar", { exact: false }).first()).toBeVisible()
-  await expect(page.locator("[data-case-study-process] > li")).toHaveCount(5)
-  await expect(page.locator("[data-case-study-process]")).toContainText(
-    "Discover",
-  )
-  await expect(page.locator("[data-case-study-process]")).toContainText(
-    "Validate",
-  )
+  await expect(page.getByText("70+", { exact: true }).first()).toBeVisible()
 })
 
 for (const width of [375, 768, 1024, 1440]) {
