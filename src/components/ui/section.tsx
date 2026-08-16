@@ -2,7 +2,7 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
-import { Container, type containerVariants } from "@/components/ui/container"
+import { Container, type ContainerSize } from "@/components/ui/container"
 
 const sectionVariants = cva("w-full", {
   variants: {
@@ -16,8 +16,6 @@ const sectionVariants = cva("w-full", {
     spacing: "md",
   },
 })
-
-type ContainerSize = VariantProps<typeof containerVariants>["size"]
 
 type SectionProps = {
   className?: string
@@ -49,4 +47,4 @@ function Section({
   )
 }
 
-export { Section, sectionVariants }
+export { Section }

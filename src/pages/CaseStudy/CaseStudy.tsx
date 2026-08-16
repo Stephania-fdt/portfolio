@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { ArrowLeft, ExternalLink, FileText } from "lucide-react"
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import { CaseStudyFacts } from "@/components/ui/case-study-facts"
 import { CaseStudyHero } from "@/components/ui/case-study-hero"
@@ -9,19 +9,21 @@ import { CaseStudyVideo } from "@/components/ui/case-study-video"
 import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
-import { getCaseStudies } from "@/content/case-studies"
+import type { CaseStudy as CaseStudyContent } from "@/content/case-studies"
 import { getWorkProjects } from "@/content/work"
 import { formatNumeral } from "@/lib/numerals"
 import { cn } from "@/lib/utils"
 import { useLanguage } from "@/i18n"
 
 /** Canonical generic case-study route, assembled from the shared editorial system. */
-function CaseStudy() {
+type CaseStudyProps = {
+  slug: string
+  caseStudy: CaseStudyContent
+}
+
+function CaseStudy({ slug, caseStudy }: CaseStudyProps) {
   const { language, copy } = useLanguage()
-  const { slug } = useParams<{ slug: string }>()
-  const caseStudies = getCaseStudies(language)
   const workProjects = getWorkProjects(language)
-  const caseStudy = slug ? caseStudies[slug] : undefined
   const project = workProjects.find(
     (project) => project.href === `/work/${slug}`,
   )

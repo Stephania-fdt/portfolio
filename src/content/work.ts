@@ -138,6 +138,7 @@ export const workProjects: WorkProject[] = [
       "Site du bracelet connecté Harmony affiché sur un écran d’ordinateur",
     previewWidth: 1600,
     previewHeight: 900,
+    hasCaseStudy: true,
   },
   {
     title: "WellPack",
@@ -175,6 +176,7 @@ export const workProjects: WorkProject[] = [
     signalTechnologies: ["Shopify"],
     href: "/work/joga-aura",
     previewImage: jogaAuraHomeThumbnail,
+    hasCaseStudy: true,
   },
 ]
 

@@ -16,6 +16,8 @@ const containerVariants = cva("mx-auto w-full px-container", {
   },
 })
 
+type ContainerSize = VariantProps<typeof containerVariants>["size"]
+
 type ContainerProps<T extends React.ElementType> = {
   as?: T
   className?: string
@@ -43,4 +45,5 @@ function Container<T extends React.ElementType = "div">({
   )
 }
 
-export { Container, containerVariants }
+export { Container }
+export type { ContainerSize }

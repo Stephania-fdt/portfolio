@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils"
 import { formatNumeral } from "@/lib/numerals"
 import { transition } from "@/lib/motion"
 import { EditorialEntry } from "@/components/ui/editorial-entry"
-import { caseStudies } from "@/content/case-studies"
 import type { WorkProject } from "@/content/work"
 import { useLanguage } from "@/i18n"
 
@@ -54,9 +53,7 @@ function WorkItem({
   // Completed studies come from either the generic registry (heading +
   // paragraphs, rendered by `pages/CaseStudy`) or a hand-built route like
   // Portfolio's, flagged directly on the project.
-  const slug = project.href.replace("/work/", "")
-  const hasCaseStudy =
-    linkToProject || slug in caseStudies || project.hasCaseStudy === true
+  const hasCaseStudy = linkToProject || project.hasCaseStudy === true
 
   return (
     <div

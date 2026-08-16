@@ -1,6 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion"
 
-import { containerVariants } from "@/components/ui/container"
 import { useScrolled } from "@/hooks/use-scrolled"
 import { transition } from "@/lib/motion"
 import { cn } from "@/lib/utils"
@@ -16,7 +15,7 @@ function ScrollIndicator() {
       animate={{ opacity: hasScrolled ? 0 : 1 }}
       transition={shouldReduceMotion ? { duration: 0 } : transition.slow}
       className={cn(
-        containerVariants({ size: "content" }),
+        "mx-auto w-full max-w-content px-container",
         "row-start-3 flex min-h-16 shrink-0 items-start justify-end md:-translate-y-12",
       )}
     >

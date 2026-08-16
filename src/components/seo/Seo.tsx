@@ -9,6 +9,17 @@ const OG_IMAGE = `${ORIGIN}/og/stephania-fordant-product-designer.jpg`
 type SeoCopy = { title: string; description: string }
 type SeoEntry = Record<"en" | "fr", SeoCopy>
 
+const notFoundSeo: SeoEntry = {
+  en: {
+    title: "Page Not Found | Stéphania Fordant",
+    description: "The requested page does not exist or may have moved.",
+  },
+  fr: {
+    title: "Page introuvable | Stéphania Fordant",
+    description: "La page demandée n’existe pas ou a été déplacée.",
+  },
+}
+
 const seoByPath: Record<string, SeoEntry> = {
   "/": {
     en: {
@@ -136,9 +147,11 @@ function Seo() {
   const { language } = useLanguage()
 
   useEffect(() => {
-    const entry = seoByPath[pathname]?.[language] ?? seoByPath["/"][language]
-    const canonicalPath = seoByPath[pathname] ? pathname : "/"
-    const canonical = `${ORIGIN}${canonicalPath === "/" ? "" : canonicalPath}`
+    const isKnownRoute = Boolean(seoByPath[pathname])
+    const entry = isKnownRoute
+      ? seoByPath[pathname][language]
+      : notFoundSeo[language]
+    const canonical = `${ORIGIN}${pathname === "/" ? "" : pathname}`
     const locale = language === "fr" ? "fr_BE" : "en_GB"
 
     document.title = entry.title
@@ -146,6 +159,10 @@ function Seo() {
     setMeta('meta[name="description"]', {
       name: "description",
       content: entry.description,
+    })
+    setMeta('meta[name="robots"]', {
+      name: "robots",
+      content: isKnownRoute ? "index, follow" : "noindex, nofollow",
     })
     setMeta('meta[property="og:title"]', {
       property: "og:title",
