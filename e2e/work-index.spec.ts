@@ -1,11 +1,11 @@
 import { expect, test } from "./fixtures"
 
 const projectTitles = [
-  "SPF Affaires étrangères",
-  "Stéphania — Portfolio",
-  "Harmony",
-  "WellPack",
-  "Joga Aura",
+  "Scaling Accessible Public Services with a Unified Design System",
+  "Designing and Building an Accessible Portfolio with AI-Assisted Workflows",
+  "Turning User Needs into a Connected Product Experience",
+  "Turning User Research into Evidence-Based Marketing Decisions",
+  "Shaping a Premium Shopify Journey from Product Discovery to Conversion",
 ]
 
 test("Home presents only the three curated work projects", async ({ page }) => {
@@ -14,16 +14,25 @@ test("Home presents only the three curated work projects", async ({ page }) => {
   const preview = page.locator("#work [data-work-preview] > div")
   await expect(preview).toHaveCount(3)
   await expect(
-    preview.nth(0).getByRole("heading", { name: "SPF Affaires étrangères" }),
+    preview.nth(0).getByRole("heading", {
+      name: "Scaling Accessible Public Services with a Unified Design System",
+    }),
   ).toBeVisible()
   await expect(
-    preview.nth(1).getByRole("heading", { name: "Harmony" }),
+    preview.nth(1).getByRole("heading", {
+      name: "Turning User Needs into a Connected Product Experience",
+    }),
   ).toBeVisible()
   await expect(
-    preview.nth(2).getByRole("heading", { name: "Stéphania — Portfolio" }),
+    preview.nth(2).getByRole("heading", {
+      name: "Designing and Building an Accessible Portfolio with AI-Assisted Workflows",
+    }),
   ).toBeVisible()
   await expect(page.locator("#work")).not.toContainText("WellPack")
   await expect(page.locator("#work")).not.toContainText("Joga Aura")
+  await expect(preview.nth(0)).toContainText("SPF Foreign Affairs")
+  await expect(preview.nth(1)).toContainText("Harmony")
+  await expect(preview.nth(2)).toContainText("Stéphania — Portfolio")
   const workCta = page.getByRole("link", { name: /View all my work/i })
   const contactCta = page.getByRole("link", { name: /Connect on LinkedIn/i })
   await expect(workCta).toHaveAttribute("href", "/work")
@@ -32,6 +41,45 @@ test("Home presents only the three curated work projects", async ({ page }) => {
     (await contactCta.getAttribute("class")) ?? "",
   )
 })
+
+test("Project card titles use the French translations", async ({ page }) => {
+  await page.addInitScript(() => {
+    window.localStorage.setItem("portfolio-language", "fr")
+  })
+  await page.goto("/work")
+
+  for (const title of [
+    "Faire évoluer des services publics accessibles grâce à un Design System unifié",
+    "Transformer les besoins utilisateurs en expérience produit connectée",
+    "Concevoir et développer un portfolio accessible grâce à un workflow assisté par l’IA",
+    "Transformer la recherche utilisateur en décisions marketing fondées sur des données",
+    "Concevoir une expérience Shopify premium, de la découverte à la conversion",
+  ]) {
+    await expect(page.getByRole("heading", { name: title })).toBeVisible()
+  }
+})
+
+for (const width of [375, 768, 1440]) {
+  test(`Project cards remain clickable and readable at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 })
+    await page.goto("/")
+
+    const firstCard = page.locator("[data-work-preview] > div").first()
+    const heading = firstCard.getByRole("heading")
+    const lineCount = await heading.evaluate((element) => {
+      const styles = getComputedStyle(element)
+      return Math.round(
+        element.getBoundingClientRect().height / parseFloat(styles.lineHeight),
+      )
+    })
+    expect(lineCount).toBeLessThanOrEqual(width === 375 ? 3 : 2)
+
+    await firstCard.getByRole("link", { name: /View Case Study/i }).click()
+    await expect(page).toHaveURL(/\/work\/spf-design-system$/)
+  })
+}
 
 for (const width of [375, 1440]) {
   test(`Home work CTA is centered at ${width}px`, async ({ page }) => {

@@ -1,9 +1,11 @@
 import { useEffect } from "react"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ExternalLink, FileText } from "lucide-react"
 import { Link, useParams } from "react-router-dom"
 
 import { CaseStudyFacts } from "@/components/ui/case-study-facts"
 import { CaseStudyHero } from "@/components/ui/case-study-hero"
+import { CaseStudyImage } from "@/components/ui/case-study-image"
+import { CaseStudyVideo } from "@/components/ui/case-study-video"
 import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
@@ -47,13 +49,18 @@ function CaseStudy() {
     )
   }
 
-  const heroMeta = [
-    project.roleContext ? { label: "Role", value: project.roleContext } : null,
-    { label: "Year", value: project.year },
-    project.technologies.length > 0
-      ? { label: "Tools", value: project.technologies.join(" · ") }
+  const heroMeta: Array<{ label: string; value: string } | null> = [
+    project.roleContext
+      ? { label: copy.common.role, value: project.roleContext }
       : null,
-  ].filter((item): item is { label: string; value: string } => item !== null)
+    { label: copy.common.year, value: project.year },
+    project.technologies.length > 0
+      ? { label: copy.common.tools, value: project.technologies.join(" · ") }
+      : null,
+  ]
+  const filteredHeroMeta = heroMeta.filter(
+    (item): item is { label: string; value: string } => item !== null,
+  )
 
   return (
     <article>
@@ -74,7 +81,7 @@ function CaseStudy() {
         eyebrow={project.category}
         title={project.title}
         summary={project.sentence}
-        meta={heroMeta}
+        meta={filteredHeroMeta}
         image={caseStudy.heroImage}
         action={caseStudy.liveSite}
       />
@@ -142,26 +149,21 @@ function CaseStudy() {
                         image.featured && "md:col-span-2",
                         image.portrait &&
                           "w-full max-w-sm justify-self-center md:col-span-2",
+                        image.displayWidth === "reference" &&
+                          "mx-auto w-full max-w-[720px]",
+                        image.displayWidth === "wide" &&
+                          "mx-auto w-full max-w-[880px]",
                       )}
                     >
-                      <div
-                        className={cn(
-                          "overflow-hidden border border-border bg-secondary/50",
-                          image.selected && "border-brand",
-                          image.contain &&
-                            "bg-secondary/30 p-4 shadow-xs md:p-6",
-                        )}
-                      >
-                        <img
-                          src={image.src}
-                          alt={image.alt}
-                          loading="lazy"
-                          className={cn(
-                            "h-auto w-full",
-                            image.contain && "object-contain",
-                          )}
-                        />
-                      </div>
+                      <CaseStudyImage
+                        src={image.src}
+                        alt={image.alt}
+                        contain={image.contain}
+                        zoomable={image.zoomable}
+                        selected={image.selected}
+                        width={image.width}
+                        height={image.height}
+                      />
                       {image.label || image.caption ? (
                         <figcaption className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
                           {image.label ? <span>{image.label}</span> : null}
@@ -172,6 +174,61 @@ function CaseStudy() {
                     </figure>
                   ))}
                 </div>
+              ) : null}
+
+              {section.videos && section.videos.length > 0 ? (
+                <div
+                  className={cn(
+                    "mt-10 gap-8",
+                    section.videos.length > 1
+                      ? "grid sm:grid-cols-2"
+                      : "space-y-10",
+                  )}
+                >
+                  {section.videos.map((video) => (
+                    <CaseStudyVideo
+                      key={video.src}
+                      src={video.src}
+                      poster={video.poster}
+                      posterAlt={video.posterAlt}
+                      label={video.label}
+                      caption={video.caption}
+                      sizeNote={video.sizeNote}
+                      width={video.width}
+                      height={video.height}
+                      className={cn(
+                        "mx-auto w-full",
+                        video.displayWidth === "website" && "max-w-[880px]",
+                        video.displayWidth === "mobile" && "max-w-[680px]",
+                      )}
+                    />
+                  ))}
+                </div>
+              ) : null}
+
+              {section.document ? (
+                <a
+                  href={section.document.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-10 inline-flex items-center gap-3 border border-border px-5 py-4 text-sm font-medium text-foreground transition-colors duration-(--duration-fast) ease-standard hover:border-brand hover:text-brand"
+                >
+                  <FileText aria-hidden="true" className="size-5 shrink-0" />
+                  <span>
+                    {language === "fr"
+                      ? section.document.frenchLabel
+                      : section.document.label}
+                    {section.document.sizeNote ? (
+                      <span className="ml-2 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
+                        {section.document.sizeNote}
+                      </span>
+                    ) : null}
+                  </span>
+                  <ExternalLink
+                    aria-hidden="true"
+                    className="size-4 shrink-0 opacity-60 transition-transform duration-(--duration-fast) ease-standard group-hover:translate-x-0.5"
+                  />
+                </a>
               ) : null}
 
               {section.processSteps && section.processSteps.length > 0 ? (

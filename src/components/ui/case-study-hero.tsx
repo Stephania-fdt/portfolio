@@ -4,6 +4,7 @@ import { ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Container } from "@/components/ui/container"
 import { transition } from "@/lib/motion"
+import { cn } from "@/lib/utils"
 
 type CaseStudyHeroMeta = {
   label: string
@@ -23,6 +24,9 @@ type CaseStudyHeroProps = {
   image?: {
     src: string
     alt: string
+    contain?: boolean
+    width?: number
+    height?: number
   }
 }
 
@@ -144,13 +148,24 @@ function CaseStudyHero({
             ...transition.slow,
             delay: shouldReduceMotion ? 0 : detail ? 0.55 : 0.5,
           }}
-          className="mt-16 aspect-[21/9] w-full overflow-hidden border-y border-border"
+          className={cn(
+            "mt-16 w-full overflow-hidden border-y border-border",
+            image.contain
+              ? "aspect-[2560/1364] bg-secondary/30"
+              : "aspect-[21/9]",
+          )}
         >
           <img
             src={image.src}
             alt={image.alt}
-            className="h-full w-full object-cover object-top"
+            width={image.width}
+            height={image.height}
+            className={cn(
+              "h-full w-full object-top",
+              image.contain ? "object-contain" : "object-cover",
+            )}
             loading="eager"
+            fetchPriority="high"
           />
         </motion.div>
       ) : null}

@@ -3,6 +3,8 @@ export type CaseStudyImage = {
   src: string
   /** Describes what the image shows, not what it's called — this is what a screen reader announces. */
   alt: string
+  /** Optional localized alternative for images outside a translated section. */
+  frenchAlt?: string
   caption?: string
   /** A concise editorial annotation shown above the image caption. */
   label?: string
@@ -14,6 +16,17 @@ export type CaseStudyImage = {
   featured?: boolean
   /** Centers a vertical screen at a readable width without cropping it. */
   portrait?: boolean
+  /**
+   * Opts an image into the click-to-enlarge lightbox. Reserved for dense,
+   * text-heavy artifacts (research decks, wireframe sheets) where the
+   * inline size can't carry full legibility on its own.
+   */
+  zoomable?: boolean
+  /** Limits the inline presentation while preserving the full-resolution lightbox. */
+  displayWidth?: "reference" | "wide"
+  /** Real source-file pixel dimensions — reserves the right aspect ratio before load, so nothing jumps. */
+  width?: number
+  height?: number
 }
 
 export type CaseStudyVisualLayout =
@@ -30,6 +43,30 @@ export type CaseStudyFact = {
   emphasizeValue?: boolean
 }
 
+export type CaseStudyVideo = {
+  /** Public-path URL (from `/public`), not a Vite-bundled import — these files are too large to run through the asset pipeline. */
+  src: string
+  /** A real project still used as the click-to-play cover, never a fabricated frame grab. */
+  poster: string
+  posterAlt: string
+  label?: string
+  caption?: string
+  /** Shown next to the play affordance so nobody's mobile data is spent by surprise. */
+  sizeNote?: string
+  /** Centers prototype previews at a readable, non-dominant desktop width. */
+  displayWidth?: "mobile" | "website"
+  /** The poster image's real pixel dimensions — reserves its aspect ratio before load. */
+  width?: number
+  height?: number
+}
+
+export type CaseStudyDocument = {
+  href: string
+  label: string
+  frenchLabel: string
+  sizeNote?: string
+}
+
 export type CaseStudySection = {
   heading: string
   /** Optional editorial title displayed below the section eyebrow. */
@@ -41,6 +78,8 @@ export type CaseStudySection = {
     title?: string
     paragraphs: string[]
     imageAlts?: string[]
+    /** Translated labels for `facts` — falls back to the English facts when absent. */
+    facts?: CaseStudyFact[]
   }
   /**
    * Real project artifacts only — flat, honest screenshots, per the
@@ -59,6 +98,10 @@ export type CaseStudySection = {
   facts?: CaseStudyFact[]
   /** A compact, evidence-backed process summary when a project benefits from one. */
   processSteps?: CaseStudyProcessStep[]
+  /** Real prototype recordings — click-to-play, never autoplayed or preloaded. */
+  videos?: CaseStudyVideo[]
+  /** A source deliverable too large or too paginated to flatten into screenshots (e.g. a full design-system PDF). */
+  document?: CaseStudyDocument
 }
 
 export type CaseStudy = {

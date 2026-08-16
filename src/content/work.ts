@@ -9,6 +9,10 @@ import jogaAuraHomeThumbnail from "@/assets/case-studies/joga-aura/home-thumbnai
 
 export type WorkProject = {
   title: string
+  /** Short project name retained as the card's secondary eyebrow. */
+  cardLabel: string
+  /** Recruiter-facing problem statement used only as the card heading. */
+  cardTitle: string
   category: string
   year: string
   sentence: string
@@ -60,6 +64,9 @@ export type WorkProject = {
 export const workProjects: WorkProject[] = [
   {
     title: "SPF Affaires étrangères",
+    cardLabel: "SPF Foreign Affairs",
+    cardTitle:
+      "Scaling Accessible Public Services with a Unified Design System",
     category: "Product Design · Design System · Accessibility",
     year: "2023–present",
     roleContext: "Product Designer · Belgian Federal Institution",
@@ -80,6 +87,9 @@ export const workProjects: WorkProject[] = [
   },
   {
     title: "Stéphania — Portfolio",
+    cardLabel: "Stéphania — Portfolio",
+    cardTitle:
+      "Designing and Building an Accessible Portfolio with AI-Assisted Workflows",
     category: "Product Design · Design System · Front-end · AI Workflow",
     year: "2026–present",
     sentence:
@@ -99,6 +109,8 @@ export const workProjects: WorkProject[] = [
   },
   {
     title: "Harmony",
+    cardLabel: "Harmony",
+    cardTitle: "Turning User Needs into a Connected Product Experience",
     category: "Product Design",
     year: "2022",
     roleContext:
@@ -119,6 +131,8 @@ export const workProjects: WorkProject[] = [
   },
   {
     title: "WellPack",
+    cardLabel: "WellPack",
+    cardTitle: "Turning User Research into Evidence-Based Marketing Decisions",
     category: "Marketing Design",
     year: "2021–2023",
     roleContext: "UX Researcher · B2B SaaS Marketing team",
@@ -138,6 +152,9 @@ export const workProjects: WorkProject[] = [
   },
   {
     title: "Joga Aura",
+    cardLabel: "Joga Aura",
+    cardTitle:
+      "Shaping a Premium Shopify Journey from Product Discovery to Conversion",
     category: "E-commerce · Product Design · Shopify",
     year: "2026",
     roleContext:
@@ -170,20 +187,26 @@ function getWorkProjects(language: "en" | "fr"): WorkProject[] {
 
   const frenchCopy: Record<
     string,
-    Pick<WorkProject, "category" | "sentence" | "roleContext">
+    Pick<WorkProject, "cardTitle" | "category" | "sentence" | "roleContext">
   > = {
     "/work/spf-design-system": {
+      cardTitle:
+        "Faire évoluer des services publics accessibles grâce à un Design System unifié",
       category: "Product Design · Design System · Accessibilité",
       roleContext: "Product Designer · Institution fédérale belge",
       sentence:
         "Création et gouvernance d’un Design System évolutif pour une institution fédérale belge, avec des standards partagés et une accessibilité fondée sur les WCAG.",
     },
     "/work/portfolio": {
+      cardTitle:
+        "Concevoir et développer un portfolio accessible grâce à un workflow assisté par l’IA",
       category: "Product Design · Design System · Front-end · Workflow IA",
       sentence:
         "Conception et développement de ce portfolio de bout en bout : Design System sur mesure, front-end accessible et responsive, amélioré par des workflows assistés par IA.",
     },
     "/work/harmony": {
+      cardTitle:
+        "Transformer les besoins utilisateurs en expérience produit connectée",
       category: "Product Design",
       roleContext:
         "Product Designer · Équipe de 4, start-up française de bracelets connectés",
@@ -191,12 +214,16 @@ function getWorkProjects(language: "en" | "fr"): WorkProject[] {
         "Participation à un projet de bracelet connecté destiné au marché français, de la recherche utilisateur à la conception d’interface et aux tests.",
     },
     "/work/wellpack": {
+      cardTitle:
+        "Transformer la recherche utilisateur en décisions marketing fondées sur des données",
       category: "Marketing Design",
       roleContext: "UX Researcher · Équipe marketing B2B SaaS",
       sentence:
         "Conception d’une méthode de recherche reproductible transformant les demandes clients en briefs de landing pages fondés sur des données pour des campagnes B2B.",
     },
     "/work/joga-aura": {
+      cardTitle:
+        "Concevoir une expérience Shopify premium, de la découverte à la conversion",
       category: "E-commerce · Product Design · Shopify",
       roleContext:
         "Product Design · UX/UI · Direction artistique · Implémentation Shopify",

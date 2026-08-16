@@ -1,5 +1,6 @@
 export type ContactContent = {
   statement: string
+  email: string
   linkedin: string
 }
 
@@ -14,6 +15,8 @@ export type ContactContent = {
 export const contactContent: ContactContent = {
   statement:
     "Feel free to reach out directly on LinkedIn — just mention that you found me through my portfolio.",
+  email:
+    "mailto:hello@stephania-fdt.com?subject=Product%20Design%20Opportunity%20%E2%80%94%20St%C3%A9phania",
   linkedin: "https://www.linkedin.com/in/stephania-fordant",
 }
 

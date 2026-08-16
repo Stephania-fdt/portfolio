@@ -64,23 +64,26 @@ function WorkItem({
         // Mobile-only gap trimmed (10→8): below `md` this is the vertical
         // space between a card's text block and its stacked image — the
         // desktop row gap (md:gap-16, lead's md:gap-20/24) is untouched.
-        "group relative flex flex-col gap-8 md:flex-row md:items-center md:gap-16",
-        isLead && "md:gap-20 lg:gap-24",
-        reverse && "md:flex-row-reverse",
+        "group relative flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-16",
+        isLead && "lg:gap-20 xl:gap-24",
+        reverse && "lg:flex-row-reverse",
       )}
     >
-      <div className={cn(isLead ? "md:basis-[38%]" : "md:basis-2/5")}>
+      <div className="lg:basis-1/2">
         <EditorialEntry
           index={index}
-          eyebrow={`${project.category} · ${project.year}`}
-          title={project.title}
+          eyebrow={project.cardLabel}
+          title={project.cardTitle}
           sentence={project.sentence}
           titleClassName={cn(
-            isLead && "text-6xl md:text-7xl",
+            "text-2xl leading-tight md:text-2xl",
             hasCaseStudy &&
               "transition-colors duration-(--duration-standard) ease-standard group-hover:text-brand",
           )}
         >
+          <p className="mt-5 font-sans text-xs tracking-widest text-muted-foreground uppercase">
+            {project.category} · {project.year}
+          </p>
           <p className="mt-6 font-mono text-xs tracking-wide text-muted-foreground">
             {project.technologies.map((tech, i) => (
               <span key={tech}>
@@ -116,7 +119,7 @@ function WorkItem({
         </EditorialEntry>
       </div>
 
-      <div className={cn(isLead ? "md:basis-[62%]" : "md:basis-3/5")}>
+      <div className="lg:basis-1/2">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, scale: 1.03 }}
           whileInView={{ opacity: 1, scale: 1 }}

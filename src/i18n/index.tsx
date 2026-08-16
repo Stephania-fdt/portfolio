@@ -24,6 +24,9 @@ const copy = {
       chooseLanguage: "Choose language",
       changeLanguage: "Change language",
       language: "Language",
+      zoomImage: "Open image in full size",
+      playVideo: "Play video",
+      openDocument: "Open document in a new tab",
     },
     common: {
       selectedWork: "Selected Work",
@@ -33,11 +36,15 @@ const copy = {
       backToWork: "Selected Work",
       contact: "Contact",
       connectLinkedIn: "Connect on LinkedIn",
+      emailMe: "Email me",
       stages: "stages",
       productDesigner: "Product Designer",
       introduction: "Introduction",
       specimenView: "Specimen view",
       chapters: "Chapters",
+      role: "Role",
+      year: "Year",
+      tools: "Tools",
     },
     work: {
       intro:
@@ -72,6 +79,9 @@ const copy = {
       chooseLanguage: "Choisir la langue",
       changeLanguage: "Changer la langue",
       language: "Langue",
+      zoomImage: "Agrandir l’image",
+      playVideo: "Lire la vidéo",
+      openDocument: "Ouvrir le document dans un nouvel onglet",
     },
     common: {
       selectedWork: "Projets sélectionnés",
@@ -81,11 +91,15 @@ const copy = {
       backToWork: "Projets sélectionnés",
       contact: "Contact",
       connectLinkedIn: "Me contacter sur LinkedIn",
+      emailMe: "Me contacter par e-mail",
       stages: "étapes",
       productDesigner: "Product Designer",
       introduction: "Introduction",
       specimenView: "Vue du spécimen",
       chapters: "Chapitres",
+      role: "Rôle",
+      year: "Année",
+      tools: "Outils",
     },
     work: {
       intro:
