@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion"
-import { Accessibility, Layers, PenTool, Search } from "lucide-react"
+import { Accessibility, Layers, Search } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 
 import { transition } from "@/lib/motion"
@@ -7,7 +7,6 @@ import { getHeroContent } from "@/content/hero"
 import { useLanguage } from "@/i18n"
 import { Container } from "@/components/ui/container"
 import { SectionKicker } from "@/components/ui/section-kicker"
-import { cn } from "@/lib/utils"
 
 /**
  * Presentation only — content stays pure data in `content/hero.ts`. Reuses
@@ -18,10 +17,10 @@ import { cn } from "@/lib/utils"
  * magnifying glass for research, the literal accessibility mark.
  */
 const EXPERTISE_ICONS: Record<string, LucideIcon> = {
-  "Product Design": PenTool,
   "Design Systems": Layers,
-  "UX Research": Search,
+  "UX Research & collaboration": Search,
   Accessibility: Accessibility,
+  Accessibilité: Accessibility,
 }
 
 /**
@@ -38,7 +37,7 @@ function HeroExpertise() {
     <section
       id="expertise"
       aria-labelledby="expertise-heading"
-      className="border-y border-border bg-secondary/15 py-10 md:py-16 lg:py-20"
+      className="border-y border-border bg-secondary/15 pt-12 pb-10 md:pt-14 md:pb-12 lg:pt-16 lg:pb-14"
     >
       <Container size="content">
         <SectionKicker>{expertise.eyebrow}</SectionKicker>
@@ -55,19 +54,15 @@ function HeroExpertise() {
           viewport={{ once: true, margin: "-10% 0px" }}
           transition={transition.slow}
           data-expertise-grid
-          className="mt-8 grid md:mt-10 md:grid-cols-2 lg:mt-12 lg:grid-cols-4"
+          className="mt-8 grid md:mt-10 md:grid-cols-3"
         >
-          {expertise.items.map((item, index) => {
+          {expertise.items.map((item) => {
             const Icon = EXPERTISE_ICONS[item.title]
 
             return (
               <li
                 key={item.title}
-                className={cn(
-                  "grid grid-cols-[auto_1fr] gap-x-3 border-b border-border py-5 last:border-b-0 md:block md:px-7 md:py-7 md:first:pl-0 lg:border-b-0 lg:border-l lg:first:border-l-0 lg:last:pr-0 md:[&:nth-child(2)]:border-b",
-                  index % 2 === 0 && "md:border-r lg:border-r-0",
-                  index < 2 && "md:border-b",
-                )}
+                className="grid grid-cols-[auto_1fr] gap-x-3 border-b border-border py-5 last:border-b-0 md:block md:border-b-0 md:border-l md:px-7 md:py-7 md:first:border-l-0 md:first:pl-0 md:last:pr-0"
               >
                 <div className="flex size-6 items-center justify-center md:block">
                   {Icon ? (

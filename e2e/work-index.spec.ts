@@ -2,10 +2,10 @@ import { expect, test } from "./fixtures"
 
 const projectTitles = [
   "Scaling Accessible Public Services with a Unified Design System",
-  "Designing and Building an Accessible Portfolio with AI-Assisted Workflows",
   "Turning User Needs into a Connected Product Experience",
   "Turning User Research into Evidence-Based Marketing Decisions",
   "Shaping a Premium Shopify Journey from Product Discovery to Conversion",
+  "Designing and Building an Accessible Portfolio with AI-Assisted Workflows",
 ]
 
 test("Home presents only the three curated work projects", async ({ page }) => {
@@ -15,24 +15,21 @@ test("Home presents only the three curated work projects", async ({ page }) => {
   await expect(preview).toHaveCount(3)
   await expect(
     preview.nth(0).getByRole("heading", {
-      name: "Scaling Accessible Public Services with a Unified Design System",
+      name: "SPF Affaires étrangères",
     }),
   ).toBeVisible()
   await expect(
     preview.nth(1).getByRole("heading", {
-      name: "Turning User Needs into a Connected Product Experience",
+      name: "Harmony",
     }),
   ).toBeVisible()
   await expect(
     preview.nth(2).getByRole("heading", {
-      name: "Designing and Building an Accessible Portfolio with AI-Assisted Workflows",
+      name: "WellPack",
     }),
   ).toBeVisible()
-  await expect(page.locator("#work")).not.toContainText("WellPack")
   await expect(page.locator("#work")).not.toContainText("Joga Aura")
-  await expect(preview.nth(0)).toContainText("SPF Foreign Affairs")
-  await expect(preview.nth(1)).toContainText("Harmony")
-  await expect(preview.nth(2)).toContainText("Stéphania — Portfolio")
+  await expect(page.locator("#work")).not.toContainText("Stéphania — Portfolio")
   const workCta = page.getByRole("link", { name: /View all my work/i })
   const contactCta = page.getByRole("link", { name: /Connect on LinkedIn/i })
   await expect(workCta).toHaveAttribute("href", "/work")
@@ -109,6 +106,11 @@ test("Work is a complete five-project editorial index", async ({ page }) => {
   for (const title of projectTitles) {
     await expect(page.getByRole("heading", { name: title })).toBeVisible()
   }
+  await expect(projects.nth(0)).toContainText("SPF Foreign Affairs")
+  await expect(projects.nth(1)).toContainText("Harmony")
+  await expect(projects.nth(2)).toContainText("WellPack")
+  await expect(projects.nth(3)).toContainText("Joga Aura")
+  await expect(projects.nth(4)).toContainText("Stéphania — Portfolio")
 
   const caseStudyLinks = page.locator("[data-work-projects] a[href^='/work/']")
   await expect(caseStudyLinks).toHaveCount(5)

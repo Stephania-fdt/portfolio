@@ -1,7 +1,6 @@
 import { useState, type MouseEvent } from "react"
 import { useReducedMotion } from "framer-motion"
 
-import { getHeroContent } from "@/content/hero"
 import { heroSpecimenContent } from "@/content/hero-specimen"
 import { getLocalizedContent, useLanguage } from "@/i18n"
 
@@ -20,7 +19,6 @@ const EASE_STANDARD = "cubic-bezier(0.22, 1, 0.36, 1)"
  */
 function HeroBackground() {
   const { language } = useLanguage()
-  const heroContent = getHeroContent(language)
   const copy = getLocalizedContent(heroSpecimenContent, language)
   const shouldReduceMotion = useReducedMotion()
   const [mouse, setMouse] = useState<MousePosition>({
@@ -263,10 +261,6 @@ function HeroBackground() {
           </div>
         </div>
       </div>
-
-      <p className="absolute right-6 bottom-6 left-6 z-10 max-w-[15rem] text-[0.8125rem] leading-[1.55] text-muted-foreground italic">
-        {heroContent.signature}
-      </p>
     </div>
   )
 }

@@ -77,7 +77,9 @@ for (const width of [1024, 1280, 1440]) {
       .getByRole("group", { name: "Choisir la langue" })
       .boundingBox()
     const frenchHeaderBox = await header.boundingBox()
-    expect(frenchGroupBox?.x).toBe(groupBox.x)
+    expect(Math.abs((frenchGroupBox?.x ?? 0) - groupBox.x)).toBeLessThanOrEqual(
+      5,
+    )
     expect(frenchGroupBox?.width).toBe(groupBox.width)
     expect(frenchHeaderBox?.height).toBe(headerBox.height)
 

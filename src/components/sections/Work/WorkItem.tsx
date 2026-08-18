@@ -27,6 +27,7 @@ type WorkItemProps = {
   tier?: "lead" | "secondary" | "standard"
   /** `/work` is the canonical index, so every listed project keeps its route link. */
   linkToProject?: boolean
+  compact?: boolean
 }
 
 /**
@@ -43,17 +44,37 @@ function WorkItem({
   reverse,
   tier = "standard",
   linkToProject = false,
+  compact = false,
 }: WorkItemProps) {
   const { language, copy } = useLanguage()
   const shouldReduceMotion = useReducedMotion()
   const isLead = tier === "lead"
   const isSecondary = tier === "secondary"
+  const usesHomePreview = compact && Boolean(project.homePreviewImage)
+  const previewImage = usesHomePreview
+    ? project.homePreviewImage
+    : project.previewImage
   // Home links only projects with completed case studies. The canonical
   // `/work` index intentionally exposes every project's existing route.
   // Completed studies come from either the generic registry (heading +
   // paragraphs, rendered by `pages/CaseStudy`) or a hand-built route like
   // Portfolio's, flagged directly on the project.
   const hasCaseStudy = linkToProject || project.hasCaseStudy === true
+  const homeCopy = getLocalizedContent(
+    {
+      en: {
+        problem: project.homeProblem,
+        role: project.homeRole,
+        outcome: project.homeOutcome,
+      },
+      fr: {
+        problem: project.homeProblemFr,
+        role: project.homeRoleFr,
+        outcome: project.homeOutcomeFr,
+      },
+    },
+    language,
+  )
 
   return (
     <div
@@ -61,41 +82,62 @@ function WorkItem({
         // Mobile-only gap trimmed (10→8): below `md` this is the vertical
         // space between a card's text block and its stacked image — the
         // desktop row gap (md:gap-16, lead's md:gap-20/24) is untouched.
-        "group relative flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-16",
-        isLead && "lg:gap-20 xl:gap-24",
+        "group relative flex flex-col gap-8 lg:flex-row lg:items-center",
+        compact ? "lg:gap-12" : "lg:gap-16",
+        isLead && !compact && "lg:gap-20 xl:gap-24",
         reverse && "lg:flex-row-reverse",
       )}
     >
       <div className="lg:basis-1/2">
         <EditorialEntry
           index={index}
-          eyebrow={project.cardLabel}
-          title={project.cardTitle}
-          sentence={project.sentence}
+          numeral={compact ? false : "arabic"}
+          eyebrow={compact ? undefined : project.cardLabel}
+          title={compact ? project.title : project.cardTitle}
+          sentence={compact ? homeCopy.problem : project.sentence}
           titleClassName={cn(
             "text-2xl leading-tight md:text-2xl",
             hasCaseStudy &&
               "transition-colors duration-(--duration-standard) ease-standard group-hover:text-brand",
           )}
         >
-          <p className="mt-5 font-sans text-xs tracking-widest text-muted-foreground uppercase">
-            {project.category} · {project.year}
-          </p>
-          <p className="mt-6 font-mono text-xs tracking-wide text-muted-foreground">
-            {project.technologies.map((tech, i) => (
-              <span key={tech}>
-                {i > 0 && " · "}
-                <span
-                  className={cn(
-                    project.signalTechnologies?.includes(tech) &&
-                      "font-medium text-foreground",
-                  )}
-                >
-                  {tech}
-                </span>
-              </span>
-            ))}
-          </p>
+          {compact ? (
+            <dl className="mt-6 grid gap-4 text-sm leading-relaxed">
+              <div>
+                <dt className="font-mono text-2xs tracking-widest text-brand uppercase">
+                  {copy.common.role}
+                </dt>
+                <dd className="mt-1 text-foreground">{homeCopy.role}</dd>
+              </div>
+              <div>
+                <dt className="font-mono text-2xs tracking-widest text-brand uppercase">
+                  {copy.common.outcome}
+                </dt>
+                <dd className="mt-1 text-foreground">{homeCopy.outcome}</dd>
+              </div>
+            </dl>
+          ) : (
+            <>
+              <p className="mt-5 font-sans text-xs tracking-widest text-muted-foreground uppercase">
+                {project.category} · {project.year}
+              </p>
+              <p className="mt-6 font-mono text-xs tracking-wide text-muted-foreground">
+                {project.technologies.map((tech, i) => (
+                  <span key={tech}>
+                    {i > 0 && " · "}
+                    <span
+                      className={cn(
+                        project.signalTechnologies?.includes(tech) &&
+                          "font-medium text-foreground",
+                      )}
+                    >
+                      {tech}
+                    </span>
+                  </span>
+                ))}
+              </p>
+            </>
+          )}
 
           {hasCaseStudy ? (
             // Deliberately not `relative` — the stretched `after` pseudo-
@@ -131,21 +173,31 @@ function WorkItem({
             // directly sets how tall the card gets; desktop (where the
             // image sits at 60% column width in the two-column row) is
             // untouched, same aspect-[4/3] as before.
-            !isLead && !isSecondary && "aspect-[3/2] md:aspect-[4/3]",
+            usesHomePreview && "aspect-video",
+            !isLead &&
+              !isSecondary &&
+              !usesHomePreview &&
+              "aspect-[3/2] md:aspect-[4/3]",
             hasCaseStudy && "group-hover:shadow-md",
           )}
         >
-          {project.previewImage ? (
+          {previewImage ? (
             <img
-              src={project.previewImage}
+              src={previewImage}
               alt={getLocalizedContent(
                 {
                   en:
-                    project.previewAlt ??
+                    (usesHomePreview
+                      ? project.homePreviewAlt
+                      : project.previewAlt) ??
                     `${project.title} — selected interface`,
                   fr:
-                    project.previewAltFr ??
-                    project.previewAlt ??
+                    (usesHomePreview
+                      ? project.homePreviewAltFr
+                      : project.previewAltFr) ??
+                    (usesHomePreview
+                      ? project.homePreviewAlt
+                      : project.previewAlt) ??
                     `${project.title} — interface sélectionnée`,
                 },
                 language,
@@ -153,7 +205,12 @@ function WorkItem({
               width={project.previewWidth}
               height={project.previewHeight}
               loading="lazy"
-              className="h-full w-full object-cover object-top transition-transform duration-(--duration-slow) ease-standard group-hover:scale-[1.03]"
+              className={cn(
+                "h-full w-full transition-transform duration-(--duration-slow) ease-standard",
+                usesHomePreview
+                  ? "object-contain"
+                  : "object-cover object-top group-hover:scale-[1.03]",
+              )}
             />
           ) : (
             // The "plate" — a drafting sheet before the image is inset,

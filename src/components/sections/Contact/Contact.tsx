@@ -18,13 +18,26 @@ import { useLanguage } from "@/i18n"
  * portfolio to connect isn't a dead end — styled exactly like Hero's own
  * primary button.
  */
-function Contact() {
+type ContactProps = {
+  homepage?: boolean
+}
+
+function Contact({ homepage = false }: ContactProps) {
   const { language, copy } = useLanguage()
   const contactContent = getContactContent(language)
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <Section id="contact" aria-label={copy.common.contact} spacing="sm">
+    <Section
+      id="contact"
+      aria-label={copy.common.contact}
+      spacing={homepage ? "none" : "sm"}
+      className={
+        homepage
+          ? "scroll-mt-20 pt-10 pb-12 md:scroll-mt-24 md:pt-12 md:pb-16 lg:pt-14 lg:pb-20"
+          : undefined
+      }
+    >
       <SectionKicker>{copy.common.contact}</SectionKicker>
 
       <motion.div
@@ -35,10 +48,18 @@ function Contact() {
         className="mt-8 max-w-2xl"
       >
         <p className="text-xl leading-relaxed text-foreground md:text-2xl">
-          {contactContent.statement}
+          {homepage
+            ? contactContent.homepageStatement
+            : contactContent.statement}
         </p>
 
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div
+          className={
+            homepage
+              ? "mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+              : "mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
+          }
+        >
           <Button
             asChild
             size="lg"

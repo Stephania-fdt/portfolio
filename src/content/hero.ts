@@ -12,15 +12,8 @@ export type HeroContent = {
    * so the intended break point is a content property, not a side-effect
    * of container width.
    */
-  statement: {
-    primary: string
-    secondary: string
-  }
-  /** Two-part statement — rendered as two editorial paragraphs, lead emphasized, support muted. */
-  valueProposition: {
-    lead: string
-    support: string
-  }
+  headline: string
+  description: string
   primaryCta: CallToAction
   secondaryCta: CallToAction
   /**
@@ -32,7 +25,6 @@ export type HeroContent = {
    * SignatureMark. Never repeated verbatim elsewhere — the case studies'
    * own closing reflections echo the same philosophy in their own words.
    */
-  signature: string
   /**
    * Compact expertise block, added directly beneath the two Hero CTAs
    * (Sprint "Hero expertise addition"). Deliberately part of `HeroContent`,
@@ -51,42 +43,30 @@ export type HeroContent = {
 export const heroContent: HeroContent = {
   name: "Stéphania",
   title: "Product Designer",
-  statement: {
-    primary: "Building scalable products through",
-    secondary: "Design Systems, Accessibility & AI",
-  },
-  valueProposition: {
-    lead: "I transform complex problems into simple, accessible and scalable digital products.",
-    support:
-      "I build the systems that help teams design faster, collaborate better and create lasting impact.",
-  },
+  headline:
+    "Senior Product Designer — making complex products clear, accessible and useful.",
+  description:
+    "With 6+ years of experience, I turn business and technical constraints into clear, consistent and scalable products. I specialize in Design Systems, accessibility and UX Research, with extensive experience in public services.",
   primaryCta: { label: "View my work", href: "#work" },
-  secondaryCta: { label: "Let's talk", href: "#contact" },
-  signature:
-    "I believe great products are built when people understand each other before they build together.",
+  secondaryCta: { label: "Contact me", href: "#contact" },
   expertise: {
     eyebrow: "Expertise",
-    heading: "What I bring to digital products",
+    heading: "Expertise backed by delivered work",
     items: [
-      {
-        title: "Product Design",
-        description:
-          "From research to interface design, I create intuitive and purposeful digital experiences.",
-      },
       {
         title: "Design Systems",
         description:
-          "I build scalable, accessible and consistent systems that help teams design and ship faster.",
-      },
-      {
-        title: "UX Research",
-        description:
-          "I use research, testing and insights to make product decisions grounded in real user needs.",
+          "Created a scalable Angular Material UI Kit for the Belgian Federal Public Service Foreign Affairs.",
       },
       {
         title: "Accessibility",
         description:
-          "I design inclusive experiences aligned with WCAG accessibility principles.",
+          "Integrated WCAG AA/AA+ requirements into components and design processes.",
+      },
+      {
+        title: "UX Research & collaboration",
+        description:
+          "Conducted interviews, user tests and workshops with business and technical teams.",
       },
     ],
   },
@@ -97,42 +77,30 @@ function getHeroContent(language: "en" | "fr"): HeroContent {
 
   return {
     ...heroContent,
-    statement: {
-      primary: "Créer des produits évolutifs grâce aux",
-      secondary: "Design Systems, à l’accessibilité et à l’IA",
-    },
-    valueProposition: {
-      lead: "Je transforme des problématiques complexes en produits numériques simples, accessibles et évolutifs.",
-      support:
-        "Je conçois les systèmes qui aident les équipes à créer plus vite, mieux collaborer et générer un impact durable.",
-    },
+    headline:
+      "Product Designer senior — des produits complexes rendus clairs, accessibles et utiles.",
+    description:
+      "Depuis plus de 6 ans, je transforme des contraintes métier et techniques en expériences cohérentes et évolutives. Je suis spécialisée en Design Systems, accessibilité et UX Research, notamment dans les services publics.",
     primaryCta: { label: "Voir mes projets", href: "#work" },
-    secondaryCta: { label: "Échangeons", href: "#contact" },
-    signature:
-      "Je crois que les grands produits naissent lorsque les personnes se comprennent avant de construire ensemble.",
+    secondaryCta: { label: "Me contacter", href: "#contact" },
     expertise: {
       eyebrow: "Expertise",
-      heading: "Ce que j’apporte aux produits numériques",
+      heading: "Des expertises appuyées par des réalisations concrètes",
       items: [
-        {
-          title: "Product Design",
-          description:
-            "De la recherche à l’interface, je crée des expériences numériques intuitives et utiles.",
-        },
         {
           title: "Design Systems",
           description:
-            "Je construis des systèmes accessibles, cohérents et évolutifs qui aident les équipes à concevoir et livrer plus vite.",
+            "Création d’un UI Kit évolutif basé sur Angular Material pour le SPF Affaires étrangères.",
         },
         {
-          title: "UX Research",
+          title: "Accessibilité",
           description:
-            "J’utilise la recherche, les tests et les retours terrain pour ancrer les décisions produit dans les besoins réels.",
+            "Intégration des exigences WCAG AA/AA+ dans les composants et les processus de conception.",
         },
         {
-          title: "Accessibility",
+          title: "UX Research & collaboration",
           description:
-            "Je conçois des expériences inclusives alignées sur les principes d’accessibilité WCAG.",
+            "Entretiens, tests utilisateurs et ateliers avec les équipes métier et techniques.",
         },
       ],
     },

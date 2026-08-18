@@ -59,37 +59,20 @@ function Hero() {
           {/* The claim is allowed to run wider than the reading column
               beneath it (max-w-3xl vs. max-w-xl) — headlines outrunning
               body measure is a real editorial convention, not an accident. */}
-          <h1 className="mt-10 max-w-3xl">
-            <motion.span
-              {...reveal(0.15)}
-              className="block text-3xl font-medium text-muted-foreground md:text-4xl"
-            >
-              {heroContent.statement.primary}
-            </motion.span>
-            <motion.span
-              initial={
-                shouldReduceMotion ? false : { opacity: 0, y: 22, scale: 0.98 }
-              }
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{
-                ...transition.slow,
-                delay: shouldReduceMotion ? 0 : 0.32,
-              }}
-              className="mt-1 block origin-left text-5xl leading-[0.9] font-bold tracking-tightest sm:text-6xl md:text-7xl"
-            >
-              {heroContent.statement.secondary}
-            </motion.span>
-          </h1>
+          <motion.h1
+            {...reveal(0.2)}
+            className="mt-10 max-w-4xl text-5xl leading-[0.92] font-bold tracking-tightest sm:text-6xl md:text-7xl"
+          >
+            {heroContent.headline}
+          </motion.h1>
 
           <div className="max-w-xl">
-            <motion.div {...reveal(0.55)} className="mt-16 space-y-4">
-              <p className="text-lg text-foreground md:text-xl">
-                {heroContent.valueProposition.lead}
-              </p>
-              <p className="text-lg text-muted-foreground md:text-xl">
-                {heroContent.valueProposition.support}
-              </p>
-            </motion.div>
+            <motion.p
+              {...reveal(0.5)}
+              className="mt-12 text-lg leading-relaxed text-muted-foreground md:text-xl"
+            >
+              {heroContent.description}
+            </motion.p>
 
             <motion.div
               {...reveal(0.7)}
@@ -122,8 +105,6 @@ function Hero() {
 
         <ScrollIndicator />
       </div>
-
-      <p className="sr-only md:hidden">{heroContent.signature}</p>
 
       <HeroBackground />
     </section>

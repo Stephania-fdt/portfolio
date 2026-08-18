@@ -1,5 +1,6 @@
 export type ContactContent = {
   statement: string
+  homepageStatement: string
   email: string
   linkedin: string
 }
@@ -15,6 +16,8 @@ export type ContactContent = {
 export const contactContent: ContactContent = {
   statement:
     "Feel free to reach out directly on LinkedIn — just mention that you found me through my portfolio.",
+  homepageStatement:
+    "Want to discuss a role or a project? Email me or connect with me on LinkedIn.",
   email:
     "mailto:hello@stephania-fdt.com?subject=Product%20Design%20Opportunity%20%E2%80%94%20St%C3%A9phania",
   linkedin: "https://www.linkedin.com/in/stephania-fordant",
@@ -26,6 +29,8 @@ function getContactContent(language: "en" | "fr"): ContactContent {
         ...contactContent,
         statement:
           "N’hésitez pas à me contacter directement sur LinkedIn — indiquez simplement que vous avez découvert mon profil via mon portfolio.",
+        homepageStatement:
+          "Vous souhaitez échanger au sujet d’un poste ou d’un projet ? Écrivez-moi ou contactez-moi sur LinkedIn.",
       }
     : contactContent
 }

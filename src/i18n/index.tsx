@@ -43,6 +43,8 @@ const copy = {
       specimenView: "Specimen view",
       chapters: "Chapters",
       role: "Role",
+      problem: "Problem",
+      outcome: "Result / deliverable",
       year: "Year",
       tools: "Tools",
       loading: "Loading content…",
@@ -54,7 +56,7 @@ const copy = {
     },
     work: {
       intro:
-        "A selection of product systems, services and research methods shaped with real teams, constraints and the people who use them in mind.",
+        "Three projects showing how I work across complex public services, connected products and research-led design.",
       title: "Selected projects, systems and digital experiences.",
       description:
         "Public digital services, connected products, e-commerce and the systems that make ambitious products easier to build and sustain.",
@@ -104,6 +106,8 @@ const copy = {
       specimenView: "Vue du spécimen",
       chapters: "Chapitres",
       role: "Rôle",
+      problem: "Problème",
+      outcome: "Résultat / livrable",
       year: "Année",
       tools: "Outils",
       loading: "Chargement du contenu…",
@@ -115,7 +119,7 @@ const copy = {
     },
     work: {
       intro:
-        "Une sélection de systèmes produit, services et méthodes de recherche façonnés avec de vraies équipes, des contraintes concrètes et les personnes qui les utilisent.",
+        "Trois projets qui montrent ma manière de travailler sur des services publics complexes, des produits connectés et des démarches guidées par la recherche.",
       title: "Projets, systèmes et expériences numériques sélectionnés.",
       description:
         "Services numériques publics, produits connectés, e-commerce et systèmes qui rendent les produits ambitieux plus simples à créer et à faire évoluer.",

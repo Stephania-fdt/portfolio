@@ -5,6 +5,7 @@ import spfHomeThumbnail from "@/assets/case-studies/spf/home-thumbnail.png"
 import portfolioHomeThumbnail from "@/assets/case-studies/portfolio/home-thumbnail.png"
 import harmonyHomeThumbnail from "@/assets/case-studies/harmony/home-thumbnail.webp"
 import wellpackHomeThumbnail from "@/assets/case-studies/wellpack/home-thumbnail.png"
+import wellpackWebsitePreview from "@/assets/case-studies/wellpack/02-brand/supports/Declinaisaon_siteweb.png"
 import jogaAuraHomeThumbnail from "@/assets/case-studies/joga-aura/home-thumbnail.png"
 
 export type WorkProject = {
@@ -16,6 +17,12 @@ export type WorkProject = {
   category: string
   year: string
   sentence: string
+  homeProblem: string
+  homeRole: string
+  homeOutcome: string
+  homeProblemFr: string
+  homeRoleFr: string
+  homeOutcomeFr: string
   technologies: string[]
   /**
    * Subset of `technologies` that most directly proves this project's
@@ -42,6 +49,10 @@ export type WorkProject = {
    * exists, not a gap to paper over.
    */
   previewImage?: string
+  /** Optional homepage-only artifact when the archive thumbnail is less representative. */
+  homePreviewImage?: string
+  homePreviewAlt?: string
+  homePreviewAltFr?: string
   previewAlt?: string
   previewAltFr?: string
   previewWidth?: number
@@ -65,7 +76,7 @@ export type WorkProject = {
  * front-end implementation) shows up as one shipped, complete product
  * rather than a described skill.
  */
-export const workProjects: WorkProject[] = [
+const unorderedWorkProjects: WorkProject[] = [
   {
     title: "SPF Affaires étrangères",
     cardLabel: "SPF Foreign Affairs",
@@ -76,6 +87,16 @@ export const workProjects: WorkProject[] = [
     roleContext: "Product Designer · Belgian Federal Institution",
     sentence:
       "Built and governed a scalable Design System for a Belgian federal institution — embedding WCAG-based accessibility and shared standards through close, earned collaboration with developers.",
+    homeProblem:
+      "Several public-service applications lacked a shared UX methodology and consistent interface language.",
+    homeRole: "Product Designer",
+    homeOutcome:
+      "A scalable Design System and Angular Material UI Kit shared across teams.",
+    homeProblemFr:
+      "Plusieurs applications de service public ne partageaient ni méthode UX ni langage d’interface cohérent.",
+    homeRoleFr: "Product Designer",
+    homeOutcomeFr:
+      "Un Design System évolutif et un UI Kit Angular Material partagés entre les équipes.",
     technologies: [
       "Figma",
       "Angular Material",
@@ -98,6 +119,16 @@ export const workProjects: WorkProject[] = [
     year: "2026–present",
     sentence:
       "Designed and built this portfolio itself, end to end — from a bespoke design system through to accessible, responsive front-end code, shaped iteratively through AI-assisted workflows.",
+    homeProblem:
+      "The previous portfolio did not clearly present the depth of the work or professional experience.",
+    homeRole: "Product Designer · Front-end implementation",
+    homeOutcome:
+      "A bilingual, accessible and responsive portfolio built with reusable components.",
+    homeProblemFr:
+      "Le portfolio précédent ne présentait pas clairement la profondeur des projets ni le parcours professionnel.",
+    homeRoleFr: "Product Designer · Implémentation front-end",
+    homeOutcomeFr:
+      "Un portfolio bilingue, accessible et responsive construit avec des composants réutilisables.",
     technologies: [
       "Figma",
       "React",
@@ -121,6 +152,16 @@ export const workProjects: WorkProject[] = [
       "Product Designer · Team of 4, French connected-bracelet startup",
     sentence:
       "Part of a four-person team taking a connected bracelet to the French market — from user research through interface design and testing.",
+    homeProblem:
+      "Harmony’s connected bracelet needed a consistent experience across its website and companion mobile app.",
+    homeRole: "Product Designer · Team of 4",
+    homeOutcome:
+      "Tested web and mobile prototypes supported by a shared Design System.",
+    homeProblemFr:
+      "Le bracelet connecté Harmony nécessitait une expérience cohérente entre le site web et l’application mobile.",
+    homeRoleFr: "Product Designer · Équipe de 4",
+    homeOutcomeFr:
+      "Des prototypes web et mobile testés, soutenus par un Design System partagé.",
     technologies: [
       "Figma",
       "Miro",
@@ -149,6 +190,16 @@ export const workProjects: WorkProject[] = [
     roleContext: "UX Researcher · B2B SaaS Marketing team",
     sentence:
       "Designed a repeatable research methodology turning client requests into evidence-based landing page briefs for B2B marketing campaigns.",
+    homeProblem:
+      "Landing-page projects started from inconsistent briefs, without a shared understanding of client audiences and markets.",
+    homeRole: "UX Researcher",
+    homeOutcome:
+      "A repeatable research method producing evidence-based design briefs.",
+    homeProblemFr:
+      "Les projets de landing pages partaient de briefs hétérogènes, sans compréhension partagée des audiences et des marchés clients.",
+    homeRoleFr: "UX Researcher",
+    homeOutcomeFr:
+      "Une méthode de recherche reproductible produisant des briefs de design fondés sur des données.",
     technologies: [
       "UX Research",
       "Personas",
@@ -159,6 +210,11 @@ export const workProjects: WorkProject[] = [
     signalTechnologies: ["UX Research", "Design Briefs"],
     href: "/work/wellpack",
     previewImage: wellpackHomeThumbnail,
+    homePreviewImage: wellpackWebsitePreview,
+    homePreviewAlt:
+      "WellPack’s completed website showing the final interface and brand system in use",
+    homePreviewAltFr:
+      "Site final de WellPack montrant l’interface et le système de marque en situation",
     hasCaseStudy: true,
   },
   {
@@ -172,6 +228,15 @@ export const workProjects: WorkProject[] = [
       "Product Design · UX/UI · Art Direction · Shopify implementation",
     sentence:
       "Designed and built a luxury e-commerce experience for Joga Aura, from UX/UI design through Shopify implementation, with a focus on clarity, trust and conversion.",
+    homeProblem:
+      "Create a clear premium shopping journey for the Blue Serenity yoga mat.",
+    homeRole: "UX/UI Design · Shopify implementation",
+    homeOutcome: "A responsive e-commerce storefront implemented on Shopify.",
+    homeProblemFr:
+      "Créer un parcours d’achat premium et clair pour le tapis de yoga Blue Serenity.",
+    homeRoleFr: "UX/UI Design · Implémentation Shopify",
+    homeOutcomeFr:
+      "Une boutique e-commerce responsive implémentée sur Shopify.",
     technologies: ["Shopify", "Figma", "UX/UI Design", "SEO"],
     signalTechnologies: ["Shopify"],
     href: "/work/joga-aura",
@@ -180,10 +245,24 @@ export const workProjects: WorkProject[] = [
   },
 ]
 
+const projectOrder = [
+  "/work/spf-design-system",
+  "/work/harmony",
+  "/work/wellpack",
+  "/work/joga-aura",
+  "/work/portfolio",
+] as const
+
+export const workProjects = projectOrder.map((href) => {
+  const project = unorderedWorkProjects.find((item) => item.href === href)
+  if (!project) throw new Error(`Project not found: ${href}`)
+  return project
+})
+
 const featuredProjectHrefs = [
   "/work/spf-design-system",
   "/work/harmony",
-  "/work/portfolio",
+  "/work/wellpack",
 ] as const
 
 /** Curated Home preview, derived from the complete `/work` archive. */

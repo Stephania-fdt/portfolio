@@ -14,14 +14,13 @@ test("Home section headers reuse the Contact section kicker without numbering", 
     .getAttribute("class")
 
   for (const [sectionId, title] of [
-    ["positioning", "Positioning"],
     ["work", "Selected Work"],
-    ["principles", "Design Systems"],
-    ["process", "The Process"],
+    ["expertise", "Expertise"],
+    ["home-profile", "A little about me"],
   ]) {
     const heading = page
       .locator(`#${sectionId}`)
-      .getByRole("heading", { name: title })
+      .getByRole("heading", { name: title, exact: true })
 
     await expect(heading).toBeVisible()
     await expect(heading).toHaveAttribute("class", referenceClass ?? "")
@@ -35,6 +34,7 @@ for (const width of [375, 768, 1440]) {
   }) => {
     await page.setViewportSize({ width, height: 900 })
     await page.goto("/#contact")
+    await page.evaluate(() => document.fonts.ready)
 
     const contact = page.locator("#contact")
     const email = contact.getByRole("link", { name: "Email me" })
