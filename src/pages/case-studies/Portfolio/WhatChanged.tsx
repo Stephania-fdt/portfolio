@@ -3,65 +3,20 @@ import { motion, useReducedMotion } from "framer-motion"
 import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
-import { useLanguage } from "@/i18n"
+import { portfolioPageContent } from "@/content/case-studies/portfolio-page"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 import { fadeUp, staggerContainer } from "@/lib/motion"
-
-const COPY = {
-  en: {
-    eyebrow: "What changed",
-    title:
-      "The same identity, with a clearer and more capable product around it.",
-    before: "Before",
-    after: "After",
-    beforeItems: [
-      "A mainly visual presentation",
-      "Uneven case-study depth",
-      "More limited navigation",
-      "A single-language experience",
-      "Little visibility into professional experience",
-      "A design process documented only lightly",
-    ],
-    afterItems: [
-      "Harmonized, editorial case studies",
-      "Clearer UX narratives and evidence",
-      "Richer About and Experience pages",
-      "Responsive navigation and contextual CTAs",
-      "A bilingual French and English experience",
-      "Accessibility, Design System, tools and AI-assisted iteration made explicit",
-    ],
-  },
-  fr: {
-    eyebrow: "Ce qui a évolué",
-    title:
-      "La même identité, portée par un produit plus clair et plus complet.",
-    before: "Avant",
-    after: "Après",
-    beforeItems: [
-      "Une présentation principalement visuelle",
-      "Des études de cas de profondeur inégale",
-      "Une navigation plus limitée",
-      "Une expérience dans une seule langue",
-      "Peu de visibilité sur le parcours professionnel",
-      "Un processus de conception peu documenté",
-    ],
-    afterItems: [
-      "Des études de cas harmonisées et éditoriales",
-      "Des récits UX et des preuves plus clairs",
-      "Des pages À propos et Expérience enrichies",
-      "Une navigation responsive et des CTA contextualisés",
-      "Une expérience bilingue français-anglais",
-      "L’accessibilité, le Design System, les outils et l’itération assistée par IA rendus explicites",
-    ],
-  },
-} as const
 
 function WhatChanged() {
   const { language } = useLanguage()
-  const copy = COPY[language]
+  const content = getLocalizedContent(
+    portfolioPageContent,
+    language,
+  ).whatChanged
   const shouldReduceMotion = useReducedMotion()
   const columns = [
-    [copy.before, copy.beforeItems, false],
-    [copy.after, copy.afterItems, true],
+    [content.before, content.beforeItems, false],
+    [content.after, content.afterItems, true],
   ] as const
 
   return (
@@ -69,9 +24,9 @@ function WhatChanged() {
       <Container size="content">
         {/* No reliable legacy/current screenshot pair exists yet. Keep this
             comparison typographic until real, matching captures are supplied. */}
-        <SectionKicker>{copy.eyebrow}</SectionKicker>
+        <SectionKicker>{content.kicker}</SectionKicker>
         <h3 className="mt-8 max-w-3xl text-3xl leading-tight font-bold tracking-tight text-foreground md:text-4xl">
-          {copy.title}
+          {content.title}
         </h3>
         <motion.div
           initial={shouldReduceMotion ? false : "hidden"}

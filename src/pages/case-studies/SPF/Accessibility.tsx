@@ -116,9 +116,10 @@ function Accessibility() {
         <div className="mt-24 grid gap-10 md:grid-cols-2 md:gap-16">
           <AssetChecklist
             label={content.gap.checklist}
+            status={content.assetStatus}
             missing={[
               {
-                filename: "keyboard-navigation.webp",
+                filename: content.gap.filename,
                 description: content.gap.description,
               },
             ]}

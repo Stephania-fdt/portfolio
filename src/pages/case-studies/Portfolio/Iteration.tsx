@@ -83,13 +83,13 @@ function Iteration() {
           >
             <p className="text-muted-foreground">
               <span aria-hidden="true">− </span>
-              Product Design · Design System
+              {content.beforeCategory}
             </p>
             <p className="text-foreground">
               <span aria-hidden="true" className="text-brand">
                 +{" "}
               </span>
-              Product Design · Design System · Accessibility
+              {content.afterCategory}
             </p>
           </motion.div>
         </div>

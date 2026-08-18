@@ -71,16 +71,19 @@ import { getLocalizedContent, useLanguage } from "@/i18n"
 
 function EmptySubsection({
   label,
+  status,
   missing,
   description,
 }: {
   label: string
+  status: string
   missing: string[]
   description: string
 }) {
   return (
     <AssetChecklist
       label={label}
+      status={status}
       missing={missing.map((filename) => ({
         filename,
         description,
@@ -187,7 +190,8 @@ function Foundations() {
           </div>
           <EmptySubsection
             label={layout.label}
-            missing={["spacing.webp", "grid.webp"]}
+            status={content.assetStatus}
+            missing={content.missingAssets}
             description={content.missingDescription}
           />
         </div>

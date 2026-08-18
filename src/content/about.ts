@@ -1,143 +1,108 @@
-export type AboutChapter = {
-  eyebrow: string
+import {
+  getLocalizedContent,
+  type Language,
+  type LocalizedContent,
+} from "@/i18n"
+
+export type AboutSection = {
+  id: string
   title: string
   paragraphs: string[]
 }
 
 export type AboutContent = {
+  eyebrow: string
   heading: string
-  chapters: AboutChapter[]
-  /** The closing editorial statement — one line per array entry, rendered
-   *  on its own line (a deliberate content-driven break, same convention
-   *  Hero's own two-line statement uses, not word-wrap). */
-  conclusion: string[]
+  introduction: string
+  sections: AboutSection[]
+  primaryCta: string
+  secondaryCta: string
 }
 
-/**
- * `/about` — approved copy, used verbatim. Nothing here is invented or
- * reworded; see the chat request this page was built from for the source.
- */
-export const aboutContent: AboutContent = {
-  heading: "About Me",
-  chapters: [
-    {
-      eyebrow: "Introduction",
-      title:
-        "Designing with curiosity. Building with technology. Creating with purpose.",
-      paragraphs: [
-        "I'm a Product Designer passionate about creating digital experiences that find the right balance between design, technology, and human needs.",
-        "With 6+ years of experience in the digital industry, I've worked across UX/UI and Product Design, from research and strategy to interface design, prototyping, testing, and design systems.",
-        "What drives me most is taking a complex problem, understanding the people behind it, turning it into a simple and meaningful experience, and working closely with technical teams to bring it to life.",
-      ],
-    },
-    {
-      eyebrow: "More Than Design",
-      title: "More than design",
-      paragraphs: [
-        "My curiosity about technology has naturally pushed me beyond the boundaries of interface design.",
-        "I'm interested in understanding how products are built, how technical constraints influence design decisions, and how technology can open new possibilities for users.",
-        "From Figma and Design Systems to Design Tokens, Angular Material, React, TypeScript and AI tools, I enjoy exploring the ecosystem where design and technology meet.",
-        "This technical mindset helps me collaborate closely with developers, understand feasibility, anticipate constraints, and design solutions that are not only beautiful, but also realistic, scalable and maintainable.",
-      ],
-    },
-    {
-      eyebrow: "Experience That Shapes My Work",
-      title: "Experience that shapes my work",
-      paragraphs: [
-        "Throughout my career, I've worked on digital products and services in demanding environments, including the Belgian Federal Public Service for Foreign Affairs, where I contributed to digital transformation, accessibility, and design consistency.",
-        "I worked on the creation and evolution of a Design System, an Angular Material UI Kit, Design Tokens, and accessibility practices aligned with WCAG and RGAA standards.",
-        "I've also worked on e-commerce, growth, digital services and user-focused products, allowing me to develop a broad understanding of the product lifecycle — from identifying a problem to delivering and improving the final experience.",
-      ],
-    },
-    {
-      eyebrow: "Projects I Love",
-      title: "Projects I love",
-      paragraphs: [
-        "What excites me about a project is the journey from an idea to something people can actually use.",
-        "Research → Strategy → Architecture → Wireframes → UI → Design System → Prototype → Testing → Iteration.",
-        "I particularly enjoy projects where design has a real impact: simplifying complex journeys, making digital services more accessible, creating intuitive mobile experiences, or transforming an idea into a meaningful product.",
-        "Alongside my professional work, I also develop personal projects to experiment with new ideas and explore the intersection of Product Design, technology and innovation.",
-      ],
-    },
-    {
-      eyebrow: "How I Think",
-      title: "How I think",
-      paragraphs: [
-        "I don't simply design screens.",
-        "I try to understand why a product exists, who it is designed for, and how it can genuinely improve someone's experience.",
-        "To me, a great product should be useful, accessible, intuitive, technically thoughtful and enjoyable to use.",
-        "And I believe the best products happen when designers, developers, product teams and users build together.",
-      ],
-    },
-  ],
-  conclusion: [
-    "Curious by nature.",
-    "Designer by passion.",
-    "Tech enthusiast by choice.",
-  ],
-}
-
-function getAboutContent(language: "en" | "fr"): AboutContent {
-  if (language === "en") return aboutContent
-  return {
-    heading: "À propos de moi",
-    chapters: [
+/** Approved bilingual copy for the standalone `/about` route. */
+export const aboutContent: LocalizedContent<AboutContent> = {
+  en: {
+    eyebrow: "About",
+    heading:
+      "I design with the people who use products — and the teams who build them — in mind.",
+    introduction:
+      "I’m Stéphania, a Product Designer based in Brussels. For more than six years, I’ve designed digital products and services by balancing user needs, business goals and technical constraints.",
+    sections: [
       {
-        eyebrow: "Introduction",
-        title:
-          "Concevoir avec curiosité. Construire avec la technologie. Créer avec intention.",
+        id: "what-drives-me",
+        title: "What drives me",
         paragraphs: [
-          "Je suis Product Designer et je crée des expériences numériques qui trouvent le bon équilibre entre design, technologie et besoins humains.",
-          "Avec plus de six ans d’expérience dans le numérique, j’ai travaillé en UX/UI et Product Design, de la recherche et la stratégie jusqu’aux interfaces, prototypes, tests et Design Systems.",
-          "Ce qui me motive est de comprendre un problème complexe et les personnes concernées, puis de le transformer en une expérience simple et utile avec les équipes techniques.",
+          "What first drew me to Product Design was the opportunity to understand users: what gets in their way, what they genuinely need and what makes an experience useful in their everyday lives.",
+          "My curiosity about technology pushes me to look beyond the screen. I like understanding how a product is built, how its components work and what makes a solution feasible so I can collaborate more effectively with developers.",
+          "Outside work, dance, photography and basketball feed my creativity, energy and ability to notice both details and team dynamics.",
         ],
       },
       {
-        eyebrow: "Au-delà du design",
-        title: "Au-delà du design",
+        id: "how-i-work",
+        title: "How I work",
         paragraphs: [
-          "Ma curiosité pour la technologie m’a naturellement menée au-delà des frontières de la conception d’interfaces.",
-          "Je m’intéresse à la manière dont les produits sont construits, à l’influence des contraintes techniques et aux possibilités qu’ouvre la technologie pour les utilisateurs.",
-          "De Figma et des Design Systems aux Design Tokens, Angular Material, React, TypeScript et aux outils IA, j’aime explorer le terrain où design et technologie se rencontrent.",
-          "Cette culture technique me permet de collaborer étroitement avec les développeurs et de concevoir des solutions belles, réalistes, évolutives et maintenables.",
+          "When facing a complex problem, I start by clarifying the real issue, listening to stakeholders and examining the technical constraints.",
+          "When working with developers, I translate business needs, build a shared language and look for a feasible compromise. Solutions often become stronger when they evolve through technical discussion.",
+          "While working on the Belgian Foreign Affairs Design System, some solutions were adjusted with developers to preserve the user intent while respecting Angular Material, accessibility requirements and implementation realities.",
+          "I prefer building decisions that the team understands and supports rather than arriving with a fully fixed answer.",
         ],
       },
       {
-        eyebrow: "Une expérience qui façonne ma pratique",
-        title: "Une expérience qui façonne ma pratique",
+        id: "what-i-am-looking-for",
+        title: "What I’m looking for",
         paragraphs: [
-          "J’ai contribué à des produits et services numériques dans des environnements exigeants, notamment au Service public fédéral Affaires étrangères, autour de la transformation numérique, de l’accessibilité et de la cohérence des interfaces.",
-          "J’y ai participé à la création et à l’évolution d’un Design System, d’un UI Kit Angular Material, de Design Tokens et de pratiques d’accessibilité alignées sur les WCAG et le RGAA.",
-          "J’ai aussi travaillé sur l’e-commerce, la croissance, les services numériques et des produits centrés utilisateur, ce qui m’a donné une vision large du cycle de vie produit.",
-        ],
-      },
-      {
-        eyebrow: "Les projets que j’aime",
-        title: "Les projets que j’aime",
-        paragraphs: [
-          "Ce qui m’enthousiasme dans un projet, c’est le chemin qui mène d’une idée à quelque chose que les personnes peuvent réellement utiliser.",
-          "Recherche → Stratégie → Architecture → Wireframes → UI → Design System → Prototype → Tests → Itération.",
-          "J’apprécie particulièrement les projets où le design a un impact réel : simplifier des parcours complexes, rendre les services numériques plus accessibles ou transformer une idée en produit utile.",
-          "En parallèle de mon activité professionnelle, je développe aussi des projets personnels pour expérimenter de nouvelles idées à l’intersection du Product Design, de la technologie et de l’innovation.",
-        ],
-      },
-      {
-        eyebrow: "Ma manière de penser",
-        title: "Ma manière de penser",
-        paragraphs: [
-          "Je ne conçois pas simplement des écrans.",
-          "Je cherche à comprendre pourquoi un produit existe, pour qui il est conçu et comment il peut véritablement améliorer une expérience.",
-          "Pour moi, un excellent produit doit être utile, accessible, intuitif, techniquement réfléchi et agréable à utiliser.",
-          "Et je crois que les meilleurs produits naissent lorsque designers, développeurs, équipes produit et utilisateurs construisent ensemble.",
+          "I’m now looking for a Senior Product Designer role within a structured product team, working closely with PMs, business analysts and developers.",
+          "My ideal environment provides real access to users, values testing and research, and combines autonomy with clear objectives. I want to contribute from early product framing through implementation while supporting Design Systems and accessibility across teams.",
+          "My goal is a role where design contributes to product decisions — not only to interface execution after the important choices have already been made.",
         ],
       },
     ],
-    conclusion: [
-      "Curieuse par nature.",
-      "Designer par passion.",
-      "Enthousiaste de la tech par choix.",
+    primaryCta: "View my experience & CV",
+    secondaryCta: "Contact me",
+  },
+  fr: {
+    eyebrow: "À propos",
+    heading:
+      "Je conçois avec les personnes qui utilisent les produits — et les équipes qui les construisent.",
+    introduction:
+      "Je suis Stéphania, Product Designer basée à Bruxelles. Depuis plus de six ans, je conçois des produits et services numériques en conciliant les besoins des utilisateurs, les objectifs métier et les contraintes techniques.",
+    sections: [
+      {
+        id: "ce-qui-m-anime",
+        title: "Ce qui m’anime",
+        paragraphs: [
+          "Ce qui m’a attirée vers le Product Design, c’est d’abord la possibilité de comprendre les utilisateurs : ce qui les bloque, ce dont ils ont réellement besoin et ce qui rend une expérience utile dans leur quotidien.",
+          "Ma curiosité technologique me pousse à regarder au-delà des écrans. J’aime comprendre comment un produit est construit, comment ses composants fonctionnent et ce qui rend une solution réalisable afin de mieux collaborer avec les développeurs.",
+          "En dehors du travail, la danse, la photographie et le basketball nourrissent ma créativité, mon énergie et ma manière d’observer les détails comme les dynamiques collectives.",
+        ],
+      },
+      {
+        id: "ma-maniere-de-travailler",
+        title: "Ma manière de travailler",
+        paragraphs: [
+          "Face à un problème complexe, je commence par clarifier le vrai sujet, écouter les parties prenantes et étudier les contraintes techniques.",
+          "Avec les développeurs, je traduis les besoins métier, construis un langage commun et recherche un compromis réalisable. Une solution gagne souvent à évoluer au fil des échanges techniques.",
+          "Sur le Design System du SPF Affaires étrangères, certaines solutions ont ainsi été ajustées avec les développeurs pour préserver l’intention utilisateur tout en respectant Angular Material, l’accessibilité et la réalité de l’implémentation.",
+          "Je préfère construire des décisions comprises et partagées par l’équipe plutôt qu’arriver avec une réponse déjà figée.",
+        ],
+      },
+      {
+        id: "ce-que-je-recherche",
+        title: "Ce que je recherche aujourd’hui",
+        paragraphs: [
+          "Je souhaite aujourd’hui évoluer comme Senior Product Designer au sein d’une équipe produit structurée, en collaboration étroite avec les PM, BA et développeurs.",
+          "Mon environnement idéal donne un accès réel aux utilisateurs, valorise les tests et la recherche, et associe autonomie et objectifs clairs. Je veux intervenir en amont, accompagner le produit jusqu’à sa réalisation et contribuer de manière transverse aux Design Systems et à l’accessibilité.",
+          "Je vise un rôle où le design participe aux décisions produit — pas uniquement à l’exécution des interfaces lorsque les choix ont déjà été faits.",
+        ],
+      },
     ],
-  }
+    primaryCta: "Voir mon expérience & mon CV",
+    secondaryCta: "Me contacter",
+  },
+}
+
+function getAboutContent(language: Language): AboutContent {
+  return getLocalizedContent(aboutContent, language)
 }
 
 export { getAboutContent }

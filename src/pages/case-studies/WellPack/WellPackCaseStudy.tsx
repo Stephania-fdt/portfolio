@@ -1,5 +1,3 @@
-import { useEffect } from "react"
-
 import { Hero } from "@/pages/case-studies/WellPack/Hero"
 import { Challenge } from "@/pages/case-studies/WellPack/Challenge"
 import { Method } from "@/pages/case-studies/WellPack/Method"
@@ -20,10 +18,6 @@ import { Reflection } from "@/pages/case-studies/WellPack/Reflection"
  * the same order the brief for this pass specified.
  */
 function WellPackCaseStudy() {
-  useEffect(() => {
-    document.title = "WellPack — Stéphania"
-  }, [])
-
   return (
     <article>
       <Hero />

@@ -1,5 +1,3 @@
-import { useEffect } from "react"
-
 import { Hero } from "@/pages/case-studies/SPF/Hero"
 import { Overview } from "@/pages/case-studies/SPF/Overview"
 import { Facts } from "@/pages/case-studies/SPF/Facts"
@@ -17,10 +15,6 @@ import { Reflection } from "@/pages/case-studies/SPF/Reflection"
  * the detailed asset-driven chapters in their published reading order.
  */
 function SPFCaseStudy() {
-  useEffect(() => {
-    document.title = "SPF Design System — Stéphania"
-  }, [])
-
   return (
     <article>
       <Hero />

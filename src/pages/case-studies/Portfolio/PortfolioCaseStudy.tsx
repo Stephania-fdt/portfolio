@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { ArrowLeft } from "lucide-react"
 
@@ -20,8 +19,7 @@ import { Iteration } from "@/pages/case-studies/Portfolio/Iteration"
 import { WhatChanged } from "@/pages/case-studies/Portfolio/WhatChanged"
 import { Outcome } from "@/pages/case-studies/Portfolio/Outcome"
 import { Learnings } from "@/pages/case-studies/Portfolio/Learnings"
-import { portfolioDetails } from "@/content/case-studies/portfolio-details"
-import { getLocalizedContent, useLanguage } from "@/i18n"
+import { useLanguage } from "@/i18n"
 
 /**
  * Reachable at `/work/portfolio` — the real, live case study for Project
@@ -36,12 +34,7 @@ import { getLocalizedContent, useLanguage } from "@/i18n"
  * around.
  */
 function PortfolioCaseStudy() {
-  const { language, copy } = useLanguage()
-  const pageTitle = getLocalizedContent(portfolioDetails, language).pageTitle
-
-  useEffect(() => {
-    document.title = pageTitle
-  }, [pageTitle])
+  const { copy } = useLanguage()
 
   return (
     <article>

@@ -9,6 +9,8 @@ type FoundationSection = {
 type FoundationsContent = {
   kicker: string
   introduction: string
+  assetStatus: string
+  missingAssets: string[]
   missingDescription: string
   sections: Record<
     "typography" | "colors" | "icons" | "layout" | "elevation",
@@ -21,6 +23,8 @@ const spfFoundationsContent: LocalizedContent<FoundationsContent> = {
     kicker: "Foundations",
     introduction:
       "Before a single component existed, the system needed a shared visual language — the colors, type and icons every component would later draw from, not improvise.",
+    assetStatus: "awaiting assets",
+    missingAssets: ["spacing.webp", "grid.webp"],
     missingDescription:
       "No real export exists yet — nothing shown rather than a fabricated diagram.",
     sections: {
@@ -85,6 +89,8 @@ const spfFoundationsContent: LocalizedContent<FoundationsContent> = {
     kicker: "Fondations",
     introduction:
       "Avant même l’existence du premier composant, le système avait besoin d’un langage visuel partagé : les couleurs, la typographie et les icônes dans lesquels chaque composant puiserait ensuite, sans improviser.",
+    assetStatus: "visuels en attente",
+    missingAssets: ["spacing.webp", "grid.webp"],
     missingDescription:
       "Aucun export réel n’existe encore — rien n’est montré plutôt que de fabriquer un diagramme.",
     sections: {

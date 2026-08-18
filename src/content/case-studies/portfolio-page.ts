@@ -2,8 +2,24 @@ import type { LocalizedContent } from "@/i18n"
 
 type Item = { label: string; statement: string }
 type PortfolioPageContent = {
+  hero: {
+    eyebrow: string
+    title: string
+    summary: string
+    detail: string
+    meta: { label: string; value: string }[]
+    alt: string
+  }
+  challenge: { kicker: string; paragraphs: string[]; quote: string }
   objectives: { kicker: string; items: Item[] }
   process: { kicker: string; introduction: string; steps: Item[]; loop: string }
+  evolution: {
+    kicker: string
+    title: string
+    introduction: string
+    phaseLabel: string
+    phases: { title: string; description: string }[]
+  }
   architecture: {
     kicker: string
     introduction: string
@@ -12,6 +28,7 @@ type PortfolioPageContent = {
     hierarchyLabel: string
     hierarchy: string
   }
+  features: { kicker: string; title: string; items: string[] }
   responsive: {
     kicker: string
     paragraph: string
@@ -36,6 +53,8 @@ type PortfolioPageContent = {
     after: string
     categoryLabel: string
     category: string
+    beforeCategory: string
+    afterCategory: string
   }
   accessibility: {
     kicker: string
@@ -44,10 +63,45 @@ type PortfolioPageContent = {
     qualificationLabel: string
     qualification: string
   }
+  whatChanged: {
+    kicker: string
+    title: string
+    before: string
+    after: string
+    beforeItems: string[]
+    afterItems: string[]
+  }
+  outcome: { kicker: string; statement: string }
 }
 
 const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
   en: {
+    hero: {
+      eyebrow: "Product Design · Stéphania — Portfolio",
+      title: "Stéphania — Portfolio",
+      summary:
+        "Designing and building my own product experience from strategy to front-end.",
+      detail:
+        "A living personal product designed to express my Product Designer identity, make six years of experience legible, and demonstrate how I turn complex problems into simple, accessible and scalable experiences.",
+      meta: [
+        { label: "Role", value: "Product Designer & Front-end Implementer" },
+        { label: "Timeline", value: "2026 — Present" },
+        {
+          label: "Focus",
+          value: "Design Systems · Accessibility · AI Workflow",
+        },
+        { label: "Stack", value: "React · TypeScript · Tailwind CSS" },
+      ],
+      alt: "This portfolio's homepage showing its editorial hero, primary navigation and calls to action.",
+    },
+    challenge: {
+      kicker: "The Challenge",
+      paragraphs: [
+        "The project began as a mainly visual portfolio, then became a structured professional platform, and finally a living, bilingual personal product built through an AI-assisted workflow.",
+        "The challenge was to express my Product Designer identity, make six years of experience credible and legible, and demonstrate how I turn complex problems into simple, accessible and scalable experiences — through the product itself, not claims in a biography.",
+      ],
+      quote: "The portfolio itself became the product.",
+    },
     objectives: {
       kicker: "Objectives",
       items: [
@@ -121,6 +175,45 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       ],
       loop: "Iterate feeds back into Discover — this loop ran more than once before anything shipped.",
     },
+    evolution: {
+      kicker: "The Evolution",
+      title: "From portfolio to personal product",
+      introduction:
+        "The work evolved through six connected phases. Each one extended the same product rather than replacing what came before.",
+      phaseLabel: "Phase",
+      phases: [
+        {
+          title: "Foundations",
+          description:
+            "Positioning, art direction, palette, typography, the first architecture and the initial project selection.",
+        },
+        {
+          title: "Structuring the experience",
+          description:
+            "Clearer navigation and case-study hierarchy, dedicated About and Experience pages, a stronger header, mobile menu and contextual calls to action.",
+        },
+        {
+          title: "Enriching the case studies",
+          description:
+            "A shared editorial standard across SPF, Harmony, WellPack and Joga Aura, supported by real wireframes, moodboards, sitemaps, final interfaces and product links.",
+        },
+        {
+          title: "Building with AI",
+          description:
+            "AI-assisted visual exploration, React and TypeScript implementation, responsive refinement, code review and debugging — with human validation at every consequential decision.",
+        },
+        {
+          title: "Preparing for an international audience",
+          description:
+            "French and English content, a persistent language selector, adapted calls to action and stronger consistency across routes.",
+        },
+        {
+          title: "Continuous improvement",
+          description:
+            "Accessibility, contrast, responsive behavior, performance, Git and GitHub versioning, deployment readiness and domain integration.",
+        },
+      ],
+    },
     architecture: {
       kicker: "Information Architecture",
       introduction:
@@ -130,6 +223,26 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       hierarchyLabel: "Selected Work’s Deliberate Hierarchy",
       hierarchy:
         "Selected Work isn’t ordered by date or alphabet. SPF stays the permanent flagship — the clearest single proof of enterprise Design System work, accessibility and governance at scale — regardless of what else is added around it. This case study sits second, deliberately: it’s the one place the current practice (Design Systems, accessibility, AI-assisted workflow, front-end implementation) shows up as one shipped product rather than a described skill, so it gets real editorial room without ever competing with SPF for the lead position. Harmony, WellPack and Joga Aura follow, each proving a different, complementary register — research, methodology, and real client delivery.",
+    },
+    features: {
+      kicker: "Product capabilities",
+      title:
+        "A portfolio designed as a coherent system, not a collection of pages.",
+      items: [
+        "Desktop and mobile navigation",
+        "About and Experience pages",
+        "Five deliberately ordered projects",
+        "Detailed editorial case studies",
+        "French and English content",
+        "Persistent language selector",
+        "LinkedIn and live-project links",
+        "Downloadable CV",
+        "Contextual calls to action",
+        "Responsive layouts",
+        "Reusable components",
+        "Accessible content and interactions",
+        "Git and GitHub versioning",
+      ],
     },
     responsive: {
       kicker: "Responsive Design",
@@ -186,6 +299,8 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       categoryLabel: "Example — a Category Tag, Refined Under Review",
       category:
         "SPF’s category tag went through a real review pass: the accessibility work described in that case study wasn’t reflected in its own eyebrow tag until it was pointed out and corrected.",
+      beforeCategory: "Product Design · Design System",
+      afterCategory: "Product Design · Design System · Accessibility",
     },
     accessibility: {
       kicker: "Accessibility",
@@ -227,8 +342,62 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       qualification:
         "This site runs an automated accessibility check — axe-core, via Playwright, scoped to WCAG 2.1 A and AA rules — against the home page, and lint runs on every commit through a pre-commit hook. That’s real, ongoing, automated verification. It is not a manual audit and not a formal accessibility certification, and this case study doesn’t claim either.",
     },
+    whatChanged: {
+      kicker: "What changed",
+      title:
+        "The same identity, with a clearer and more capable product around it.",
+      before: "Before",
+      after: "After",
+      beforeItems: [
+        "A mainly visual presentation",
+        "Uneven case-study depth",
+        "More limited navigation",
+        "A single-language experience",
+        "Little visibility into professional experience",
+        "A design process documented only lightly",
+      ],
+      afterItems: [
+        "Harmonized, editorial case studies",
+        "Clearer UX narratives and evidence",
+        "Richer About and Experience pages",
+        "Responsive navigation and contextual CTAs",
+        "A bilingual French and English experience",
+        "Accessibility, Design System, tools and AI-assisted iteration made explicit",
+      ],
+    },
+    outcome: {
+      kicker: "Outcome",
+      statement:
+        "The result is a clearer professional identity and a more credible presentation for Senior Product Designer opportunities: a bilingual portfolio that documents design decisions, demonstrates process, and rests on a reusable technical foundation that can continue to evolve for French and international audiences.",
+    },
   },
   fr: {
+    hero: {
+      eyebrow: "Product Design · Stéphania — Portfolio",
+      title: "Stéphania — Portfolio",
+      summary:
+        "Concevoir et développer ma propre expérience produit, de la stratégie au front-end.",
+      detail:
+        "Un produit personnel vivant, conçu pour traduire mon identité de Product Designer, valoriser six années d’expérience et démontrer ma capacité à transformer des problématiques complexes en expériences simples, accessibles et évolutives.",
+      meta: [
+        { label: "Rôle", value: "Product Designer & intégratrice front-end" },
+        { label: "Période", value: "2026 — Aujourd’hui" },
+        {
+          label: "Focus",
+          value: "Design Systems · Accessibilité · Workflow IA",
+        },
+        { label: "Stack", value: "React · TypeScript · Tailwind CSS" },
+      ],
+      alt: "Page d’accueil du portfolio montrant son hero éditorial, la navigation principale et les appels à l’action.",
+    },
+    challenge: {
+      kicker: "Le défi",
+      paragraphs: [
+        "Le projet a commencé comme un portfolio principalement visuel, avant de devenir une plateforme professionnelle structurée, puis un produit personnel vivant, bilingue et construit avec une approche assistée par l’IA.",
+        "Le défi consistait à traduire mon identité de Product Designer, rendre six années d’expérience crédibles et lisibles, et démontrer ma capacité à transformer des problématiques complexes en expériences simples, accessibles et évolutives — à travers le produit lui-même.",
+      ],
+      quote: "Le portfolio lui-même est devenu le produit.",
+    },
     objectives: {
       kicker: "Objectifs",
       items: [
@@ -302,6 +471,45 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       ],
       loop: "Itérer revient vers Découvrir : cette boucle a été parcourue plusieurs fois avant la mise en ligne.",
     },
+    evolution: {
+      kicker: "L’évolution",
+      title: "Du portfolio au produit personnel",
+      introduction:
+        "Le projet a évolué à travers six phases liées. Chacune a enrichi le même produit sans remplacer ce qui existait déjà.",
+      phaseLabel: "Phase",
+      phases: [
+        {
+          title: "Fondations",
+          description:
+            "Positionnement, direction artistique, palette, typographie, première architecture et sélection initiale des projets.",
+        },
+        {
+          title: "Structurer l’expérience",
+          description:
+            "Navigation et hiérarchie des études de cas clarifiées, pages À propos et Expérience dédiées, header, menu mobile et CTA contextualisés.",
+        },
+        {
+          title: "Enrichir les études de cas",
+          description:
+            "Un standard éditorial commun pour SPF, Harmony, WellPack et Joga Aura, appuyé par de vrais wireframes, moodboards, sitemaps, interfaces finales et liens produit.",
+        },
+        {
+          title: "Construire avec l’IA",
+          description:
+            "Exploration visuelle, implémentation React et TypeScript, responsive, revue de code et résolution de problèmes assistés par IA, avec validation humaine de chaque décision importante.",
+        },
+        {
+          title: "S’adresser à une audience internationale",
+          description:
+            "Contenus français et anglais, sélecteur de langue persistant, CTA adaptés et cohérence renforcée entre les routes.",
+        },
+        {
+          title: "Amélioration continue",
+          description:
+            "Accessibilité, contrastes, responsive, performances, versionnage Git et GitHub, préparation du déploiement et connexion au nom de domaine.",
+        },
+      ],
+    },
     architecture: {
       kicker: "Architecture de l’information",
       introduction:
@@ -311,6 +519,26 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       hierarchyLabel: "La hiérarchie intentionnelle des projets sélectionnés",
       hierarchy:
         "Les projets sélectionnés ne sont classés ni par date ni par ordre alphabétique. SPF reste le projet phare permanent — la preuve la plus claire d’un travail de Design System d’entreprise, d’accessibilité et de gouvernance à grande échelle — indépendamment de ce qui sera ajouté autour. Cette étude de cas occupe volontairement la deuxième place : c’est le seul endroit où la pratique actuelle — Design Systems, accessibilité, workflow assisté par IA et implémentation front-end — apparaît comme un produit livré plutôt que comme une compétence décrite. Elle reçoit donc un véritable espace éditorial sans concurrencer SPF pour la première place. Harmony, WellPack et Joga Aura suivent, chacun démontrant un registre différent et complémentaire : recherche, méthodologie et livraison réelle pour un client.",
+    },
+    features: {
+      kicker: "Fonctionnalités du produit",
+      title:
+        "Un portfolio conçu comme un système cohérent, pas comme une collection de pages.",
+      items: [
+        "Navigation desktop et mobile",
+        "Pages À propos et Expérience",
+        "Cinq projets ordonnés intentionnellement",
+        "Études de cas éditoriales détaillées",
+        "Contenus français et anglais",
+        "Sélecteur de langue persistant",
+        "Liens LinkedIn et projets en ligne",
+        "CV téléchargeable",
+        "CTA contextualisés",
+        "Mises en page responsives",
+        "Composants réutilisables",
+        "Contenus et interactions accessibles",
+        "Versionnage Git et GitHub",
+      ],
     },
     responsive: {
       kicker: "Design responsive",
@@ -370,6 +598,8 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       categoryLabel: "Exemple — un tag de catégorie affiné pendant la revue",
       category:
         "Le tag de catégorie de SPF a connu une véritable passe de revue : le travail d’accessibilité décrit dans cette étude de cas n’apparaissait pas dans son propre eyebrow jusqu’à ce que cette omission soit relevée et corrigée.",
+      beforeCategory: "Conception produit · Système de design",
+      afterCategory: "Conception produit · Système de design · Accessibilité",
     },
     accessibility: {
       kicker: "Accessibilité",
@@ -410,6 +640,34 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       qualificationLabel: "Ce que cela est — et n’est pas",
       qualification:
         "Ce site exécute sur la page d’accueil un contrôle automatisé d’accessibilité — axe-core via Playwright, limité aux règles WCAG 2.1 A et AA — et le lint s’exécute à chaque commit grâce à un hook pre-commit. Il s’agit d’une vérification automatisée réelle, continue. Ce n’est ni un audit manuel ni une certification formelle d’accessibilité, et cette étude de cas ne revendique aucun des deux.",
+    },
+    whatChanged: {
+      kicker: "Ce qui a évolué",
+      title:
+        "La même identité, portée par un produit plus clair et plus complet.",
+      before: "Avant",
+      after: "Après",
+      beforeItems: [
+        "Une présentation principalement visuelle",
+        "Des études de cas de profondeur inégale",
+        "Une navigation plus limitée",
+        "Une expérience dans une seule langue",
+        "Peu de visibilité sur le parcours professionnel",
+        "Un processus de conception peu documenté",
+      ],
+      afterItems: [
+        "Des études de cas harmonisées et éditoriales",
+        "Des récits UX et des preuves plus clairs",
+        "Des pages À propos et Expérience enrichies",
+        "Une navigation responsive et des CTA contextualisés",
+        "Une expérience bilingue français-anglais",
+        "L’accessibilité, le Design System, les outils et l’itération assistée par IA rendus explicites",
+      ],
+    },
+    outcome: {
+      kicker: "Résultats",
+      statement:
+        "Le résultat est une identité professionnelle plus claire et une présentation plus crédible pour des opportunités de Senior Product Designer : un portfolio bilingue qui documente les décisions, démontre le processus de conception et repose sur un socle technique réutilisable, capable d’évoluer pour une audience française et internationale.",
     },
   },
 }

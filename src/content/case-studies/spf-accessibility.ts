@@ -3,10 +3,12 @@ import type { LocalizedContent } from "@/i18n"
 type AccessibilityContent = {
   kicker: string
   introduction: string
+  assetStatus: string
   contrast: { label: string; paragraphs: string[]; alt: string }
   states: { label: string; paragraphs: string[]; alt: string; caption: string }
   gap: {
     checklist: string
+    filename: string
     description: string
     label: string
     paragraph: string
@@ -19,6 +21,7 @@ const spfAccessibilityContent: LocalizedContent<AccessibilityContent> = {
     kicker: "Accessibility",
     introduction:
       "Every citizen filling out this system arrives with a different screen, a different input device, a different amount of patience. Accessibility wasn’t a pass taken at the end — it was checked at the token, before a single screen existed.",
+    assetStatus: "awaiting assets",
     contrast: {
       label: "Contrast, Checked at the Source",
       paragraphs: [
@@ -39,6 +42,7 @@ const spfAccessibilityContent: LocalizedContent<AccessibilityContent> = {
     },
     gap: {
       checklist: "Keyboard Navigation",
+      filename: "keyboard-navigation.webp",
       description:
         "No real capture of focus order or a keyboard-only flow exists yet — nothing shown rather than a fabricated diagram.",
       label: "What Isn’t Proven Yet",
@@ -52,6 +56,7 @@ const spfAccessibilityContent: LocalizedContent<AccessibilityContent> = {
     kicker: "Accessibilité",
     introduction:
       "Chaque personne qui utilise ce système arrive avec un écran différent, un périphérique de saisie différent et une patience différente. L’accessibilité n’était pas une vérification finale : elle était contrôlée au niveau du token, avant même l’existence du premier écran.",
+    assetStatus: "visuels en attente",
     contrast: {
       label: "Le contraste vérifié à la source",
       paragraphs: [
@@ -72,6 +77,7 @@ const spfAccessibilityContent: LocalizedContent<AccessibilityContent> = {
     },
     gap: {
       checklist: "Navigation au clavier",
+      filename: "keyboard-navigation.webp",
       description:
         "Aucune capture réelle d’un ordre de focus ou d’un parcours entièrement au clavier n’existe encore — rien n’est montré plutôt que de fabriquer un diagramme.",
       label: "Ce qui n’est pas encore prouvé",

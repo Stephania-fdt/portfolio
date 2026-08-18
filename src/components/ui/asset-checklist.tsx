@@ -7,6 +7,7 @@ import type { ExpectedAsset } from "@/content/case-studies/spf-assets"
 
 type AssetChecklistProps = {
   label: string
+  status?: string
   missing: ExpectedAsset[]
   className?: string
 }
@@ -18,7 +19,12 @@ type AssetChecklistProps = {
  * own as real files get dropped into the folder: it only ever lists
  * what's still missing, not the section's full expected list.
  */
-function AssetChecklist({ label, missing, className }: AssetChecklistProps) {
+function AssetChecklist({
+  label,
+  status,
+  missing,
+  className,
+}: AssetChecklistProps) {
   const shouldReduceMotion = useReducedMotion()
 
   if (missing.length === 0) return null
@@ -37,7 +43,8 @@ function AssetChecklist({ label, missing, className }: AssetChecklistProps) {
       style={{ backgroundImage: FIELD_GRID_PATTERN }}
     >
       <p className="font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-        {label} — awaiting assets
+        {label}
+        {status ? ` — ${status}` : null}
       </p>
       <ul className="mt-6 space-y-2">
         {missing.map((asset) => (
