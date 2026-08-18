@@ -4,6 +4,8 @@ import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
 import { fadeUp, staggerContainer } from "@/lib/motion"
+import { portfolioPageContent } from "@/content/case-studies/portfolio-page"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
  * Portfolio case study — Chapter 3, Objectives. Same "labeled statement"
@@ -11,44 +13,15 @@ import { fadeUp, staggerContainer } from "@/lib/motion"
  * marketing language, each one traceable to what the rest of this case
  * study actually demonstrates.
  */
-const OBJECTIVES = [
-  {
-    label: "Positioning",
-    statement:
-      "Create a clear and differentiated Product Designer positioning — not another generic portfolio template.",
-  },
-  {
-    label: "System",
-    statement: "Build a scalable visual system, not a set of one-off pages.",
-  },
-  {
-    label: "Accessibility & Responsive",
-    statement:
-      "Make the experience accessible and responsive by construction, not as a pass added at the end.",
-  },
-  {
-    label: "Design-to-Code",
-    statement:
-      "Translate design decisions into production-ready front-end code myself.",
-  },
-  {
-    label: "AI Workflow",
-    statement: "Use AI to accelerate iteration, not to make the decisions.",
-  },
-  {
-    label: "Dual Proof",
-    statement:
-      "Create a portfolio that demonstrates design and technical understanding in the same artifact.",
-  },
-]
-
 function Objectives() {
+  const { language } = useLanguage()
+  const content = getLocalizedContent(portfolioPageContent, language).objectives
   const shouldReduceMotion = useReducedMotion()
 
   return (
     <Section id="portfolio-objectives">
       <Container size="content">
-        <SectionKicker>Objectives</SectionKicker>
+        <SectionKicker>{content.kicker}</SectionKicker>
 
         <motion.div
           initial={shouldReduceMotion ? false : "hidden"}
@@ -57,7 +30,7 @@ function Objectives() {
           variants={staggerContainer}
           className="mt-16 grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3"
         >
-          {OBJECTIVES.map((objective) => (
+          {content.items.map((objective) => (
             <motion.div key={objective.label} variants={fadeUp}>
               <p className="font-mono text-2xs tracking-widest text-brand uppercase">
                 {objective.label}

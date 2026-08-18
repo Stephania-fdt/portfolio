@@ -34,6 +34,8 @@ function translateCaseStudy(
       ? {
           ...study.heroImage,
           alt: study.heroImage.frenchAlt ?? study.heroImage.alt,
+          label: study.heroImage.frenchLabel ?? study.heroImage.label,
+          caption: study.heroImage.frenchCaption ?? study.heroImage.caption,
         }
       : undefined,
     liveSite: study.liveSite
@@ -48,10 +50,41 @@ function translateCaseStudy(
       title: section.french?.title ?? section.title,
       paragraphs: section.french?.paragraphs ?? section.paragraphs,
       facts: section.french?.facts ?? section.facts,
+      processSteps: section.french?.processSteps ?? section.processSteps,
       images: section.images?.map((image, imageIndex) => ({
         ...image,
         alt: section.french?.imageAlts?.[imageIndex] ?? image.alt,
+        label:
+          section.french?.imageLabels?.[imageIndex] ??
+          image.frenchLabel ??
+          image.label,
+        caption:
+          section.french?.imageCaptions?.[imageIndex] ??
+          image.frenchCaption ??
+          image.caption,
       })),
+      videos: section.videos?.map((video, videoIndex) => ({
+        ...video,
+        posterAlt:
+          section.french?.videoPosterAlts?.[videoIndex] ??
+          video.frenchPosterAlt ??
+          video.posterAlt,
+        label:
+          section.french?.videoLabels?.[videoIndex] ??
+          video.frenchLabel ??
+          video.label,
+        caption:
+          section.french?.videoCaptions?.[videoIndex] ??
+          video.frenchCaption ??
+          video.caption,
+        sizeNote:
+          section.french?.videoSizeNotes?.[videoIndex] ??
+          video.frenchSizeNote ??
+          video.sizeNote,
+      })),
+      document: section.document
+        ? { ...section.document, label: section.document.frenchLabel }
+        : undefined,
     })),
   }
 }

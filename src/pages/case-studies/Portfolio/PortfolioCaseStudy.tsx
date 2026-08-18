@@ -20,7 +20,8 @@ import { Iteration } from "@/pages/case-studies/Portfolio/Iteration"
 import { WhatChanged } from "@/pages/case-studies/Portfolio/WhatChanged"
 import { Outcome } from "@/pages/case-studies/Portfolio/Outcome"
 import { Learnings } from "@/pages/case-studies/Portfolio/Learnings"
-import { useLanguage } from "@/i18n"
+import { portfolioDetails } from "@/content/case-studies/portfolio-details"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
  * Reachable at `/work/portfolio` — the real, live case study for Project
@@ -36,13 +37,11 @@ import { useLanguage } from "@/i18n"
  */
 function PortfolioCaseStudy() {
   const { language, copy } = useLanguage()
+  const pageTitle = getLocalizedContent(portfolioDetails, language).pageTitle
 
   useEffect(() => {
-    document.title =
-      language === "fr"
-        ? "Stéphania — Portfolio — Étude de cas"
-        : "Stéphania — Portfolio — Case study"
-  }, [language])
+    document.title = pageTitle
+  }, [pageTitle])
 
   return (
     <article>

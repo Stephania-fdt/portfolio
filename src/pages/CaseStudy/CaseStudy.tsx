@@ -31,7 +31,7 @@ function CaseStudy({ slug, caseStudy }: CaseStudyProps) {
   useEffect(() => {
     document.title = project
       ? `${project.title} — Stéphania`
-      : "Case study — Stéphania"
+      : copy.meta.caseFallbackTitle
   }, [project, copy.meta.caseFallbackTitle])
 
   if (!caseStudy || !project) {
@@ -217,9 +217,7 @@ function CaseStudy({ slug, caseStudy }: CaseStudyProps) {
                 >
                   <FileText aria-hidden="true" className="size-5 shrink-0" />
                   <span>
-                    {language === "fr"
-                      ? section.document.frenchLabel
-                      : section.document.label}
+                    {section.document.label}
                     {section.document.sizeNote ? (
                       <span className="ml-2 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
                         {section.document.sizeNote}

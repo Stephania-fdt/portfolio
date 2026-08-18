@@ -7,7 +7,7 @@ import { formatNumeral } from "@/lib/numerals"
 import { transition } from "@/lib/motion"
 import { EditorialEntry } from "@/components/ui/editorial-entry"
 import type { WorkProject } from "@/content/work"
-import { useLanguage } from "@/i18n"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 type WorkItemProps = {
   project: WorkProject
@@ -138,12 +138,18 @@ function WorkItem({
           {project.previewImage ? (
             <img
               src={project.previewImage}
-              alt={
-                language === "fr" && project.previewAltFr
-                  ? project.previewAltFr
-                  : (project.previewAlt ??
-                    `${project.title} — selected interface`)
-              }
+              alt={getLocalizedContent(
+                {
+                  en:
+                    project.previewAlt ??
+                    `${project.title} — selected interface`,
+                  fr:
+                    project.previewAltFr ??
+                    project.previewAlt ??
+                    `${project.title} — interface sélectionnée`,
+                },
+                language,
+              )}
               width={project.previewWidth}
               height={project.previewHeight}
               loading="lazy"

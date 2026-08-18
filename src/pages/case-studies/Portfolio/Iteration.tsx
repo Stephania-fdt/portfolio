@@ -6,6 +6,8 @@ import { SectionKicker } from "@/components/ui/section-kicker"
 import { REVEAL, SubsectionText } from "@/components/ui/case-study-capture"
 import { FIELD_GRID_PATTERN } from "@/lib/patterns"
 import jogaAuraProduct from "@/assets/case-studies/joga-aura/product.png"
+import { portfolioPageContent } from "@/content/case-studies/portfolio-page"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
  * Portfolio case study — Chapter 12, Iteration. The "before" state is
@@ -15,25 +17,23 @@ import jogaAuraProduct from "@/assets/case-studies/joga-aura/product.png"
  * the same real product photo Selected Work uses today.
  */
 function Iteration() {
+  const { language } = useLanguage()
+  const content = getLocalizedContent(portfolioPageContent, language).iteration
   const shouldReduceMotion = useReducedMotion()
 
   return (
     <Section id="portfolio-iteration">
       <Container size="content">
-        <SectionKicker>Iteration</SectionKicker>
+        <SectionKicker>{content.kicker}</SectionKicker>
 
         <SubsectionText className="mt-8 max-w-2xl text-lg">
-          <p>
-            The final portfolio is the result of repeated design, implementation
-            and review cycles, not a single pass. Two real examples from this
-            project, not staged for this page.
-          </p>
+          <p>{content.introduction}</p>
         </SubsectionText>
 
         {/* Example 1 — the Joga Aura placeholder */}
         <div className="mt-16">
           <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-            Example — a Placeholder, Replaced Once Real Evidence Existed
+            {content.assetLabel}
           </p>
           <motion.div
             {...(shouldReduceMotion ? { initial: false } : REVEAL())}
@@ -46,26 +46,24 @@ function Iteration() {
                 style={{ backgroundImage: FIELD_GRID_PATTERN }}
               >
                 <span className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
-                  Plate 05
+                  {content.plate}
                 </span>
               </div>
               <figcaption className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-                Before — the sober placeholder used while no real Joga Aura
-                asset existed yet.
+                {content.before}
               </figcaption>
             </figure>
             <figure>
               <div className="aspect-[4/3] w-full overflow-hidden border border-border bg-secondary/50">
                 <img
                   src={jogaAuraProduct}
-                  alt="Joga Aura's real product page, showing the Tapis Blue Serenity yoga mat — the real asset that replaced the placeholder."
+                  alt={content.alt}
                   loading="lazy"
                   className="h-full w-full object-cover object-top"
                 />
               </div>
               <figcaption className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-                After — a real client asset, found and cropped to the same
-                aspect ratio, not invented.
+                {content.after}
               </figcaption>
             </figure>
           </motion.div>
@@ -74,15 +72,10 @@ function Iteration() {
         {/* Example 2 — the SPF category tag refinement */}
         <div className="mt-24 max-w-2xl">
           <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-            Example — a Category Tag, Refined Under Review
+            {content.categoryLabel}
           </p>
           <SubsectionText className="mt-4">
-            <p>
-              SPF&rsquo;s category tag went through a real review pass: the
-              accessibility work described in that case study wasn&rsquo;t
-              reflected in its own eyebrow tag until it was pointed out and
-              corrected.
-            </p>
+            <p>{content.category}</p>
           </SubsectionText>
           <motion.div
             {...(shouldReduceMotion ? { initial: false } : REVEAL(0.1))}

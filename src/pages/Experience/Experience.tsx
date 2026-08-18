@@ -8,64 +8,97 @@ import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
 import { getExperienceContent } from "@/content/experience"
 import { fadeUp, transition } from "@/lib/motion"
-import { useLanguage } from "@/i18n"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 function Experience() {
   const { language } = useLanguage()
   const content = getExperienceContent(language)
-  const copy =
-    language === "fr"
-      ? {
-          eyebrow: "Expérience — parcours & expertise",
-          title:
-            "Une expérience construite avec les produits, les systèmes et les équipes.",
-          intro:
-            "Plus de 6 ans d’expérience en Product Design, UX/UI, recherche, accessibilité et Design Systems — de la compréhension de problématiques complexes à la conception d’expériences numériques évolutives avec les équipes produit et techniques.",
-          expertise: "Expertise professionnelle",
-          beyond: "Au-delà des projets",
-          philosophy: "Le design est rarement une discipline solitaire.",
-          education: "Formation & apprentissage continu",
-          skills: "Compétences & expertise",
-          skillsIntro:
-            "Un Product Design façonné par la recherche, la pensée systémique et une compréhension concrète de la manière dont les idées deviennent des produits.",
-          certifications: "Certifications & développement",
-          languages: "Langues",
-          profile: "Profil complet",
-          profileTitle: "Envie de voir la version complète ?",
-          profileBody:
-            "Pour le parcours détaillé, la formation et l’expérience professionnelle, vous pouvez télécharger mon CV.",
-          download: "Télécharger mon CV",
-          downloadHref: "/stephania-fordant-product-designer-cv-fr.pdf",
-          downloadFilename: "Stephania-Fordant-Product-Designer-CV-FR.pdf",
-          ariaDownload:
-            "Télécharger le CV Product Designer de Stéphania Fordant au format PDF",
-          tools: "Outils :",
-        }
-      : {
-          eyebrow: "Experience — Career & expertise",
-          title: "Experience built across products, systems and people.",
-          intro:
-            "6+ years working across Product Design, UX/UI, research, accessibility and Design Systems — from understanding complex problems to building scalable digital experiences with product and technical teams.",
-          expertise: "Professional Experience",
-          beyond: "Beyond project delivery",
-          philosophy: "Design is rarely a solo discipline.",
-          education: "Education & continuous learning",
-          skills: "Skills & expertise",
-          skillsIntro:
-            "Product design shaped by research, systems thinking and a practical understanding of how ideas become real products.",
-          certifications: "Certifications & development",
-          languages: "Languages",
-          profile: "Full profile",
-          profileTitle: "Want the complete version?",
-          profileBody:
-            "For the full timeline, education and professional background, you can download my CV.",
-          download: "Download my CV",
-          downloadHref: "/stephania-fordant-product-designer-cv-en.pdf",
-          downloadFilename: "Stephania-Fordant-Product-Designer-CV-EN.pdf",
-          ariaDownload:
-            "Download Stéphania Fordant's Product Designer CV as a PDF",
-          tools: "Tools:",
-        }
+  const copy = getLocalizedContent(
+    {
+      fr: {
+        eyebrow: "Expérience — parcours & expertise",
+        title:
+          "Une expérience construite avec les produits, les systèmes et les équipes.",
+        intro:
+          "Plus de 6 ans d’expérience en Product Design, UX/UI, recherche, accessibilité et Design Systems — de la compréhension de problématiques complexes à la conception d’expériences numériques évolutives avec les équipes produit et techniques.",
+        expertise: "Expertise professionnelle",
+        beyond: "Au-delà des projets",
+        philosophy: "Le design est rarement une discipline solitaire.",
+        education: "Formation & apprentissage continu",
+        skills: "Compétences & expertise",
+        skillsIntro:
+          "Un Product Design façonné par la recherche, la pensée systémique et une compréhension concrète de la manière dont les idées deviennent des produits.",
+        certifications: "Certifications & développement",
+        languages: "Langues",
+        profile: "Profil complet",
+        profileTitle: "Envie de voir la version complète ?",
+        profileBody:
+          "Pour le parcours détaillé, la formation et l’expérience professionnelle, vous pouvez télécharger mon CV.",
+        download: "Télécharger mon CV",
+        downloadHref: "/stephania-fordant-product-designer-cv-fr.pdf",
+        downloadFilename: "Stephania-Fordant-Product-Designer-CV-FR.pdf",
+        ariaDownload:
+          "Télécharger le CV Product Designer de Stéphania Fordant au format PDF",
+        tools: "Outils :",
+        communities: [
+          "Co-fondatrice. Une communauté UX interne dédiée au partage de connaissances, aux formations UX, aux ateliers et à l’apprentissage entre pairs.",
+          "Trois ans de participation, de partage de connaissances et de formations.",
+          "Deux ans de formation continue en ligne et de développement professionnel.",
+        ],
+        languageLevels: "Anglais — C1  ·  Allemand — B2",
+        disciplines:
+          "Product Design · UX Research · Design Systems · Accessibilité",
+        metaDescription:
+          "Product Designer avec plus de 6 ans d’expérience en UX/UI, Design Systems, accessibilité, UX Research et conception de produits numériques.",
+        communityNames: [
+          "UX Tribe — Cream Consulting",
+          "Communauté Figma — Bruxelles",
+          "Interaction Design Foundation",
+        ],
+      },
+      en: {
+        eyebrow: "Experience — Career & expertise",
+        title: "Experience built across products, systems and people.",
+        intro:
+          "6+ years working across Product Design, UX/UI, research, accessibility and Design Systems — from understanding complex problems to building scalable digital experiences with product and technical teams.",
+        expertise: "Professional Experience",
+        beyond: "Beyond project delivery",
+        philosophy: "Design is rarely a solo discipline.",
+        education: "Education & continuous learning",
+        skills: "Skills & expertise",
+        skillsIntro:
+          "Product design shaped by research, systems thinking and a practical understanding of how ideas become real products.",
+        certifications: "Certifications & development",
+        languages: "Languages",
+        profile: "Full profile",
+        profileTitle: "Want the complete version?",
+        profileBody:
+          "For the full timeline, education and professional background, you can download my CV.",
+        download: "Download my CV",
+        downloadHref: "/stephania-fordant-product-designer-cv-en.pdf",
+        downloadFilename: "Stephania-Fordant-Product-Designer-CV-EN.pdf",
+        ariaDownload:
+          "Download Stéphania Fordant's Product Designer CV as a PDF",
+        tools: "Tools:",
+        communities: [
+          "Co-Founder. An internal UX community for knowledge sharing, UX training, workshops and peer learning.",
+          "Three years of participation, knowledge sharing and training.",
+          "Two years of continuous online learning and professional development.",
+        ],
+        languageLevels: "English — C1  ·  German — B2",
+        disciplines:
+          "Product Design · UX Research · Design Systems · Accessibility",
+        metaDescription:
+          "Product Designer with 6+ years of experience across UX/UI, Design Systems, accessibility, UX Research and digital product design.",
+        communityNames: [
+          "UX Tribe — Cream Consulting",
+          "Figma Community — Brussels",
+          "Interaction Design Foundation",
+        ],
+      },
+    },
+    language,
+  )
   const shouldReduceMotion = useReducedMotion()
 
   useEffect(() => {
@@ -79,11 +112,8 @@ function Experience() {
       description.name = "description"
       document.head.appendChild(description)
     }
-    description.content =
-      language === "fr"
-        ? "Product Designer avec plus de 6 ans d’expérience en UX/UI, Design Systems, accessibilité, UX Research et conception de produits numériques."
-        : "Product Designer with 6+ years of experience across UX/UI, Design Systems, accessibility, UX Research and digital product design."
-  }, [copy.expertise, language])
+    description.content = copy.metaDescription
+  }, [copy.expertise, copy.metaDescription])
 
   return (
     <article>
@@ -105,7 +135,7 @@ function Experience() {
               {copy.intro}
             </p>
             <p className="mt-8 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-              Product Design · UX Research · Design Systems · Accessibility
+              {copy.disciplines}
             </p>
           </motion.div>
         </Container>
@@ -185,29 +215,27 @@ function Experience() {
           <div className="mt-5 grid gap-6 md:grid-cols-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               <strong className="block font-medium text-foreground">
-                UX Tribe — Cream Consulting
+                {copy.communityNames[0]}
               </strong>
-              Co-Founder. An internal UX community for knowledge sharing, UX
-              training, workshops and peer learning.
+              {copy.communities[0]}
             </p>
             <p className="text-sm leading-relaxed text-muted-foreground">
               <strong className="block font-medium text-foreground">
-                Figma Community — Brussels
+                {copy.communityNames[1]}
               </strong>
-              Three years of participation, knowledge sharing and training.
+              {copy.communities[1]}
             </p>
             <p className="text-sm leading-relaxed text-muted-foreground">
               <strong className="block font-medium text-foreground">
-                Interaction Design Foundation
+                {copy.communityNames[2]}
               </strong>
-              Two years of continuous online learning and professional
-              development.
+              {copy.communities[2]}
             </p>
           </div>
         </aside>
       </Section>
 
-      <Section aria-label="Design philosophy" spacing="sm">
+      <Section aria-label={copy.philosophy} spacing="sm">
         <motion.blockquote
           initial={shouldReduceMotion ? false : "hidden"}
           whileInView="visible"
@@ -294,7 +322,7 @@ function Experience() {
             {copy.languages}
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            English — C1&nbsp;&nbsp;·&nbsp;&nbsp;German — B2
+            {copy.languageLevels}
           </p>
         </div>
       </Section>

@@ -53,7 +53,7 @@ const NotFound = lazy(() =>
 )
 
 function RouteLoadingFallback() {
-  const { language } = useLanguage()
+  const { copy } = useLanguage()
 
   return (
     <main className="min-h-[50vh] pt-16 lg:pt-20">
@@ -62,7 +62,7 @@ function RouteLoadingFallback() {
         aria-live="polite"
         className="py-section text-sm text-muted-foreground"
       >
-        {language === "fr" ? "Chargement du contenu…" : "Loading content…"}
+        {copy.common.loading}
       </Container>
     </main>
   )

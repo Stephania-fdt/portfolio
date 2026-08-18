@@ -7,6 +7,8 @@ import { REVEAL, SubsectionText } from "@/components/ui/case-study-capture"
 import desktopCapture from "@/assets/case-studies/portfolio/responsive-desktop.png"
 import tabletCapture from "@/assets/case-studies/portfolio/responsive-tablet.png"
 import mobileCapture from "@/assets/case-studies/portfolio/responsive-mobile.png"
+import { portfolioPageContent } from "@/content/case-studies/portfolio-page"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
  * Portfolio case study — Chapter 10, Responsive Design. Three real
@@ -16,22 +18,17 @@ import mobileCapture from "@/assets/case-studies/portfolio/responsive-mobile.png
  * illustrative mockups.
  */
 function Responsive() {
+  const { language } = useLanguage()
+  const content = getLocalizedContent(portfolioPageContent, language).responsive
   const shouldReduceMotion = useReducedMotion()
 
   return (
     <Section id="portfolio-responsive">
       <Container size="content">
-        <SectionKicker>Responsive Design</SectionKicker>
+        <SectionKicker>{content.kicker}</SectionKicker>
 
         <SubsectionText className="mt-8 max-w-2xl text-lg">
-          <p>
-            Desktop is where the asymmetric composition happens — a
-            project&rsquo;s text and image columns sit side by side, mirrored
-            every other row. Below the md breakpoint, every row collapses to a
-            single column, image above text, in source order — no information
-            hidden, nothing requiring horizontal scroll. Mobile also swaps the
-            inline nav links for the INDEX dialog, visible in the capture below.
-          </p>
+          <p>{content.paragraph}</p>
         </SubsectionText>
 
         <div className="mt-16 grid gap-10 md:grid-cols-2">
@@ -42,13 +39,13 @@ function Responsive() {
             <div className="w-full overflow-hidden border border-border bg-secondary/50">
               <img
                 src={desktopCapture}
-                alt="Selected Work at 1440px — SPF's lead entry with a wide two-column layout, image and text side by side."
+                alt={content.alts[0]}
                 loading="lazy"
                 className="h-full w-full object-cover object-top"
               />
             </div>
             <figcaption className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-              1440px — asymmetric two-column composition.
+              {content.captions[0]}
             </figcaption>
           </motion.figure>
 
@@ -58,13 +55,13 @@ function Responsive() {
             <div className="aspect-[3/4] w-full overflow-hidden border border-border bg-secondary/50">
               <img
                 src={tabletCapture}
-                alt="Selected Work at 768px — the same section, columns still side by side but narrower."
+                alt={content.alts[1]}
                 loading="lazy"
                 className="h-full w-full object-cover object-top"
               />
             </div>
             <figcaption className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-              768px — tablet.
+              {content.captions[1]}
             </figcaption>
           </motion.figure>
 
@@ -74,13 +71,13 @@ function Responsive() {
             <div className="aspect-[3/4] w-full overflow-hidden border border-border bg-secondary/50">
               <img
                 src={mobileCapture}
-                alt="Selected Work at 375px — a single stacked column, image above text, and the INDEX dialog trigger replacing the inline nav links."
+                alt={content.alts[2]}
                 loading="lazy"
                 className="h-full w-full object-cover object-top"
               />
             </div>
             <figcaption className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-              375px — mobile, INDEX navigation visible.
+              {content.captions[2]}
             </figcaption>
           </motion.figure>
         </div>

@@ -6,39 +6,8 @@ import { SectionKicker } from "@/components/ui/section-kicker"
 import { formatNumeral } from "@/lib/numerals"
 import { REVEAL } from "@/components/ui/case-study-capture"
 import { fadeUp, staggerContainer } from "@/lib/motion"
-
-const STEPS = [
-  {
-    label: "Discover",
-    statement:
-      "Inspected the existing architecture, content and tokens before writing anything new — what already worked, what a new section had to respect.",
-  },
-  {
-    label: "Define",
-    statement:
-      "Turned a brief into concrete objectives and a real information architecture, not a wish list.",
-  },
-  {
-    label: "Design",
-    statement:
-      "Made the visual and structural decisions — hierarchy, composition, what earns space and what doesn't.",
-  },
-  {
-    label: "Build",
-    statement:
-      "Implemented the decision in React, TypeScript and Tailwind — production code, not a static comp.",
-  },
-  {
-    label: "Test",
-    statement:
-      "Checked typecheck, lint, responsive behavior and accessibility before calling anything done.",
-  },
-  {
-    label: "Iterate",
-    statement:
-      "Reviewed the result against intent, corrected what didn't hold, and went back to Discover for the next pass.",
-  },
-]
+import { portfolioPageContent } from "@/content/case-studies/portfolio-page"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
  * Portfolio case study — Chapter 4, Process. A numbered sequence that
@@ -49,19 +18,20 @@ const STEPS = [
  * several passes through the same six.
  */
 function Process() {
+  const { language } = useLanguage()
+  const content = getLocalizedContent(portfolioPageContent, language).process
   const shouldReduceMotion = useReducedMotion()
 
   return (
     <Section id="portfolio-process">
       <Container size="content">
-        <SectionKicker>Process</SectionKicker>
+        <SectionKicker>{content.kicker}</SectionKicker>
 
         <motion.p
           {...(shouldReduceMotion ? { initial: false } : REVEAL())}
           className="mt-8 max-w-2xl text-xl leading-snug font-medium text-foreground md:text-2xl"
         >
-          Six stages, run more than once — each pass through Build and Test fed
-          back into what Discover and Define got right, or didn&rsquo;t.
+          {content.introduction}
         </motion.p>
 
         <motion.div
@@ -71,7 +41,7 @@ function Process() {
           variants={staggerContainer}
           className="mt-16 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-6"
         >
-          {STEPS.map((step, index) => (
+          {content.steps.map((step, index) => (
             <motion.div key={step.label} variants={fadeUp} className="relative">
               <p className="font-mono text-2xs text-muted-foreground">
                 {formatNumeral(index)}
@@ -94,8 +64,7 @@ function Process() {
             ↻
           </span>
           <p className="font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-            Iterate feeds back into Discover — this loop ran more than once
-            before anything shipped.
+            {content.loop}
           </p>
         </motion.div>
       </Container>

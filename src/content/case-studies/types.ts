@@ -6,8 +6,10 @@ export type CaseStudyImage = {
   /** Optional localized alternative for images outside a translated section. */
   frenchAlt?: string
   caption?: string
+  frenchCaption?: string
   /** A concise editorial annotation shown above the image caption. */
   label?: string
+  frenchLabel?: string
   /** Marks a client-approved direction without turning it into a decorative badge. */
   selected?: boolean
   /** Keeps diagram-like assets fully visible inside the shared editorial frame. */
@@ -49,10 +51,14 @@ export type CaseStudyVideo = {
   /** A real project still used as the click-to-play cover, never a fabricated frame grab. */
   poster: string
   posterAlt: string
+  frenchPosterAlt?: string
   label?: string
+  frenchLabel?: string
   caption?: string
+  frenchCaption?: string
   /** Shown next to the play affordance so nobody's mobile data is spent by surprise. */
   sizeNote?: string
+  frenchSizeNote?: string
   /** Centers prototype previews at a readable, non-dominant desktop width. */
   displayWidth?: "mobile" | "website"
   /** The poster image's real pixel dimensions — reserves its aspect ratio before load. */
@@ -78,8 +84,15 @@ export type CaseStudySection = {
     title?: string
     paragraphs: string[]
     imageAlts?: string[]
+    imageLabels?: string[]
+    imageCaptions?: string[]
     /** Translated labels for `facts` — falls back to the English facts when absent. */
     facts?: CaseStudyFact[]
+    processSteps?: CaseStudyProcessStep[]
+    videoPosterAlts?: string[]
+    videoLabels?: string[]
+    videoCaptions?: string[]
+    videoSizeNotes?: string[]
   }
   /**
    * Real project artifacts only — flat, honest screenshots, per the

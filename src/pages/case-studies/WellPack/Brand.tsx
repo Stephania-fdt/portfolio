@@ -12,6 +12,8 @@ import {
 import laMarque from "@/assets/case-studies/wellpack/01-strategy/Strategy_la marque.png"
 import logoSheet from "@/assets/case-studies/wellpack/02-brand/logo/logo_fond.png"
 import website from "@/assets/case-studies/wellpack/02-brand/supports/Declinaisaon_siteweb.png"
+import { wellPackPageContent } from "@/content/case-studies/wellpack-page"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
  * WellPack — new Chapter, The Brand Itself. Added after a second, larger
@@ -56,77 +58,56 @@ import website from "@/assets/case-studies/wellpack/02-brand/supports/Declinaisa
  * than touching the source asset."
  */
 function Brand() {
+  const { language } = useLanguage()
+  const content = getLocalizedContent(wellPackPageContent, language).brand
   const shouldReduceMotion = useReducedMotion()
 
   return (
     <Section id="wellpack-brand">
       <Container size="content">
-        <SectionKicker>The Brand Itself</SectionKicker>
+        <SectionKicker>{content.kicker}</SectionKicker>
 
         <motion.p
           {...(shouldReduceMotion ? { initial: false } : REVEAL())}
           className="mt-8 max-w-2xl text-xl leading-snug font-medium text-foreground md:text-2xl"
         >
-          The research methodology wasn&rsquo;t the only system this role asked
-          me to build. WellPack&rsquo;s own brand needed the same evidence-first
-          treatment its clients&rsquo; briefs did.
+          {content.introduction}
         </motion.p>
 
         <SubsectionText className="mt-8 max-w-2xl text-lg">
-          <p>
-            Before any of it got redesigned, it had to be diagnosed honestly. An
-            internal audit named the problem plainly: positioning that
-            didn&rsquo;t match the industry, an image read as dated rather than
-            expert, a brand that hadn&rsquo;t decided what it wanted to be
-            mistaken for. The answer wasn&rsquo;t a mood board. It was three
-            words &mdash; premium, épurée, expert &mdash; and everything that
-            followed had to answer to them.
-          </p>
+          <p>{content.paragraphs[0]}</p>
         </SubsectionText>
 
         <AssetFrame
           src={laMarque}
-          alt="A real brand-positioning slide — 'Image de marque à définir en 3 mots clés' — landing on three keywords: Premium, Épurée, Expert."
+          alt={content.alts[0]}
           className="mt-10 max-w-2xl"
         />
         <p className="mt-3 max-w-2xl font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-          Three words, not a mood board — the brief the identity had to answer
-          to.
+          {content.captions[0]}
         </p>
 
         <SubsectionText className="mt-16 max-w-2xl text-lg">
-          <p>
-            That positioning became a full identity: a logo with defined light
-            and dark variants and explicit rules for what not to do with it, a
-            palette anchored on a single orange rather than a gradient of good
-            intentions, and a graphic language &mdash; a repeated chevron
-            &mdash; pulled directly from the K in the wordmark instead of
-            invented separately from it.
-          </p>
+          <p>{content.paragraphs[1]}</p>
         </SubsectionText>
 
         <AssetFrame
           src={logoSheet}
-          alt="The WellPack logo system — three light-background variants and two dark-background variants of the wordmark, each keeping the same orange speech-bubble W."
+          alt={content.alts[1]}
           className="mt-10 max-w-2xl"
         />
         <p className="mt-3 max-w-2xl font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-          Light and dark variants, not one logo asked to work everywhere.
+          {content.captions[1]}
         </p>
 
         <SubsectionText className="mt-16 max-w-2xl text-lg">
-          <p>
-            None of it stayed in a guideline document. The same system carried
-            through to WellPack&rsquo;s own website &mdash; the identity doing
-            real work on a real, working page rather than sitting in a specimen
-            sheet nobody consumed.
-          </p>
+          <p>{content.paragraphs[2]}</p>
         </SubsectionText>
 
         <CroppedCapture
           src={website}
-          alt="The WellPack homepage built on the new identity — crest-style orange wordmark in the header, the same orange accent on buttons and highlights, service cards, platform preview, testimonials and a dark footer, all in one continuous page."
-          caption="The identity, doing real work on a real page — not a guideline PDF nobody opened again."
+          alt={content.alts[2]}
+          caption={content.captions[2]}
           className="mt-10 max-w-md"
           aspectClassName="aspect-[2/5]"
           zoomClassName="scale-100"
@@ -137,9 +118,7 @@ function Brand() {
           {...(shouldReduceMotion ? { initial: false } : REVEAL())}
           className="mt-16 max-w-2xl text-xl leading-snug font-medium text-foreground italic md:text-2xl"
         >
-          The client was WellPack itself this time. The discipline &mdash;
-          diagnose before you design &mdash; didn&rsquo;t change because of
-          that.
+          {content.quote}
         </motion.p>
       </Container>
     </Section>

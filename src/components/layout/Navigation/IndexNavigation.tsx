@@ -144,7 +144,7 @@ function IndexNavigation() {
               </button>
             </div>
 
-            <nav aria-label="Index" className="mt-8">
+            <nav aria-label={copy.controls.index} className="mt-8">
               <ol>
                 {navigation.links.map((link, index) => {
                   const isActive = isNavLinkActive(
@@ -216,7 +216,7 @@ function IndexNavigation() {
             <div className="mt-auto pt-10 font-mono text-2xs tracking-widest text-muted-foreground">
               <p>{copy.common.productDesigner.toUpperCase()}</p>
               <p className="mt-2 tracking-normal normal-case">
-                Design Systems · Accessibility · AI
+                {copy.common.disciplines}
               </p>
               <div className="mt-8 border-t border-border pt-6">
                 <p className="mb-3 font-sans text-sm font-medium tracking-normal text-foreground normal-case">

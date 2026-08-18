@@ -14,14 +14,12 @@ function TheProcess() {
   return (
     <section
       id="process"
-      aria-label={language === "fr" ? "Le processus" : "The Process"}
+      aria-label={copy.common.process}
       data-screen-label="Approach"
       className="border-b border-border px-[clamp(1.5rem,4vw,4rem)] py-[clamp(3.5rem,7vw,6rem)]"
     >
       <div className="mb-[clamp(2rem,4vw,3rem)] flex items-baseline gap-6">
-        <SectionKicker className="flex-1">
-          {language === "fr" ? "Le processus" : "The Process"}
-        </SectionKicker>
+        <SectionKicker className="flex-1">{copy.common.process}</SectionKicker>
         <span className="font-mono text-[0.625rem] tracking-[0.16em] text-muted-foreground">
           {String(processStages.length).padStart(2, "0")} {copy.common.stages}
         </span>

@@ -4,6 +4,8 @@ import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
 import { REVEAL, SubsectionText } from "@/components/ui/case-study-capture"
+import { wellPackPageContent } from "@/content/case-studies/wellpack-page"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
  * WellPack — Chapter 4, From Method to Brief. Same pattern as
@@ -24,41 +26,26 @@ import { REVEAL, SubsectionText } from "@/components/ui/case-study-capture"
  * publishing" in `content/case-studies/wellpack.ts`.
  */
 function Brief() {
+  const { language } = useLanguage()
+  const content = getLocalizedContent(wellPackPageContent, language).brief
   const shouldReduceMotion = useReducedMotion()
 
   return (
     <Section id="wellpack-brief">
       <Container size="content">
-        <SectionKicker>From Method to Brief</SectionKicker>
+        <SectionKicker>{content.kicker}</SectionKicker>
 
         <SubsectionText className="mt-8 max-w-2xl text-lg">
-          <p>
-            My job was never to hand over a finished interface. What the method
-            surfaced — the client&rsquo;s market, their actual customers, what
-            mattered to the people who&rsquo;d eventually land on that page — I
-            turned into research findings, a set of UX recommendations, and an
-            art direction proposal. Then I handed all of it to our UI Designer
-            to build.
-          </p>
-          <p>
-            I owned the thinking behind every brief. I didn&rsquo;t own the
-            final pixels. That line sounds small written down, but it changed
-            how the work actually moved: the UI Designer could commit to a
-            direction immediately, because that direction had already survived
-            scrutiny before it reached them. Neither of us was guessing
-            alongside the other. And before any of it reached a client, it was
-            tested — not as a formality tacked onto the end of the process, but
-            as the same discipline that started the brief, still holding at the
-            finish.
-          </p>
+          {content.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </SubsectionText>
 
         <motion.p
           {...(shouldReduceMotion ? { initial: false } : REVEAL())}
           className="mt-16 max-w-2xl text-xl leading-snug font-medium text-foreground italic md:text-2xl"
         >
-          I owned the thinking behind every brief. I didn&rsquo;t own the final
-          pixels.
+          {content.quote}
         </motion.p>
       </Container>
     </Section>

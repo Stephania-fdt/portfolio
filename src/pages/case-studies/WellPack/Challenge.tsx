@@ -4,6 +4,8 @@ import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
 import { REVEAL, SubsectionText } from "@/components/ui/case-study-capture"
+import { wellPackPageContent } from "@/content/case-studies/wellpack-page"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
  * WellPack Sprint 1 (implementation pass 2) — Chapter 2, The Challenge.
@@ -21,39 +23,26 @@ import { REVEAL, SubsectionText } from "@/components/ui/case-study-capture"
  * systematized" in `content/case-studies/wellpack.ts` — no new claim.
  */
 function Challenge() {
+  const { language } = useLanguage()
+  const content = getLocalizedContent(wellPackPageContent, language).challenge
   const shouldReduceMotion = useReducedMotion()
 
   return (
     <Section id="wellpack-challenge">
       <Container size="content">
-        <SectionKicker>The Challenge</SectionKicker>
+        <SectionKicker>{content.kicker}</SectionKicker>
 
         <SubsectionText className="mt-8 max-w-2xl text-lg">
-          <p>
-            WellPack helps other businesses find local customers through SMS and
-            RCS marketing — geo-targeted campaigns, real-time audience data, a
-            platform called WeData that already did its job well. The product
-            was never the problem. The landing pages built around it were: some
-            had gone quiet, visually, the way anything does when nobody&rsquo;s
-            had a reason to look at it twice. There was no fire to put out. Just
-            a steady, ordinary need to keep the Marketing team&rsquo;s work from
-            drifting.
-          </p>
-          <p>
-            What made that drift possible wasn&rsquo;t a lack of effort. It was
-            a lack of memory. Each client brief arrived complete, ready to hand
-            to design — but nothing in that brief had been tested against an
-            actual understanding of who the client&rsquo;s customers were. So
-            each page started from the same blank page the last one had.
-          </p>
+          {content.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </SubsectionText>
 
         <motion.p
           {...(shouldReduceMotion ? { initial: false } : REVEAL())}
           className="mt-16 max-w-2xl text-xl leading-snug font-medium text-foreground italic md:text-2xl"
         >
-          Not because anyone on the team was careless. Because nobody had ever
-          built the thing that would have stopped it from happening again.
+          {content.quote}
         </motion.p>
       </Container>
     </Section>

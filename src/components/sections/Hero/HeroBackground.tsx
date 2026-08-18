@@ -1,7 +1,9 @@
 import { useState, type MouseEvent } from "react"
 import { useReducedMotion } from "framer-motion"
 
-import { heroContent } from "@/content/hero"
+import { getHeroContent } from "@/content/hero"
+import { heroSpecimenContent } from "@/content/hero-specimen"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 type MousePosition = {
   x: number
@@ -17,6 +19,9 @@ const EASE_STANDARD = "cubic-bezier(0.22, 1, 0.36, 1)"
  * this plate alone, so it never affects the reading column or page layout.
  */
 function HeroBackground() {
+  const { language } = useLanguage()
+  const heroContent = getHeroContent(language)
+  const copy = getLocalizedContent(heroSpecimenContent, language)
   const shouldReduceMotion = useReducedMotion()
   const [mouse, setMouse] = useState<MousePosition>({
     x: 0.5,
@@ -91,7 +96,7 @@ function HeroBackground() {
       </div>
 
       <div className="absolute top-6 right-6 left-6 z-10 flex flex-wrap justify-between gap-x-6 gap-y-2 font-mono text-2xs tracking-wider text-muted-foreground">
-        <span>SPECIMEN — S · General Sans 600</span>
+        <span>{copy.header}</span>
         <span>
           x {readX} · y {readY}
         </span>
@@ -191,16 +196,16 @@ function HeroBackground() {
             fill="#6e6a63"
           >
             <text x="10" y="28.2">
-              cap-height
+              {copy.capHeight}
             </text>
             <text x="10" y="42.2">
-              x-height
+              {copy.xHeight}
             </text>
             <text x="10" y="76.2">
-              baseline
+              {copy.baseline}
             </text>
             <text x="10" y="89.6">
-              descender
+              {copy.descender}
             </text>
             <text x="72" y="22.4" fill="#590f29">
               General Sans · 600
@@ -219,7 +224,7 @@ function HeroBackground() {
             fontSize="2.1"
             fill="#590f29"
           >
-            40 units
+            {copy.units}
           </text>
           <g stroke="#6e6a63" strokeWidth="0.3" opacity="0.5">
             <line x1="10.5" y1="8" x2="10.5" y2="13" />

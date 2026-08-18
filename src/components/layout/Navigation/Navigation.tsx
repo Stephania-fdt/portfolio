@@ -40,7 +40,7 @@ const SECTION_IDS = navigationContent.links
  * bleed-through reads richer/warmer instead of just softened.
  */
 function Navigation() {
-  const { language } = useLanguage()
+  const { language, copy } = useLanguage()
   const navigation = getNavigationContent(language)
   const scrolled = useScrolled(8)
   const activeId = useActiveSection(SECTION_IDS)
@@ -55,7 +55,7 @@ function Navigation() {
     >
       <Container size="wide" className="relative z-10">
         <nav
-          aria-label="Primary"
+          aria-label={copy.common.primaryNavigation}
           className="grid h-16 grid-cols-[1fr_auto] items-center gap-2 sm:gap-4 lg:h-20 lg:grid-cols-[auto_1fr_auto] lg:gap-8 xl:gap-12"
         >
           <div className="flex items-center gap-6 xl:gap-8">

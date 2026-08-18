@@ -11,7 +11,7 @@ import { useLanguage } from "@/i18n"
  * Same rhythm as Design Principles and The Process, no new pattern.
  */
 function SelectedThoughts() {
-  const { language } = useLanguage()
+  const { language, copy } = useLanguage()
   const selectedThoughts = getSelectedThoughts(language)
   const items = selectedThoughts.map((thought) => ({
     eyebrow: thought.category,
@@ -20,15 +20,8 @@ function SelectedThoughts() {
   }))
 
   return (
-    <Section
-      id="thoughts"
-      aria-label={
-        language === "fr" ? "Réflexions sélectionnées" : "Selected Thoughts"
-      }
-    >
-      <SectionKicker>
-        {language === "fr" ? "Réflexions sélectionnées" : "Selected Thoughts"}
-      </SectionKicker>
+    <Section id="thoughts" aria-label={copy.common.selectedThoughts}>
+      <SectionKicker>{copy.common.selectedThoughts}</SectionKicker>
       <EditorialList items={items} numeral={false} />
     </Section>
   )

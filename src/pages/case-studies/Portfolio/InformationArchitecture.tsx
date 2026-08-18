@@ -4,8 +4,10 @@ import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
 import { REVEAL, SubsectionText } from "@/components/ui/case-study-capture"
-import { navigationContent } from "@/content/navigation"
-import { workProjects } from "@/content/work"
+import { getNavigationContent } from "@/content/navigation"
+import { getWorkProjects } from "@/content/work"
+import { portfolioPageContent } from "@/content/case-studies/portfolio-page"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
  * Portfolio case study — Chapter 5, Information Architecture. Two real
@@ -18,6 +20,13 @@ import { workProjects } from "@/content/work"
  * minimal closing section rather than a promised one.
  */
 function InformationArchitecture() {
+  const { language } = useLanguage()
+  const content = getLocalizedContent(
+    portfolioPageContent,
+    language,
+  ).architecture
+  const navigation = getNavigationContent(language)
+  const projects = getWorkProjects(language)
   const shouldReduceMotion = useReducedMotion()
   const builtSections = new Set([
     "#work",
@@ -29,25 +38,17 @@ function InformationArchitecture() {
   return (
     <Section id="portfolio-ia">
       <Container size="content">
-        <SectionKicker>Information Architecture</SectionKicker>
+        <SectionKicker>{content.kicker}</SectionKicker>
 
         <SubsectionText className="mt-8 max-w-2xl text-lg">
-          <p>
-            The top-level structure is four sections: Work, About, Experience,
-            Contact — a résumé&rsquo;s own order, read as a book instead of a
-            list. Work carries the whole first argument (proof before pitch).
-            About and Experience are honest reuses, not new chapters: they point
-            to Design Principles and The Process, the two existing sections that
-            already answer what those labels ask for. Contact is real and
-            minimal — one statement, one direct email link, no form.
-          </p>
+          <p>{content.introduction}</p>
         </SubsectionText>
 
         <motion.ol
           {...(shouldReduceMotion ? { initial: false } : REVEAL())}
           className="mt-10 max-w-2xl divide-y divide-border border-y border-border"
         >
-          {navigationContent.links.map((link, index) => {
+          {navigation.links.map((link, index) => {
             const isBuilt = builtSections.has(link.href)
             return (
               <li
@@ -61,7 +62,7 @@ function InformationArchitecture() {
                   {link.label.toUpperCase()}
                 </span>
                 <span className="ml-auto text-2xs tracking-widest text-muted-foreground uppercase">
-                  {isBuilt ? "Live" : "Planned"}
+                  {isBuilt ? content.live : content.planned}
                 </span>
               </li>
             )
@@ -70,26 +71,14 @@ function InformationArchitecture() {
 
         <div className="mt-24">
           <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-            Selected Work&rsquo;s Deliberate Hierarchy
+            {content.hierarchyLabel}
           </p>
           <SubsectionText className="mt-4 max-w-2xl">
-            <p>
-              Selected Work isn&rsquo;t ordered by date or alphabet. SPF stays
-              the permanent flagship — the clearest single proof of enterprise
-              Design System work, accessibility and governance at scale —
-              regardless of what else is added around it. This case study sits
-              second, deliberately: it&rsquo;s the one place the current
-              practice (Design Systems, accessibility, AI-assisted workflow,
-              front-end implementation) shows up as one shipped product rather
-              than a described skill, so it gets real editorial room without
-              ever competing with SPF for the lead position. Harmony, WellPack
-              and Joga Aura follow, each proving a different, complementary
-              register — research, methodology, and real client delivery.
-            </p>
+            <p>{content.hierarchy}</p>
           </SubsectionText>
 
           <ol className="mt-10 max-w-2xl divide-y divide-border border-y border-border">
-            {workProjects.map((project, index) => (
+            {projects.map((project, index) => (
               <li
                 key={project.title}
                 className="flex items-baseline gap-4 py-4 font-mono text-sm"

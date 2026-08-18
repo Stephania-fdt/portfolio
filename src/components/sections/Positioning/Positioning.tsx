@@ -1,5 +1,5 @@
 import { SectionKicker } from "@/components/ui/section-kicker"
-import { useLanguage } from "@/i18n"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 const metrics = [
   {
@@ -27,48 +27,49 @@ const metrics = [
   },
 ]
 
+const positioningContent = {
+  en: {
+    label: "Positioning",
+    heading:
+      "A product designer who builds the system, not just the screen — and the accessibility standard that keeps it honest.",
+    metrics,
+  },
+  fr: {
+    label: "Positionnement",
+    heading:
+      "Une Product Designer qui construit le système, pas seulement l’écran — et le niveau d’accessibilité qui le rend exigeant.",
+    metrics: [
+      {
+        value: "2023",
+        label: "Design System fédéral",
+        description:
+          "Conçu et gouverné pour une institution fédérale belge — toujours actif.",
+      },
+      {
+        value: "WCAG",
+        label: "Accessibilité intégrée",
+        description:
+          "Audits et standards inscrits dans les composants, pas ajoutés en fin de parcours.",
+      },
+      {
+        value: "05",
+        label: "Produits livrés",
+        description: "Secteur public, start-up hardware, SaaS B2B, e-commerce.",
+      },
+      {
+        value: "IA",
+        label: "Workflow assisté",
+        description:
+          "Ce portfolio a été conçu et codé de bout en bout avec l’IA dans la boucle.",
+      },
+    ],
+  },
+}
+
 /** Reference Positioning section, placed directly below the Home hero. */
 function Positioning() {
   const { language } = useLanguage()
-  const content =
-    language === "fr"
-      ? {
-          label: "Positionnement",
-          heading:
-            "Une Product Designer qui construit le système, pas seulement l’écran — et le niveau d’accessibilité qui le rend exigeant.",
-          metrics: [
-            {
-              value: "2023",
-              label: "Design System fédéral",
-              description:
-                "Conçu et gouverné pour une institution fédérale belge — toujours actif.",
-            },
-            {
-              value: "WCAG",
-              label: "Accessibilité intégrée",
-              description:
-                "Audits et standards inscrits dans les composants, pas ajoutés en fin de parcours.",
-            },
-            {
-              value: "05",
-              label: "Produits livrés",
-              description:
-                "Secteur public, start-up hardware, SaaS B2B, e-commerce.",
-            },
-            {
-              value: "IA",
-              label: "Workflow assisté",
-              description:
-                "Ce portfolio a été conçu et codé de bout en bout avec l’IA dans la boucle.",
-            },
-          ],
-        }
-      : {
-          label: "Positioning",
-          heading:
-            "A product designer who builds the system, not just the screen — and the accessibility standard that keeps it honest.",
-          metrics,
-        }
+  const content = getLocalizedContent(positioningContent, language)
   return (
     <section
       id="positioning"

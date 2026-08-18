@@ -3,7 +3,11 @@ import { useRef, useState, type KeyboardEvent } from "react"
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
 import { cn } from "@/lib/utils"
-import { useLanguage } from "@/i18n"
+import {
+  designPrinciplesSectionContent,
+  type DesignPrinciplesSectionContent,
+} from "@/content/design-principles-section"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 const TABS = ["Tokens", "Components", "Grid"] as const
 type Tab = (typeof TABS)[number]
@@ -25,12 +29,16 @@ const TECHNICAL_LABEL = {
   color: "#6e6a63",
 }
 
-function TokensSpecimen() {
+function TokensSpecimen({
+  copy,
+}: {
+  copy: DesignPrinciplesSectionContent["tokens"]
+}) {
   return (
     <div className="flex flex-col gap-8 p-7 sm:px-6">
       <div>
         <p className="mb-[0.9rem]" style={TECHNICAL_LABEL}>
-          Color — 6 tokens
+          {copy.color}
         </p>
         <div className="grid grid-cols-1 gap-px border border-border bg-border min-[480px]:grid-cols-2 sm:grid-cols-3">
           {tokenSwatches.map((token) => (
@@ -74,7 +82,7 @@ function TokensSpecimen() {
 
       <div>
         <p className="mb-[0.9rem]" style={TECHNICAL_LABEL}>
-          Type scale — fluid
+          {copy.typeScale}
         </p>
         <div className="flex flex-col">
           <div className="flex items-baseline gap-5 border-t border-border py-[0.7rem]">
@@ -90,7 +98,7 @@ function TokensSpecimen() {
                 letterSpacing: "-0.04em",
               }}
             >
-              Headline
+              {copy.headline}
             </span>
           </div>
           <div className="flex items-baseline gap-5 border-t border-border py-[0.7rem]">
@@ -106,16 +114,14 @@ function TokensSpecimen() {
                 letterSpacing: "-0.025em",
               }}
             >
-              Section title
+              {copy.sectionTitle}
             </span>
           </div>
           <div className="flex items-baseline gap-5 border-t border-border py-[0.7rem]">
             <span className="w-20 shrink-0 font-mono text-2xs text-muted-foreground">
               base / 400
             </span>
-            <span className="text-base leading-[1.6]">
-              Body copy set for reading — 66 characters to the line.
-            </span>
+            <span className="text-base leading-[1.6]">{copy.body}</span>
           </div>
           <div className="flex items-baseline gap-5 border-t border-border py-[0.7rem]">
             <span className="w-20 shrink-0 font-mono text-2xs text-muted-foreground">
@@ -125,7 +131,7 @@ function TokensSpecimen() {
               className="font-mono text-2xs text-muted-foreground uppercase"
               style={{ letterSpacing: "0.16em" }}
             >
-              Technical annotation
+              {copy.annotation}
             </span>
           </div>
         </div>
@@ -133,7 +139,7 @@ function TokensSpecimen() {
 
       <div>
         <p className="mb-[0.9rem]" style={TECHNICAL_LABEL}>
-          Spacing — 8pt base
+          {copy.spacing}
         </p>
         <div className="flex items-end gap-3">
           {[8, 16, 24, 40, 64].map((space) => (
@@ -164,11 +170,15 @@ function TokensSpecimen() {
   )
 }
 
-function ComponentsSpecimen() {
+function ComponentsSpecimen({
+  copy,
+}: {
+  copy: DesignPrinciplesSectionContent["components"]
+}) {
   return (
     <div className="flex flex-col gap-7 p-7 sm:px-6">
       <div className="flex flex-col gap-[0.9rem]">
-        <p style={TECHNICAL_LABEL}>Buttons — 3 variants · 3 sizes</p>
+        <p style={TECHNICAL_LABEL}>{copy.buttons}</p>
         <div className="flex flex-wrap items-center gap-[0.85rem]">
           <button
             type="button"
@@ -176,7 +186,7 @@ function ComponentsSpecimen() {
             className="h-12 border-0 bg-brand px-6 text-sm font-medium text-brand-foreground"
             style={{ borderRadius: "0.3rem" }}
           >
-            Primary
+            {copy.primary}
           </button>
           <button
             type="button"
@@ -184,7 +194,7 @@ function ComponentsSpecimen() {
             className="h-12 border border-border bg-transparent px-6 text-sm font-medium text-foreground"
             style={{ borderRadius: "0.3rem" }}
           >
-            Outline
+            {copy.outline}
           </button>
           <button
             type="button"
@@ -192,23 +202,23 @@ function ComponentsSpecimen() {
             className="h-10 border-0 bg-secondary px-[1.1rem] text-[0.8125rem] font-medium text-secondary-foreground"
             style={{ borderRadius: "0.3rem" }}
           >
-            Secondary
+            {copy.secondary}
           </button>
           <span
             className="font-mono text-muted-foreground"
             style={{ fontSize: "0.5625rem", letterSpacing: "0.1em" }}
           >
-            min target 44px
+            {copy.target}
           </span>
         </div>
       </div>
 
       <div className="grid gap-5 min-[480px]:grid-cols-2">
         <label className="flex flex-col gap-2">
-          <span className="text-[0.8125rem] font-medium">Email</span>
+          <span className="text-[0.8125rem] font-medium">{copy.email}</span>
           <input
             type="email"
-            placeholder="you@studio.com"
+            placeholder={copy.placeholder}
             className="h-11 border border-border bg-background px-[0.85rem] text-sm text-foreground"
             style={{ borderRadius: "0.3rem" }}
           />
@@ -216,11 +226,11 @@ function ComponentsSpecimen() {
             className="font-mono text-muted-foreground"
             style={{ fontSize: "0.5625rem", letterSpacing: "0.1em" }}
           >
-            label + hint, never placeholder-only
+            {copy.hint}
           </span>
         </label>
         <div className="flex flex-col gap-2">
-          <span className="text-[0.8125rem] font-medium">Focus state</span>
+          <span className="text-[0.8125rem] font-medium">{copy.focus}</span>
           <div
             className="flex h-11 items-center border border-border bg-background px-[0.85rem] text-sm text-muted-foreground"
             style={{
@@ -229,37 +239,37 @@ function ComponentsSpecimen() {
               outlineOffset: "3px",
             }}
           >
-            Visible, never suppressed
+            {copy.visible}
           </div>
           <span
             className="font-mono text-muted-foreground"
             style={{ fontSize: "0.5625rem", letterSpacing: "0.1em" }}
           >
-            outline 2px · offset 3px
+            {copy.outlineHint}
           </span>
         </div>
       </div>
 
       <div className="flex flex-col gap-[0.9rem]">
-        <p style={TECHNICAL_LABEL}>Tags · status</p>
+        <p style={TECHNICAL_LABEL}>{copy.tags}</p>
         <div className="flex flex-wrap gap-2">
           <span
             className="border border-brand-border bg-brand-soft px-[0.6rem] py-[0.35rem] font-mono text-2xs text-brand"
             style={{ letterSpacing: "0.1em" }}
           >
-            AA PASS
+            {copy.pass}
           </span>
           <span
             className="bg-muted px-[0.6rem] py-[0.35rem] font-mono text-2xs text-muted-foreground"
             style={{ letterSpacing: "0.1em" }}
           >
-            TOKEN
+            {copy.token}
           </span>
           <span
             className="bg-secondary px-[0.6rem] py-[0.35rem] font-mono text-2xs text-secondary-foreground"
             style={{ letterSpacing: "0.1em" }}
           >
-            DEPRECATED
+            {copy.deprecated}
           </span>
         </div>
       </div>
@@ -268,21 +278,22 @@ function ComponentsSpecimen() {
         className="flex items-center justify-between border-t border-border pt-4 font-mono text-muted-foreground uppercase"
         style={{ fontSize: "0.5625rem", letterSpacing: "0.12em" }}
       >
-        <span>Tokens → components, one source</span>
-        <span className="text-brand">Governed</span>
+        <span>{copy.source}</span>
+        <span className="text-brand">{copy.governed}</span>
       </div>
     </div>
   )
 }
 
-function GridSpecimen() {
+function GridSpecimen({
+  copy,
+}: {
+  copy: DesignPrinciplesSectionContent["grid"]
+}) {
   return (
     <div className="flex flex-col gap-6 p-7 sm:px-6">
-      <p style={TECHNICAL_LABEL}>Grid — 12 columns · 24px gutter</p>
-      <div
-        className="grid h-44 grid-cols-12 gap-2"
-        aria-label="Twelve-column editorial layout grid"
-      >
+      <p style={TECHNICAL_LABEL}>{copy.title}</p>
+      <div className="grid h-44 grid-cols-12 gap-2" aria-label={copy.ariaLabel}>
         {Array.from({ length: 12 }, (_, index) => (
           <span
             key={index}
@@ -300,27 +311,33 @@ function GridSpecimen() {
         className="flex justify-between font-mono text-muted-foreground"
         style={{ fontSize: "0.5625rem", letterSpacing: "0.12em" }}
       >
-        <span>col 01</span>
-        <span>editorial span 4 / 8</span>
-        <span>col 12</span>
+        <span>{copy.start}</span>
+        <span>{copy.span}</span>
+        <span>{copy.end}</span>
       </div>
       <p className="max-w-[30rem] text-[0.9375rem] leading-[1.6] text-muted-foreground">
-        The grid is the identity: the same 12 columns govern the hero, the work
-        plates and this specimen — asymmetry comes from how content is placed on
-        it, never from abandoning it.
+        {copy.description}
       </p>
     </div>
   )
 }
 
-function SpecimenContent({ activeTab }: { activeTab: Tab }) {
-  if (activeTab === "Tokens") return <TokensSpecimen />
-  if (activeTab === "Components") return <ComponentsSpecimen />
-  return <GridSpecimen />
+function SpecimenContent({
+  activeTab,
+  copy,
+}: {
+  activeTab: Tab
+  copy: DesignPrinciplesSectionContent
+}) {
+  if (activeTab === "Tokens") return <TokensSpecimen copy={copy.tokens} />
+  if (activeTab === "Components")
+    return <ComponentsSpecimen copy={copy.components} />
+  return <GridSpecimen copy={copy.grid} />
 }
 
 function DesignPrinciples() {
   const { language } = useLanguage()
+  const copy = getLocalizedContent(designPrinciplesSectionContent, language)
   const [activeTab, setActiveTab] = useState<Tab>("Tokens")
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([])
 
@@ -355,7 +372,7 @@ function DesignPrinciples() {
   return (
     <Section
       id="principles"
-      aria-label="Design Systems"
+      aria-label={copy.ariaLabel}
       spacing="none"
       container={false}
       style={{
@@ -365,7 +382,7 @@ function DesignPrinciples() {
     >
       <div className="grid grid-cols-1 gap-6 min-[900px]:grid-cols-12 min-[900px]:gap-6">
         <div className="flex flex-col gap-6 min-[900px]:sticky min-[900px]:top-24 min-[900px]:col-span-4">
-          <SectionKicker>Design Systems</SectionKicker>
+          <SectionKicker>{copy.kicker}</SectionKicker>
           <h2
             style={{
               fontFamily: '"General Sans", sans-serif',
@@ -375,18 +392,16 @@ function DesignPrinciples() {
               letterSpacing: "-0.04em",
             }}
           >
-            {language === "fr" ? "Des systèmes," : "Systems,"}
+            {copy.heading[0]}
             <br />
-            {language === "fr" ? "pas des écrans." : "not screens."}
+            {copy.heading[1]}
           </h2>
           <p className="max-w-96 leading-[1.65] text-muted-foreground">
-            {language === "fr"
-              ? "Chaque décision doit simplifier les cent suivantes. Ci-dessous : les tokens et composants réels de ce portfolio — la même discipline que j’apporte à un Design System fédéral."
-              : "Every decision should make the next hundred decisions easier. Below: the actual tokens and components this portfolio is built from — the same discipline I bring to a federal design system."}
+            {copy.intro}
           </p>
           <div
             role="tablist"
-            aria-label="Specimen view"
+            aria-label={copy.specimen}
             className="flex self-start border border-border"
           >
             {TABS.map((tab, index) => {
@@ -441,7 +456,7 @@ function DesignPrinciples() {
               v1.4
             </span>
           </div>
-          <SpecimenContent activeTab={activeTab} />
+          <SpecimenContent activeTab={activeTab} copy={copy} />
         </div>
       </div>
     </Section>

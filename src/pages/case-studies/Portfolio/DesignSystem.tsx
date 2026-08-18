@@ -11,6 +11,9 @@ import {
 import navCapture from "@/assets/case-studies/portfolio/nav.png"
 import buttonsCapture from "@/assets/case-studies/portfolio/buttons.png"
 import workCardCapture from "@/assets/case-studies/portfolio/work-card-detail.png"
+import { LocalizedRichText } from "@/components/ui/localized-rich-text"
+import { portfolioDesignSystemContent } from "@/content/case-studies/portfolio-design-system"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /** Real values, copied directly from `src/index.css` — nothing here is invented. */
 const COLOR_TOKENS = [
@@ -50,37 +53,30 @@ const MOTION_TOKENS = [
  * (Front-end Implementation, Responsive Design) rather than repeated.
  */
 function DesignSystem() {
+  const { language } = useLanguage()
+  const content = getLocalizedContent(portfolioDesignSystemContent, language)
   const shouldReduceMotion = useReducedMotion()
 
   return (
     <Section id="portfolio-design-system">
       <Container size="content">
-        <SectionKicker>Design System</SectionKicker>
+        <SectionKicker>{content.kicker}</SectionKicker>
 
         <motion.p
           {...(shouldReduceMotion ? { initial: false } : REVEAL())}
           className="mt-8 max-w-2xl text-xl leading-snug font-medium text-foreground md:text-2xl"
         >
-          Every section on this site draws from the same small set of tokens —
-          three type families, a fluid spacing scale, one motion curve, one
-          accent color used deliberately rather than often.
+          {content.introduction}
         </motion.p>
 
         {/* Typography */}
         <div className="mt-24">
           <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-            Typography
+            {content.typography.label}
           </p>
           <SubsectionText className="mt-4 max-w-2xl">
             <p>
-              Three families, each with one job: General Sans for headings,
-              Inter for body and UI text, IBM Plex Mono reserved for
-              construction-language moments — numerals, edition marks, category
-              labels — never body copy. The type scale itself is fluid above the
-              2xl step, sized with{" "}
-              <code className="font-mono text-base">clamp()</code> so headings
-              resize smoothly across viewports instead of jumping at
-              breakpoints.
+              <LocalizedRichText text={content.typography.paragraph} />
             </p>
           </SubsectionText>
           <div className="mt-8 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-3">
@@ -100,20 +96,11 @@ function DesignSystem() {
         {/* Color system */}
         <div className="mt-24">
           <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-            Color System
+            {content.colors.label}
           </p>
           <SubsectionText className="mt-4 max-w-2xl">
             <p>
-              A warm, near-neutral background and foreground carry almost every
-              screen. One brand color — a deep burgundy — is reserved for
-              deliberate moments (an active nav link, a category tag, a hover
-              state), not wired in as a general UI color. Its own token comment
-              says why directly:{" "}
-              <code className="font-mono text-sm">
-                reserved for deliberate brand moments, not a replacement for
-                --primary/--accent in general UI
-              </code>
-              .
+              <LocalizedRichText text={content.colors.paragraph} />
             </p>
           </SubsectionText>
           <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden border border-border bg-border sm:grid-cols-3 lg:grid-cols-6">
@@ -139,16 +126,11 @@ function DesignSystem() {
         <div className="mt-24 grid gap-10 md:grid-cols-2 md:gap-16">
           <div>
             <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-              Spacing
+              {content.spacing.label}
             </p>
             <SubsectionText className="mt-4">
               <p>
-                Three named, fluid steps instead of a fixed pixel scale —
-                container padding, section rhythm, and a smaller
-                &ldquo;section-sm&rdquo; step for tighter chapters. Each one is
-                a <code className="font-mono text-base">clamp()</code>, so the
-                same token stays proportionate from a 320px screen to a 1440px
-                one, rather than needing per-breakpoint overrides.
+                <LocalizedRichText text={content.spacing.paragraph} />
               </p>
             </SubsectionText>
           </div>
@@ -182,22 +164,11 @@ function DesignSystem() {
           </div>
           <div>
             <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-              Motion & Interaction Patterns
+              {content.motion.label}
             </p>
             <SubsectionText className="mt-4">
               <p>
-                One easing curve, three durations, used consistently rather than
-                tuned per component. Interactions stay deliberately quiet: a
-                hover shifts an arrow 2px, lightens a border, nudges an image
-                scale — never a bounce, never an overshoot. Every animated
-                component checks{" "}
-                <code className="font-mono text-base">useReducedMotion()</code>{" "}
-                and a site-wide{" "}
-                <code className="font-mono text-base">
-                  prefers-reduced-motion
-                </code>{" "}
-                media query collapses every transition to near-zero for anyone
-                who has asked for that.
+                <LocalizedRichText text={content.motion.paragraph} />
               </p>
             </SubsectionText>
           </div>
@@ -206,47 +177,38 @@ function DesignSystem() {
         {/* Components — real screenshots */}
         <div className="mt-24">
           <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-            Components, as Built
+            {content.components.label}
           </p>
           <SubsectionText className="mt-4 max-w-2xl">
-            <p>
-              Navigation, buttons and the Selected Work project card are the
-              system&rsquo;s three most-repeated components — shown here exactly
-              as the live site renders them, not redrawn for this page.
-            </p>
+            <p>{content.components.paragraph}</p>
           </SubsectionText>
 
           <div className="mt-10 space-y-10">
             <div>
-              <AssetFrame
-                src={navCapture}
-                alt="The site's primary navigation bar — logo, Work/About/Experience/Contact links, and the 'Let's talk' CTA button."
-              />
+              <AssetFrame src={navCapture} alt={content.components.alts[0]} />
               <p className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-                Navigation — the real header, captured live.
+                {content.components.captions[0]}
               </p>
             </div>
 
             <div>
               <AssetFrame
                 src={buttonsCapture}
-                alt="The two button variants used across the site — a solid brand-colored primary button and an outlined secondary button, both with visible borders and no drop shadows."
+                alt={content.components.alts[1]}
                 className="max-w-md"
               />
               <p className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-                Buttons — solid primary, outlined secondary. No shadows, no
-                gradients.
+                {content.components.captions[1]}
               </p>
             </div>
 
             <div>
               <AssetFrame
                 src={workCardCapture}
-                alt="A Selected Work project card at rest — the Harmony entry, showing the numbered eyebrow, title, description, technology tags and a real project screenshot."
+                alt={content.components.alts[2]}
               />
               <p className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-                Project card — the same component this case study is linked
-                from.
+                {content.components.captions[2]}
               </p>
             </div>
           </div>

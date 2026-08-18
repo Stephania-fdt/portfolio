@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/case-study-capture"
 import buttonStates from "@/assets/case-studies/spf/components/ANGULAR/mat-btn.png"
 import surfaceContrast from "@/assets/case-studies/spf/foundations/contrast.png"
+import { spfAccessibilityContent } from "@/content/case-studies/spf-accessibility"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
  * Sprint 18.7. Replaces the Sprint 18.1 generic asset-checklist rendering
@@ -57,51 +59,35 @@ import surfaceContrast from "@/assets/case-studies/spf/foundations/contrast.png"
  * actually make.
  */
 function Accessibility() {
+  const { language } = useLanguage()
+  const content = getLocalizedContent(spfAccessibilityContent, language)
   const shouldReduceMotion = useReducedMotion()
 
   return (
     <Section id="spf-accessibility">
       <Container size="content">
-        <SectionKicker>Accessibility</SectionKicker>
+        <SectionKicker>{content.kicker}</SectionKicker>
 
         <motion.p
           {...(shouldReduceMotion ? { initial: false } : REVEAL())}
           className="mt-8 max-w-2xl text-xl leading-snug font-medium text-foreground md:text-2xl"
         >
-          Every citizen filling out this system arrives with a different screen,
-          a different input device, a different amount of patience.
-          Accessibility wasn&rsquo;t a pass taken at the end — it was checked at
-          the token, before a single screen existed.
+          {content.introduction}
         </motion.p>
 
         {/* Contrast — cross-referenced, now with real surface evidence too */}
         <div className="mt-24">
           <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-            Contrast, Checked at the Source
+            {content.contrast.label}
           </p>
           <SubsectionText className="mt-4 max-w-2xl">
-            <p>
-              The Design Tokens chapter already carries one piece of evidence: a
-              background/text pairing checked inside Tokens Studio itself,
-              reporting &ldquo;Level AA — Pass, Level AAA — Pass&rdquo; before a
-              single component consumed the token. A second capture gives the
-              surface layer the same treatment — Surface Dim, Surface, Surface
-              Bright and five Surface Container steps, each a real resolved hex,
-              with a dedicated On Surface and Outline built to sit on top of
-              them. Nine roles, nine real values, not one "text color" asked to
-              work everywhere.
-            </p>
-            <p>
-              The same discipline shows up in Foundations&rsquo; tonal system:
-              every feedback role — success, warning, information, error — ships
-              with its own dedicated on-color, so a component asking for a
-              feedback color never has to guess whether its own text will read
-              against it.
-            </p>
+            {content.contrast.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </SubsectionText>
           <AssetFrame
             src={surfaceContrast}
-            alt="SPF's surface and neutral color tokens documented with real hex values — Surface Dim, Surface, Surface Bright, five Surface Container steps, On Surface, On Surface Variant, Outline and Outline Variant — shown twice, once against a pale backdrop and once against near-black."
+            alt={content.contrast.alt}
             className="mt-10 aspect-[3/1]"
           />
         </div>
@@ -109,61 +95,40 @@ function Accessibility() {
         {/* States as decisions */}
         <div className="mt-24">
           <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-            States Aren&rsquo;t Cosmetic
+            {content.states.label}
           </p>
           <SubsectionText className="mt-4 max-w-2xl">
-            <p>
-              A disabled button that still reads as a button — dimmed enough to
-              signal &ldquo;not now,&rdquo; legible enough not to disappear — is
-              a decision, not whatever Angular Material happened to ship by
-              default. Every variant in the system carries the same disabled
-              treatment: primary, rounded, outlined, text, tile, each dimmed by
-              the same amount rather than five separate guesses.
-            </p>
-            <p>
-              That same discipline is what let the Component Library chapter
-              show a dozen input states — default, focus, filled, error,
-              validated, disabled, autocomplete — and a notification system
-              built on roles a screen reader and a stressed citizen both need to
-              tell apart at a glance.
-            </p>
+            {content.states.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </SubsectionText>
           <AssetFrame
             src={buttonStates}
-            alt="A matrix of Angular Material button variants from the SPF component library — normal, primary, disabled and rounded — showing the disabled state applied consistently across every button style."
+            alt={content.states.alt}
             className="mt-10 aspect-[11/2]"
           />
           <p className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-            Normal, primary, disabled, rounded — the same treatment, not five
-            separate guesses.
+            {content.states.caption}
           </p>
         </div>
 
         {/* Honest gap */}
         <div className="mt-24 grid gap-10 md:grid-cols-2 md:gap-16">
           <AssetChecklist
-            label="Keyboard Navigation"
+            label={content.gap.checklist}
             missing={[
               {
                 filename: "keyboard-navigation.webp",
-                description:
-                  "No real capture of focus order or a keyboard-only flow exists yet — nothing shown rather than a fabricated diagram.",
+                description: content.gap.description,
               },
             ]}
           />
           <div>
             <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-              What Isn&rsquo;t Proven Yet
+              {content.gap.label}
             </p>
             <SubsectionText className="mt-4">
-              <p>
-                A citizen filling out a visa form by keyboard alone, or by
-                screen reader, deserves a system designed for that path, not one
-                that merely tolerates it. That&rsquo;s the honest gap in this
-                chapter: no file in the project documents a visible focus order
-                or a keyboard-only walkthrough of the portal, so none is claimed
-                here.
-              </p>
+              <p>{content.gap.paragraph}</p>
             </SubsectionText>
           </div>
         </div>
@@ -174,12 +139,7 @@ function Accessibility() {
           className="mt-24 max-w-2xl"
         >
           <p className="text-xl leading-snug font-medium text-foreground md:text-2xl">
-            None of this adds up to a claim that the system is fully accessible
-            — three chapters of evidence aren&rsquo;t entitled to say that. What
-            they can say is narrower and true: contrast was checked before a
-            component existed, states were drawn on purpose, and where the
-            evidence runs out, this chapter says so instead of filling the gap
-            with a badge nobody earned.
+            {content.conclusion}
           </p>
         </motion.div>
       </Container>

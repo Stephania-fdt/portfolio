@@ -45,6 +45,12 @@ const copy = {
       role: "Role",
       year: "Year",
       tools: "Tools",
+      loading: "Loading content…",
+      primaryNavigation: "Primary navigation",
+      designPhilosophy: "Design philosophy",
+      disciplines: "Design Systems · Accessibility · AI",
+      selectedThoughts: "Selected Thoughts",
+      process: "The Process",
     },
     work: {
       intro:
@@ -100,6 +106,12 @@ const copy = {
       role: "Rôle",
       year: "Année",
       tools: "Outils",
+      loading: "Chargement du contenu…",
+      primaryNavigation: "Navigation principale",
+      designPhilosophy: "Philosophie du design",
+      disciplines: "Design Systems · Accessibilité · IA",
+      selectedThoughts: "Réflexions sélectionnées",
+      process: "Le processus",
     },
     work: {
       intro:
@@ -124,6 +136,15 @@ type LanguageContextValue = {
   language: Language
   setLanguage: (language: Language) => void
   copy: Translation
+}
+
+type LocalizedContent<T> = Record<Language, T>
+
+function getLocalizedContent<T>(
+  content: LocalizedContent<T>,
+  language: Language,
+): T {
+  return content[language]
 }
 
 const LanguageContext = createContext<LanguageContextValue | null>(null)
@@ -160,4 +181,5 @@ function useLanguage() {
   return context
 }
 
-export { LanguageProvider, useLanguage }
+export { LanguageProvider, useLanguage, getLocalizedContent }
+export type { LocalizedContent }

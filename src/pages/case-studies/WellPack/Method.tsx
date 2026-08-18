@@ -9,6 +9,8 @@ import {
   AssetFrame,
 } from "@/components/ui/case-study-capture"
 import portraitChinois from "@/assets/case-studies/wellpack/01-strategy/Strategy_portrait chinois.png"
+import { wellPackPageContent } from "@/content/case-studies/wellpack-page"
+import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
  * WellPack Sprint 1 (implementation pass 2) — Chapter 3, The Method.
@@ -44,54 +46,35 @@ import portraitChinois from "@/assets/case-studies/wellpack/01-strategy/Strategy
  * recommending instead of guessing.
  */
 function Method() {
+  const { language } = useLanguage()
+  const content = getLocalizedContent(wellPackPageContent, language).method
   const shouldReduceMotion = useReducedMotion()
 
   return (
     <Section id="wellpack-method">
       <Container size="content">
-        <SectionKicker>The Method</SectionKicker>
+        <SectionKicker>{content.kicker}</SectionKicker>
 
         <SubsectionText className="mt-8 max-w-2xl text-lg">
-          <p>
-            The biggest thing I built at WellPack was never a landing page. It
-            was a method — reusable templates for personas, for market analysis,
-            for the kind of &ldquo;portrait chinois&rdquo; exercise that sounds
-            like a game until you notice what it actually surfaces about a
-            brand. Internal discovery documents that asked the same rigorous
-            questions whether the client meeting had gone long or the week had
-            gone short.
-          </p>
-          <p>
-            That distinction matters more than it sounds like it should.
-            Conducting good research for one client is a skill. Building a
-            system that guarantees every client gets that same rigor, regardless
-            of who&rsquo;s doing the work or how much time is left in the week,
-            is a different thing entirely — closer to infrastructure than craft.
-            I didn&rsquo;t just study each client&rsquo;s market. I built the
-            mechanism that turned &ldquo;what does this client need&rdquo; into
-            an evidence-based design brief, the same way, every time. That
-            mechanism outlasted any single landing page. It was still running
-            after I&rsquo;d moved on to the next client.
-          </p>
+          {content.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </SubsectionText>
 
         <AssetFrame
           src={portraitChinois}
-          alt="A real 'portrait chinois' exercise slide — WellPack described through a lion, a black panther and a herd of elephants, the same projective-brand technique the paragraph above names, shown here as it was actually built."
+          alt={content.alt}
           className="mt-10 max-w-2xl"
         />
         <p className="mt-3 max-w-2xl font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-          A real portrait chinois exercise, applied here to WellPack&rsquo;s own
-          brand — the same technique, not an illustration of it.
+          {content.caption}
         </p>
 
         <motion.p
           {...(shouldReduceMotion ? { initial: false } : REVEAL())}
           className="mt-16 max-w-2xl text-xl leading-snug font-medium text-foreground italic md:text-2xl"
         >
-          Conducting good research for one client is a skill. Building a system
-          that guarantees every client gets that same rigor is a different thing
-          entirely.
+          {content.quote}
         </motion.p>
       </Container>
     </Section>
