@@ -27,19 +27,31 @@ function HomeClosing() {
       className="border-t border-border py-14 md:py-16 lg:py-20"
     >
       <Container size="content">
+        {/* A deterministic sm: breakpoint switch, not `flex-wrap` (Sprint
+            "HomeClosing responsive stability fix"). `flex-wrap` let the
+            browser decide row-vs-stack per pixel of *measured content
+            width* — a threshold that isn't pinned to any real breakpoint,
+            sits right in the middle of common phone viewports (~390–414px
+            in FR), and shifts by a few px whenever the fallback font swaps
+            to Inter (`font-display: swap`), since the two metrics don't
+            measure identically. That combination is what read as
+            "sometimes stable, sometimes not": the same viewport width
+            could resolve to either layout depending on font-load timing.
+            Below `sm`, this is a plain stacked column — no wrap decision
+            left to make, so nothing is left for a font swap to flip. */}
         <motion.div
           initial={shouldReduceMotion ? false : "hidden"}
           whileInView="visible"
           viewport={{ once: true, margin: "-10% 0px" }}
           variants={fadeUp}
-          className="flex flex-wrap items-baseline gap-x-3 gap-y-2"
+          className="flex flex-col items-start gap-2 sm:flex-row sm:items-baseline sm:gap-x-3"
         >
           <p className="text-xl font-medium text-foreground md:text-2xl">
             {content.closingPrompt}
           </p>
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-2 text-xl font-medium text-brand md:text-2xl"
+            className="group inline-flex items-center gap-2 text-xl font-medium whitespace-nowrap text-brand md:text-2xl"
           >
             {content.closingCta}
             <ArrowRight
