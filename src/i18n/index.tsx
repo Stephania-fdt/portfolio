@@ -56,7 +56,7 @@ const copy = {
     },
     work: {
       intro:
-        "Three projects showing how I work across complex public services, connected products and research-led design.",
+        "Five projects across public services, connected products and e-commerce — the proof behind the positioning above.",
       title: "Selected projects, systems and digital experiences.",
       description:
         "Public digital services, connected products, e-commerce and the systems that make ambitious products easier to build and sustain.",
@@ -119,7 +119,7 @@ const copy = {
     },
     work: {
       intro:
-        "Trois projets qui montrent ma manière de travailler sur des services publics complexes, des produits connectés et des démarches guidées par la recherche.",
+        "Cinq projets entre services publics, produits connectés et e-commerce — la preuve derrière le positionnement ci-dessus.",
       title: "Projets, systèmes et expériences numériques sélectionnés.",
       description:
         "Services numériques publics, produits connectés, e-commerce et systèmes qui rendent les produits ambitieux plus simples à créer et à faire évoluer.",

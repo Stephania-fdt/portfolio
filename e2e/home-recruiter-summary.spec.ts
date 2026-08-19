@@ -2,52 +2,49 @@ import { expect, test } from "./fixtures"
 
 const languages = {
   en: {
-    headline:
-      "Senior Product Designer — making complex products clear, accessible and useful.",
+    headline: "I turn complexity into clear, accessible, scalable products.",
     description:
-      "With 6+ years of experience, I turn business and technical constraints into clear, consistent and scalable products. I specialize in Design Systems, accessibility and UX Research, with extensive experience in public services.",
+      "I’m Stéphania, a Product Designer based in Brussels, curious by nature and passionate about technology. I like understanding how products are built and the constraints that shape them — it keeps me curious, helps me stay up to date, and allows me to design experiences that are more relevant and realistic.",
+    expertise: "Design Systems · Accessibility · UX Research",
     work: "View my work",
-    contact: "Contact me",
-    experience: "View experience & CV",
+    contact: "Let's talk",
     workIntro:
-      "Three projects showing how I work across complex public services, connected products and research-led design.",
-    profileTitle:
-      "I’m curious about how products are built — not only how they look.",
-    profileParagraphs: [
-      "I’m Stéphania, a Product Designer based in Brussels. I work with business teams, developers and users to turn real constraints into clear product decisions.",
-      "After 6+ years across public services, research and digital products, I’m looking for a senior role where accessibility, systems thinking and collaboration shape the work from the start.",
-    ],
-    contactStatement:
-      "Want to discuss a role or a project? Email me or connect with me on LinkedIn.",
+      "Five projects across public services, connected products and e-commerce — the proof behind the positioning above.",
+    closingPrompt: "Like what you see?",
+    closingCta: "Let's talk",
+    spfDescription:
+      "Several public-service applications lacked a shared UX methodology and consistent interface language.",
+    portfolioDescription:
+      "The previous portfolio did not clearly present the depth of the work or professional experience.",
     harmonyDescription:
       "Harmony’s connected bracelet needed a consistent experience across its website and companion mobile app.",
     wellpackDescription:
       "Landing-page projects started from inconsistent briefs, without a shared understanding of client audiences and markets.",
-    accessibility: "Accessibility",
+    jogaAuraDescription:
+      "Create a clear premium shopping journey for the Blue Serenity yoga mat.",
   },
   fr: {
     headline:
-      "Product Designer senior — des produits complexes rendus clairs, accessibles et utiles.",
+      "Je transforme la complexité en produits clairs, accessibles et évolutifs.",
     description:
-      "Depuis plus de 6 ans, je transforme des contraintes métier et techniques en expériences cohérentes et évolutives. Je suis spécialisée en Design Systems, accessibilité et UX Research, notamment dans les services publics.",
+      "Je suis Stéphania, Product Designer basée à Bruxelles, curieuse et passionnée par la technologie. J’aime comprendre comment les produits sont construits et les contraintes qui les façonnent : cela nourrit ma curiosité, m’aide à rester à jour et à concevoir des expériences plus pertinentes et réalistes.",
+    expertise: "Design Systems · Accessibilité · UX Research",
     work: "Voir mes projets",
     contact: "Me contacter",
-    experience: "Voir mon expérience & mon CV",
     workIntro:
-      "Trois projets qui montrent ma manière de travailler sur des services publics complexes, des produits connectés et des démarches guidées par la recherche.",
-    profileTitle:
-      "Je m’intéresse à la manière dont les produits sont construits — pas seulement à leur apparence.",
-    profileParagraphs: [
-      "Je suis Stéphania, Product Designer basée à Bruxelles. Je travaille avec les équipes métier, les développeurs et les utilisateurs pour transformer des contraintes concrètes en décisions produit claires.",
-      "Après plus de 6 ans dans les services publics, la recherche et les produits numériques, je recherche aujourd’hui un rôle senior où l’accessibilité, les systèmes et la collaboration font partie du travail dès le départ.",
-    ],
-    contactStatement:
-      "Vous souhaitez échanger au sujet d’un poste ou d’un projet ? Écrivez-moi ou contactez-moi sur LinkedIn.",
+      "Cinq projets entre services publics, produits connectés et e-commerce — la preuve derrière le positionnement ci-dessus.",
+    closingPrompt: "Envie d’en discuter ?",
+    closingCta: "Échangeons",
+    spfDescription:
+      "Plusieurs applications de service public ne partageaient ni méthode UX ni langage d’interface cohérent.",
+    portfolioDescription:
+      "Le portfolio précédent ne présentait pas clairement la profondeur des projets ni le parcours professionnel.",
     harmonyDescription:
       "Le bracelet connecté Harmony nécessitait une expérience cohérente entre le site web et l’application mobile.",
     wellpackDescription:
       "Les projets de landing pages partaient de briefs hétérogènes, sans compréhension partagée des audiences et des marchés clients.",
-    accessibility: "Accessibilité",
+    jogaAuraDescription:
+      "Créer un parcours d’achat premium et clair pour le tapis de yoga Blue Serenity.",
   },
 } as const
 
@@ -72,57 +69,60 @@ for (const language of ["en", "fr"] as const) {
       ).toHaveAttribute("href", "#work")
       await expect(
         page.locator("#hero").getByRole("link", { name: copy.contact }),
-      ).toHaveAttribute("href", "#contact")
+      ).toHaveAttribute("href", "/contact")
       await expect(
-        page.getByRole("link", { name: copy.experience }),
-      ).toHaveAttribute("href", "/experience")
-      await expect(page.getByText(copy.workIntro)).toBeVisible()
-      await expect(
-        page.getByRole("heading", { level: 2, name: copy.profileTitle }),
+        page.locator("#hero").getByText(copy.expertise),
       ).toBeVisible()
-      for (const paragraph of copy.profileParagraphs) {
-        await expect(page.getByText(paragraph)).toBeVisible()
-      }
-      await expect(page.getByText(copy.contactStatement)).toBeVisible()
-      await expect(page.locator("#home-profile").getByRole("link")).toHaveCount(
-        1,
-      )
+      await expect(page.getByText(copy.workIntro)).toBeVisible()
+
+      // The Homepage's third and only remaining beat: one line, one link
+      // to `/contact` — no email, no LinkedIn, no card shown here anymore.
+      const closing = page.locator("#closing")
+      await expect(closing.getByText(copy.closingPrompt)).toBeVisible()
+      await expect(
+        closing.getByRole("link", { name: new RegExp(copy.closingCta) }),
+      ).toHaveAttribute("href", "/contact")
 
       const projects = page.locator("#work [data-work-preview] > div")
-      await expect(projects).toHaveCount(3)
-      await expect(projects.nth(0)).toContainText("SPF")
-      await expect(projects.nth(1)).toContainText("Harmony")
-      await expect(projects.nth(2)).toContainText("WellPack")
-      await expect(projects.nth(1)).toContainText(copy.harmonyDescription)
-      await expect(projects.nth(2)).toContainText(copy.wellpackDescription)
+      await expect(projects).toHaveCount(5)
+      for (const [index, name] of [
+        [0, "SPF"],
+        [1, "Stéphania"],
+        [2, "Harmony"],
+        [3, "WellPack"],
+        [4, "Joga Aura"],
+      ] as const) {
+        await expect(projects.nth(index)).toContainText(name)
+      }
+      await expect(projects.nth(0)).toContainText(copy.spfDescription)
+      await expect(projects.nth(1)).toContainText(copy.portfolioDescription)
+      await expect(projects.nth(2)).toContainText(copy.harmonyDescription)
+      await expect(projects.nth(3)).toContainText(copy.wellpackDescription)
+      await expect(projects.nth(4)).toContainText(copy.jogaAuraDescription)
       for (const [index, href] of [
         [0, "/work/spf-design-system"],
-        [1, "/work/harmony"],
-        [2, "/work/wellpack"],
+        [1, "/work/portfolio"],
+        [2, "/work/harmony"],
+        [3, "/work/wellpack"],
+        [4, "/work/joga-aura"],
       ] as const) {
         await expect(projects.nth(index).getByRole("link")).toHaveAttribute(
           "href",
           href,
         )
       }
-      await expect(projects.nth(2)).toContainText("UX Researcher")
-      await expect(projects.nth(2).locator("img")).toHaveAttribute(
+      await expect(projects.nth(3)).toContainText("UX Researcher")
+      await expect(projects.nth(3).locator("img")).toHaveAttribute(
         "src",
         /Declinaisaon_siteweb/,
       )
+
+      // Progressive disclosure: Homepage orients only — no Expertise
+      // block, no About/Experience teaser, no full Contact section.
       await expect(
-        page.locator("#expertise [data-expertise-grid] > li"),
-      ).toHaveCount(3)
-      const accessibility = page
-        .locator("#expertise [data-expertise-grid] > li")
-        .filter({ hasText: copy.accessibility })
-      await expect(accessibility.locator("svg")).toHaveCount(1)
-      await expect(accessibility.locator("svg")).toHaveAttribute(
-        "aria-hidden",
-        "true",
-      )
-      await expect(
-        page.locator("#positioning, #principles, #process, #thoughts"),
+        page.locator(
+          "#positioning, #principles, #process, #thoughts, #expertise, #home-profile, #contact",
+        ),
       ).toHaveCount(0)
       await expect(
         page.locator("#work").getByRole("link", {
@@ -149,6 +149,19 @@ for (const language of ["en", "fr"] as const) {
       const heroToWorkGap = Math.round(workTop - heroBottom)
       expect(heroToWorkGap).toBeGreaterThanOrEqual(79)
       expect(heroToWorkGap).toBeLessThanOrEqual(97)
+
+      // The Hero no longer claims the entire first viewport — Selected
+      // Work should already be perceptible without scrolling at 1440px.
+      if (width === 1440) {
+        const heroHeight = await page
+          .locator("#hero")
+          .evaluate((element) => element.getBoundingClientRect().height)
+        expect(heroHeight).toBeLessThan(900)
+        const workVisibleTop = await page
+          .locator("#work")
+          .evaluate((element) => element.getBoundingClientRect().top)
+        expect(workVisibleTop).toBeLessThan(900)
+      }
 
       await page.goto("/#work")
       const headerBottom = await page

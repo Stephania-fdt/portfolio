@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
+import { Link } from "react-router-dom"
 
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
@@ -20,8 +21,10 @@ const REVEAL_OFFSET = 16
  * section keeps that shared vocabulary; the Hero earns a bespoke one
  * because it's the one moment asked to feel authored rather than
  * systematic. Hand-tuned, uneven delays (not a fixed stagger interval) so
- * the byline, the claim, and the CTA land as three distinct beats with
- * their own weight — a pause you can feel, not a metronome.
+ * the byline, the claim, the CTAs and the expertise line land as distinct
+ * beats with their own weight — a pause you can feel, not a metronome.
+ * Compressed (Sprint "Hero height reduction") so that pause never reads as
+ * a delay: four beats now land inside ~0.6s of hand-off, not ~0.9s.
  */
 function Hero() {
   const { language, copy } = useLanguage()
@@ -38,9 +41,9 @@ function Hero() {
     <section
       id="hero"
       aria-label={copy.common.introduction}
-      className="relative isolate grid min-h-dvh w-full overflow-x-hidden md:grid-cols-[58fr_42fr] lg:grid-cols-[65fr_35fr]"
+      className="relative isolate grid w-full overflow-x-hidden md:min-h-[80dvh] md:grid-cols-[58fr_42fr] lg:grid-cols-[65fr_35fr]"
     >
-      <div className="grid min-h-dvh grid-rows-[auto_1fr_auto] pt-section pb-6">
+      <div className="grid grid-rows-[auto_1fr_auto] pt-16 pb-6 md:pt-20 lg:pt-24">
         <Container size="content" className="row-start-1">
           {/* Byline demoted to a masthead credit line, not a sentence —
               the scale drop from here to the claim below is the first
@@ -56,27 +59,36 @@ function Hero() {
             </span>
           </motion.p>
 
-          {/* The claim is allowed to run wider than the reading column
-              beneath it (max-w-3xl vs. max-w-xl) — headlines outrunning
-              body measure is a real editorial convention, not an accident. */}
+          {/* Sprint "Hero height reduction" — 6xl, not 7xl, and one
+              sentence, not the title restated: the byline above already
+              answers "who", so every word here is spent on "what" instead. */}
           <motion.h1
-            {...reveal(0.2)}
-            className="mt-10 max-w-4xl text-5xl leading-[0.92] font-bold tracking-tightest sm:text-6xl md:text-7xl"
+            {...reveal(0.15)}
+            className="mt-6 max-w-3xl text-4xl leading-[0.98] font-bold tracking-tightest sm:text-5xl md:mt-7 md:text-5xl lg:text-6xl"
           >
             {heroContent.headline}
           </motion.h1>
 
-          <div className="max-w-xl">
-            <motion.p
-              {...reveal(0.5)}
-              className="mt-12 text-lg leading-relaxed text-muted-foreground md:text-xl"
-            >
-              {heroContent.description}
-            </motion.p>
+          {/* Wider than the CTA/expertise column below (max-w-2xl vs.
+              max-w-xl) and a tighter leading-[1.5] rather than
+              leading-relaxed — both tuned specifically to absorb the
+              longer, personal-introduction supporting statement (Sprint
+              "Hero supporting statement — personal intro") without
+              growing the Hero's height more than that extra length
+              already requires. Matches About's own intro paragraph
+              (max-w-[50rem], leading-[1.5]) rather than inventing a new
+              body-copy convention. */}
+          <motion.p
+            {...reveal(0.3)}
+            className="mt-5 max-w-2xl text-lg leading-[1.5] text-muted-foreground md:mt-6 md:text-xl"
+          >
+            {heroContent.description}
+          </motion.p>
 
+          <div className="max-w-xl">
             <motion.div
-              {...reveal(0.7)}
-              className="mt-10 flex flex-wrap items-center gap-5"
+              {...reveal(0.45)}
+              className="mt-7 flex flex-wrap items-center gap-5 md:mt-8"
             >
               <Button asChild size="lg">
                 <a href={heroContent.primaryCta.href}>
@@ -93,11 +105,23 @@ function Hero() {
                 size="lg"
                 className="border-muted-foreground/70 hover:border-muted-foreground"
               >
-                <a href={heroContent.secondaryCta.href}>
+                <Link to={heroContent.secondaryCta.href}>
                   {heroContent.secondaryCta.label}
-                </a>
+                </Link>
               </Button>
             </motion.div>
+
+            {/* Three names, quietly — never a badge grid, never louder
+                than the CTAs it sits beneath. The depth behind each one
+                lives in the case studies, not here. */}
+            <motion.p
+              {...reveal(0.6)}
+              className="mt-6 text-xs font-medium tracking-wide text-muted-foreground uppercase md:mt-7 md:text-sm"
+            >
+              {heroContent.expertise.items
+                .map((item) => item.title)
+                .join(" · ")}
+            </motion.p>
           </div>
         </Container>
 

@@ -85,6 +85,46 @@ function translateCaseStudy(
       document: section.document
         ? { ...section.document, label: section.document.frenchLabel }
         : undefined,
+      subsections: section.subsections?.map((sub) => ({
+        ...sub,
+        title: sub.french?.title ?? sub.title,
+        paragraphs: sub.french?.paragraphs ?? sub.paragraphs,
+        images: sub.images?.map((image, imageIndex) => ({
+          ...image,
+          alt: sub.french?.imageAlts?.[imageIndex] ?? image.alt,
+          label:
+            sub.french?.imageLabels?.[imageIndex] ??
+            image.frenchLabel ??
+            image.label,
+          caption:
+            sub.french?.imageCaptions?.[imageIndex] ??
+            image.frenchCaption ??
+            image.caption,
+        })),
+      })),
+      disclosure: section.disclosure
+        ? {
+            ...section.disclosure,
+            summary: section.disclosure.frenchSummary,
+            sections: section.disclosure.sections.map((sub) => ({
+              ...sub,
+              title: sub.french?.title ?? sub.title,
+              paragraphs: sub.french?.paragraphs ?? sub.paragraphs,
+              images: sub.images?.map((image, imageIndex) => ({
+                ...image,
+                alt: sub.french?.imageAlts?.[imageIndex] ?? image.alt,
+                label:
+                  sub.french?.imageLabels?.[imageIndex] ??
+                  image.frenchLabel ??
+                  image.label,
+                caption:
+                  sub.french?.imageCaptions?.[imageIndex] ??
+                  image.frenchCaption ??
+                  image.caption,
+              })),
+            })),
+          }
+        : undefined,
     })),
   }
 }

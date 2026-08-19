@@ -73,6 +73,34 @@ export type CaseStudyDocument = {
   sizeNote?: string
 }
 
+/**
+ * Additive, opt-in progressive disclosure for a section's secondary
+ * evidence — used by Harmony only. `disclosure` is undefined on every
+ * other case study built on this shared schema (WellPack, Joga Aura),
+ * so their rendering is untouched byte-for-byte; this type and the
+ * rendering branch in `CaseStudy.tsx` only ever activate when a section
+ * sets it explicitly.
+ */
+export type CaseStudyDisclosureSection = {
+  title?: string
+  paragraphs: string[]
+  images?: CaseStudyImage[]
+  imageLayout?: CaseStudyVisualLayout
+  french?: {
+    title?: string
+    paragraphs: string[]
+    imageAlts?: string[]
+    imageLabels?: string[]
+    imageCaptions?: string[]
+  }
+}
+
+export type CaseStudyDisclosure = {
+  summary: string
+  frenchSummary: string
+  sections: CaseStudyDisclosureSection[]
+}
+
 export type CaseStudySection = {
   heading: string
   /** Optional editorial title displayed below the section eyebrow. */
@@ -115,6 +143,17 @@ export type CaseStudySection = {
   videos?: CaseStudyVideo[]
   /** A source deliverable too large or too paginated to flatten into screenshots (e.g. a full design-system PDF). */
   document?: CaseStudyDocument
+  /**
+   * Additive, opt-in labeled sub-blocks within a single main-flow section
+   * — used by Harmony only, when 2-3 related decisions share one heading
+   * but each still needs its own short label, prose and image(s) (the
+   * generic single flat `paragraphs`/`images` pair can't do that).
+   * Undefined on every other case study on this shared schema, so their
+   * rendering is untouched.
+   */
+  subsections?: CaseStudyDisclosureSection[]
+  /** Secondary evidence behind a disclosure — see `CaseStudyDisclosure` above. */
+  disclosure?: CaseStudyDisclosure
 }
 
 export type CaseStudy = {

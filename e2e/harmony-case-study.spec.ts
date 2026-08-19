@@ -11,14 +11,13 @@ test("Harmony presents a complete evidence-based product design case study", asy
   ).toBeVisible()
 
   for (const heading of [
-    "Project Overview",
-    "Context & Challenge",
-    "My Role & Team",
-    "User Research",
-    "Information Architecture",
-    "Website Wireframes",
-    "Dashboard & Progress Tracking",
-    "Community & Gamification",
+    "Overview",
+    "The Challenge",
+    "Understanding the Experience",
+    "Paper Prototype & User Testing",
+    "Designing the Interaction",
+    "Final Experience",
+    "Accessibility",
     "Outcomes, Limitations & Learnings",
   ]) {
     await expect(
@@ -26,18 +25,26 @@ test("Harmony presents a complete evidence-based product design case study", asy
     ).toBeVisible()
   }
 
+  // The three decisions the research directly produced stay visible as
+  // labeled sub-blocks inside "Designing the Interaction," not as their
+  // own top-level chapters.
+  const interaction = page
+    .getByRole("heading", { level: 2, name: "Designing the Interaction" })
+    .locator("xpath=ancestor::section")
+  for (const label of [
+    "Personalized Onboarding",
+    "Dashboard & Progress Tracking",
+    "Community & Gamification",
+  ]) {
+    await expect(interaction.getByText(label, { exact: true })).toBeVisible()
+  }
+
   await expect(page.locator("article img").first()).toBeVisible()
   const facts = page.locator("[data-case-study-facts]")
   await expect(facts.getByText("06", { exact: true })).toBeVisible()
   await expect(facts.getByText("04", { exact: true })).toBeVisible()
-  await expect(
-    page.getByText("Google Forms", { exact: false }).first(),
-  ).toBeVisible()
-  await expect(
-    page.getByText("Google Optimize", { exact: false }).first(),
-  ).toBeVisible()
-  await expect(page.getByText("Hotjar", { exact: false }).first()).toBeVisible()
-  await expect(page.getByText("70+", { exact: true }).first()).toBeVisible()
+  await expect(facts.getByText("70+", { exact: true }).first()).toBeVisible()
+  await expect(facts.getByText("76%", { exact: true })).toBeVisible()
 })
 
 for (const width of [375, 768, 1024, 1440]) {
@@ -59,29 +66,26 @@ test("Harmony keeps its largest previews compact and fully contained", async ({
   await page.setViewportSize({ width: 1440, height: 900 })
   await page.goto("/work/harmony")
 
-  const sectionFor = (heading: string) =>
-    page
-      .getByRole("heading", { level: 2, name: heading })
-      .locator("xpath=ancestor::section")
-
   await expect
     .poll(() =>
-      sectionFor("Dashboard & Progress Tracking")
-        .locator("figure")
+      page
+        .getByAltText(/^Harmony app dashboard:/)
         .evaluate((element) => element.getBoundingClientRect().width),
     )
     .toBeLessThanOrEqual(720)
   await expect
     .poll(() =>
-      sectionFor("Website Prototype")
-        .locator("figure")
+      page
+        .getByText("Website prototype walkthrough", { exact: false })
+        .locator("xpath=ancestor::figure")
         .evaluate((element) => element.getBoundingClientRect().width),
     )
     .toBeLessThanOrEqual(880)
   await expect
     .poll(() =>
-      sectionFor("Mobile App Prototype")
-        .locator("figure")
+      page
+        .getByText("App prototype walkthrough", { exact: false })
+        .locator("xpath=ancestor::figure")
         .evaluate((element) => element.getBoundingClientRect().width),
     )
     .toBeLessThanOrEqual(680)
@@ -112,6 +116,24 @@ test("Harmony image lightbox opens and closes from the keyboard", async ({
   await page.keyboard.press("Escape")
   await expect(page.getByRole("dialog")).toBeHidden()
   await expect(zoomButton).toBeFocused()
+})
+
+test("Harmony's two disclosures open and stay accessible", async ({ page }) => {
+  await page.goto("/work/harmony")
+  const summaries = page.locator("article details > summary")
+  await expect(summaries).toHaveCount(2)
+
+  for (const summary of await summaries.all()) {
+    await summary.scrollIntoViewIfNeeded()
+    await summary.click()
+    const details = summary.locator("xpath=..")
+    await expect(details).toHaveJSProperty("open", true)
+  }
+
+  await expect(page.getByText("Persona", { exact: true }).first()).toBeVisible()
+  await expect(
+    page.getByText("Mobile App Wireframes", { exact: true }),
+  ).toBeVisible()
 })
 
 for (const width of [375, 768, 1024, 1440]) {

@@ -1,7 +1,7 @@
-import { useEffect } from "react"
 import { ArrowLeft, ExternalLink, FileText } from "lucide-react"
 import { Link } from "react-router-dom"
 
+import { CaseStudyDisclosure } from "@/components/ui/case-study-disclosure"
 import { CaseStudyFacts } from "@/components/ui/case-study-facts"
 import { CaseStudyHero } from "@/components/ui/case-study-hero"
 import { CaseStudyImage } from "@/components/ui/case-study-image"
@@ -9,7 +9,10 @@ import { CaseStudyVideo } from "@/components/ui/case-study-video"
 import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
-import type { CaseStudy as CaseStudyContent } from "@/content/case-studies"
+import type {
+  CaseStudy as CaseStudyContent,
+  CaseStudyDisclosureSection,
+} from "@/content/case-studies"
 import { getWorkProjects } from "@/content/work"
 import { formatNumeral } from "@/lib/numerals"
 import { cn } from "@/lib/utils"
@@ -21,6 +24,78 @@ type CaseStudyProps = {
   caseStudy: CaseStudyContent
 }
 
+/**
+ * One labeled sub-block — a short mono label, prose, then that block's
+ * own image(s). Shared by `section.subsections` (rendered plainly, in
+ * the main flow) and `section.disclosure.sections` (rendered inside
+ * `CaseStudyDisclosure`) so the two additive, Harmony-only schema
+ * extensions don't duplicate this JSX.
+ */
+function SectionSubBlock({
+  sub,
+  index,
+}: {
+  sub: CaseStudyDisclosureSection
+  index: number
+}) {
+  return (
+    <div className={index > 0 ? "mt-14" : undefined}>
+      {sub.title ? (
+        <p className="font-mono text-2xs tracking-widest text-brand uppercase">
+          {sub.title}
+        </p>
+      ) : null}
+      <div className={cn("max-w-2xl space-y-4", sub.title && "mt-4")}>
+        {sub.paragraphs.map((paragraph) => (
+          <p
+            key={paragraph}
+            className="text-base leading-relaxed text-muted-foreground"
+          >
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      {sub.images && sub.images.length > 0 ? (
+        <div
+          className={cn(
+            "mt-8",
+            sub.imageLayout === "two-up"
+              ? "grid gap-8 md:grid-cols-2"
+              : "max-w-2xl space-y-8",
+          )}
+        >
+          {sub.images.map((image) => (
+            <figure key={image.src}>
+              <CaseStudyImage
+                src={image.src}
+                alt={image.alt}
+                contain={image.contain}
+                zoomable={image.zoomable}
+                width={image.width}
+                height={image.height}
+              />
+              {image.label || image.caption ? (
+                <figcaption className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
+                  {image.label ? <span>{image.label}</span> : null}
+                  {image.label && image.caption ? " — " : null}
+                  {image.caption ? <span>{image.caption}</span> : null}
+                </figcaption>
+              ) : null}
+            </figure>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
+/**
+ * Title/meta description come from `<Seo />` alone (Sprint "SEO title race
+ * fix") — this used to set `document.title` itself too, racing `<Seo />`'s
+ * own effect and unpredictably showing a shorter, generic title (or, for an
+ * unknown slug, one that skipped `<Seo />`'s automatic `noindex`-worthy
+ * fallback) depending on which effect committed last.
+ */
 function CaseStudy({ slug, caseStudy }: CaseStudyProps) {
   const { language, copy } = useLanguage()
   const workProjects = getWorkProjects(language)
@@ -28,15 +103,9 @@ function CaseStudy({ slug, caseStudy }: CaseStudyProps) {
     (project) => project.href === `/work/${slug}`,
   )
 
-  useEffect(() => {
-    document.title = project
-      ? `${project.title} — Stéphania`
-      : copy.meta.caseFallbackTitle
-  }, [project, copy.meta.caseFallbackTitle])
-
   if (!caseStudy || !project) {
     return (
-      <Section spacing="md">
+      <Section role="main" spacing="md">
         <Container size="narrow">
           <p className="text-lg text-foreground">{copy.meta.missingCase}</p>
           <Link
@@ -65,7 +134,9 @@ function CaseStudy({ slug, caseStudy }: CaseStudyProps) {
   )
 
   return (
-    <article>
+    // `role="main"` — one `<main>` landmark per page (Sprint "Finalisation
+    // — Lighthouse landmark-one-main").
+    <article role="main">
       <Container size="content" className="pt-8">
         <Link
           to="/work"
@@ -128,6 +199,18 @@ function CaseStudy({ slug, caseStudy }: CaseStudyProps) {
 
               {section.facts && section.facts.length > 0 ? (
                 <CaseStudyFacts facts={section.facts} />
+              ) : null}
+
+              {section.subsections && section.subsections.length > 0 ? (
+                <div className="mt-10">
+                  {section.subsections.map((sub, subIndex) => (
+                    <SectionSubBlock
+                      key={sub.title ?? subIndex}
+                      sub={sub}
+                      index={subIndex}
+                    />
+                  ))}
+                </div>
               ) : null}
 
               {section.images && section.images.length > 0 ? (
@@ -253,6 +336,18 @@ function CaseStudy({ slug, caseStudy }: CaseStudyProps) {
                     </li>
                   ))}
                 </ol>
+              ) : null}
+
+              {section.disclosure ? (
+                <CaseStudyDisclosure summary={section.disclosure.summary}>
+                  {section.disclosure.sections.map((sub, subIndex) => (
+                    <SectionSubBlock
+                      key={sub.title ?? subIndex}
+                      sub={sub}
+                      index={subIndex}
+                    />
+                  ))}
+                </CaseStudyDisclosure>
               ) : null}
             </Container>
           </Section>

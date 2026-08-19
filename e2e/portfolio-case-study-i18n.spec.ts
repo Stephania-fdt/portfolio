@@ -6,110 +6,73 @@ import { expect, test } from "./fixtures"
 const portfolioUrl = `${process.env.PORTFOLIO_BASE_URL ?? ""}/work/portfolio`
 
 const chapters = [
+  "portfolio-overview",
   "portfolio-challenge",
-  "portfolio-objectives",
-  "portfolio-process",
-  "portfolio-evolution",
-  "portfolio-ia",
-  "portfolio-features",
-  "portfolio-design-system",
-  "portfolio-accessibility",
-  "portfolio-ai-workflow",
-  "portfolio-frontend",
-  "portfolio-responsive",
-  "portfolio-testing",
-  "portfolio-iteration",
-  "portfolio-what-changed",
+  "portfolio-approach",
+  "portfolio-decisions",
+  "portfolio-building",
+  "portfolio-iterations",
+  "portfolio-final-experience",
   "portfolio-outcome",
-  "portfolio-learnings",
 ] as const
 
 const content = {
   en: {
-    documentTitle: "React and AI-Assisted Design Portfolio | Stéphania Fordant",
+    documentTitle:
+      "Portfolio — Product Design & Design System | Stéphania Fordant",
     description:
-      "An accessible portfolio designed and developed with React, TypeScript, Tailwind CSS and an AI-assisted Product Design workflow.",
+      "A Product Design case study about designing and building my own portfolio — positioning, a Design System, accessibility and a bilingual front-end, with AI as a supporting tool.",
     summary:
       "Designing and building my own product experience from strategy to front-end.",
     alt: "This portfolio's homepage showing its editorial hero, primary navigation and calls to action.",
     headings: [
+      "Overview",
       "The Challenge",
-      "Objectives",
-      "Process",
-      "The Evolution",
-      "Information Architecture",
-      "Product capabilities",
-      "Design System",
-      "Accessibility",
-      "Designing with AI",
-      "Tools & front-end implementation",
-      "Responsive Design",
-      "Testing & Validation",
-      "Iteration",
-      "What changed",
-      "Outcome",
-      "What I learned",
+      "Approach",
+      "Key Design Decisions",
+      "Designing & Building",
+      "Iterations",
+      "Final Experience",
+      "Outcome & Learnings",
     ],
     forbidden: [
+      "Vue d’ensemble",
       "Le défi",
-      "Objectifs",
-      "Processus",
-      "L’évolution",
-      "Architecture de l’information",
-      "Fonctionnalités du produit",
-      "Accessibilité",
-      "Concevoir avec l’IA",
-      "Outils & implémentation",
-      "Design responsive",
-      "Tests & validation",
-      "Itération",
-      "Ce qui a évolué",
-      "Résultats",
-      "Ce que j’ai appris",
+      "Approche",
+      "Décisions de conception clés",
+      "Concevoir et construire",
+      "Itérations",
+      "L’expérience finale",
+      "Résultat & enseignements",
     ],
   },
   fr: {
     documentTitle:
-      "Portfolio Product Design avec React et IA | Stéphania Fordant",
+      "Portfolio — Product Design & Design System | Stéphania Fordant",
     description:
-      "Conception et développement d’un portfolio accessible avec React, TypeScript, Tailwind CSS et un workflow Product Design assisté par l’IA.",
+      "Étude de cas Product Design sur la conception et le développement de mon propre portfolio : positionnement, Design System, accessibilité et front-end bilingue, avec l’IA comme outil d’appui.",
     summary:
       "Concevoir et développer ma propre expérience produit, de la stratégie au front-end.",
     alt: "Page d’accueil du portfolio montrant son hero éditorial, la navigation principale et les appels à l’action.",
     headings: [
+      "Vue d’ensemble",
       "Le défi",
-      "Objectifs",
-      "Processus",
-      "L’évolution",
-      "Architecture de l’information",
-      "Fonctionnalités du produit",
-      "Design System",
-      "Accessibilité",
-      "Concevoir avec l’IA",
-      "Outils & implémentation",
-      "Design responsive",
-      "Tests & validation",
-      "Itération",
-      "Ce qui a évolué",
-      "Résultats",
-      "Ce que j’ai appris",
+      "Approche",
+      "Décisions de conception clés",
+      "Concevoir et construire",
+      "Itérations",
+      "L’expérience finale",
+      "Résultat & enseignements",
     ],
     forbidden: [
+      "Overview",
       "The Challenge",
-      "Objectives",
-      "Process",
-      "The Evolution",
-      "Information Architecture",
-      "Product capabilities",
-      "Accessibility",
-      "Designing with AI",
-      "Tools & front-end implementation",
-      "Responsive Design",
-      "Testing & Validation",
-      "Iteration",
-      "What changed",
-      "Outcome",
-      "What I learned",
+      "Approach",
+      "Key Design Decisions",
+      "Designing & Building",
+      "Iterations",
+      "Final Experience",
+      "Outcome & Learnings",
     ],
   },
 } as const
@@ -184,6 +147,31 @@ for (const language of ["en", "fr"] as const) {
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
       .analyze()
 
+    expect(
+      results.violations,
+      JSON.stringify(results.violations, null, 2),
+    ).toEqual([])
+  })
+
+  test(`Portfolio's disclosures stay reachable and accessible when opened in ${language}`, async ({
+    page,
+  }) => {
+    await setLanguage(page, language)
+    await page.goto(portfolioUrl)
+
+    const summaries = page.locator("article details > summary")
+    await expect(summaries).toHaveCount(2)
+
+    for (const summary of await summaries.all()) {
+      await summary.scrollIntoViewIfNeeded()
+      await summary.click()
+      const details = summary.locator("xpath=..")
+      await expect(details).toHaveJSProperty("open", true)
+    }
+
+    const results = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze()
     expect(
       results.violations,
       JSON.stringify(results.violations, null, 2),

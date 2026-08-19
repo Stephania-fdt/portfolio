@@ -57,7 +57,11 @@ function CaseStudyVideo({
           <button
             type="button"
             onClick={() => setIsPlaying(true)}
-            aria-label={copy.controls.playVideo}
+            aria-label={
+              sizeNote
+                ? `${copy.controls.playVideo} — ${sizeNote}`
+                : copy.controls.playVideo
+            }
             className="group relative block w-full"
           >
             <img

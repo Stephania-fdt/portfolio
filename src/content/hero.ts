@@ -6,13 +6,17 @@ export type CallToAction = {
 export type HeroContent = {
   name: string
   title: string
-  /**
-   * The capability statement set directly beneath the name — its own
-   * typographic voice (mono). Two explicit lines, not one wrapped string,
-   * so the intended break point is a content property, not a side-effect
-   * of container width.
-   */
+  /** The value-proposition claim — one sentence, no more. Answers "what do
+   *  you do", not "who are you" (the name/title byline already covers
+   *  that) — repeating the title here would just cost height for no new
+   *  information. */
   headline: string
+  /** The supporting statement beneath `headline` — a short personal
+   *  introduction (name, base, what drives her) rather than a pure
+   *  capability sentence (Sprint "Hero supporting statement — personal
+   *  intro"). Longer than the single-sentence version it replaced, so its
+   *  container width/line-height were tuned specifically to absorb that
+   *  extra length without growing the Hero's overall height. */
   description: string
   primaryCta: CallToAction
   secondaryCta: CallToAction
@@ -26,12 +30,14 @@ export type HeroContent = {
    * own closing reflections echo the same philosophy in their own words.
    */
   /**
-   * Compact expertise block, added directly beneath the two Hero CTAs
-   * (Sprint "Hero expertise addition"). Deliberately part of `HeroContent`,
-   * not its own content file — this is presented as one more beat of the
-   * Hero's own composition, not a separate homepage section. Icon choice
-   * lives in `HeroExpertise.tsx` (presentation, not content) keyed by
-   * `title`.
+   * Three names only — `description` is never rendered here, this is a
+   * quiet, unstyled-as-list line ("Design Systems · Accessibility · UX
+   * Research"), not the older, heavier `HeroExpertise.tsx` grid (still in
+   * the repo but no longer part of any route — kept for its content
+   * shape, not reused, since a 3-column card grid is exactly the kind of
+   * weight this field must now stay lighter than). Rendered directly in
+   * `Hero.tsx`, beneath both CTAs, deliberately quieter than either of
+   * them.
    */
   expertise: {
     eyebrow: string
@@ -43,12 +49,11 @@ export type HeroContent = {
 export const heroContent: HeroContent = {
   name: "Stéphania",
   title: "Product Designer",
-  headline:
-    "Senior Product Designer — making complex products clear, accessible and useful.",
+  headline: "I turn complexity into clear, accessible, scalable products.",
   description:
-    "With 6+ years of experience, I turn business and technical constraints into clear, consistent and scalable products. I specialize in Design Systems, accessibility and UX Research, with extensive experience in public services.",
+    "I’m Stéphania, a Product Designer based in Brussels, curious by nature and passionate about technology. I like understanding how products are built and the constraints that shape them — it keeps me curious, helps me stay up to date, and allows me to design experiences that are more relevant and realistic.",
   primaryCta: { label: "View my work", href: "#work" },
-  secondaryCta: { label: "Contact me", href: "#contact" },
+  secondaryCta: { label: "Let's talk", href: "/contact" },
   expertise: {
     eyebrow: "Expertise",
     heading: "Expertise backed by delivered work",
@@ -64,7 +69,7 @@ export const heroContent: HeroContent = {
           "Integrated WCAG AA/AA+ requirements into components and design processes.",
       },
       {
-        title: "UX Research & collaboration",
+        title: "UX Research",
         description:
           "Conducted interviews, user tests and workshops with business and technical teams.",
       },
@@ -78,11 +83,11 @@ function getHeroContent(language: "en" | "fr"): HeroContent {
   return {
     ...heroContent,
     headline:
-      "Product Designer senior — des produits complexes rendus clairs, accessibles et utiles.",
+      "Je transforme la complexité en produits clairs, accessibles et évolutifs.",
     description:
-      "Depuis plus de 6 ans, je transforme des contraintes métier et techniques en expériences cohérentes et évolutives. Je suis spécialisée en Design Systems, accessibilité et UX Research, notamment dans les services publics.",
+      "Je suis Stéphania, Product Designer basée à Bruxelles, curieuse et passionnée par la technologie. J’aime comprendre comment les produits sont construits et les contraintes qui les façonnent : cela nourrit ma curiosité, m’aide à rester à jour et à concevoir des expériences plus pertinentes et réalistes.",
     primaryCta: { label: "Voir mes projets", href: "#work" },
-    secondaryCta: { label: "Me contacter", href: "#contact" },
+    secondaryCta: { label: "Me contacter", href: "/contact" },
     expertise: {
       eyebrow: "Expertise",
       heading: "Des expertises appuyées par des réalisations concrètes",
@@ -98,7 +103,7 @@ function getHeroContent(language: "en" | "fr"): HeroContent {
             "Intégration des exigences WCAG AA/AA+ dans les composants et les processus de conception.",
         },
         {
-          title: "UX Research & collaboration",
+          title: "UX Research",
           description:
             "Entretiens, tests utilisateurs et ateliers avec les équipes métier et techniques.",
         },

@@ -261,8 +261,10 @@ export const workProjects = projectOrder.map((href) => {
 
 const featuredProjectHrefs = [
   "/work/spf-design-system",
+  "/work/portfolio",
   "/work/harmony",
   "/work/wellpack",
+  "/work/joga-aura",
 ] as const
 
 /** Curated Home preview, derived from the complete `/work` archive. */

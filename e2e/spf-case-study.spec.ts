@@ -12,21 +12,22 @@ const content = {
       "Project Overview",
       "The Challenge",
       "Research & UX",
-      "Foundations",
-      "Design Tokens",
-      "Component Library",
-      "Product Interfaces",
+      "The Design System",
+      "Execution",
       "Accessibility",
       "Reflection",
     ],
     assetStatus: "awaiting assets",
+    detailsSummaries: [
+      "Design system reference",
+      "Component library reference",
+    ],
     forbidden: [
       "Vue d’ensemble du projet",
       "Le défi",
       "Recherche & UX",
-      "Fondations",
-      "Bibliothèque de composants",
-      "Interfaces produit",
+      "Le Design System",
+      "Exécution",
       "Accessibilité",
       "Réflexion",
       "visuels en attente",
@@ -39,21 +40,22 @@ const content = {
       "Vue d’ensemble du projet",
       "Le défi",
       "Recherche & UX",
-      "Fondations",
-      "Design Tokens",
-      "Bibliothèque de composants",
-      "Interfaces produit",
+      "Le Design System",
+      "Exécution",
       "Accessibilité",
       "Réflexion",
     ],
     assetStatus: "visuels en attente",
+    detailsSummaries: [
+      "Référence du Design System",
+      "Référence de la bibliothèque de composants",
+    ],
     forbidden: [
       "Project Overview",
       "The Challenge",
       "Research & UX",
-      "Foundations",
-      "Component Library",
-      "Product Interfaces",
+      "The Design System",
+      "Execution",
       "Accessibility",
       "Reflection",
       "awaiting assets",
@@ -100,6 +102,39 @@ for (const language of ["en", "fr"] as const) {
       ).toBe(true)
     })
   }
+
+  test(`SPF's two disclosures open and stay accessible in ${language}`, async ({
+    page,
+  }) => {
+    await page.addInitScript((selectedLanguage) => {
+      localStorage.setItem("portfolio-language", selectedLanguage)
+    }, language)
+    await page.goto(spfUrl)
+
+    const copy = content[language]
+    const article = page.locator("article")
+    const summaries = article.locator("details > summary")
+    await expect(summaries).toHaveCount(2)
+
+    for (const label of copy.detailsSummaries) {
+      const summary = article.getByText(label, { exact: false })
+      await summary.scrollIntoViewIfNeeded()
+      await summary.click()
+    }
+
+    for (const summary of await summaries.all()) {
+      const details = summary.locator("xpath=..")
+      await expect(details).toHaveJSProperty("open", true)
+    }
+
+    const results = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze()
+    expect(
+      results.violations,
+      JSON.stringify(results.violations, null, 2),
+    ).toEqual([])
+  })
 
   test(`SPF has no detectable WCAG A/AA violations in ${language}`, async ({
     page,

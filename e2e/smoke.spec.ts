@@ -7,11 +7,13 @@ test("home page loads and renders the hero + nav", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
   await expect(page.getByRole("navigation", { name: "Primary" })).toBeVisible()
 
+  // Three beats only: Hero, Selected Work, a closing prompt — no
+  // Expertise, Home Profile or full Contact section on the Homepage
+  // anymore (Contact is its own route, `/contact`).
   await expect(page.locator("#work")).toBeVisible()
-  await expect(page.locator("#expertise")).toBeVisible()
-  await expect(page.locator("#home-profile")).toBeVisible()
-  await expect(page.locator("#contact")).toBeVisible()
   await expect(
-    page.locator("#positioning, #principles, #process, #thoughts"),
+    page.locator(
+      "#positioning, #principles, #process, #thoughts, #expertise, #home-profile, #contact",
+    ),
   ).toHaveCount(0)
 })

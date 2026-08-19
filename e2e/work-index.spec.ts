@@ -8,33 +8,37 @@ const projectTitles = [
   "Designing and Building an Accessible Portfolio with AI-Assisted Workflows",
 ]
 
-test("Home presents only the three curated work projects", async ({ page }) => {
+test("Home presents all five projects, SPF through Joga Aura, in the requested order", async ({
+  page,
+}) => {
   await page.goto("/")
 
   const preview = page.locator("#work [data-work-preview] > div")
-  await expect(preview).toHaveCount(3)
+  await expect(preview).toHaveCount(5)
   await expect(
-    preview.nth(0).getByRole("heading", {
-      name: "SPF Affaires étrangères",
-    }),
+    preview.nth(0).getByRole("heading", { name: "SPF Affaires étrangères" }),
   ).toBeVisible()
   await expect(
-    preview.nth(1).getByRole("heading", {
-      name: "Harmony",
-    }),
+    preview.nth(1).getByRole("heading", { name: "Stéphania — Portfolio" }),
   ).toBeVisible()
   await expect(
-    preview.nth(2).getByRole("heading", {
-      name: "WellPack",
-    }),
+    preview.nth(2).getByRole("heading", { name: "Harmony" }),
   ).toBeVisible()
-  await expect(page.locator("#work")).not.toContainText("Joga Aura")
-  await expect(page.locator("#work")).not.toContainText("Stéphania — Portfolio")
+  await expect(
+    preview.nth(3).getByRole("heading", { name: "WellPack" }),
+  ).toBeVisible()
+  await expect(
+    preview.nth(4).getByRole("heading", { name: "Joga Aura" }),
+  ).toBeVisible()
+
+  // Homepage progressive disclosure: no full Contact section here anymore
+  // — "Connect on LinkedIn" now lives only on the dedicated /contact page.
+  await expect(
+    page.getByRole("link", { name: /Connect on LinkedIn/i }),
+  ).toHaveCount(0)
   const workCta = page.getByRole("link", { name: /View all my work/i })
-  const contactCta = page.getByRole("link", { name: /Connect on LinkedIn/i })
   await expect(workCta).toHaveAttribute("href", "/work")
   await expect(workCta).toHaveClass(/bg-brand/)
-  await expect(contactCta).toHaveClass(/border-\[#590f29\]/)
 })
 
 test("Project card titles use the French translations", async ({ page }) => {

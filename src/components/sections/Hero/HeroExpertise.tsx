@@ -18,7 +18,7 @@ import { SectionKicker } from "@/components/ui/section-kicker"
  */
 const EXPERTISE_ICONS: Record<string, LucideIcon> = {
   "Design Systems": Layers,
-  "UX Research & collaboration": Search,
+  "UX Research": Search,
   Accessibility: Accessibility,
   Accessibilité: Accessibility,
 }

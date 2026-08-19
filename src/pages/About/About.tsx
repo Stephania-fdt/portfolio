@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Link } from "react-router-dom"
@@ -10,17 +9,23 @@ import { getAboutContent } from "@/content/about"
 import { fadeUp, transition } from "@/lib/motion"
 import { useLanguage } from "@/i18n"
 
+/**
+ * Title/meta description come from `<Seo />` alone (Sprint "SEO title race
+ * fix") — this page used to set `document.title` itself too, racing
+ * `<Seo />`'s own effect and unpredictably showing a shorter, less specific
+ * title depending on which effect committed last.
+ */
 function About() {
-  const { language, copy } = useLanguage()
+  const { language } = useLanguage()
   const content = getAboutContent(language)
   const shouldReduceMotion = useReducedMotion()
 
-  useEffect(() => {
-    document.title = copy.meta.aboutTitle
-  }, [copy.meta.aboutTitle])
-
   return (
-    <article>
+    // `role="main"` — one `<main>` landmark per page (Sprint "Finalisation
+    // — Lighthouse landmark-one-main"); kept as `<article>` rather than
+    // renamed to `<main>` so the many existing `page.locator("article")`
+    // e2e assertions keep matching the same element.
+    <article role="main">
       <header className="pt-16 md:pt-[4.5rem] lg:pt-24">
         <Container size="content">
           <div className="flex items-center gap-6">
@@ -109,7 +114,7 @@ function About() {
               variant="outline"
               className="w-full sm:w-auto"
             >
-              <Link to="/#contact">{content.secondaryCta}</Link>
+              <Link to="/contact">{content.secondaryCta}</Link>
             </Button>
           </motion.div>
         </div>

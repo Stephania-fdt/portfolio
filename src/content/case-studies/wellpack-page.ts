@@ -11,6 +11,15 @@ type WellPackPageContent = {
     meta: { label: string; value: string }[]
     alt: string
   }
+  overview: {
+    kicker: string
+    problemLabel: string
+    problem: string
+    roleLabel: string
+    role: string
+    outcomeLabel: string
+    outcome: string
+  }
   challenge: Chapter
   method: Chapter & { alt: string; caption: string }
   brief: Chapter
@@ -45,6 +54,17 @@ const wellPackPageContent: LocalizedContent<WellPackPageContent> = {
         { label: "Focus", value: "UX Research · Personas · Market Analysis" },
       ],
       alt: "WellPack's completed website, showing the brand identity applied to a real digital product experience.",
+    },
+    overview: {
+      kicker: "Overview",
+      problemLabel: "The problem",
+      problem:
+        "WellPack's landing pages had gone visually quiet — not from a single failure, but because no client brief was ever tested against real evidence about who the client's customers actually were.",
+      roleLabel: "My role",
+      role: "I built the research method itself — personas, market analysis, brand exercises — and turned its findings into UX recommendations and art direction. I owned the thinking behind every brief; a UI Designer owned the pixels.",
+      outcomeLabel: "The outcome",
+      outcome:
+        "No business metric ever reached this role, and none is claimed here. What's real: two years of continued trust from the CEO, Co-founder, Marketing, Sales and Key Accounts — the same evidence-first discipline applied, eventually, to WellPack's own brand.",
     },
     challenge: {
       kicker: "The Challenge",
@@ -138,6 +158,17 @@ const wellPackPageContent: LocalizedContent<WellPackPageContent> = {
         },
       ],
       alt: "Site final de WellPack montrant l’identité de marque appliquée à une expérience produit numérique réelle.",
+    },
+    overview: {
+      kicker: "Vue d’ensemble",
+      problemLabel: "Le problème",
+      problem:
+        "Les pages de destination de WellPack s’étaient visuellement éteintes — non par un échec ponctuel, mais parce qu’aucun cahier des charges client n’était jamais confronté à une compréhension réelle de ses propres clients.",
+      roleLabel: "Mon rôle",
+      role: "J’ai construit la méthode de recherche elle-même — personas, analyse de marché, exercices de marque — et transformé ses résultats en recommandations UX et en direction artistique. Je possédais la réflexion derrière chaque cahier des charges ; une designer UI possédait les pixels.",
+      outcomeLabel: "Le résultat",
+      outcome:
+        "Aucune métrique business n’a jamais atteint ce rôle, et aucune n’est revendiquée ici. Ce qui est réel : deux ans de confiance continue du PDG, du co-fondateur, du marketing, des ventes et des grands comptes — la même discipline fondée sur la preuve, appliquée, plus tard, à la marque WellPack elle-même.",
     },
     challenge: {
       kicker: "Le défi",

@@ -9,12 +9,12 @@ import { useLocation } from "react-router-dom"
  * once it's actually in the DOM.
  *
  * Depends on `key`, not just `[pathname, hash]`: two different links can
- * legitimately share a target hash (the header CTA and the "Contact" nav
- * link both point to "#contact"). If a visitor lands on "#contact" via one,
- * then clicks the other, `pathname`/`hash` don't change — but `key` does,
- * since React Router mints a new one on every navigation regardless of
- * whether the resulting URL is identical. Without it, that second click
- * silently did nothing.
+ * legitimately share a target hash (e.g. the Hero's own "View my work"
+ * button and a case-study back-link, both resolving to "/#work"). If a
+ * visitor lands on "/#work" via one, then clicks the other, `pathname`/
+ * `hash` don't change — but `key` does, since React Router mints a new
+ * one on every navigation regardless of whether the resulting URL is
+ * identical. Without it, that second click silently did nothing.
  */
 function ScrollManager() {
   const { pathname, hash, key } = useLocation()

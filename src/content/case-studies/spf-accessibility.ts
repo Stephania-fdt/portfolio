@@ -25,8 +25,8 @@ const spfAccessibilityContent: LocalizedContent<AccessibilityContent> = {
     contrast: {
       label: "Contrast, Checked at the Source",
       paragraphs: [
-        'The Design Tokens chapter already carries one piece of evidence: a background/text pairing checked inside Tokens Studio itself, reporting “Level AA — Pass, Level AAA — Pass” before a single component consumed the token. A second capture gives the surface layer the same treatment — Surface Dim, Surface, Surface Bright and five Surface Container steps, each a real resolved hex, with a dedicated On Surface and Outline built to sit on top of them. Nine roles, nine real values, not one "text color" asked to work everywhere.',
-        "The same discipline shows up in Foundations’ tonal system: every feedback role — success, warning, information, error — ships with its own dedicated on-color, so a component asking for a feedback color never has to guess whether its own text will read against it.",
+        'The Design System chapter already carries one piece of evidence: a background/text pairing checked inside Tokens Studio itself, reporting “Level AA — Pass, Level AAA — Pass” before a single component consumed the token. A second capture gives the surface layer the same treatment — Surface Dim, Surface, Surface Bright and five Surface Container steps, each a real resolved hex, with a dedicated On Surface and Outline built to sit on top of them. Nine roles, nine real values, not one "text color" asked to work everywhere.',
+        "The same discipline shows up in that chapter’s tonal system: every feedback role — success, warning, information, error — ships with its own dedicated on-color, so a component asking for a feedback color never has to guess whether its own text will read against it.",
       ],
       alt: "SPF's surface and neutral color tokens documented with real hex values — Surface Dim, Surface, Surface Bright, five Surface Container steps, On Surface, On Surface Variant, Outline and Outline Variant — shown twice, once against a pale backdrop and once against near-black.",
     },
@@ -34,7 +34,7 @@ const spfAccessibilityContent: LocalizedContent<AccessibilityContent> = {
       label: "States Aren’t Cosmetic",
       paragraphs: [
         "A disabled button that still reads as a button — dimmed enough to signal “not now,” legible enough not to disappear — is a decision, not whatever Angular Material happened to ship by default. Every variant in the system carries the same disabled treatment: primary, rounded, outlined, text, tile, each dimmed by the same amount rather than five separate guesses.",
-        "That same discipline is what let the Component Library chapter show a dozen input states — default, focus, filled, error, validated, disabled, autocomplete — and a notification system built on roles a screen reader and a stressed citizen both need to tell apart at a glance.",
+        "That same discipline is what let the Execution chapter show a dozen input states — default, focus, filled, error, validated, disabled, autocomplete — and a notification system built on roles a screen reader and a stressed citizen both need to tell apart at a glance.",
       ],
       alt: "A matrix of Angular Material button variants from the SPF component library — normal, primary, disabled and rounded — showing the disabled state applied consistently across every button style.",
       caption:
@@ -60,8 +60,8 @@ const spfAccessibilityContent: LocalizedContent<AccessibilityContent> = {
     contrast: {
       label: "Le contraste vérifié à la source",
       paragraphs: [
-        "Le chapitre Design Tokens apporte déjà une première preuve : une association arrière-plan/texte contrôlée directement dans Tokens Studio, avec les résultats « Level AA — Pass, Level AAA — Pass », avant qu’un seul composant n’utilise le token. Une deuxième capture applique le même traitement aux surfaces : Surface Dim, Surface, Surface Bright et cinq niveaux de Surface Container, chacun résolu vers une véritable valeur hexadécimale, avec des rôles dédiés On Surface et Outline. Neuf rôles, neuf valeurs réelles, plutôt qu’une seule « couleur de texte » censée fonctionner partout.",
-        "La même discipline apparaît dans le système tonal des Fondations : chaque rôle de retour — succès, avertissement, information, erreur — possède sa propre on-color. Un composant demandant une couleur de retour n’a donc jamais à deviner si son texte sera lisible dessus.",
+        "Le chapitre Design System apporte déjà une première preuve : une association arrière-plan/texte contrôlée directement dans Tokens Studio, avec les résultats « Level AA — Pass, Level AAA — Pass », avant qu’un seul composant n’utilise le token. Une deuxième capture applique le même traitement aux surfaces : Surface Dim, Surface, Surface Bright et cinq niveaux de Surface Container, chacun résolu vers une véritable valeur hexadécimale, avec des rôles dédiés On Surface et Outline. Neuf rôles, neuf valeurs réelles, plutôt qu’une seule « couleur de texte » censée fonctionner partout.",
+        "La même discipline apparaît dans le système tonal de ce chapitre : chaque rôle de retour — succès, avertissement, information, erreur — possède sa propre on-color. Un composant demandant une couleur de retour n’a donc jamais à deviner si son texte sera lisible dessus.",
       ],
       alt: "Tokens de surface et de couleurs neutres du SPF documentés avec leurs valeurs hexadécimales réelles : Surface Dim, Surface, Surface Bright, cinq niveaux Surface Container, On Surface, On Surface Variant, Outline et Outline Variant, présentés sur deux arrière-plans.",
     },
@@ -69,7 +69,7 @@ const spfAccessibilityContent: LocalizedContent<AccessibilityContent> = {
       label: "Les états ne sont pas cosmétiques",
       paragraphs: [
         "Un bouton désactivé qui reste identifiable comme bouton — assez atténué pour signifier « pas maintenant », assez lisible pour ne pas disparaître — résulte d’une décision, pas du comportement livré par défaut dans Angular Material. Chaque variante du système partage le même traitement désactivé : primary, rounded, outlined, text et tile sont toutes atténuées de la même manière plutôt que selon cinq approximations différentes.",
-        "Cette même discipline permet au chapitre Bibliothèque de composants de montrer une douzaine d’états de champs — default, focus, filled, error, validated, disabled, autocomplete — ainsi qu’un système de notifications fondé sur des rôles qu’un lecteur d’écran comme une personne sous pression doivent pouvoir distinguer immédiatement.",
+        "Cette même discipline permet au chapitre Exécution de montrer une douzaine d’états de champs — default, focus, filled, error, validated, disabled, autocomplete — ainsi qu’un système de notifications fondé sur des rôles qu’un lecteur d’écran comme une personne sous pression doivent pouvoir distinguer immédiatement.",
       ],
       alt: "Matrice des variantes de boutons Angular Material de la bibliothèque SPF — normal, primary, disabled et rounded — montrant un état désactivé cohérent pour chaque style.",
       caption:

@@ -16,7 +16,7 @@ function ScrollIndicator() {
       transition={shouldReduceMotion ? { duration: 0 } : transition.slow}
       className={cn(
         "mx-auto w-full max-w-content px-container",
-        "row-start-3 flex min-h-16 shrink-0 items-start justify-end md:-translate-y-12",
+        "row-start-3 mt-6 flex min-h-16 shrink-0 items-start justify-end",
       )}
     >
       <span className="flex flex-col items-center">

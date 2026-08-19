@@ -3,17 +3,17 @@ import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "./fixtures"
 
 const EXISTING_CHAPTERS = [
-  "Objectives",
-  "Process",
-  "Information Architecture",
-  "Design System",
-  "Accessibility",
-  "Responsive Design",
-  "Testing & Validation",
-  "Iteration",
+  "Overview",
+  "The Challenge",
+  "Approach",
+  "Key Design Decisions",
+  "Designing & Building",
+  "Iterations",
+  "Final Experience",
+  "Outcome & Learnings",
 ]
 
-test("Portfolio keeps its existing chapters and presents the product evolution", async ({
+test("Portfolio keeps its eight chapters and switches language via the header button", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
@@ -32,16 +32,7 @@ test("Portfolio keeps its existing chapters and presents the product evolution",
   await expect(
     page.getByRole("heading", {
       level: 3,
-      name: "From portfolio to personal product",
-    }),
-  ).toBeAttached()
-  await expect(
-    page.getByRole("heading", { level: 2, name: "What changed" }),
-  ).toBeAttached()
-  await expect(
-    page.getByRole("heading", {
-      level: 3,
-      name: /portfolio designed as a coherent system/i,
+      name: "From decision to production code.",
     }),
   ).toBeAttached()
 
@@ -49,26 +40,18 @@ test("Portfolio keeps its existing chapters and presents the product evolution",
     .getByRole("button", { name: "Switch site language to French" })
     .click()
   await expect(
-    page.getByRole("heading", {
-      level: 3,
-      name: "Du portfolio au produit personnel",
-    }),
-  ).toBeAttached()
-  await expect(
-    page.getByRole("heading", { level: 2, name: "Ce qui a évolué" }),
+    page.getByRole("heading", { level: 2, name: "Résultat & enseignements" }),
   ).toBeAttached()
   await expect(
     page.getByRole("heading", {
       level: 3,
-      name: "L’IA comme partenaire de design et de développement",
+      name: "De la décision au code de production.",
     }),
   ).toBeAttached()
 })
 
 for (const width of [375, 768, 1440]) {
-  test(`Portfolio evolution does not overflow at ${width}px`, async ({
-    page,
-  }) => {
+  test(`Portfolio does not overflow at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 })
     await page.goto("/work/portfolio")
     expect(
@@ -79,9 +62,7 @@ for (const width of [375, 768, 1440]) {
   })
 }
 
-test("Portfolio evolution has no detectable WCAG A/AA violations", async ({
-  page,
-}) => {
+test("Portfolio has no detectable WCAG A/AA violations", async ({ page }) => {
   await page.goto("/work/portfolio")
   const results = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])

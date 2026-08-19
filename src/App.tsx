@@ -21,6 +21,11 @@ const Experience = lazy(() =>
     default: module.Experience,
   })),
 )
+const ContactPage = lazy(() =>
+  import("@/pages/Contact/Contact").then((module) => ({
+    default: module.Contact,
+  })),
+)
 const SPFCaseStudy = lazy(() =>
   import("@/pages/case-studies/SPF/SPFCaseStudy").then((module) => ({
     default: module.SPFCaseStudy,
@@ -79,6 +84,7 @@ function App() {
           <Route path="/work" element={<Work />} />
           <Route path="/about" element={<About />} />
           <Route path="/experience" element={<Experience />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/work/spf-design-system" element={<SPFCaseStudy />} />
           <Route
             path="/work/spf-design-system/preview"

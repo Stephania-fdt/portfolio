@@ -15,7 +15,6 @@ type SpfPageContent = {
     meta: { label: string; value: string }[]
     alt: string
   }
-  facts: { label: string; value: string }[]
   overview: { kicker: string; points: { label: string; statement: string }[] }
   challenge: NarrativeChapter
   research: NarrativeChapter
@@ -37,16 +36,6 @@ const spfPageContent: LocalizedContent<SpfPageContent> = {
       ],
       alt: "The SPF citizen portal's authentication screen — the government's architecture as backdrop, the sign-in flow as the one deliberate object in frame.",
     },
-    facts: [
-      { label: "Role", value: "Product Designer" },
-      { label: "Industry", value: "Government" },
-      {
-        label: "Focus",
-        value: "Design System · Accessibility · Angular Material",
-      },
-      { label: "Duration", value: "2023 — Present" },
-      { label: "Team", value: "4 to 10+ developers, depending on the project" },
-    ],
     overview: {
       kicker: "Project Overview",
       points: [
@@ -152,16 +141,6 @@ const spfPageContent: LocalizedContent<SpfPageContent> = {
       ],
       alt: "Écran d’authentification du portail citoyen du SPF, avec l’architecture gouvernementale en arrière-plan et le parcours de connexion comme élément central.",
     },
-    facts: [
-      { label: "Rôle", value: "Product Designer" },
-      { label: "Secteur", value: "Service public" },
-      {
-        label: "Priorités",
-        value: "Design System · Accessibilité · Angular Material",
-      },
-      { label: "Durée", value: "2023 — Aujourd’hui" },
-      { label: "Équipe", value: "4 à plus de 10 développeurs selon le projet" },
-    ],
     overview: {
       kicker: "Vue d’ensemble du projet",
       points: [

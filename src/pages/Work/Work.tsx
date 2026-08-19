@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 
 import { Container } from "@/components/ui/container"
@@ -10,15 +9,17 @@ import { fadeUp, fadeUpSlow } from "@/lib/motion"
 import { cn } from "@/lib/utils"
 import { useLanguage } from "@/i18n"
 
-/** The complete editorial project index, using the Home's shared project data. */
+/**
+ * The complete editorial project index, using the Home's shared project
+ * data. Title/meta description come from `<Seo />` alone (Sprint "SEO title
+ * race fix") — this page no longer sets `document.title` itself; it used to,
+ * racing `<Seo />`'s own effect and unpredictably showing a shorter, less
+ * specific title depending on which effect committed last.
+ */
 function Work() {
   const { language, copy } = useLanguage()
   const workProjects = getWorkProjects(language)
   const shouldReduceMotion = useReducedMotion()
-
-  useEffect(() => {
-    document.title = copy.meta.workTitle
-  }, [copy.meta.workTitle])
 
   return (
     <main>

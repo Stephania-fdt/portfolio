@@ -69,6 +69,18 @@ const seoByPath: Record<string, SeoEntry> = {
         "Plus de six ans d’expérience en Product Design, UX Research, Design Systems accessibles, UI Design et collaboration produit pluridisciplinaire.",
     },
   },
+  "/contact": {
+    en: {
+      title: "Contact — Stéphania | Product Designer",
+      description:
+        "Get in touch with Stéphania Fordant, Product Designer based in Brussels — email, LinkedIn, location and CV in one place.",
+    },
+    fr: {
+      title: "Contact — Stéphania | Product Designer",
+      description:
+        "Contactez Stéphania Fordant, Product Designer basée à Bruxelles — e-mail, LinkedIn, localisation et CV réunis sur une page.",
+    },
+  },
   "/work/spf-design-system": {
     en: {
       title: "Accessible Public-Sector Design System | Stéphania Fordant",
@@ -83,14 +95,14 @@ const seoByPath: Record<string, SeoEntry> = {
   },
   "/work/portfolio": {
     en: {
-      title: "React and AI-Assisted Design Portfolio | Stéphania Fordant",
+      title: "Portfolio — Product Design & Design System | Stéphania Fordant",
       description:
-        "An accessible portfolio designed and developed with React, TypeScript, Tailwind CSS and an AI-assisted Product Design workflow.",
+        "A Product Design case study about designing and building my own portfolio — positioning, a Design System, accessibility and a bilingual front-end, with AI as a supporting tool.",
     },
     fr: {
-      title: "Portfolio Product Design avec React et IA | Stéphania Fordant",
+      title: "Portfolio — Product Design & Design System | Stéphania Fordant",
       description:
-        "Conception et développement d’un portfolio accessible avec React, TypeScript, Tailwind CSS et un workflow Product Design assisté par l’IA.",
+        "Étude de cas Product Design sur la conception et le développement de mon propre portfolio : positionnement, Design System, accessibilité et front-end bilingue, avec l’IA comme outil d’appui.",
     },
   },
   "/work/harmony": {
@@ -109,12 +121,12 @@ const seoByPath: Record<string, SeoEntry> = {
     en: {
       title: "WellPack - Research-Driven Marketing | Stéphania Fordant",
       description:
-        "A case study about turning marketing briefs into evidence-based decisions through user research and a standardised UI Kit.",
+        "A Product Design case study about building a reusable UX research method that turned marketing briefs into evidence-based decisions.",
     },
     fr: {
       title: "WellPack - UX Research et Design Marketing | Stéphania Fordant",
       description:
-        "Étude de cas sur la transformation de briefs marketing en décisions étayées grâce à la recherche utilisateur et à un UI Kit standardisé.",
+        "Étude de cas Product Design sur la construction d’une méthode UX Research réutilisable, transformant des briefs marketing en décisions fondées sur des preuves.",
     },
   },
   "/work/joga-aura": {

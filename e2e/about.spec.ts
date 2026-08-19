@@ -124,7 +124,7 @@ for (const language of ["en", "fr"] as const) {
       })
       const secondary = actions.getByRole("link", { name: copy.secondaryCta })
       await expect(primary).toHaveAttribute("href", "/experience")
-      await expect(secondary).toHaveAttribute("href", "/#contact")
+      await expect(secondary).toHaveAttribute("href", "/contact")
       await expect(
         article.getByRole("link", { name: copy.primaryCta }),
       ).toHaveCount(1)
@@ -252,16 +252,10 @@ test("About CTAs reach Experience, the existing CV and Contact", async ({
 
   await page.goto(aboutUrl)
   await page.getByRole("link", { name: content.en.secondaryCta }).click()
-  await expect(page).toHaveURL(/\/#contact$/)
-  await expect(page.locator("#contact")).toBeVisible()
-  const headerBottom = await page
-    .locator("header")
-    .evaluate((element) => element.getBoundingClientRect().bottom)
-  const contactHeadingTop = await page
-    .locator("#contact")
-    .getByRole("heading", { name: "Contact" })
-    .evaluate((element) => element.getBoundingClientRect().top)
-  expect(contactHeadingTop).toBeGreaterThanOrEqual(headerBottom)
+  await expect(page).toHaveURL(/\/contact$/)
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Let’s talk." }),
+  ).toBeVisible()
 })
 
 for (const language of ["en", "fr"] as const) {

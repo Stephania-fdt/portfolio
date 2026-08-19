@@ -3,7 +3,13 @@ import { motion, useReducedMotion } from "framer-motion"
 import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
-import { REVEAL, SubsectionText } from "@/components/ui/case-study-capture"
+import {
+  REVEAL,
+  AssetFrame,
+  SubsectionText,
+} from "@/components/ui/case-study-capture"
+import navCapture from "@/assets/case-studies/portfolio/nav.png"
+import workCardCapture from "@/assets/case-studies/portfolio/work-card-detail.png"
 import desktopCapture from "@/assets/case-studies/portfolio/responsive-desktop.png"
 import tabletCapture from "@/assets/case-studies/portfolio/responsive-tablet.png"
 import mobileCapture from "@/assets/case-studies/portfolio/responsive-mobile.png"
@@ -11,25 +17,45 @@ import { portfolioPageContent } from "@/content/case-studies/portfolio-page"
 import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
- * Portfolio case study — Chapter 10, Responsive Design. Three real
- * screenshots of the same section (Selected Work, chosen because it's
- * the site's most structurally complex one — asymmetric image/text
- * columns, a three-tier hierarchy) at desktop, tablet and mobile, not
- * illustrative mockups.
+ * Portfolio case study — Chapter 7, Final Experience. Replaces the
+ * screenshot halves of two former chapters (Design System's component
+ * captures, Responsive Design's viewport captures) with one gallery: the
+ * real product, real captures, no mockups. Captions name the decision
+ * each capture proves rather than describing what's already visible —
+ * the reasoning already happened in Key Design Decisions above; this
+ * section is where the reader checks it against the real thing.
  */
-function Responsive() {
+function FinalExperience() {
   const { language } = useLanguage()
-  const content = getLocalizedContent(portfolioPageContent, language).responsive
+  const content = getLocalizedContent(
+    portfolioPageContent,
+    language,
+  ).finalExperience
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <Section id="portfolio-responsive">
+    <Section id="portfolio-final-experience">
       <Container size="content">
         <SectionKicker>{content.kicker}</SectionKicker>
 
         <SubsectionText className="mt-8 max-w-2xl text-lg">
-          <p>{content.paragraph}</p>
+          <p>{content.introduction}</p>
         </SubsectionText>
+
+        <div className="mt-16 grid gap-10 md:grid-cols-2">
+          <div>
+            <AssetFrame src={navCapture} alt={content.navAlt} />
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+              {content.navCaption}
+            </p>
+          </div>
+          <div>
+            <AssetFrame src={workCardCapture} alt={content.cardAlt} />
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+              {content.cardCaption}
+            </p>
+          </div>
+        </div>
 
         <div className="mt-16 grid gap-10 md:grid-cols-2">
           <motion.figure
@@ -39,13 +65,13 @@ function Responsive() {
             <div className="w-full overflow-hidden border border-border bg-secondary/50">
               <img
                 src={desktopCapture}
-                alt={content.alts[0]}
+                alt={content.desktopAlt}
                 loading="lazy"
                 className="h-full w-full object-cover object-top"
               />
             </div>
-            <figcaption className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-              {content.captions[0]}
+            <figcaption className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              {content.desktopCaption}
             </figcaption>
           </motion.figure>
 
@@ -55,13 +81,13 @@ function Responsive() {
             <div className="aspect-[3/4] w-full overflow-hidden border border-border bg-secondary/50">
               <img
                 src={tabletCapture}
-                alt={content.alts[1]}
+                alt={content.tabletAlt}
                 loading="lazy"
                 className="h-full w-full object-cover object-top"
               />
             </div>
-            <figcaption className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-              {content.captions[1]}
+            <figcaption className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {content.tabletCaption}
             </figcaption>
           </motion.figure>
 
@@ -71,13 +97,13 @@ function Responsive() {
             <div className="aspect-[3/4] w-full overflow-hidden border border-border bg-secondary/50">
               <img
                 src={mobileCapture}
-                alt={content.alts[2]}
+                alt={content.mobileAlt}
                 loading="lazy"
                 className="h-full w-full object-cover object-top"
               />
             </div>
-            <figcaption className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
-              {content.captions[2]}
+            <figcaption className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {content.mobileCaption}
             </figcaption>
           </motion.figure>
         </div>
@@ -86,4 +112,4 @@ function Responsive() {
   )
 }
 
-export { Responsive }
+export { FinalExperience }

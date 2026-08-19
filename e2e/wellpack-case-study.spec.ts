@@ -7,7 +7,10 @@ const wellPackUrl = `${process.env.WELLPACK_BASE_URL ?? ""}/work/wellpack`
 const content = {
   en: {
     documentTitle: "WellPack - Research-Driven Marketing | Stéphania Fordant",
+    description:
+      "A Product Design case study about building a reusable UX research method that turned marketing briefs into evidence-based decisions.",
     chapters: [
+      "Overview",
       "The Challenge",
       "The Method",
       "From Method to Brief",
@@ -20,6 +23,7 @@ const content = {
     heroAlt:
       "WellPack's completed website, showing the brand identity applied to a real digital product experience.",
     forbidden: [
+      "Vue d’ensemble",
       "Le défi",
       "La méthode",
       "De la méthode au cahier des charges",
@@ -31,7 +35,10 @@ const content = {
   fr: {
     documentTitle:
       "WellPack - UX Research et Design Marketing | Stéphania Fordant",
+    description:
+      "Étude de cas Product Design sur la construction d’une méthode UX Research réutilisable, transformant des briefs marketing en décisions fondées sur des preuves.",
     chapters: [
+      "Vue d’ensemble",
       "Le défi",
       "La méthode",
       "De la méthode au cahier des charges",
@@ -44,6 +51,7 @@ const content = {
     heroAlt:
       "Site final de WellPack montrant l’identité de marque appliquée à une expérience produit numérique réelle.",
     forbidden: [
+      "Overview",
       "The Challenge",
       "The Method",
       "From Method to Brief",
@@ -72,6 +80,10 @@ for (const language of ["en", "fr"] as const) {
         article.getByRole("heading", { level: 1, name: "WellPack" }),
       ).toBeVisible()
       await expect(page).toHaveTitle(copy.documentTitle)
+      await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+        "content",
+        copy.description,
+      )
       await expect(
         article.getByText(copy.heroSummary, { exact: true }),
       ).toBeVisible()

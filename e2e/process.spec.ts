@@ -9,7 +9,7 @@ test("Home keeps the standalone Process chapter out of the page flow", async ({
   await expect(page.locator("#process")).toHaveCount(0)
   await expect(page.locator("#work")).toHaveJSProperty(
     "nextElementSibling.id",
-    "expertise",
+    "closing",
   )
 })
 

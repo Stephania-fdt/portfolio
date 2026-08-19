@@ -73,4 +73,8 @@ function getCaseStudies(language: "en" | "fr"): Record<string, CaseStudy> {
 
 export { getCaseStudies }
 
-export type { CaseStudy, CaseStudySection } from "@/content/case-studies/types"
+export type {
+  CaseStudy,
+  CaseStudySection,
+  CaseStudyDisclosureSection,
+} from "@/content/case-studies/types"

@@ -5,6 +5,7 @@ const routes = [
   "/work",
   "/about",
   "/experience",
+  "/contact",
   "/work/spf-design-system",
   "/work/portfolio",
   "/work/harmony",
@@ -71,6 +72,24 @@ test("language updates document metadata without false hreflang links", async ({
   await expect(page.locator("script#person-jsonld")).toHaveCount(1)
 })
 
+test("sitemap lists every indexable public route, including /contact, and nothing internal", async ({
+  request,
+}) => {
+  const response = await request.get("/sitemap.xml")
+  expect(response.ok()).toBe(true)
+  const body = await response.text()
+
+  for (const route of routes) {
+    expect(
+      body.includes(
+        `https://stephania-fdt.com${route === "/" ? "/" : route}</loc>`,
+      ),
+      `sitemap should list ${route}`,
+    ).toBe(true)
+  }
+  expect(body).not.toContain("/preview")
+})
+
 test("production SEO and CV files are publicly served", async ({ request }) => {
   for (const path of [
     "/robots.txt",
@@ -99,6 +118,14 @@ for (const width of [375, 768, 1024, 1440]) {
     await expect(image).toHaveAttribute("loading", "lazy")
     await expect(image).toHaveAttribute("width", "1600")
     await expect(image).toHaveAttribute("height", "900")
+    // The card sits further down the page now that Home shows five
+    // projects instead of three — give the lazy-loaded image time to
+    // actually start fetching after scrolling it into view.
+    await expect
+      .poll(() =>
+        image.evaluate((element: HTMLImageElement) => element.currentSrc),
+      )
+      .not.toBe("")
     const details = await image.evaluate((element: HTMLImageElement) => ({
       src: element.currentSrc,
       naturalWidth: element.naturalWidth,

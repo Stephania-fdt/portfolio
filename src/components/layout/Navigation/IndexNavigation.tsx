@@ -92,9 +92,7 @@ function IndexNavigation() {
       <button
         ref={triggerRef}
         type="button"
-        aria-label={
-          isOpen ? copy.controls.closeNavigation : copy.controls.openNavigation
-        }
+        aria-label={copy.controls.openNavigation}
         aria-expanded={isOpen}
         aria-controls={PANEL_ID}
         onClick={() => setIsOpen((open) => !open)}

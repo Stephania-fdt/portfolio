@@ -8,18 +8,25 @@ import { portfolioPageContent } from "@/content/case-studies/portfolio-page"
 import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
- * Portfolio case study — Chapter 3, Objectives. Same "labeled statement"
- * grid as SPF's Overview.tsx — six short, concrete objectives instead of
- * marketing language, each one traceable to what the rest of this case
- * study actually demonstrates.
+ * Portfolio case study — Chapter 1, Overview. The 45-second executive
+ * summary that used to not exist as its own chapter: problem, role,
+ * outcome, three short answers, right after the Hero and before any
+ * other reasoning. Everything past this point expands on one of these
+ * three lines — nothing here is said again the same way later.
  */
-function Objectives() {
+function Overview() {
   const { language } = useLanguage()
-  const content = getLocalizedContent(portfolioPageContent, language).objectives
+  const content = getLocalizedContent(portfolioPageContent, language).overview
   const shouldReduceMotion = useReducedMotion()
 
+  const rows = [
+    { label: content.problemLabel, statement: content.problem },
+    { label: content.roleLabel, statement: content.role },
+    { label: content.outcomeLabel, statement: content.outcome },
+  ]
+
   return (
-    <Section id="portfolio-objectives">
+    <Section id="portfolio-overview">
       <Container size="content">
         <SectionKicker>{content.kicker}</SectionKicker>
 
@@ -28,15 +35,15 @@ function Objectives() {
           whileInView="visible"
           viewport={{ once: true, margin: "-10% 0px" }}
           variants={staggerContainer}
-          className="mt-16 grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3"
+          className="mt-16 grid gap-x-12 gap-y-12 md:grid-cols-3"
         >
-          {content.items.map((objective) => (
-            <motion.div key={objective.label} variants={fadeUp}>
+          {rows.map((row) => (
+            <motion.div key={row.label} variants={fadeUp}>
               <p className="font-mono text-2xs tracking-widest text-brand uppercase">
-                {objective.label}
+                {row.label}
               </p>
-              <p className="mt-4 max-w-md text-xl leading-snug font-medium text-foreground md:text-2xl">
-                {objective.statement}
+              <p className="mt-4 text-lg leading-relaxed text-foreground">
+                {row.statement}
               </p>
             </motion.div>
           ))}
@@ -46,4 +53,4 @@ function Objectives() {
   )
 }
 
-export { Objectives }
+export { Overview }

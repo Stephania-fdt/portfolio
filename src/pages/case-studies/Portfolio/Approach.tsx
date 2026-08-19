@@ -10,20 +10,22 @@ import { portfolioPageContent } from "@/content/case-studies/portfolio-page"
 import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
- * Portfolio case study — Chapter 4, Process. A numbered sequence that
- * reads left-to-right like the site's other numbered lists (Design
- * Principles, The Process on the homepage), but the last connector
- * points back to the first step instead of ending — the loop is the
- * point: this wasn't a single linear pass through six stages, it was
- * several passes through the same six.
+ * Portfolio case study — Chapter 3, Approach (formerly "Process"). A
+ * numbered sequence that reads left-to-right like the site's other
+ * numbered lists (Design Principles, The Process on the homepage), but
+ * the last connector points back to the first step instead of ending —
+ * the loop is the point: this wasn't a single linear pass through six
+ * stages, it was several passes through the same six. The same grid
+ * pattern is reused, one column narrower, inside Designing & Building's
+ * "How it was built" disclosure for the AI-specific variant of this loop.
  */
-function Process() {
+function Approach() {
   const { language } = useLanguage()
-  const content = getLocalizedContent(portfolioPageContent, language).process
+  const content = getLocalizedContent(portfolioPageContent, language).approach
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <Section id="portfolio-process">
+    <Section id="portfolio-approach">
       <Container size="content">
         <SectionKicker>{content.kicker}</SectionKicker>
 
@@ -72,4 +74,4 @@ function Process() {
   )
 }
 
-export { Process }
+export { Approach }

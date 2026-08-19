@@ -3,6 +3,9 @@ export type ContactContent = {
   homepageStatement: string
   email: string
   linkedin: string
+  /** The Homepage's closing beat after Selected Work — one line, not a section. */
+  closingPrompt: string
+  closingCta: string
 }
 
 /**
@@ -21,6 +24,8 @@ export const contactContent: ContactContent = {
   email:
     "mailto:hello@stephania-fdt.com?subject=Product%20Design%20Opportunity%20%E2%80%94%20St%C3%A9phania",
   linkedin: "https://www.linkedin.com/in/stephania-fordant",
+  closingPrompt: "Like what you see?",
+  closingCta: "Let's talk",
 }
 
 function getContactContent(language: "en" | "fr"): ContactContent {
@@ -31,6 +36,8 @@ function getContactContent(language: "en" | "fr"): ContactContent {
           "N’hésitez pas à me contacter directement sur LinkedIn — indiquez simplement que vous avez découvert mon profil via mon portfolio.",
         homepageStatement:
           "Vous souhaitez échanger au sujet d’un poste ou d’un projet ? Écrivez-moi ou contactez-moi sur LinkedIn.",
+        closingPrompt: "Envie d’en discuter ?",
+        closingCta: "Échangeons",
       }
     : contactContent
 }

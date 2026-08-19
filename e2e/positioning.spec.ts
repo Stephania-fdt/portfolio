@@ -1,6 +1,7 @@
+import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "./fixtures"
 
-test("Selected Work and the merged Expertise follow the Hero", async ({
+test("Hero, Selected Work and the closing prompt are the Homepage's only three beats", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
@@ -12,54 +13,29 @@ test("Selected Work and the merged Expertise follow the Hero", async ({
   )
   await expect(page.locator("#work")).toHaveJSProperty(
     "nextElementSibling.id",
-    "expertise",
+    "closing",
   )
-  await expect(page.locator("#expertise")).toHaveJSProperty(
-    "nextElementSibling.id",
-    "home-profile",
-  )
+  await expect(
+    page.locator("#closing").locator("xpath=following-sibling::*"),
+  ).toHaveCount(0)
 })
 
-test("Merged expertise remains readable without mobile horizontal overflow", async ({
+test("Expertise and Home Profile no longer render on the Homepage", async ({
   page,
 }) => {
-  await page.setViewportSize({ width: 375, height: 812 })
-  await page.goto("/#expertise")
+  await page.goto("/")
 
-  await expect(
-    page.locator("#expertise [data-expertise-grid] > li"),
-  ).toHaveCount(3)
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= window.innerWidth,
-    ),
-  ).toBe(true)
+  await expect(page.locator("#expertise")).toHaveCount(0)
+  await expect(page.locator("#home-profile")).toHaveCount(0)
 })
 
-for (const { width, columns } of [
-  { width: 375, columns: 1 },
-  { width: 768, columns: 3 },
-  { width: 1024, columns: 3 },
-  { width: 1440, columns: 3 },
-]) {
-  test(`Expertise uses ${columns} column(s) at ${width}px without overflow`, async ({
+for (const width of [375, 768, 1440]) {
+  test(`Homepage stays compact and overflow-free at ${width}px`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height: 900 })
-    await page.goto("/#expertise")
+    await page.goto("/")
 
-    const items = page.locator("#expertise [data-expertise-grid] > li")
-    await expect(items).toHaveCount(3)
-    expect(
-      await items.evaluateAll(
-        (elements) =>
-          new Set(
-            elements.map((element) =>
-              Math.round(element.getBoundingClientRect().left),
-            ),
-          ).size,
-      ),
-    ).toBe(columns)
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -68,26 +44,76 @@ for (const { width, columns } of [
   })
 }
 
-test("Expertise keeps its translated content outside the Hero", async ({
+test("Hero CTAs are keyboard reachable with visible focus, in order", async ({
   page,
 }) => {
   await page.goto("/")
 
-  await expect(page.locator("#hero #expertise")).toHaveCount(0)
-  await expect(
-    page.locator("#expertise").getByRole("heading", {
-      name: "Expertise backed by delivered work",
-    }),
-  ).toBeVisible()
+  const primary = page.getByRole("link", { name: "View my work" })
+  const secondary = page
+    .locator("#hero")
+    .getByRole("link", { name: "Let's talk" })
 
-  await page
-    .getByRole("group")
-    .getByRole("button")
-    .filter({ hasText: "FR" })
-    .click()
+  await primary.focus()
+  await expect(primary).toBeFocused()
+  expect(
+    await primary.evaluate((element) => getComputedStyle(element).outlineWidth),
+  ).not.toBe("0px")
+
+  await page.keyboard.press("Tab")
+  await expect(secondary).toBeFocused()
+  expect(
+    await secondary.evaluate(
+      (element) => getComputedStyle(element).outlineWidth,
+    ),
+  ).not.toBe("0px")
+})
+
+test("Hero has no detectable WCAG A/AA violations", async ({ page }) => {
+  await page.goto("/")
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
+
+  const results = await new AxeBuilder({ page })
+    .include("#hero")
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+    .analyze()
+
+  expect(
+    results.violations,
+    JSON.stringify(results.violations, null, 2),
+  ).toEqual([])
+})
+
+test("Hero survives 200% zoom without horizontal overflow or hidden CTAs", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 720, height: 450 })
+  await page.goto("/")
+
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth + 1,
+    ),
+  ).toBe(true)
+  await expect(page.getByRole("link", { name: "View my work" })).toBeVisible()
   await expect(
-    page.locator("#expertise").getByRole("heading", {
-      name: "Des expertises appuyées par des réalisations concrètes",
-    }),
+    page.locator("#hero").getByRole("link", { name: "Let's talk" }),
   ).toBeVisible()
+})
+
+test("Selected Work is already perceptible below the Hero at 1440px, without scrolling", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 })
+  await page.goto("/")
+
+  const heroHeight = await page
+    .locator("#hero")
+    .evaluate((element) => element.getBoundingClientRect().height)
+  expect(heroHeight).toBeLessThan(900)
+
+  const workTop = await page
+    .locator("#work")
+    .evaluate((element) => element.getBoundingClientRect().top)
+  expect(workTop).toBeLessThan(900)
 })

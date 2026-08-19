@@ -10,40 +10,45 @@ type PortfolioPageContent = {
     meta: { label: string; value: string }[]
     alt: string
   }
-  challenge: { kicker: string; paragraphs: string[]; quote: string }
-  objectives: { kicker: string; items: Item[] }
-  process: { kicker: string; introduction: string; steps: Item[]; loop: string }
-  evolution: {
+  overview: {
+    kicker: string
+    problemLabel: string
+    problem: string
+    roleLabel: string
+    role: string
+    outcomeLabel: string
+    outcome: string
+  }
+  challenge: {
+    kicker: string
+    paragraphs: string[]
+    quote: string
+    goals: string[]
+  }
+  approach: {
+    kicker: string
+    introduction: string
+    steps: Item[]
+    loop: string
+  }
+  decisions: {
     kicker: string
     title: string
-    introduction: string
-    phaseLabel: string
-    phases: { title: string; description: string }[]
+    items: Item[]
+    detailsSummary: string
   }
-  architecture: {
+  building: {
     kicker: string
-    introduction: string
-    live: string
-    planned: string
-    hierarchyLabel: string
-    hierarchy: string
-  }
-  features: { kicker: string; title: string; items: string[] }
-  responsive: {
-    kicker: string
-    paragraph: string
-    alts: string[]
-    captions: string[]
-  }
-  testing: {
-    kicker: string
-    introduction: string
-    checks: { label: string; value: string }[]
-    infrastructureLabel: string
-    infrastructure: string
+    title: string
+    intro: string
+    exampleLabel: string
+    example: string
+    codeLabel: string
+    code: string
     conclusion: string
+    detailsSummary: string
   }
-  iteration: {
+  iterations: {
     kicker: string
     introduction: string
     assetLabel: string
@@ -55,23 +60,31 @@ type PortfolioPageContent = {
     category: string
     beforeCategory: string
     afterCategory: string
+    summaryTitle: string
+    summaryBeforeLabel: string
+    summaryAfterLabel: string
+    summaryBeforeItems: string[]
+    summaryAfterItems: string[]
   }
-  accessibility: {
+  finalExperience: {
     kicker: string
     introduction: string
-    practices: Item[]
-    qualificationLabel: string
-    qualification: string
+    navAlt: string
+    navCaption: string
+    cardAlt: string
+    cardCaption: string
+    desktopAlt: string
+    desktopCaption: string
+    tabletAlt: string
+    tabletCaption: string
+    mobileAlt: string
+    mobileCaption: string
   }
-  whatChanged: {
+  outcomeLearnings: {
     kicker: string
-    title: string
-    before: string
-    after: string
-    beforeItems: string[]
-    afterItems: string[]
+    statement: string
+    learnings: string[]
   }
-  outcome: { kicker: string; statement: string }
 }
 
 const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
@@ -87,12 +100,22 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
         { label: "Role", value: "Product Designer & Front-end Implementer" },
         { label: "Timeline", value: "2026 — Present" },
         {
-          label: "Focus",
-          value: "Design Systems · Accessibility · AI Workflow",
+          label: "Scope",
+          value: "UX/UI · Design System · Accessibility · Front-end",
         },
-        { label: "Stack", value: "React · TypeScript · Tailwind CSS" },
       ],
       alt: "This portfolio's homepage showing its editorial hero, primary navigation and calls to action.",
+    },
+    overview: {
+      kicker: "Overview",
+      problemLabel: "The problem",
+      problem:
+        "The previous portfolio looked good but proved little — uneven case studies, one language, no real evidence of Design System or accessibility thinking.",
+      roleLabel: "My role",
+      role: "I owned it end to end — positioning, UX writing, the Design System and the production front-end — with AI accelerating execution under my direction.",
+      outcomeLabel: "The outcome",
+      outcome:
+        "A bilingual, accessible product that shows the decisions behind it, not just the result.",
     },
     challenge: {
       kicker: "The Challenge",
@@ -101,44 +124,15 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
         "The challenge was to express my Product Designer identity, make six years of experience credible and legible, and demonstrate how I turn complex problems into simple, accessible and scalable experiences — through the product itself, not claims in a biography.",
       ],
       quote: "The portfolio itself became the product.",
-    },
-    objectives: {
-      kicker: "Objectives",
-      items: [
-        {
-          label: "Positioning",
-          statement:
-            "Create a clear and differentiated Product Designer positioning — not another generic portfolio template.",
-        },
-        {
-          label: "System",
-          statement:
-            "Build a scalable visual system, not a set of one-off pages.",
-        },
-        {
-          label: "Accessibility & Responsive",
-          statement:
-            "Make the experience accessible and responsive by construction, not as a pass added at the end.",
-        },
-        {
-          label: "Design-to-Code",
-          statement:
-            "Translate design decisions into production-ready front-end code myself.",
-        },
-        {
-          label: "AI Workflow",
-          statement:
-            "Use AI to accelerate iteration, not to make the decisions.",
-        },
-        {
-          label: "Dual Proof",
-          statement:
-            "Create a portfolio that demonstrates design and technical understanding in the same artifact.",
-        },
+      goals: [
+        "A differentiated positioning, not a template",
+        "A scalable system, not one-off pages",
+        "Accessible and responsive from the start",
+        "Design shipped as real code, AI-assisted",
       ],
     },
-    process: {
-      kicker: "Process",
+    approach: {
+      kicker: "Approach",
       introduction:
         "Six stages, run more than once — each pass through Build and Test fed back into what Discover and Define got right, or didn’t.",
       steps: [
@@ -175,119 +169,56 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       ],
       loop: "Iterate feeds back into Discover — this loop ran more than once before anything shipped.",
     },
-    evolution: {
-      kicker: "The Evolution",
-      title: "From portfolio to personal product",
-      introduction:
-        "The work evolved through six connected phases. Each one extended the same product rather than replacing what came before.",
-      phaseLabel: "Phase",
-      phases: [
-        {
-          title: "Foundations",
-          description:
-            "Positioning, art direction, palette, typography, the first architecture and the initial project selection.",
-        },
-        {
-          title: "Structuring the experience",
-          description:
-            "Clearer navigation and case-study hierarchy, dedicated About and Experience pages, a stronger header, mobile menu and contextual calls to action.",
-        },
-        {
-          title: "Enriching the case studies",
-          description:
-            "A shared editorial standard across SPF, Harmony, WellPack and Joga Aura, supported by real wireframes, moodboards, sitemaps, final interfaces and product links.",
-        },
-        {
-          title: "Building with AI",
-          description:
-            "AI-assisted visual exploration, React and TypeScript implementation, responsive refinement, code review and debugging — with human validation at every consequential decision.",
-        },
-        {
-          title: "Preparing for an international audience",
-          description:
-            "French and English content, a persistent language selector, adapted calls to action and stronger consistency across routes.",
-        },
-        {
-          title: "Continuous improvement",
-          description:
-            "Accessibility, contrast, responsive behavior, performance, Git and GitHub versioning, deployment readiness and domain integration.",
-        },
-      ],
-    },
-    architecture: {
-      kicker: "Information Architecture",
-      introduction:
-        "The top-level structure is four sections: Work, About, Experience, Contact — a résumé’s own order, read as a book instead of a list. Work carries the whole first argument (proof before pitch). About and Experience are honest reuses, not new chapters: they point to Design Principles and The Process, the two existing sections that already answer what those labels ask for. Contact is real and minimal — one statement, one direct email link, no form.",
-      live: "Live",
-      planned: "Planned",
-      hierarchyLabel: "Selected Work’s Deliberate Hierarchy",
-      hierarchy:
-        "Selected Work isn’t ordered by date or alphabet. SPF stays the permanent flagship — the clearest single proof of enterprise Design System work, accessibility and governance at scale — regardless of what else is added around it. This case study sits second, deliberately: it’s the one place the current practice (Design Systems, accessibility, AI-assisted workflow, front-end implementation) shows up as one shipped product rather than a described skill, so it gets real editorial room without ever competing with SPF for the lead position. Harmony, WellPack and Joga Aura follow, each proving a different, complementary register — research, methodology, and real client delivery.",
-    },
-    features: {
-      kicker: "Product capabilities",
-      title:
-        "A portfolio designed as a coherent system, not a collection of pages.",
+    decisions: {
+      kicker: "Key Design Decisions",
+      title: "The choices that hold this product together.",
       items: [
-        "Desktop and mobile navigation",
-        "About and Experience pages",
-        "Five deliberately ordered projects",
-        "Detailed editorial case studies",
-        "French and English content",
-        "Persistent language selector",
-        "LinkedIn and live-project links",
-        "Downloadable CV",
-        "Contextual calls to action",
-        "Responsive layouts",
-        "Reusable components",
-        "Accessible content and interactions",
-        "Git and GitHub versioning",
-      ],
-    },
-    responsive: {
-      kicker: "Responsive Design",
-      paragraph:
-        "Desktop is where the asymmetric composition happens — a project’s text and image columns sit side by side, mirrored every other row. Below the md breakpoint, every row collapses to a single column, image above text, in source order — no information hidden, nothing requiring horizontal scroll. Mobile also swaps the inline nav links for the INDEX dialog, visible in the capture below.",
-      alts: [
-        "Selected Work at 1440px — SPF's lead entry with a wide two-column layout, image and text side by side.",
-        "Selected Work at 768px — the same section, columns still side by side but narrower.",
-        "Selected Work at 375px — a single stacked column, image above text, and the INDEX dialog trigger replacing the inline nav links.",
-      ],
-      captions: [
-        "1440px — asymmetric two-column composition.",
-        "768px — tablet.",
-        "375px — mobile, INDEX navigation visible.",
-      ],
-    },
-    testing: {
-      kicker: "Testing & Validation",
-      introduction:
-        "These are the checks that were actually run against this codebase, not a general claim about quality. No usability testing has been conducted on this specific site, and none is claimed here.",
-      checks: [
-        { label: "TypeScript", value: "Clean — tsc -b --noEmit" },
-        { label: "Lint", value: "Clean — oxlint" },
-        { label: "Horizontal Overflow", value: "None, 320px–1440px" },
-        { label: "Desktop Visual Check", value: "Verified" },
-        { label: "Mobile Visual Check", value: "Verified" },
         {
-          label: "Breakpoints Tested",
-          value: "320 / 375 / 390 / 430 / 768 / 1024 / 1440",
+          label: "Information architecture",
+          statement:
+            "Four top-level sections, not a menu: Work, About, Experience, Contact — a résumé's own order, read as a book. Work carries the whole first argument, proof before pitch; About and Experience are honest reuses of Design Principles and The Process rather than new chapters; Contact stays real and minimal, no form.",
         },
         {
-          label: "Project Hierarchy",
-          value: "Verified — 5 projects, exact order",
+          label: "Selected Work's hierarchy",
+          statement:
+            "Projects aren't ordered by date. SPF stays the permanent flagship — the clearest proof of enterprise Design System work at scale. This case study sits second, deliberately: the one place the current practice shows up as a shipped product, not a described skill, without ever competing with SPF for the lead.",
+        },
+        {
+          label: "A restrained Design System",
+          statement:
+            "One brand color — a deep burgundy — reserved for deliberate moments only, never wired in as a general UI color. Three type families, each with one job. Spacing and motion both run on a handful of fluid tokens instead of per-breakpoint overrides.",
+        },
+        {
+          label: "Accessibility, built in",
+          statement:
+            "Real anchor links instead of clickable divs, a documented focus trap only where one exists, a focus ring that's never suppressed, and useReducedMotion() checked in every animated component. An automated WCAG A/AA check runs on every commit — not a one-time pass.",
         },
       ],
-      infrastructureLabel: "Supporting Infrastructure",
-      infrastructure:
-        "Beyond the manual checks above, an automated WCAG A/AA accessibility test (axe-core, via Playwright) runs against the home page, and a pre-commit hook runs lint on every commit — real, standing infrastructure, not a one-time pass.",
+      detailsSummary: "Design system reference",
+    },
+    building: {
+      kicker: "Designing & Building",
+      title: "From decision to production code.",
+      intro:
+        "Every decision had to survive becoming real code — React, TypeScript, Tailwind. AI sits inside that chain as a tool for exploration and acceleration, directed and reviewed at every step; it never replaces Product Design judgment or human validation.",
+      exampleLabel: "One Real Pass, Not a Hypothetical",
+      example:
+        "The Joga Aura entry in Selected Work is one real pass through that loop, not a staged example. Direction: replace a placeholder with a real project visual — never fabricate one. Exploration found two real candidates; review chose the cleaner product page over the homepage capture. The image was cropped to the card's existing ratio, then typecheck, lint and a full responsive sweep ran again before it shipped.",
+      codeLabel: "Documented AI workflow example in code",
+      code: `// Direction: real asset only, no fabricated visual.
+// Exploration: search existing project files for "joga aura".
+// Review: product page chosen over homepage — no lorem ipsum
+//         visible in the usable crop region.
+// Iteration: cropped to the card's existing 4:3 aspect ratio.
+// Validation: tsc -b --noEmit, oxlint, 320px–1440px sweep.`,
       conclusion:
-        "Every layout change was checked at 320px–1440px before shipping — not assumed.",
+        "AI accelerated exploration and implementation. It never made a design decision on its own.",
+      detailsSummary: "How it was built",
     },
-    iteration: {
-      kicker: "Iteration",
+    iterations: {
+      kicker: "Iterations",
       introduction:
-        "The final portfolio is the result of repeated design, implementation and review cycles, not a single pass. Two real examples from this project, not staged for this page.",
+        "The final product is the result of repeated review, not a single pass. Two real examples, then what changed overall.",
       assetLabel:
         "Example — a Placeholder, Replaced Once Real Evidence Existed",
       plate: "Plate 05",
@@ -301,74 +232,57 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
         "SPF’s category tag went through a real review pass: the accessibility work described in that case study wasn’t reflected in its own eyebrow tag until it was pointed out and corrected.",
       beforeCategory: "Product Design · Design System",
       afterCategory: "Product Design · Design System · Accessibility",
-    },
-    accessibility: {
-      kicker: "Accessibility",
-      introduction:
-        "Accessibility was considered while building each component, not run as a checklist after the fact.",
-      practices: [
-        {
-          label: "Semantic HTML",
-          statement:
-            "Project cards are real anchor links, not clickable divs — a single, real tab stop, not a keyboard trap dressed up to look interactive.",
-        },
-        {
-          label: "Keyboard Navigation",
-          statement:
-            "Every interactive element — links, buttons, the mobile INDEX panel — is reachable and operable by keyboard alone, with a documented focus trap inside the INDEX dialog.",
-        },
-        {
-          label: "Focus States",
-          statement:
-            "A visible focus ring (2px solid, the brand color, 3px offset) is never suppressed — it's set once, globally, in the base layer.",
-        },
-        {
-          label: "Reduced Motion",
-          statement:
-            "Every animated component checks useReducedMotion(), and a site-wide prefers-reduced-motion query collapses transitions and scroll-behavior to near-zero.",
-        },
-        {
-          label: "Responsive Behavior",
-          statement:
-            "No horizontal overflow at any tested width from 320px to 1440px — checked on every layout change, not assumed.",
-        },
-        {
-          label: "Accessible Interactive Elements",
-          statement:
-            "Decorative numerals, arrows and icons carry aria-hidden; the elements a screen reader actually announces are the ones that matter.",
-        },
-      ],
-      qualificationLabel: "What This Is — and Isn’t",
-      qualification:
-        "This site runs an automated accessibility check — axe-core, via Playwright, scoped to WCAG 2.1 A and AA rules — against the home page, and lint runs on every commit through a pre-commit hook. That’s real, ongoing, automated verification. It is not a manual audit and not a formal accessibility certification, and this case study doesn’t claim either.",
-    },
-    whatChanged: {
-      kicker: "What changed",
-      title:
+      summaryTitle:
         "The same identity, with a clearer and more capable product around it.",
-      before: "Before",
-      after: "After",
-      beforeItems: [
+      summaryBeforeLabel: "Before",
+      summaryAfterLabel: "After",
+      summaryBeforeItems: [
         "A mainly visual presentation",
         "Uneven case-study depth",
-        "More limited navigation",
-        "A single-language experience",
+        "Limited navigation",
         "Little visibility into professional experience",
-        "A design process documented only lightly",
       ],
-      afterItems: [
+      summaryAfterItems: [
         "Harmonized, editorial case studies",
         "Clearer UX narratives and evidence",
         "Richer About and Experience pages",
         "Responsive navigation and contextual CTAs",
-        "A bilingual French and English experience",
-        "Accessibility, Design System, tools and AI-assisted iteration made explicit",
       ],
     },
-    outcome: {
-      kicker: "Outcome",
+    finalExperience: {
+      kicker: "Final Experience",
+      introduction: "The real product, not mockups — captured live.",
+      navAlt:
+        "The site's primary navigation bar — logo, Work/About/Experience/Contact links, and the 'Let's talk' CTA button.",
+      navCaption:
+        "One primary CTA, everything else text links — nothing competes with 'Let's talk' for attention.",
+      cardAlt:
+        "A Selected Work project card at rest — the Harmony entry, showing the numbered eyebrow, title, description, technology tags and a real project screenshot.",
+      cardCaption:
+        "The same card component carries every project — one pattern, five entries, no per-project one-offs.",
+      desktopAlt:
+        "Selected Work at 1440px — SPF's lead entry with a wide two-column layout, image and text side by side.",
+      desktopCaption:
+        "Alternating image/text columns give each project room without repeating the same template beat-for-beat.",
+      tabletAlt:
+        "Selected Work at 768px — the same section, columns still side by side but narrower.",
+      tabletCaption:
+        "Columns narrow but stay side by side down to tablet — the asymmetry survives the breakpoint.",
+      mobileAlt:
+        "Selected Work at 375px — a single stacked column, image above text, and the INDEX dialog trigger replacing the inline nav links.",
+      mobileCaption:
+        "Below md, everything stacks image-first, and inline nav links become the INDEX dialog — nothing hidden, nothing scrolling sideways.",
+    },
+    outcomeLearnings: {
+      kicker: "Outcome & Learnings",
       statement:
         "The result is a clearer professional identity and a more credible presentation for Senior Product Designer opportunities: a bilingual portfolio that documents design decisions, demonstrates process, and rests on a reusable technical foundation that can continue to evolve for French and international audiences.",
+      learnings: [
+        "Designing while building collapses the distance between a decision and its consequences — a spacing choice that looks fine in a comp can still overflow a 320px screen, and you find out immediately, not in a later handoff.",
+        "Translating a design system into code exposes gaps a static file hides — a token that looks consistent in Figma still has to survive being reused across five different components before it's actually a system.",
+        "Accessibility during implementation is cheaper and more honest than accessibility as a later audit — checking focus order while building a component takes minutes; retrofitting it afterward takes a rewrite.",
+        "Iterative product thinking isn't a phase before the 'real' work — the loop this case study describes is still running on this site today, and it doesn't have a planned end date.",
+      ],
     },
   },
   fr: {
@@ -383,12 +297,22 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
         { label: "Rôle", value: "Product Designer & intégratrice front-end" },
         { label: "Période", value: "2026 — Aujourd’hui" },
         {
-          label: "Focus",
-          value: "Design Systems · Accessibilité · Workflow IA",
+          label: "Périmètre",
+          value: "UX/UI · Design System · Accessibilité · Front-end",
         },
-        { label: "Stack", value: "React · TypeScript · Tailwind CSS" },
       ],
       alt: "Page d’accueil du portfolio montrant son hero éditorial, la navigation principale et les appels à l’action.",
+    },
+    overview: {
+      kicker: "Vue d’ensemble",
+      problemLabel: "Le problème",
+      problem:
+        "Le précédent portfolio avait l’air soigné mais démontrait peu : études de cas inégales, une seule langue, aucune preuve réelle de pensée Design System ou accessibilité.",
+      roleLabel: "Mon rôle",
+      role: "J’en ai porté l’ensemble : positionnement, UX writing, Design System et front-end de production — avec l’IA en appui de l’exécution, sous ma direction.",
+      outcomeLabel: "Le résultat",
+      outcome:
+        "Un produit bilingue et accessible qui montre les décisions derrière le résultat, pas seulement le résultat.",
     },
     challenge: {
       kicker: "Le défi",
@@ -397,44 +321,15 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
         "Le défi consistait à traduire mon identité de Product Designer, rendre six années d’expérience crédibles et lisibles, et démontrer ma capacité à transformer des problématiques complexes en expériences simples, accessibles et évolutives — à travers le produit lui-même.",
       ],
       quote: "Le portfolio lui-même est devenu le produit.",
-    },
-    objectives: {
-      kicker: "Objectifs",
-      items: [
-        {
-          label: "Positionnement",
-          statement:
-            "Créer un positionnement clair et différencié de Product Designer, plutôt qu’un nouveau template de portfolio générique.",
-        },
-        {
-          label: "Système",
-          statement:
-            "Construire un système visuel évolutif, pas une collection de pages isolées.",
-        },
-        {
-          label: "Accessibilité & responsive",
-          statement:
-            "Rendre l’expérience accessible et responsive dès sa construction, plutôt que lors d’une vérification finale.",
-        },
-        {
-          label: "Du design au code",
-          statement:
-            "Traduire moi-même les décisions de design en code front-end prêt pour la production.",
-        },
-        {
-          label: "Workflow IA",
-          statement:
-            "Utiliser l’IA pour accélérer l’itération, non pour prendre les décisions.",
-        },
-        {
-          label: "Double preuve",
-          statement:
-            "Créer un portfolio démontrant dans le même produit la pratique du design et la compréhension technique.",
-        },
+      goals: [
+        "Un positionnement différenciant, pas un template",
+        "Un système évolutif, pas des pages isolées",
+        "Accessible et responsive dès la conception",
+        "Du design livré en code réel, assisté par l’IA",
       ],
     },
-    process: {
-      kicker: "Processus",
+    approach: {
+      kicker: "Approche",
       introduction:
         "Six étapes parcourues plusieurs fois : chaque passage par Build et Test réinjectait ses enseignements dans ce que Discover et Define avaient correctement cadré, ou non.",
       steps: [
@@ -471,122 +366,56 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       ],
       loop: "Itérer revient vers Découvrir : cette boucle a été parcourue plusieurs fois avant la mise en ligne.",
     },
-    evolution: {
-      kicker: "L’évolution",
-      title: "Du portfolio au produit personnel",
-      introduction:
-        "Le projet a évolué à travers six phases liées. Chacune a enrichi le même produit sans remplacer ce qui existait déjà.",
-      phaseLabel: "Phase",
-      phases: [
-        {
-          title: "Fondations",
-          description:
-            "Positionnement, direction artistique, palette, typographie, première architecture et sélection initiale des projets.",
-        },
-        {
-          title: "Structurer l’expérience",
-          description:
-            "Navigation et hiérarchie des études de cas clarifiées, pages À propos et Expérience dédiées, header, menu mobile et CTA contextualisés.",
-        },
-        {
-          title: "Enrichir les études de cas",
-          description:
-            "Un standard éditorial commun pour SPF, Harmony, WellPack et Joga Aura, appuyé par de vrais wireframes, moodboards, sitemaps, interfaces finales et liens produit.",
-        },
-        {
-          title: "Construire avec l’IA",
-          description:
-            "Exploration visuelle, implémentation React et TypeScript, responsive, revue de code et résolution de problèmes assistés par IA, avec validation humaine de chaque décision importante.",
-        },
-        {
-          title: "S’adresser à une audience internationale",
-          description:
-            "Contenus français et anglais, sélecteur de langue persistant, CTA adaptés et cohérence renforcée entre les routes.",
-        },
-        {
-          title: "Amélioration continue",
-          description:
-            "Accessibilité, contrastes, responsive, performances, versionnage Git et GitHub, préparation du déploiement et connexion au nom de domaine.",
-        },
-      ],
-    },
-    architecture: {
-      kicker: "Architecture de l’information",
-      introduction:
-        "La structure principale comprend quatre sections : Projets, À propos, Expérience, Contact — l’ordre naturel d’un CV, lu comme un livre plutôt que comme une liste. Projets porte le premier argument complet : la preuve avant le discours. À propos et Expérience sont des réutilisations honnêtes, non de nouveaux chapitres : elles pointent vers Design Principles et Le processus, les deux sections existantes qui répondent déjà à ces attentes. Contact reste réel et minimal : une phrase, un lien direct vers l’adresse e-mail, aucun formulaire.",
-      live: "En ligne",
-      planned: "Prévu",
-      hierarchyLabel: "La hiérarchie intentionnelle des projets sélectionnés",
-      hierarchy:
-        "Les projets sélectionnés ne sont classés ni par date ni par ordre alphabétique. SPF reste le projet phare permanent — la preuve la plus claire d’un travail de Design System d’entreprise, d’accessibilité et de gouvernance à grande échelle — indépendamment de ce qui sera ajouté autour. Cette étude de cas occupe volontairement la deuxième place : c’est le seul endroit où la pratique actuelle — Design Systems, accessibilité, workflow assisté par IA et implémentation front-end — apparaît comme un produit livré plutôt que comme une compétence décrite. Elle reçoit donc un véritable espace éditorial sans concurrencer SPF pour la première place. Harmony, WellPack et Joga Aura suivent, chacun démontrant un registre différent et complémentaire : recherche, méthodologie et livraison réelle pour un client.",
-    },
-    features: {
-      kicker: "Fonctionnalités du produit",
-      title:
-        "Un portfolio conçu comme un système cohérent, pas comme une collection de pages.",
+    decisions: {
+      kicker: "Décisions de conception clés",
+      title: "Les choix qui tiennent ce produit ensemble.",
       items: [
-        "Navigation desktop et mobile",
-        "Pages À propos et Expérience",
-        "Cinq projets ordonnés intentionnellement",
-        "Études de cas éditoriales détaillées",
-        "Contenus français et anglais",
-        "Sélecteur de langue persistant",
-        "Liens LinkedIn et projets en ligne",
-        "CV téléchargeable",
-        "CTA contextualisés",
-        "Mises en page responsives",
-        "Composants réutilisables",
-        "Contenus et interactions accessibles",
-        "Versionnage Git et GitHub",
+        {
+          label: "Architecture de l’information",
+          statement:
+            "Quatre sections principales, pas un menu : Projets, À propos, Expérience, Contact — l’ordre d’un CV, lu comme un livre. Projets porte tout le premier argument, la preuve avant le discours ; À propos et Expérience réutilisent honnêtement Design Principles et Le Processus plutôt que d’inventer de nouveaux chapitres ; Contact reste réel et minimal, sans formulaire.",
+        },
+        {
+          label: "La hiérarchie des projets sélectionnés",
+          statement:
+            "Les projets ne sont pas classés par date. SPF reste le projet phare permanent — la preuve la plus claire d’un travail de Design System d’entreprise à grande échelle. Cette étude de cas occupe volontairement la deuxième place : le seul endroit où la pratique actuelle apparaît comme un produit livré, et non comme une compétence décrite, sans jamais concurrencer SPF pour la tête de liste.",
+        },
+        {
+          label: "Un Design System sobre",
+          statement:
+            "Une seule couleur de marque — un bordeaux profond — réservée aux moments intentionnels, jamais utilisée comme couleur UI générale. Trois familles typographiques, chacune avec une seule fonction. Espacement et mouvement reposent tous deux sur une poignée de tokens fluides plutôt que sur des surcharges par breakpoint.",
+        },
+        {
+          label: "Une accessibilité intégrée dès la construction",
+          statement:
+            "De vrais liens plutôt que des divs cliquables, un focus trap documenté uniquement là où il est nécessaire, un anneau de focus jamais supprimé, et useReducedMotion() vérifié dans chaque composant animé. Un contrôle automatisé WCAG A/AA s’exécute à chaque commit — pas une passe ponctuelle.",
+        },
       ],
+      detailsSummary: "Référence du Design System",
     },
-    responsive: {
-      kicker: "Design responsive",
-      paragraph:
-        "La composition asymétrique apparaît sur desktop : les colonnes de texte et d’image d’un projet se placent côte à côte et s’inversent une ligne sur deux. Sous le breakpoint md, chaque ligne devient une colonne unique, avec l’image au-dessus du texte selon l’ordre du contenu : aucune information masquée et aucun défilement horizontal. Sur mobile, les liens de navigation intégrés sont également remplacés par la boîte de dialogue INDEX, visible dans la capture ci-dessous.",
-      alts: [
-        "Projets sélectionnés à 1440 px : projet SPF principal dans une large mise en page à deux colonnes, image et texte côte à côte.",
-        "Projets sélectionnés à 768 px : même section avec des colonnes côte à côte plus étroites.",
-        "Projets sélectionnés à 375 px : colonne unique empilée, image au-dessus du texte et bouton INDEX remplaçant les liens de navigation.",
-      ],
-      captions: [
-        "1440 px : composition asymétrique à deux colonnes.",
-        "768 px : tablette.",
-        "375 px : mobile, navigation INDEX visible.",
-      ],
-    },
-    testing: {
-      kicker: "Tests & validation",
-      introduction:
-        "Voici les contrôles réellement exécutés sur cette base de code, et non une affirmation générale sur sa qualité. Aucun test d’utilisabilité n’a été mené sur ce site spécifique et aucun n’est revendiqué ici.",
-      checks: [
-        { label: "TypeScript", value: "Valide — tsc -b --noEmit" },
-        { label: "Lint", value: "Valide — oxlint" },
-        {
-          label: "Débordement horizontal",
-          value: "Aucun, de 320 px à 1440 px",
-        },
-        { label: "Contrôle visuel desktop", value: "Vérifié" },
-        { label: "Contrôle visuel mobile", value: "Vérifié" },
-        {
-          label: "Breakpoints testés",
-          value: "320 / 375 / 390 / 430 / 768 / 1024 / 1440",
-        },
-        {
-          label: "Hiérarchie des projets",
-          value: "Vérifiée — 5 projets, ordre exact",
-        },
-      ],
-      infrastructureLabel: "Infrastructure de soutien",
-      infrastructure:
-        "Au-delà des contrôles manuels ci-dessus, un test automatisé d’accessibilité WCAG A/AA — axe-core via Playwright — s’exécute sur la page d’accueil, et un hook pre-commit lance le lint à chaque commit. Il s’agit d’une véritable infrastructure permanente, non d’un passage unique.",
+    building: {
+      kicker: "Concevoir et construire",
+      title: "De la décision au code de production.",
+      intro:
+        "Chaque décision devait résister au passage en code réel — React, TypeScript, Tailwind. L’IA intervient dans cette chaîne comme un outil d’exploration et d’accélération, dirigé et revu à chaque étape ; elle ne remplace jamais le jugement Product Design ni la validation humaine.",
+      exampleLabel: "Un passage réel, pas un exemple hypothétique",
+      example:
+        "L’entrée Joga Aura dans les projets sélectionnés est un véritable passage par cette boucle, pas un exemple mis en scène. Direction : remplacer un placeholder par un vrai visuel de projet — sans jamais en fabriquer un. L’exploration a trouvé deux candidats réels ; la revue a retenu la page produit, plus nette, plutôt que la capture de la page d’accueil. L’image a été recadrée au ratio existant de la carte, puis typage, lint et un contrôle responsive complet ont tourné à nouveau avant la mise en ligne.",
+      codeLabel: "Exemple de workflow IA documenté dans le code",
+      code: `// Direction : uniquement un visuel réel, aucune fabrication.
+// Exploration : rechercher « joga aura » dans les fichiers existants.
+// Revue : page produit retenue plutôt que la page d’accueil,
+//         sans lorem ipsum dans la zone de recadrage.
+// Itération : recadrage selon le ratio 4:3 existant de la carte.
+// Validation : tsc -b --noEmit, oxlint, contrôle 320 px–1440 px.`,
       conclusion:
-        "Chaque modification de mise en page a été vérifiée de 320 px à 1440 px avant sa mise en ligne, et non supposée correcte.",
+        "L’IA a accéléré l’exploration et l’implémentation. Elle n’a jamais pris seule une décision de design.",
+      detailsSummary: "Comment c’est construit",
     },
-    iteration: {
-      kicker: "Itération",
+    iterations: {
+      kicker: "Itérations",
       introduction:
-        "Le portfolio final résulte de cycles répétés de design, d’implémentation et de revue, non d’un passage unique. Voici deux exemples réels du projet, non mis en scène pour cette page.",
+        "Le produit final résulte de revues répétées, pas d’un unique passage. Deux exemples réels, puis ce qui a changé globalement.",
       assetLabel:
         "Exemple — un placeholder remplacé dès l’arrivée d’une preuve réelle",
       plate: "Planche 05",
@@ -600,74 +429,57 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
         "Le tag de catégorie de SPF a connu une véritable passe de revue : le travail d’accessibilité décrit dans cette étude de cas n’apparaissait pas dans son propre eyebrow jusqu’à ce que cette omission soit relevée et corrigée.",
       beforeCategory: "Conception produit · Système de design",
       afterCategory: "Conception produit · Système de design · Accessibilité",
-    },
-    accessibility: {
-      kicker: "Accessibilité",
-      introduction:
-        "L’accessibilité a été prise en compte pendant la construction de chaque composant, et non traitée comme une checklist après coup.",
-      practices: [
-        {
-          label: "HTML sémantique",
-          statement:
-            "Les cartes de projets sont de véritables liens et non des divs cliquables : un seul arrêt de tabulation réel, plutôt qu’un piège clavier déguisé en élément interactif.",
-        },
-        {
-          label: "Navigation au clavier",
-          statement:
-            "Chaque élément interactif — liens, boutons et panneau INDEX mobile — est accessible et utilisable uniquement au clavier, avec un focus trap documenté dans la boîte de dialogue INDEX.",
-        },
-        {
-          label: "États de focus",
-          statement:
-            "Un anneau de focus visible — trait plein de 2 px, couleur de marque, décalage de 3 px — n’est jamais supprimé ; il est défini une seule fois globalement dans la couche de base.",
-        },
-        {
-          label: "Mouvements réduits",
-          statement:
-            "Chaque composant animé vérifie useReducedMotion(), tandis qu’une media query prefers-reduced-motion globale réduit presque à zéro les transitions et le défilement animé.",
-        },
-        {
-          label: "Comportement responsive",
-          statement:
-            "Aucun débordement horizontal à toutes les largeurs testées de 320 px à 1440 px : vérifié à chaque modification de mise en page, et non supposé.",
-        },
-        {
-          label: "Éléments interactifs accessibles",
-          statement:
-            "Les numéros, flèches et icônes décoratifs utilisent aria-hidden ; les éléments réellement annoncés par un lecteur d’écran sont ceux qui portent du sens.",
-        },
-      ],
-      qualificationLabel: "Ce que cela est — et n’est pas",
-      qualification:
-        "Ce site exécute sur la page d’accueil un contrôle automatisé d’accessibilité — axe-core via Playwright, limité aux règles WCAG 2.1 A et AA — et le lint s’exécute à chaque commit grâce à un hook pre-commit. Il s’agit d’une vérification automatisée réelle, continue. Ce n’est ni un audit manuel ni une certification formelle d’accessibilité, et cette étude de cas ne revendique aucun des deux.",
-    },
-    whatChanged: {
-      kicker: "Ce qui a évolué",
-      title:
+      summaryTitle:
         "La même identité, portée par un produit plus clair et plus complet.",
-      before: "Avant",
-      after: "Après",
-      beforeItems: [
+      summaryBeforeLabel: "Avant",
+      summaryAfterLabel: "Après",
+      summaryBeforeItems: [
         "Une présentation principalement visuelle",
         "Des études de cas de profondeur inégale",
         "Une navigation plus limitée",
-        "Une expérience dans une seule langue",
         "Peu de visibilité sur le parcours professionnel",
-        "Un processus de conception peu documenté",
       ],
-      afterItems: [
+      summaryAfterItems: [
         "Des études de cas harmonisées et éditoriales",
         "Des récits UX et des preuves plus clairs",
         "Des pages À propos et Expérience enrichies",
         "Une navigation responsive et des CTA contextualisés",
-        "Une expérience bilingue français-anglais",
-        "L’accessibilité, le Design System, les outils et l’itération assistée par IA rendus explicites",
       ],
     },
-    outcome: {
-      kicker: "Résultats",
+    finalExperience: {
+      kicker: "L’expérience finale",
+      introduction: "Le produit réel, pas des maquettes — capturé en direct.",
+      navAlt:
+        "Barre de navigation principale du site avec logo, liens Projets, À propos, Expérience et Contact, ainsi que le bouton CTA « Échangeons ».",
+      navCaption:
+        "Un seul CTA plein, le reste en liens texte — rien ne concurrence « Échangeons » pour l’attention.",
+      cardAlt:
+        "Carte de projet Selected Work au repos pour Harmony, avec eyebrow numéroté, titre, description, tags technologiques et véritable capture du projet.",
+      cardCaption:
+        "Le même composant de carte porte chaque projet — un seul pattern, cinq entrées, aucun cas particulier.",
+      desktopAlt:
+        "Projets sélectionnés à 1440 px : projet SPF principal dans une large mise en page à deux colonnes, image et texte côte à côte.",
+      desktopCaption:
+        "Les colonnes image/texte s’inversent d’un projet à l’autre — chacun respire sans répéter le même gabarit.",
+      tabletAlt:
+        "Projets sélectionnés à 768 px : même section avec des colonnes côte à côte plus étroites.",
+      tabletCaption:
+        "Les colonnes se resserrent mais restent côte à côte jusqu’à la tablette — l’asymétrie survit au breakpoint.",
+      mobileAlt:
+        "Projets sélectionnés à 375 px : colonne unique empilée, image au-dessus du texte et bouton INDEX remplaçant les liens de navigation.",
+      mobileCaption:
+        "Sous le breakpoint md, tout s’empile image en premier, et les liens de navigation deviennent la boîte de dialogue INDEX — rien n’est caché, rien ne défile horizontalement.",
+    },
+    outcomeLearnings: {
+      kicker: "Résultat & enseignements",
       statement:
         "Le résultat est une identité professionnelle plus claire et une présentation plus crédible pour des opportunités de Senior Product Designer : un portfolio bilingue qui documente les décisions, démontre le processus de conception et repose sur un socle technique réutilisable, capable d’évoluer pour une audience française et internationale.",
+      learnings: [
+        "Concevoir tout en construisant réduit la distance entre une décision et ses conséquences : un choix d’espacement convaincant dans une maquette peut encore déborder sur un écran de 320 px, et on le découvre immédiatement plutôt que lors d’un handoff ultérieur.",
+        "Traduire un Design System en code expose les lacunes cachées par un fichier statique : un token cohérent dans Figma doit encore survivre à sa réutilisation dans cinq composants différents avant de devenir réellement un système.",
+        "Traiter l’accessibilité pendant l’implémentation est moins coûteux et plus honnête qu’un audit tardif : vérifier l’ordre de focus pendant la construction prend quelques minutes ; le corriger après coup exige une réécriture.",
+        "La pensée produit itérative n’est pas une phase précédant le « vrai » travail : la boucle décrite ici fonctionne encore aujourd’hui sur ce site et ne possède aucune date de fin planifiée.",
+      ],
     },
   },
 }

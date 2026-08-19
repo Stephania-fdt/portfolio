@@ -1,78 +1,65 @@
 import { expect, test } from "./fixtures"
 
-const emailHref =
-  "mailto:hello@stephania-fdt.com?subject=Product%20Design%20Opportunity%20%E2%80%94%20St%C3%A9phania"
-
-test("Home section headers reuse the Contact section kicker without numbering", async ({
+test("Home's one remaining section kicker (Selected Work) isn't numbered", async ({
   page,
 }) => {
   await page.goto("/")
 
-  const referenceClass = await page
-    .locator("#contact")
-    .getByRole("heading", { name: "Contact" })
-    .getAttribute("class")
+  const heading = page
+    .locator("#work")
+    .getByRole("heading", { name: "Selected Work", exact: true })
 
-  for (const [sectionId, title] of [
-    ["work", "Selected Work"],
-    ["expertise", "Expertise"],
-    ["home-profile", "A little about me"],
-  ]) {
-    const heading = page
-      .locator(`#${sectionId}`)
-      .getByRole("heading", { name: title, exact: true })
-
-    await expect(heading).toBeVisible()
-    await expect(heading).toHaveAttribute("class", referenceClass ?? "")
-    await expect(heading).not.toHaveText(/^(01|04|06)\s*[—-]/)
-  }
+  await expect(heading).toBeVisible()
+  await expect(heading).not.toHaveText(/^(01|04|06)\s*[—-]/)
 })
 
 for (const width of [375, 768, 1440]) {
-  test(`Contact exposes email and LinkedIn actions at ${width}px`, async ({
+  test(`Contact page exposes email, LinkedIn, location and CV at ${width}px`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height: 900 })
-    await page.goto("/#contact")
+    await page.goto("/contact")
     await page.evaluate(() => document.fonts.ready)
 
-    const contact = page.locator("#contact")
-    const email = contact.getByRole("link", { name: "Email me" })
-    const linkedin = contact.getByRole("link", {
-      name: "Connect on LinkedIn",
+    const article = page.locator("article")
+    const email = article.getByRole("link", {
+      name: "hello@stephania-fdt.com",
     })
+    const linkedin = article.getByRole("link", {
+      name: /linkedin\.com\/in\/stephania-fordant/,
+    })
+    const cv = article.getByRole("link", { name: /download.*cv/i })
 
-    await expect(email).toHaveAttribute("href", emailHref)
+    await expect(email).toHaveAttribute(
+      "href",
+      "mailto:hello@stephania-fdt.com?subject=Product%20Design%20Opportunity%20%E2%80%94%20St%C3%A9phania",
+    )
     await expect(linkedin).toHaveAttribute(
       "href",
       "https://www.linkedin.com/in/stephania-fordant",
     )
     await expect(linkedin).toHaveAttribute("target", "_blank")
     await expect(linkedin).toHaveAttribute("rel", "noopener noreferrer")
-
-    const emailBox = await email.boundingBox()
-    const linkedinBox = await linkedin.boundingBox()
-    if (!emailBox || !linkedinBox) throw new Error("Contact actions are hidden")
-
-    if (width === 375) {
-      expect(Math.round(emailBox.width)).toBe(Math.round(linkedinBox.width))
-      expect(linkedinBox.y).toBeGreaterThan(emailBox.y + emailBox.height)
-    } else {
-      expect(Math.abs(emailBox.y - linkedinBox.y)).toBeLessThanOrEqual(1)
-    }
+    await expect(cv).toHaveAttribute(
+      "href",
+      "/stephania-fordant-product-designer-cv-en.pdf",
+    )
+    await expect(article.getByText("Brussels, Belgium")).toBeVisible()
   })
 }
 
-test("Contact actions use their French labels", async ({ page }) => {
+test("Contact page actions use their French labels", async ({ page }) => {
   await page.addInitScript(() => {
     window.localStorage.setItem("portfolio-language", "fr")
   })
-  await page.goto("/#contact")
+  await page.goto("/contact")
 
+  const article = page.locator("article")
   await expect(
-    page.getByRole("link", { name: "Me contacter par e-mail" }),
+    article.getByRole("link", { name: "hello@stephania-fdt.com" }),
   ).toBeVisible()
+  await expect(article.getByText("Bruxelles, Belgique")).toBeVisible()
   await expect(
-    page.getByRole("link", { name: "Me contacter sur LinkedIn" }),
-  ).toBeVisible()
+    article.getByRole("link", { name: /télécharger.*cv/i }),
+  ).toHaveAttribute("href", "/stephania-fordant-product-designer-cv-fr.pdf")
 })

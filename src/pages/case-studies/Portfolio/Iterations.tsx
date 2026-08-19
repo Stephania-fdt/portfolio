@@ -5,24 +5,36 @@ import { Section } from "@/components/ui/section"
 import { SectionKicker } from "@/components/ui/section-kicker"
 import { REVEAL, SubsectionText } from "@/components/ui/case-study-capture"
 import { FIELD_GRID_PATTERN } from "@/lib/patterns"
+import { fadeUp, staggerContainer } from "@/lib/motion"
 import jogaAuraProduct from "@/assets/case-studies/joga-aura/product.png"
 import { portfolioPageContent } from "@/content/case-studies/portfolio-page"
 import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
- * Portfolio case study — Chapter 12, Iteration. The "before" state is
- * rendered live with the exact same field-grid pattern `WorkItem` itself
- * used while no real Joga Aura asset existed — not a screenshot standing
- * in for it, the actual real component pattern, reused. The "after" is
- * the same real product photo Selected Work uses today.
+ * Portfolio case study — Chapter 6, Iterations. Replaces two former
+ * chapters (Iteration, What Changed): the same two real before/after
+ * examples, closing on a compact overall summary instead of a separate
+ * full chapter repeating the same before/after shape a third time.
  */
-function Iteration() {
+function Iterations() {
   const { language } = useLanguage()
-  const content = getLocalizedContent(portfolioPageContent, language).iteration
+  const content = getLocalizedContent(portfolioPageContent, language).iterations
   const shouldReduceMotion = useReducedMotion()
+  const columns = [
+    {
+      label: content.summaryBeforeLabel,
+      items: content.summaryBeforeItems,
+      isAfter: false,
+    },
+    {
+      label: content.summaryAfterLabel,
+      items: content.summaryAfterItems,
+      isAfter: true,
+    },
+  ] as const
 
   return (
-    <Section id="portfolio-iteration">
+    <Section id="portfolio-iterations">
       <Container size="content">
         <SectionKicker>{content.kicker}</SectionKicker>
 
@@ -93,9 +105,57 @@ function Iteration() {
             </p>
           </motion.div>
         </div>
+
+        {/* Overall summary — the former What Changed chapter, compressed */}
+        <div className="mt-24">
+          <motion.p
+            {...(shouldReduceMotion ? { initial: false } : REVEAL())}
+            className="max-w-2xl text-xl leading-snug font-medium text-foreground md:text-2xl"
+          >
+            {content.summaryTitle}
+          </motion.p>
+
+          <motion.div
+            initial={shouldReduceMotion ? false : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10% 0px" }}
+            variants={staggerContainer}
+            className="mt-10 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2"
+          >
+            {columns.map(({ label, items, isAfter }) => (
+              <motion.div
+                key={label}
+                variants={fadeUp}
+                className={
+                  isAfter
+                    ? "bg-secondary/45 p-8 md:p-10"
+                    : "bg-background p-8 md:p-10"
+                }
+              >
+                <p className="font-mono text-xs tracking-widest text-brand uppercase">
+                  {label}
+                </p>
+                <ul className="mt-6 space-y-4">
+                  {items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex gap-4 text-base leading-relaxed text-foreground"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-2 size-1.5 shrink-0 rounded-full bg-brand"
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </Container>
     </Section>
   )
 }
 
-export { Iteration }
+export { Iterations }

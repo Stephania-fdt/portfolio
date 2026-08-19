@@ -16,12 +16,11 @@ import { getLocalizedContent, useLanguage } from "@/i18n"
 
 /**
  * Sprint 18.7. Replaces the Sprint 18.1 generic asset-checklist rendering
- * with a hand-authored chapter, matching Foundations/Tokens/Components/
- * Interfaces.
+ * with a hand-authored chapter, matching the other narrative chapters.
  *
  * No file in accessibility/ is used here directly — all three real exports
  * in that folder (Accent-colors.png, KeyColors-tones.png, TONES.png)
- * already appear in Foundations (Sprint 18.3). Showing them again would be
+ * already appear in The Design System chapter. Showing them again would be
  * a duplicated visual, not new evidence, so this chapter instead:
  *
  * - Cross-references two claims already proven with real evidence
