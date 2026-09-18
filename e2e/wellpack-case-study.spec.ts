@@ -8,7 +8,7 @@ const content = {
   en: {
     documentTitle: "WellPack - Research-Driven Marketing | Stéphania Fordant",
     description:
-      "A Product Design case study about building a reusable UX research method that turned marketing briefs into evidence-based decisions.",
+      "A Product Design project overview about building a reusable UX research method that turned marketing briefs into evidence-based decisions.",
     chapters: [
       "Overview",
       "The Challenge",
@@ -36,7 +36,7 @@ const content = {
     documentTitle:
       "WellPack - UX Research et Design Marketing | Stéphania Fordant",
     description:
-      "Étude de cas Product Design sur la construction d’une méthode UX Research réutilisable, transformant des briefs marketing en décisions fondées sur des preuves.",
+      "Présentation du projet Product Design sur la construction d’une méthode UX Research réutilisable, transformant des briefs marketing en décisions fondées sur des preuves.",
     chapters: [
       "Vue d’ensemble",
       "Le défi",

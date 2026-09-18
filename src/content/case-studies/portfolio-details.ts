@@ -104,7 +104,7 @@ const portfolioDetails: LocalizedContent<PortfolioDetails> = {
       conclusion:
         "Every layout change was checked at 320px–1440px before shipping — not assumed.",
     },
-    pageTitle: "Stéphania — Portfolio — Case study",
+    pageTitle: "Stéphania — Portfolio — Project overview",
   },
   fr: {
     ai: {
@@ -187,7 +187,7 @@ const portfolioDetails: LocalizedContent<PortfolioDetails> = {
       conclusion:
         "Chaque modification de mise en page a été vérifiée de 320 px à 1440 px avant sa mise en ligne, et non supposée correcte.",
     },
-    pageTitle: "Stéphania — Portfolio — Étude de cas",
+    pageTitle: "Stéphania — Portfolio — Présentation du projet",
   },
 }
 

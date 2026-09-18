@@ -2,49 +2,40 @@ import { expect, test } from "./fixtures"
 
 const languages = {
   en: {
-    headline: "I turn complexity into clear, accessible, scalable products.",
+    headline: "I design interfaces and the systems behind them.",
     description:
-      "I’m Stéphania, a Product Designer based in Brussels, curious by nature and passionate about technology. I like understanding how products are built and the constraints that shape them — it keeps me curious, helps me stay up to date, and allows me to design experiences that are more relevant and realistic.",
+      "I’m Stéphania, a Product Designer based in Brussels. For over six years, I’ve worked with business and development teams to design digital services, with a focus on Design Systems and accessibility.",
     expertise: "Design Systems · Accessibility · UX Research",
     work: "View my work",
     contact: "Let's talk",
     workIntro:
-      "Five projects across public services, connected products and e-commerce — the proof behind the positioning above.",
+      "A selection of my work across public services, connected products and marketing.",
     closingPrompt: "Like what you see?",
     closingCta: "Let's talk",
     spfDescription:
       "Several public-service applications lacked a shared UX methodology and consistent interface language.",
-    portfolioDescription:
-      "The previous portfolio did not clearly present the depth of the work or professional experience.",
     harmonyDescription:
       "Harmony’s connected bracelet needed a consistent experience across its website and companion mobile app.",
     wellpackDescription:
-      "Landing-page projects started from inconsistent briefs, without a shared understanding of client audiences and markets.",
-    jogaAuraDescription:
-      "Create a clear premium shopping journey for the Blue Serenity yoga mat.",
+      "Landing-page briefs lacked a shared understanding of client audiences and markets.",
   },
   fr: {
-    headline:
-      "Je transforme la complexité en produits clairs, accessibles et évolutifs.",
+    headline: "Je conçois des interfaces et les systèmes qui les relient.",
     description:
-      "Je suis Stéphania, Product Designer basée à Bruxelles, curieuse et passionnée par la technologie. J’aime comprendre comment les produits sont construits et les contraintes qui les façonnent : cela nourrit ma curiosité, m’aide à rester à jour et à concevoir des expériences plus pertinentes et réalistes.",
+      "Je suis Stéphania, Product Designer à Bruxelles. Depuis plus de six ans, je travaille avec les équipes métier et développement pour concevoir des services numériques, avec une attention particulière aux Design Systems et à l’accessibilité.",
     expertise: "Design Systems · Accessibilité · UX Research",
     work: "Voir mes projets",
     contact: "Me contacter",
     workIntro:
-      "Cinq projets entre services publics, produits connectés et e-commerce — la preuve derrière le positionnement ci-dessus.",
+      "Une sélection de mon travail dans les services publics, les produits connectés et le marketing.",
     closingPrompt: "Envie d’en discuter ?",
     closingCta: "Échangeons",
     spfDescription:
       "Plusieurs applications de service public ne partageaient ni méthode UX ni langage d’interface cohérent.",
-    portfolioDescription:
-      "Le portfolio précédent ne présentait pas clairement la profondeur des projets ni le parcours professionnel.",
     harmonyDescription:
       "Le bracelet connecté Harmony nécessitait une expérience cohérente entre le site web et l’application mobile.",
     wellpackDescription:
-      "Les projets de landing pages partaient de briefs hétérogènes, sans compréhension partagée des audiences et des marchés clients.",
-    jogaAuraDescription:
-      "Créer un parcours d’achat premium et clair pour le tapis de yoga Blue Serenity.",
+      "Les briefs de landing pages manquaient d’une compréhension partagée des audiences et des marchés clients.",
   },
 } as const
 
@@ -84,37 +75,31 @@ for (const language of ["en", "fr"] as const) {
       ).toHaveAttribute("href", "/contact")
 
       const projects = page.locator("#work [data-work-preview] > div")
-      await expect(projects).toHaveCount(5)
+      await expect(projects).toHaveCount(3)
       for (const [index, name] of [
         [0, "SPF"],
-        [1, "Stéphania"],
-        [2, "Harmony"],
-        [3, "WellPack"],
-        [4, "Joga Aura"],
+        [1, "Harmony"],
+        [2, "WellPack"],
       ] as const) {
         await expect(projects.nth(index)).toContainText(name)
       }
       await expect(projects.nth(0)).toContainText(copy.spfDescription)
-      await expect(projects.nth(1)).toContainText(copy.portfolioDescription)
-      await expect(projects.nth(2)).toContainText(copy.harmonyDescription)
-      await expect(projects.nth(3)).toContainText(copy.wellpackDescription)
-      await expect(projects.nth(4)).toContainText(copy.jogaAuraDescription)
+      await expect(projects.nth(1)).toContainText(copy.harmonyDescription)
+      await expect(projects.nth(2)).toContainText(copy.wellpackDescription)
       for (const [index, href] of [
         [0, "/work/spf-design-system"],
-        [1, "/work/portfolio"],
-        [2, "/work/harmony"],
-        [3, "/work/wellpack"],
-        [4, "/work/joga-aura"],
+        [1, "/work/harmony"],
+        [2, "/work/wellpack"],
       ] as const) {
         await expect(projects.nth(index).getByRole("link")).toHaveAttribute(
           "href",
           href,
         )
       }
-      await expect(projects.nth(3)).toContainText("UX Researcher")
-      await expect(projects.nth(3).locator("img")).toHaveAttribute(
+      await expect(projects.nth(2)).toContainText("UX Researcher")
+      await expect(projects.nth(2).locator("img")).toHaveAttribute(
         "src",
-        /Declinaisaon_siteweb/,
+        /home-preview/,
       )
 
       // Progressive disclosure: Homepage orients only — no Expertise

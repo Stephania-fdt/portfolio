@@ -49,9 +49,9 @@ export type HeroContent = {
 export const heroContent: HeroContent = {
   name: "Stéphania",
   title: "Product Designer",
-  headline: "I turn complexity into clear, accessible, scalable products.",
+  headline: "I design interfaces and the systems behind them.",
   description:
-    "I’m Stéphania, a Product Designer based in Brussels, curious by nature and passionate about technology. I like understanding how products are built and the constraints that shape them — it keeps me curious, helps me stay up to date, and allows me to design experiences that are more relevant and realistic.",
+    "I’m Stéphania, a Product Designer based in Brussels. For over six years, I’ve worked with business and development teams to design digital services, with a focus on Design Systems and accessibility.",
   primaryCta: { label: "View my work", href: "#work" },
   secondaryCta: { label: "Let's talk", href: "/contact" },
   expertise: {
@@ -82,10 +82,9 @@ function getHeroContent(language: "en" | "fr"): HeroContent {
 
   return {
     ...heroContent,
-    headline:
-      "Je transforme la complexité en produits clairs, accessibles et évolutifs.",
+    headline: "Je conçois des interfaces et les systèmes qui les relient.",
     description:
-      "Je suis Stéphania, Product Designer basée à Bruxelles, curieuse et passionnée par la technologie. J’aime comprendre comment les produits sont construits et les contraintes qui les façonnent : cela nourrit ma curiosité, m’aide à rester à jour et à concevoir des expériences plus pertinentes et réalistes.",
+      "Je suis Stéphania, Product Designer à Bruxelles. Depuis plus de six ans, je travaille avec les équipes métier et développement pour concevoir des services numériques, avec une attention particulière aux Design Systems et à l’accessibilité.",
     primaryCta: { label: "Voir mes projets", href: "#work" },
     secondaryCta: { label: "Me contacter", href: "/contact" },
     expertise: {

@@ -95,7 +95,7 @@ const spfExecutionContent: LocalizedContent<ExecutionContent> = {
       portalParagraph:
         "Once inside, the same header and footer that were built as isolated components now carry an actual homepage — service cards, an FAQ accordion, a rotating set of articles — proving the system wasn't designed to look good in a component sheet. It was designed to hold a real page together.",
       portalAlt:
-        "The SPF citizen portal homepage — header with crest, a grid of service cards, an FAQ accordion, an article carousel, and the government footer, all built from the same components documented earlier in the case study.",
+        "The SPF citizen portal homepage — header with crest, a grid of service cards, an FAQ accordion, an article carousel, and the government footer, all built from the same components documented earlier in the project overview.",
       portalCaption:
         "The portal homepage — every piece of it already introduced, none of it new.",
       faqLabel: "Support, Not Buried in an Accordion",

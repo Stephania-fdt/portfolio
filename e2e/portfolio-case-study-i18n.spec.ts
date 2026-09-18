@@ -21,7 +21,7 @@ const content = {
     documentTitle:
       "Portfolio — Product Design & Design System | Stéphania Fordant",
     description:
-      "A Product Design case study about designing and building my own portfolio — positioning, a Design System, accessibility and a bilingual front-end, with AI as a supporting tool.",
+      "A Product Design project overview about designing and building my own portfolio — positioning, a Design System, accessibility and a bilingual front-end, with AI as a supporting tool.",
     summary:
       "Designing and building my own product experience from strategy to front-end.",
     alt: "This portfolio's homepage showing its editorial hero, primary navigation and calls to action.",
@@ -50,7 +50,7 @@ const content = {
     documentTitle:
       "Portfolio — Product Design & Design System | Stéphania Fordant",
     description:
-      "Étude de cas Product Design sur la conception et le développement de mon propre portfolio : positionnement, Design System, accessibilité et front-end bilingue, avec l’IA comme outil d’appui.",
+      "Présentation du projet Product Design sur la conception et le développement de mon propre portfolio : positionnement, Design System, accessibilité et front-end bilingue, avec l’IA comme outil d’appui.",
     summary:
       "Concevoir et développer ma propre expérience produit, de la stratégie au front-end.",
     alt: "Page d’accueil du portfolio montrant son hero éditorial, la navigation principale et les appels à l’action.",

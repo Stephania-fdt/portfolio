@@ -110,7 +110,7 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       kicker: "Overview",
       problemLabel: "The problem",
       problem:
-        "The previous portfolio looked good but proved little — uneven case studies, one language, no real evidence of Design System or accessibility thinking.",
+        "The previous portfolio looked good but proved little — uneven project overviews, one language, no real evidence of Design System or accessibility thinking.",
       roleLabel: "My role",
       role: "I owned it end to end — positioning, UX writing, the Design System and the production front-end — with AI accelerating execution under my direction.",
       outcomeLabel: "The outcome",
@@ -181,7 +181,7 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
         {
           label: "Selected Work's hierarchy",
           statement:
-            "Projects aren't ordered by date. SPF stays the permanent flagship — the clearest proof of enterprise Design System work at scale. This case study sits second, deliberately: the one place the current practice shows up as a shipped product, not a described skill, without ever competing with SPF for the lead.",
+            "Projects aren't ordered by date. SPF stays the permanent flagship — the clearest proof of enterprise Design System work at scale. This project sits second, deliberately: the one place the current practice shows up as a shipped product, not a described skill, without ever competing with SPF for the lead.",
         },
         {
           label: "A restrained Design System",
@@ -229,7 +229,7 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
         "After — a real client asset, found and cropped to the same aspect ratio, not invented.",
       categoryLabel: "Example — a Category Tag, Refined Under Review",
       category:
-        "SPF’s category tag went through a real review pass: the accessibility work described in that case study wasn’t reflected in its own eyebrow tag until it was pointed out and corrected.",
+        "SPF’s category tag went through a real review pass: the accessibility work described in that project overview wasn’t reflected in its own eyebrow tag until it was pointed out and corrected.",
       beforeCategory: "Product Design · Design System",
       afterCategory: "Product Design · Design System · Accessibility",
       summaryTitle:
@@ -238,12 +238,12 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       summaryAfterLabel: "After",
       summaryBeforeItems: [
         "A mainly visual presentation",
-        "Uneven case-study depth",
+        "Uneven depth in project overviews",
         "Limited navigation",
         "Little visibility into professional experience",
       ],
       summaryAfterItems: [
-        "Harmonized, editorial case studies",
+        "Harmonized, editorial project overviews",
         "Clearer UX narratives and evidence",
         "Richer About and Experience pages",
         "Responsive navigation and contextual CTAs",
@@ -281,7 +281,7 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
         "Designing while building collapses the distance between a decision and its consequences — a spacing choice that looks fine in a comp can still overflow a 320px screen, and you find out immediately, not in a later handoff.",
         "Translating a design system into code exposes gaps a static file hides — a token that looks consistent in Figma still has to survive being reused across five different components before it's actually a system.",
         "Accessibility during implementation is cheaper and more honest than accessibility as a later audit — checking focus order while building a component takes minutes; retrofitting it afterward takes a rewrite.",
-        "Iterative product thinking isn't a phase before the 'real' work — the loop this case study describes is still running on this site today, and it doesn't have a planned end date.",
+        "Iterative product thinking isn't a phase before the 'real' work — the loop this project overview describes is still running on this site today, and it doesn't have a planned end date.",
       ],
     },
   },
@@ -307,7 +307,7 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       kicker: "Vue d’ensemble",
       problemLabel: "Le problème",
       problem:
-        "Le précédent portfolio avait l’air soigné mais démontrait peu : études de cas inégales, une seule langue, aucune preuve réelle de pensée Design System ou accessibilité.",
+        "Le précédent portfolio avait l’air soigné mais démontrait peu : présentations de projets inégales, une seule langue, aucune preuve réelle de pensée Design System ou accessibilité.",
       roleLabel: "Mon rôle",
       role: "J’en ai porté l’ensemble : positionnement, UX writing, Design System et front-end de production — avec l’IA en appui de l’exécution, sous ma direction.",
       outcomeLabel: "Le résultat",
@@ -378,7 +378,7 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
         {
           label: "La hiérarchie des projets sélectionnés",
           statement:
-            "Les projets ne sont pas classés par date. SPF reste le projet phare permanent — la preuve la plus claire d’un travail de Design System d’entreprise à grande échelle. Cette étude de cas occupe volontairement la deuxième place : le seul endroit où la pratique actuelle apparaît comme un produit livré, et non comme une compétence décrite, sans jamais concurrencer SPF pour la tête de liste.",
+            "Les projets ne sont pas classés par date. SPF reste le projet phare permanent — la preuve la plus claire d’un travail de Design System d’entreprise à grande échelle. Ce projet occupe volontairement la deuxième place : le seul endroit où la pratique actuelle apparaît comme un produit livré, et non comme une compétence décrite, sans jamais concurrencer SPF pour la tête de liste.",
         },
         {
           label: "Un Design System sobre",
@@ -426,7 +426,7 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
         "Après : un véritable visuel client trouvé et recadré au même ratio, non inventé.",
       categoryLabel: "Exemple — un tag de catégorie affiné pendant la revue",
       category:
-        "Le tag de catégorie de SPF a connu une véritable passe de revue : le travail d’accessibilité décrit dans cette étude de cas n’apparaissait pas dans son propre eyebrow jusqu’à ce que cette omission soit relevée et corrigée.",
+        "Le tag de catégorie de SPF a connu une véritable passe de revue : le travail d’accessibilité décrit dans cette présentation du projet n’apparaissait pas dans son propre eyebrow jusqu’à ce que cette omission soit relevée et corrigée.",
       beforeCategory: "Conception produit · Système de design",
       afterCategory: "Conception produit · Système de design · Accessibilité",
       summaryTitle:
@@ -435,12 +435,12 @@ const portfolioPageContent: LocalizedContent<PortfolioPageContent> = {
       summaryAfterLabel: "Après",
       summaryBeforeItems: [
         "Une présentation principalement visuelle",
-        "Des études de cas de profondeur inégale",
+        "Des présentations de projets de profondeur inégale",
         "Une navigation plus limitée",
         "Peu de visibilité sur le parcours professionnel",
       ],
       summaryAfterItems: [
-        "Des études de cas harmonisées et éditoriales",
+        "Des présentations de projets harmonisées et éditoriales",
         "Des récits UX et des preuves plus clairs",
         "Des pages À propos et Expérience enrichies",
         "Une navigation responsive et des CTA contextualisés",

@@ -12,7 +12,15 @@ test("Hero specimen follows the cursor and hides its crosshair on leave", async 
   if (!box) throw new Error("Hero specimen is not visible at desktop width.")
 
   await page.mouse.move(box.x + box.width * 0.75, box.y + box.height * 0.25)
-  await expect(specimen.getByText(/x 75.0/)).toBeVisible()
+  const readout = specimen.getByText(/x \d+\.\d · y \d+\.\d/)
+  await expect(readout).toBeVisible()
+  const readoutX = Number((await readout.innerText()).match(/x (\d+\.\d)/)?.[1])
+  // Tolerant of the sub-pixel drift between Playwright's `boundingBox()`
+  // snapshot and the rect read inside the live `mousemove` handler — the
+  // interaction only needs to track the cursor closely, not to the exact
+  // decimal.
+  expect(readoutX).toBeGreaterThan(70)
+  expect(readoutX).toBeLessThan(80)
   await expect(specimen.locator("[data-hero-crosshair]")).toHaveCSS(
     "opacity",
     "1",

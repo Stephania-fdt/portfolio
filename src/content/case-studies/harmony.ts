@@ -86,7 +86,7 @@ export const harmonyCaseStudy: CaseStudy = {
       heading: "Understanding the Experience",
       paragraphs: [
         "A field survey — 70+ responses via Google Forms, shared on LinkedIn and wellbeing/sport Facebook groups — found respondents skewed female, active, training for health first. 76% already tracked their activity with a fitness app, smartwatch or bracelet; 60% said Made in France would sway a purchase, but only alongside a credible product.",
-        "The clearest gap was motivation and support over time: complexity, a lack of guidance and no sense of community were why tools got abandoned — not a missing feature. That single insight is what the onboarding, dashboard and community & gamification decisions later in this case study respond to.",
+        "The clearest gap was motivation and support over time: complexity, a lack of guidance and no sense of community were why tools got abandoned — not a missing feature. That single insight is what the onboarding, dashboard and community & gamification decisions later in this project overview respond to.",
         "A persona, Jobs To Be Done, a card sort and a full customer journey turned that evidence into a validated audience and structure — the detail behind that work is in the disclosure below.",
       ],
       facts: [
@@ -686,13 +686,13 @@ export const harmonyCaseStudy: CaseStudy = {
     {
       heading: "Outcomes, Limitations & Learnings",
       paragraphs: [
-        "By the end of the project, research had produced a defined audience and a validated set of priorities; that evidence carried through card sorting, wireframes, a finished responsive site and app UI, and two interactive prototypes. The A/B test and heatmap work here are documented plans and methodology, not completed results — the source material doesn't establish a winning variant, and this case study doesn't claim one.",
+        "By the end of the project, research had produced a defined audience and a validated set of priorities; that evidence carried through card sorting, wireframes, a finished responsive site and app UI, and two interactive prototypes. The A/B test and heatmap work here are documented plans and methodology, not completed results — the source material doesn't establish a winning variant, and this project overview doesn't claim one.",
         "There was no real user base at scale, and accessibility was treated as foundational practice rather than a completed WCAG audit. What stayed with me is that understanding has to come before designing — not a phase to finish and forget, but the discipline that made every decision after it defensible.",
       ],
       french: {
         heading: "Résultats, limites & apprentissages",
         paragraphs: [
-          "À la fin du projet, la recherche avait produit un public défini et des priorités validées ; cette évidence s’est retrouvée dans le tri de cartes, les wireframes, une interface finie et responsive pour le site et l’application, et deux prototypes interactifs. Le travail d’A/B testing et de heatmap présenté ici documente un plan et une méthodologie, pas des résultats aboutis — les documents source n’établissent pas de variante gagnante, et cette étude de cas n’en revendique aucune.",
+          "À la fin du projet, la recherche avait produit un public défini et des priorités validées ; cette évidence s’est retrouvée dans le tri de cartes, les wireframes, une interface finie et responsive pour le site et l’application, et deux prototypes interactifs. Le travail d’A/B testing et de heatmap présenté ici documente un plan et une méthodologie, pas des résultats aboutis — les documents source n’établissent pas de variante gagnante, et cette présentation du projet n’en revendique aucune.",
           "Il n’y a pas eu de base d’utilisateur·rices réelle à grande échelle, et l’accessibilité a été traitée comme une pratique fondationnelle plutôt qu’un audit WCAG complet. Ce qui m’en reste, c’est que comprendre doit précéder concevoir — non comme une étape à finir puis oublier, mais comme la discipline qui a rendu chaque décision suivante défendable.",
         ],
       },

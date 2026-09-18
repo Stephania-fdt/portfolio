@@ -2,10 +2,12 @@
 // in-case-study imagery (Hero covers, iteration examples, etc.), which
 // keep their own separate imports elsewhere and are untouched by this set.
 import spfHomeThumbnail from "@/assets/case-studies/spf/home-thumbnail.png"
+import spfHomePreview from "@/assets/case-studies/spf/product/Desktop - 54.png"
 import portfolioHomeThumbnail from "@/assets/case-studies/portfolio/home-thumbnail.png"
 import harmonyHomeThumbnail from "@/assets/case-studies/harmony/home-thumbnail.webp"
+import harmonyHomePreview from "@/assets/images/harmony/harmony-hero.webp.png"
 import wellpackHomeThumbnail from "@/assets/case-studies/wellpack/home-thumbnail.png"
-import wellpackWebsitePreview from "@/assets/case-studies/wellpack/02-brand/supports/Declinaisaon_siteweb.png"
+import wellpackHomePreview from "@/assets/case-studies/wellpack/home-preview.png"
 import jogaAuraHomeThumbnail from "@/assets/case-studies/joga-aura/home-thumbnail.png"
 
 export type WorkProject = {
@@ -53,6 +55,8 @@ export type WorkProject = {
   homePreviewImage?: string
   homePreviewAlt?: string
   homePreviewAltFr?: string
+  homePreviewWidth?: number
+  homePreviewHeight?: number
   previewAlt?: string
   previewAltFr?: string
   previewWidth?: number
@@ -91,12 +95,12 @@ const unorderedWorkProjects: WorkProject[] = [
       "Several public-service applications lacked a shared UX methodology and consistent interface language.",
     homeRole: "Product Designer",
     homeOutcome:
-      "A scalable Design System and Angular Material UI Kit shared across teams.",
+      "A Design System and Angular Material UI Kit shared across teams.",
     homeProblemFr:
       "Plusieurs applications de service public ne partageaient ni méthode UX ni langage d’interface cohérent.",
     homeRoleFr: "Product Designer",
     homeOutcomeFr:
-      "Un Design System évolutif et un UI Kit Angular Material partagés entre les équipes.",
+      "Un Design System et un UI Kit Angular Material partagés entre les équipes.",
     technologies: [
       "Figma",
       "Angular Material",
@@ -108,6 +112,13 @@ const unorderedWorkProjects: WorkProject[] = [
     signalTechnologies: ["WCAG", "Design Tokens"],
     href: "/work/spf-design-system",
     previewImage: spfHomeThumbnail,
+    homePreviewImage: spfHomePreview,
+    homePreviewAlt:
+      "SPF citizen portal authentication screen, built from the shared Design System",
+    homePreviewAltFr:
+      "Écran d’authentification du portail citoyen du SPF, construit à partir du Design System partagé",
+    homePreviewWidth: 1440,
+    homePreviewHeight: 1024,
     hasCaseStudy: true,
   },
   {
@@ -179,6 +190,13 @@ const unorderedWorkProjects: WorkProject[] = [
       "Site du bracelet connecté Harmony affiché sur un écran d’ordinateur",
     previewWidth: 1600,
     previewHeight: 900,
+    homePreviewImage: harmonyHomePreview,
+    homePreviewAlt:
+      "Harmony website homepage interface, showing the connected-bracelet hero section",
+    homePreviewAltFr:
+      "Interface de la page d’accueil du site Harmony, montrant la section hero du bracelet connecté",
+    homePreviewWidth: 2560,
+    homePreviewHeight: 1364,
     hasCaseStudy: true,
   },
   {
@@ -191,15 +209,15 @@ const unorderedWorkProjects: WorkProject[] = [
     sentence:
       "Designed a repeatable research methodology turning client requests into evidence-based landing page briefs for B2B marketing campaigns.",
     homeProblem:
-      "Landing-page projects started from inconsistent briefs, without a shared understanding of client audiences and markets.",
+      "Landing-page briefs lacked a shared understanding of client audiences and markets.",
     homeRole: "UX Researcher",
     homeOutcome:
-      "A repeatable research method producing evidence-based design briefs.",
+      "A research method and design briefs based on audience and market analysis.",
     homeProblemFr:
-      "Les projets de landing pages partaient de briefs hétérogènes, sans compréhension partagée des audiences et des marchés clients.",
+      "Les briefs de landing pages manquaient d’une compréhension partagée des audiences et des marchés clients.",
     homeRoleFr: "UX Researcher",
     homeOutcomeFr:
-      "Une méthode de recherche reproductible produisant des briefs de design fondés sur des données.",
+      "Une méthode de recherche et des briefs fondés sur l’analyse des audiences et des marchés.",
     technologies: [
       "UX Research",
       "Personas",
@@ -210,11 +228,13 @@ const unorderedWorkProjects: WorkProject[] = [
     signalTechnologies: ["UX Research", "Design Briefs"],
     href: "/work/wellpack",
     previewImage: wellpackHomeThumbnail,
-    homePreviewImage: wellpackWebsitePreview,
+    homePreviewImage: wellpackHomePreview,
     homePreviewAlt:
-      "WellPack’s completed website showing the final interface and brand system in use",
+      "WellPack’s completed website homepage hero, showing the final interface and brand system in use",
     homePreviewAltFr:
-      "Site final de WellPack montrant l’interface et le système de marque en situation",
+      "Section d’accueil du site final de WellPack, montrant l’interface et le système de marque en situation",
+    homePreviewWidth: 467,
+    homePreviewHeight: 275,
     hasCaseStudy: true,
   },
   {
@@ -261,10 +281,8 @@ export const workProjects = projectOrder.map((href) => {
 
 const featuredProjectHrefs = [
   "/work/spf-design-system",
-  "/work/portfolio",
   "/work/harmony",
   "/work/wellpack",
-  "/work/joga-aura",
 ] as const
 
 /** Curated Home preview, derived from the complete `/work` archive. */

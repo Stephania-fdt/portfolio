@@ -31,7 +31,7 @@ const copy = {
     common: {
       selectedWork: "Selected Work",
       allProjects: "All projects",
-      viewCaseStudy: "View Case Study",
+      viewCaseStudy: "Explore the project",
       viewAllWork: "View all my work",
       backToWork: "Selected Work",
       contact: "Contact",
@@ -56,7 +56,7 @@ const copy = {
     },
     work: {
       intro:
-        "Five projects across public services, connected products and e-commerce — the proof behind the positioning above.",
+        "A selection of my work across public services, connected products and marketing.",
       title: "Selected projects, systems and digital experiences.",
       description:
         "Public digital services, connected products, e-commerce and the systems that make ambitious products easier to build and sustain.",
@@ -65,8 +65,8 @@ const copy = {
       homeTitle: "Stéphania — Product Designer",
       workTitle: "Work — Stéphania Fordant | Product Designer",
       aboutTitle: "About — Stéphania Fordant | Product Designer",
-      caseFallbackTitle: "Case study — Stéphania",
-      missingCase: "This case study doesn’t exist yet.",
+      caseFallbackTitle: "Project overview — Stéphania",
+      missingCase: "This project overview doesn’t exist yet.",
     },
   },
   fr: {
@@ -94,7 +94,7 @@ const copy = {
     common: {
       selectedWork: "Projets sélectionnés",
       allProjects: "Tous les projets",
-      viewCaseStudy: "Voir l’étude de cas",
+      viewCaseStudy: "Découvrir le projet",
       viewAllWork: "Voir tous mes projets",
       backToWork: "Projets sélectionnés",
       contact: "Contact",
@@ -119,7 +119,7 @@ const copy = {
     },
     work: {
       intro:
-        "Cinq projets entre services publics, produits connectés et e-commerce — la preuve derrière le positionnement ci-dessus.",
+        "Une sélection de mon travail dans les services publics, les produits connectés et le marketing.",
       title: "Projets, systèmes et expériences numériques sélectionnés.",
       description:
         "Services numériques publics, produits connectés, e-commerce et systèmes qui rendent les produits ambitieux plus simples à créer et à faire évoluer.",
@@ -128,8 +128,8 @@ const copy = {
       homeTitle: "Stéphania — Product Designer",
       workTitle: "Projets — Stéphania Fordant | Product Designer",
       aboutTitle: "À propos — Stéphania Fordant | Product Designer",
-      caseFallbackTitle: "Étude de cas — Stéphania",
-      missingCase: "Cette étude de cas n’existe pas encore.",
+      caseFallbackTitle: "Présentation du projet — Stéphania",
+      missingCase: "Cette présentation du projet n’existe pas encore.",
     },
   },
 } as const

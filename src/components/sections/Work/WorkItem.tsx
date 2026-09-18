@@ -202,8 +202,16 @@ function WorkItem({
                 },
                 language,
               )}
-              width={project.previewWidth}
-              height={project.previewHeight}
+              width={
+                usesHomePreview
+                  ? project.homePreviewWidth
+                  : project.previewWidth
+              }
+              height={
+                usesHomePreview
+                  ? project.homePreviewHeight
+                  : project.previewHeight
+              }
               loading="lazy"
               className={cn(
                 "h-full w-full transition-transform duration-(--duration-slow) ease-standard",

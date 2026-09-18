@@ -37,12 +37,12 @@ const seoByPath: Record<string, SeoEntry> = {
     en: {
       title: "Selected Product Design Work | Stéphania Fordant",
       description:
-        "Explore Product Design case studies spanning accessible public services, Design Systems, connected products, UX Research and e-commerce.",
+        "Explore Product Design projects spanning accessible public services, Design Systems, connected products, UX Research and e-commerce.",
     },
     fr: {
       title: "Projets Product Design sélectionnés | Stéphania Fordant",
       description:
-        "Découvrez des études de cas en services publics accessibles, Design Systems, produits connectés, UX Research et expériences e-commerce.",
+        "Découvrez des projets en services publics accessibles, Design Systems, produits connectés, UX Research et expériences e-commerce.",
     },
   },
   "/about": {
@@ -85,48 +85,48 @@ const seoByPath: Record<string, SeoEntry> = {
     en: {
       title: "Accessible Public-Sector Design System | Stéphania Fordant",
       description:
-        "A Product Design case study about standardising public-sector applications with Angular Material, Zeroheight and WCAG 2.1 AA.",
+        "A Product Design project overview about standardising public-sector applications with Angular Material, Zeroheight and WCAG 2.1 AA.",
     },
     fr: {
       title: "Design System public accessible | Stéphania Fordant",
       description:
-        "Étude de cas sur la standardisation d’applications publiques grâce à Angular Material, Zeroheight et aux exigences d’accessibilité WCAG 2.1 AA.",
+        "Présentation du projet de la standardisation d’applications publiques grâce à Angular Material, Zeroheight et aux exigences d’accessibilité WCAG 2.1 AA.",
     },
   },
   "/work/portfolio": {
     en: {
       title: "Portfolio — Product Design & Design System | Stéphania Fordant",
       description:
-        "A Product Design case study about designing and building my own portfolio — positioning, a Design System, accessibility and a bilingual front-end, with AI as a supporting tool.",
+        "A Product Design project overview about designing and building my own portfolio — positioning, a Design System, accessibility and a bilingual front-end, with AI as a supporting tool.",
     },
     fr: {
       title: "Portfolio — Product Design & Design System | Stéphania Fordant",
       description:
-        "Étude de cas Product Design sur la conception et le développement de mon propre portfolio : positionnement, Design System, accessibilité et front-end bilingue, avec l’IA comme outil d’appui.",
+        "Présentation du projet Product Design sur la conception et le développement de mon propre portfolio : positionnement, Design System, accessibilité et front-end bilingue, avec l’IA comme outil d’appui.",
     },
   },
   "/work/harmony": {
     en: {
       title: "Harmony - Connected Product Design | Stéphania Fordant",
       description:
-        "A Product Design case study focused on user research, usability testing and the design of a connected bracelet product experience.",
+        "A Product Design project focused on user research, usability testing and the design of a connected bracelet product experience.",
     },
     fr: {
       title: "Harmony - Conception d’un produit connecté | Stéphania Fordant",
       description:
-        "Étude de cas Product Design consacrée à la recherche utilisateur, aux tests d’utilisabilité et à l’expérience d’un bracelet connecté.",
+        "Présentation du projet Product Design consacré à la recherche utilisateur, aux tests d’utilisabilité et à l’expérience d’un bracelet connecté.",
     },
   },
   "/work/wellpack": {
     en: {
       title: "WellPack - Research-Driven Marketing | Stéphania Fordant",
       description:
-        "A Product Design case study about building a reusable UX research method that turned marketing briefs into evidence-based decisions.",
+        "A Product Design project overview about building a reusable UX research method that turned marketing briefs into evidence-based decisions.",
     },
     fr: {
       title: "WellPack - UX Research et Design Marketing | Stéphania Fordant",
       description:
-        "Étude de cas Product Design sur la construction d’une méthode UX Research réutilisable, transformant des briefs marketing en décisions fondées sur des preuves.",
+        "Présentation du projet Product Design sur la construction d’une méthode UX Research réutilisable, transformant des briefs marketing en décisions fondées sur des preuves.",
     },
   },
   "/work/joga-aura": {

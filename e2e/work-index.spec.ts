@@ -8,27 +8,21 @@ const projectTitles = [
   "Designing and Building an Accessible Portfolio with AI-Assisted Workflows",
 ]
 
-test("Home presents all five projects, SPF through Joga Aura, in the requested order", async ({
+test("Home presents SPF, Harmony and WellPack in the requested order", async ({
   page,
 }) => {
   await page.goto("/")
 
   const preview = page.locator("#work [data-work-preview] > div")
-  await expect(preview).toHaveCount(5)
+  await expect(preview).toHaveCount(3)
   await expect(
     preview.nth(0).getByRole("heading", { name: "SPF Affaires étrangères" }),
   ).toBeVisible()
   await expect(
-    preview.nth(1).getByRole("heading", { name: "Stéphania — Portfolio" }),
+    preview.nth(1).getByRole("heading", { name: "Harmony" }),
   ).toBeVisible()
   await expect(
-    preview.nth(2).getByRole("heading", { name: "Harmony" }),
-  ).toBeVisible()
-  await expect(
-    preview.nth(3).getByRole("heading", { name: "WellPack" }),
-  ).toBeVisible()
-  await expect(
-    preview.nth(4).getByRole("heading", { name: "Joga Aura" }),
+    preview.nth(2).getByRole("heading", { name: "WellPack" }),
   ).toBeVisible()
 
   // Homepage progressive disclosure: no full Contact section here anymore
@@ -75,7 +69,7 @@ for (const width of [375, 768, 1440]) {
     })
     expect(lineCount).toBeLessThanOrEqual(width === 375 ? 3 : 2)
 
-    await firstCard.getByRole("link", { name: /View Case Study/i }).click()
+    await firstCard.getByRole("link", { name: /Explore the project/i }).click()
     await expect(page).toHaveURL(/\/work\/spf-design-system$/)
   })
 }

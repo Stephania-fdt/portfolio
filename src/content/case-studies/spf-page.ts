@@ -102,7 +102,7 @@ const spfPageContent: LocalizedContent<SpfPageContent> = {
         },
       ],
       conclusion:
-        "What that decision produced is the rest of this case study — a shared foundation everywhere, and SPF’s own identity exactly where it needed to show.",
+        "The rest of this project overview shows what that decision produced — a shared foundation everywhere, and SPF’s own identity exactly where it needed to show.",
     },
     reflection: {
       kicker: "Reflection",
@@ -207,7 +207,7 @@ const spfPageContent: LocalizedContent<SpfPageContent> = {
         },
       ],
       conclusion:
-        "Cette décision a produit le reste de cette étude de cas : une fondation partagée partout et l’identité propre du SPF exactement là où elle devait apparaître.",
+        "La suite de cette présentation du projet montre ce que cette décision a produit : une fondation partagée partout et l’identité propre du SPF exactement là où elle devait apparaître.",
     },
     reflection: {
       kicker: "Réflexion",

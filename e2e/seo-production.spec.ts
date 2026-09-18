@@ -111,13 +111,13 @@ for (const width of [375, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 1000 })
     await page.goto("/")
     const image = page.getByAltText(
-      "Harmony connected-bracelet website displayed on a desktop monitor",
+      "Harmony website homepage interface, showing the connected-bracelet hero section",
     )
     await image.scrollIntoViewIfNeeded()
     await expect(image).toBeVisible()
     await expect(image).toHaveAttribute("loading", "lazy")
-    await expect(image).toHaveAttribute("width", "1600")
-    await expect(image).toHaveAttribute("height", "900")
+    await expect(image).toHaveAttribute("width", "2560")
+    await expect(image).toHaveAttribute("height", "1364")
     // The card sits further down the page now that Home shows five
     // projects instead of three — give the lazy-loaded image time to
     // actually start fetching after scrolling it into view.
@@ -134,9 +134,9 @@ for (const width of [375, 768, 1024, 1440]) {
         element.getBoundingClientRect().width /
         element.getBoundingClientRect().height,
     }))
-    expect(details.src).toMatch(/home-thumbnail(?:-[^/]+)?\.webp$/)
-    expect(details.naturalWidth).toBe(1600)
-    expect(details.naturalHeight).toBe(900)
+    expect(details.src).toMatch(/harmony-hero\.webp(?:-[^/]+)?\.png$/)
+    expect(details.naturalWidth).toBe(2560)
+    expect(details.naturalHeight).toBe(1364)
     expect(details.ratio).toBeGreaterThan(1.3)
     expect(
       await page.evaluate(
