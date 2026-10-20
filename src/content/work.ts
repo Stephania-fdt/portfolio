@@ -2,7 +2,7 @@
 // in-case-study imagery (Hero covers, iteration examples, etc.), which
 // keep their own separate imports elsewhere and are untouched by this set.
 import spfHomeThumbnail from "@/assets/case-studies/spf/home-thumbnail.png"
-import spfHomePreview from "@/assets/case-studies/spf/product/Desktop - 54.png"
+import spfHomePreview from "@/assets/case-studies/spf/product/Desktop_authenticate.png"
 import portfolioHomeThumbnail from "@/assets/case-studies/portfolio/home-thumbnail.png"
 import harmonyHomeThumbnail from "@/assets/case-studies/harmony/home-thumbnail.webp"
 import harmonyHomePreview from "@/assets/images/harmony/harmony-hero.webp.png"
@@ -117,8 +117,8 @@ const unorderedWorkProjects: WorkProject[] = [
       "SPF citizen portal authentication screen, built from the shared Design System",
     homePreviewAltFr:
       "Écran d’authentification du portail citoyen du SPF, construit à partir du Design System partagé",
-    homePreviewWidth: 1440,
-    homePreviewHeight: 1024,
+    homePreviewWidth: 905,
+    homePreviewHeight: 680,
     hasCaseStudy: true,
   },
   {

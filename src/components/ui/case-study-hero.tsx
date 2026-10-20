@@ -1,3 +1,4 @@
+import type { ReactNode } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import { ExternalLink } from "lucide-react"
 
@@ -16,6 +17,10 @@ type CaseStudyHeroProps = {
   title: string
   summary: string
   detail?: string
+  /** Optional "01 / 05" position marker, top-right. Opt-in — omitted everywhere except the SPF pilot of the magazine-editorial direction. */
+  index?: { current: number; total: number }
+  /** Optional decorative mark beside the title, desktop only. Opt-in — omitted everywhere except the SPF illustration pass. Never overlaps the title: it sits in its own flex column, hidden below `lg`. */
+  illustration?: ReactNode
   meta: CaseStudyHeroMeta[]
   action?: {
     href: string
@@ -27,6 +32,11 @@ type CaseStudyHeroProps = {
     contain?: boolean
     width?: number
     height?: number
+    /** Zoom/position tuning for the default (non-`contain`) `object-cover` crop — for a source image whose useful content isn't already centered top. */
+    cropZoomClassName?: string
+    cropPositionClassName?: string
+    /** Overrides the default `aspect-[21/9]` banner ratio — for a source image whose one clean capture doesn't survive being cropped that wide. */
+    cropAspectClassName?: string
   }
 }
 
@@ -41,6 +51,8 @@ function CaseStudyHero({
   title,
   summary,
   detail,
+  index,
+  illustration,
   meta,
   action,
   image,
@@ -50,26 +62,47 @@ function CaseStudyHero({
   return (
     <header className="overflow-x-hidden pt-section">
       <Container size="content">
-        <motion.p
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={transition.slow}
-          className="font-sans text-xs tracking-widest text-brand uppercase"
-        >
-          {eyebrow}
-        </motion.p>
+        <div className="flex items-start justify-between gap-4">
+          <motion.p
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={transition.slow}
+            className="font-sans text-xs tracking-widest text-brand uppercase"
+          >
+            {eyebrow}
+          </motion.p>
+          {index ? (
+            <motion.p
+              aria-hidden="true"
+              initial={shouldReduceMotion ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={transition.slow}
+              className="shrink-0 font-mono text-xs text-muted-foreground tabular-nums"
+            >
+              {String(index.current).padStart(2, "0")} /{" "}
+              {String(index.total).padStart(2, "0")}
+            </motion.p>
+          ) : null}
+        </div>
 
-        <motion.h1
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            ...transition.slow,
-            delay: shouldReduceMotion ? 0 : 0.12,
-          }}
-          className="mt-4 max-w-4xl text-5xl leading-[0.95] font-bold tracking-tightest md:text-7xl"
-        >
-          {title}
-        </motion.h1>
+        <div className="flex items-start gap-5 sm:gap-8">
+          <motion.h1
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              ...transition.slow,
+              delay: shouldReduceMotion ? 0 : 0.12,
+            }}
+            className="mt-4 max-w-4xl min-w-0 flex-1 text-5xl leading-[0.95] font-bold tracking-tightest md:text-7xl"
+          >
+            {title}
+          </motion.h1>
+          {illustration ? (
+            <div className="w-20 shrink-0 pt-3 sm:w-24 sm:pt-4 lg:w-[136px] lg:pt-6">
+              {illustration}
+            </div>
+          ) : null}
+        </div>
 
         <motion.p
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
@@ -152,7 +185,7 @@ function CaseStudyHero({
             "mt-16 w-full overflow-hidden border-y border-border",
             image.contain
               ? "aspect-[2560/1364] bg-secondary/30"
-              : "aspect-[21/9]",
+              : (image.cropAspectClassName ?? "aspect-[21/9]"),
           )}
         >
           <img
@@ -161,8 +194,14 @@ function CaseStudyHero({
             width={image.width}
             height={image.height}
             className={cn(
-              "h-full w-full object-top",
-              image.contain ? "object-contain" : "object-cover",
+              "h-full w-full",
+              image.contain
+                ? "object-contain object-top"
+                : cn(
+                    "object-cover",
+                    image.cropPositionClassName ?? "object-top",
+                    image.cropZoomClassName,
+                  ),
             )}
             loading="eager"
             fetchPriority="high"

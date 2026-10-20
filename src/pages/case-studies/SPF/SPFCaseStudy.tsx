@@ -1,36 +1,55 @@
+import { Link } from "react-router-dom"
+import { ArrowLeft } from "lucide-react"
+
+import { Container } from "@/components/ui/container"
+import { CaseStudyNext } from "@/components/ui/case-study-next"
 import { Hero } from "@/pages/case-studies/SPF/Hero"
-import { Overview } from "@/pages/case-studies/SPF/Overview"
-import { Challenge } from "@/pages/case-studies/SPF/Challenge"
-import { Research } from "@/pages/case-studies/SPF/Research"
-import { DesignSystem } from "@/pages/case-studies/SPF/DesignSystem"
-import { Execution } from "@/pages/case-studies/SPF/Execution"
-import { Accessibility } from "@/pages/case-studies/SPF/Accessibility"
+import { ProblemAndRole } from "@/pages/case-studies/SPF/ProblemAndRole"
+import { Foundations } from "@/pages/case-studies/SPF/Foundations"
+import { KeyDecisions } from "@/pages/case-studies/SPF/KeyDecisions"
+import { Result } from "@/pages/case-studies/SPF/Result"
 import { Reflection } from "@/pages/case-studies/SPF/Reflection"
+import { useLanguage } from "@/i18n"
 
 /**
- * The canonical SPF case study at `/work/spf-design-system`. Condensed
- * from eleven chapters to seven after the Hero: Overview, The Challenge,
- * Research & UX, The Design System, Execution, Accessibility,
- * Reflection. Facts was folded out (it repeated Hero's own meta and
- * Overview's Environment point); Foundations+Tokens merged into The
- * Design System, Component Library+Product Interfaces merged into
- * Execution. Each merged chapter keeps its full original evidence —
- * every real screenshot, every real token value — behind a "reference"
- * disclosure rather than dropping it; only the main scroll got shorter.
- * Challenge/Research/Reflection are unchanged, including Reflection's
- * closing story, which was never a candidate for editing.
+ * The canonical SPF case study at `/work/spf-design-system`. Editorial
+ * restructure (length pass 3): five chapters — Hero, Problem &
+ * Contribution, Key Decisions, Result, Reflection — down from the
+ * previous six (which were themselves condensed from eleven). Overview,
+ * The Challenge, The Design System, Execution and Accessibility are gone
+ * as standalone chapters; their real facts and captures now live inside
+ * Problem & Contribution and the three named decisions, with the
+ * exhaustive technical inventory behind two "reference" disclosures
+ * rather than forced into the main scroll. Nothing was invented to fill
+ * the gaps this left — where evidence runs out (no documented keyboard
+ * walkthrough, no formal usability testing), the page says so instead of
+ * implying otherwise.
  */
 function SPFCaseStudy() {
+  const { copy } = useLanguage()
+
   return (
     <article>
+      <Container size="content" className="pt-8">
+        <Link
+          to="/work"
+          className="group inline-flex items-center gap-2 text-sm font-medium tracking-tight text-muted-foreground transition-colors duration-(--duration-fast) ease-standard hover:text-brand"
+        >
+          <ArrowLeft
+            aria-hidden="true"
+            className="size-4 transition-transform duration-(--duration-fast) ease-standard group-hover:-translate-x-0.5"
+          />
+          {copy.common.backToWork}
+        </Link>
+      </Container>
+
       <Hero />
-      <Overview />
-      <Challenge />
-      <Research />
-      <DesignSystem />
-      <Execution />
-      <Accessibility />
+      <ProblemAndRole />
+      <Foundations />
+      <KeyDecisions />
+      <Result />
       <Reflection />
+      <CaseStudyNext currentHref="/work/spf-design-system" />
     </article>
   )
 }

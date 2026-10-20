@@ -20,6 +20,18 @@ type CaseStudyImageProps = {
   /** Real source-file pixel dimensions — reserves the right aspect ratio before load. */
   width?: number
   height?: number
+  /**
+   * Crops the inline thumbnail to a legible representative portion of a
+   * tall composite sheet (a full-page mockup, several screens stacked in
+   * one export) via a fixed aspect ratio + `object-cover` zoom/position —
+   * the same real file, never a fabricated screen. Only affects the inline
+   * thumbnail: the zoom lightbox (when `zoomable`) always shows the
+   * complete, uncropped image via `object-contain`. Omit for images that
+   * should render whole inline, which stays the default.
+   */
+  cropAspectClassName?: string
+  cropZoomClassName?: string
+  cropPositionClassName?: string
 }
 
 /**
@@ -40,6 +52,9 @@ function CaseStudyImage({
   selected,
   width,
   height,
+  cropAspectClassName,
+  cropZoomClassName,
+  cropPositionClassName,
 }: CaseStudyImageProps) {
   const { copy } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
@@ -103,7 +118,10 @@ function CaseStudyImage({
         className={cn(
           "relative overflow-hidden border border-border bg-secondary/50",
           selected && "border-brand",
-          contain && "bg-secondary/30 p-4 shadow-xs md:p-6",
+          contain &&
+            !cropAspectClassName &&
+            "bg-secondary/30 p-4 shadow-xs md:p-6",
+          cropAspectClassName,
           className,
         )}
       >
@@ -114,8 +132,13 @@ function CaseStudyImage({
           width={width}
           height={height}
           className={cn(
-            "h-auto w-full",
-            contain && "object-contain",
+            cropAspectClassName
+              ? cn(
+                  "h-full w-full object-cover",
+                  cropZoomClassName,
+                  cropPositionClassName,
+                )
+              : cn("h-auto w-full", contain && "object-contain"),
             imgClassName,
           )}
         />

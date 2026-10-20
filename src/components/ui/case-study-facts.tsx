@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion"
 
+import { cn } from "@/lib/utils"
 import { transition } from "@/lib/motion"
 
 type CaseStudyFact = {
@@ -24,7 +25,15 @@ function CaseStudyFacts({ facts }: CaseStudyFactsProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10% 0px" }}
       transition={transition.slow}
-      className="mt-10 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4"
+      className={cn(
+        "mt-10 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2",
+        // Tailwind needs the full class name literal to generate it, so
+        // this is a lookup, not a template string — a grid with fewer
+        // items than columns would otherwise leave a bordered gap cell.
+        { 1: "lg:grid-cols-1", 2: "lg:grid-cols-2", 3: "lg:grid-cols-3" }[
+          facts.length
+        ] ?? "lg:grid-cols-4",
+      )}
     >
       {facts.map((fact) => (
         <div key={fact.label} className="bg-background p-6 md:p-8">

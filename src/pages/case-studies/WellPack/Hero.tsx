@@ -17,6 +17,9 @@ function Hero() {
       image={{
         src: website,
         alt: content.alt,
+        cropAspectClassName: "aspect-[3/2]",
+        cropZoomClassName: "scale-[3.3]",
+        cropPositionClassName: "object-[0%_5%]",
       }}
     />
   )

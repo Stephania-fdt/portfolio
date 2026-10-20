@@ -1,37 +1,48 @@
+import { Link } from "react-router-dom"
+import { ArrowLeft } from "lucide-react"
+
+import { Container } from "@/components/ui/container"
 import { Hero } from "@/pages/case-studies/WellPack/Hero"
-import { Overview } from "@/pages/case-studies/WellPack/Overview"
-import { Challenge } from "@/pages/case-studies/WellPack/Challenge"
-import { Method } from "@/pages/case-studies/WellPack/Method"
-import { Brief } from "@/pages/case-studies/WellPack/Brief"
-import { Brand } from "@/pages/case-studies/WellPack/Brand"
-import { Proof } from "@/pages/case-studies/WellPack/Proof"
+import { ProblemAndRole } from "@/pages/case-studies/WellPack/ProblemAndRole"
+import { KeyDecisions } from "@/pages/case-studies/WellPack/KeyDecisions"
+import { Result } from "@/pages/case-studies/WellPack/Result"
 import { Reflection } from "@/pages/case-studies/WellPack/Reflection"
+import { useLanguage } from "@/i18n"
 
 /**
- * The canonical WellPack case study at `/work/wellpack`.
- *
- * Eight chapters: Hero, Overview, The Challenge, The Method, From Method
- * to Brief, The Brand Itself, Proof Without a Metric, Reflection. This
- * case study needed the lightest touch of the four case studies audited
- * for Senior/Staff density (Sprint following Portfolio/SPF/Harmony): it
- * was already disciplined — no tool inventory, no method-listing, no
- * repetition, every chapter already closing on its own decision. The
- * only real gap was Overview, added here to match the same scan-level
- * summary every other case study on this site now opens with. No
- * chapter merged, no deep dive added — none of the existing six needed
- * it, and forcing one would have split a chapter that already reads as
- * one real decision into two redundant halves.
+ * The canonical WellPack case study at `/work/wellpack`. Editorial
+ * restructure (length + structure pass): five chapters — Hero, Problem &
+ * Contribution, Key Decisions, Result, Reflection — down from eight.
+ * Overview and Challenge merge (one problem, told once); Method and
+ * Brief merge into one decision (research → brief was always continuous,
+ * not two chapters); Brand becomes the second decision, in the same
+ * chapter, not its own; Proof folds into Result as a single sober line.
+ * Every real fact and image from the previous seven chapters is still
+ * here — none of it was invented or dropped, only the repeated setup
+ * and the second, third dramatic framing of the same honest limits.
  */
 function WellPackCaseStudy() {
+  const { copy } = useLanguage()
+
   return (
     <article>
+      <Container size="content" className="pt-8">
+        <Link
+          to="/work"
+          className="group inline-flex items-center gap-2 text-sm font-medium tracking-tight text-muted-foreground transition-colors duration-(--duration-fast) ease-standard hover:text-brand"
+        >
+          <ArrowLeft
+            aria-hidden="true"
+            className="size-4 transition-transform duration-(--duration-fast) ease-standard group-hover:-translate-x-0.5"
+          />
+          {copy.common.backToWork}
+        </Link>
+      </Container>
+
       <Hero />
-      <Overview />
-      <Challenge />
-      <Method />
-      <Brief />
-      <Brand />
-      <Proof />
+      <ProblemAndRole />
+      <KeyDecisions />
+      <Result />
       <Reflection />
     </article>
   )

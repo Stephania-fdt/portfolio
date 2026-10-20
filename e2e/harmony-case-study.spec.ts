@@ -1,3 +1,5 @@
+import AxeBuilder from "@axe-core/playwright"
+
 import { expect, test } from "./fixtures"
 
 test("Harmony presents a complete evidence-based product design case study", async ({
@@ -10,38 +12,30 @@ test("Harmony presents a complete evidence-based product design case study", asy
     page.getByRole("heading", { level: 1, name: "Harmony" }),
   ).toBeVisible()
 
-  for (const heading of [
-    "Overview",
-    "The Challenge",
-    "Understanding the Experience",
-    "Paper Prototype & User Testing",
-    "Designing the Interaction",
-    "Final Experience",
-    "Accessibility",
-    "Outcomes, Limitations & Learnings",
-  ]) {
+  for (const heading of ["Overview", "Key Decisions", "Result", "Reflection"]) {
     await expect(
       page.getByRole("heading", { level: 2, name: heading }),
     ).toBeVisible()
   }
 
   // The three decisions the research directly produced stay visible as
-  // labeled sub-blocks inside "Designing the Interaction," not as their
-  // own top-level chapters.
-  const interaction = page
-    .getByRole("heading", { level: 2, name: "Designing the Interaction" })
+  // labeled sub-blocks inside "Key Decisions," not as their own
+  // top-level chapters.
+  const decisions = page
+    .getByRole("heading", { level: 2, name: "Key Decisions" })
     .locator("xpath=ancestor::section")
   for (const label of [
     "Personalized Onboarding",
     "Dashboard & Progress Tracking",
     "Community & Gamification",
   ]) {
-    await expect(interaction.getByText(label, { exact: true })).toBeVisible()
+    await expect(decisions.getByText(label, { exact: true })).toBeVisible()
   }
 
   await expect(page.locator("article img").first()).toBeVisible()
   const facts = page.locator("[data-case-study-facts]")
-  await expect(facts.getByText("06", { exact: true })).toBeVisible()
+  // "06" (an unsourced duration unit) was deliberately dropped rather
+  // than shown without a confirmed unit — see the project's own bilan.
   await expect(facts.getByText("04", { exact: true })).toBeVisible()
   await expect(facts.getByText("70+", { exact: true }).first()).toBeVisible()
   await expect(facts.getByText("76%", { exact: true })).toBeVisible()
@@ -66,13 +60,19 @@ test("Harmony keeps its largest previews compact and fully contained", async ({
   await page.setViewportSize({ width: 1440, height: 900 })
   await page.goto("/work/harmony")
 
+  // Visual-composition pass: the dashboard decision now sits in a
+  // ~7/12 asymmetric column instead of the former half-width block —
+  // wider than before, but still well short of the full 1280px content
+  // width. Both prototype videos were deliberately shrunk further
+  // (440 / 320px caps) so a compact preview doesn't force an
+  // unnecessarily tall section before anyone presses play.
   await expect
     .poll(() =>
       page
         .getByAltText(/^Harmony app dashboard:/)
         .evaluate((element) => element.getBoundingClientRect().width),
     )
-    .toBeLessThanOrEqual(720)
+    .toBeLessThanOrEqual(850)
   await expect
     .poll(() =>
       page
@@ -80,7 +80,7 @@ test("Harmony keeps its largest previews compact and fully contained", async ({
         .locator("xpath=ancestor::figure")
         .evaluate((element) => element.getBoundingClientRect().width),
     )
-    .toBeLessThanOrEqual(880)
+    .toBeLessThanOrEqual(460)
   await expect
     .poll(() =>
       page
@@ -88,7 +88,27 @@ test("Harmony keeps its largest previews compact and fully contained", async ({
         .locator("xpath=ancestor::figure")
         .evaluate((element) => element.getBoundingClientRect().width),
     )
-    .toBeLessThanOrEqual(680)
+    .toBeLessThanOrEqual(340)
+})
+
+test("Harmony has no detectable WCAG A/AA violations in either language", async ({
+  page,
+}) => {
+  for (const language of ["en", "fr"] as const) {
+    await page.addInitScript((value) => {
+      window.localStorage.setItem("portfolio-language", value)
+    }, language)
+    await page.goto("/work/harmony")
+
+    const results = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze()
+
+    expect(
+      results.violations,
+      JSON.stringify(results.violations, null, 2),
+    ).toEqual([])
+  }
 })
 
 test("Harmony removes academic framing in both languages", async ({ page }) => {

@@ -10,12 +10,9 @@ const content = {
     description:
       "A Product Design project overview about building a reusable UX research method that turned marketing briefs into evidence-based decisions.",
     chapters: [
-      "Overview",
-      "The Challenge",
-      "The Method",
-      "From Method to Brief",
-      "The Brand Itself",
-      "Proof Without a Metric",
+      "Problem & Contribution",
+      "Key Decisions",
+      "Result",
       "Reflection",
     ],
     heroSummary:
@@ -23,12 +20,9 @@ const content = {
     heroAlt:
       "WellPack's completed website, showing the brand identity applied to a real digital product experience.",
     forbidden: [
-      "Vue d’ensemble",
-      "Le défi",
-      "La méthode",
-      "De la méthode au cahier des charges",
-      "La marque elle-même",
-      "Une preuve sans métrique",
+      "Problème & contribution",
+      "Décisions clés",
+      "Résultat",
       "Réflexion",
     ],
   },
@@ -38,12 +32,9 @@ const content = {
     description:
       "Présentation du projet Product Design sur la construction d’une méthode UX Research réutilisable, transformant des briefs marketing en décisions fondées sur des preuves.",
     chapters: [
-      "Vue d’ensemble",
-      "Le défi",
-      "La méthode",
-      "De la méthode au cahier des charges",
-      "La marque elle-même",
-      "Une preuve sans métrique",
+      "Problème & contribution",
+      "Décisions clés",
+      "Résultat",
       "Réflexion",
     ],
     heroSummary:
@@ -51,12 +42,9 @@ const content = {
     heroAlt:
       "Site final de WellPack montrant l’identité de marque appliquée à une expérience produit numérique réelle.",
     forbidden: [
-      "Overview",
-      "The Challenge",
-      "The Method",
-      "From Method to Brief",
-      "The Brand Itself",
-      "Proof Without a Metric",
+      "Problem & Contribution",
+      "Key Decisions",
+      "Result",
       "Reflection",
     ],
   },

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Play } from "lucide-react"
 
+import { cn } from "@/lib/utils"
 import { useLanguage } from "@/i18n"
 
 type CaseStudyVideoProps = {
@@ -14,6 +15,16 @@ type CaseStudyVideoProps = {
   /** The poster image's real pixel dimensions — reserves its aspect ratio before load. */
   width?: number
   height?: number
+  /**
+   * Crops the poster to a compact, legible preview via a fixed aspect
+   * ratio + `object-cover` zoom/position, for posters reused from a tall
+   * composite sheet rather than a real single-frame export. The real
+   * video, once played, is unaffected — this only shapes the closed
+   * preview state.
+   */
+  posterAspectClassName?: string
+  posterZoomClassName?: string
+  posterPositionClassName?: string
 }
 
 /**
@@ -34,6 +45,9 @@ function CaseStudyVideo({
   className,
   width,
   height,
+  posterAspectClassName,
+  posterZoomClassName,
+  posterPositionClassName,
 }: CaseStudyVideoProps) {
   const { copy } = useLanguage()
   const [isPlaying, setIsPlaying] = useState(false)
@@ -64,14 +78,26 @@ function CaseStudyVideo({
             }
             className="group relative block w-full"
           >
-            <img
-              src={poster}
-              alt={posterAlt}
-              loading="lazy"
-              width={width}
-              height={height}
-              className="h-auto w-full"
-            />
+            <div
+              className={cn("w-full overflow-hidden", posterAspectClassName)}
+            >
+              <img
+                src={poster}
+                alt={posterAlt}
+                loading="lazy"
+                width={width}
+                height={height}
+                className={cn(
+                  posterAspectClassName
+                    ? cn(
+                        "h-full w-full object-cover",
+                        posterZoomClassName,
+                        posterPositionClassName,
+                      )
+                    : "h-auto w-full",
+                )}
+              />
+            </div>
             <span
               aria-hidden="true"
               className="absolute inset-0 flex items-center justify-center bg-foreground/20 transition-colors duration-(--duration-fast) ease-standard group-hover:bg-foreground/30"

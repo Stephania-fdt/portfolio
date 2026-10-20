@@ -29,6 +29,15 @@ export type CaseStudyImage = {
   /** Real source-file pixel dimensions — reserves the right aspect ratio before load, so nothing jumps. */
   width?: number
   height?: number
+  /**
+   * Crops the inline thumbnail to a legible representative portion of a
+   * tall composite sheet (see `CaseStudyImage` component) — the zoom
+   * lightbox still shows the complete, uncropped file. Omit to render the
+   * image whole inline, which stays the default everywhere else.
+   */
+  cropAspectClassName?: string
+  cropZoomClassName?: string
+  cropPositionClassName?: string
 }
 
 export type CaseStudyVisualLayout =
@@ -64,6 +73,10 @@ export type CaseStudyVideo = {
   /** The poster image's real pixel dimensions — reserves its aspect ratio before load. */
   width?: number
   height?: number
+  /** Crops the closed-state poster to a compact preview (see `CaseStudyVideo`); the real video is unaffected. */
+  posterAspectClassName?: string
+  posterZoomClassName?: string
+  posterPositionClassName?: string
 }
 
 export type CaseStudyDocument = {
@@ -86,6 +99,14 @@ export type CaseStudyDisclosureSection = {
   paragraphs: string[]
   images?: CaseStudyImage[]
   imageLayout?: CaseStudyVisualLayout
+  /**
+   * Opt-in, desktop-only: renders this sub-block and the one right after
+   * it side by side in a two-column grid (`md:` and up) instead of
+   * stacked. Below `md` both still render full-width, in document order —
+   * unset anywhere else, so every other subsection/disclosure block on
+   * every other case study is unaffected.
+   */
+  pairWithNext?: boolean
   french?: {
     title?: string
     paragraphs: string[]

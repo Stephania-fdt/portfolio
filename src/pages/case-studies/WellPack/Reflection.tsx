@@ -24,11 +24,11 @@ function Reflection() {
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <Section id="wellpack-reflection">
+    <Section id="wellpack-reflection" spacing="sm">
       <Container size="content">
         <SectionKicker>{content.kicker}</SectionKicker>
 
-        <SubsectionText className="mt-8 max-w-2xl text-lg">
+        <SubsectionText className="mt-6 max-w-2xl text-lg">
           {content.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -36,7 +36,7 @@ function Reflection() {
 
         <motion.p
           {...(shouldReduceMotion ? { initial: false } : REVEAL())}
-          className="mt-16 max-w-2xl text-xl leading-snug font-medium text-foreground italic md:text-2xl"
+          className="mt-10 max-w-2xl text-xl leading-snug font-medium text-foreground italic md:text-2xl"
         >
           {content.quote}
         </motion.p>

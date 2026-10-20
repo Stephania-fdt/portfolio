@@ -130,4 +130,46 @@ function SubsectionText({
   )
 }
 
-export { CroppedCapture, AssetFrame, SubsectionText }
+/**
+ * A numbered decision heading — real type, not a mono caption standing in
+ * for one. Shared across SPF, Harmony and WellPack's "Key Decisions"
+ * chapters (visual-composition pass, Sprint "premium editorial rebuild")
+ * so a recruiter can scan just the headings and get the argument. The
+ * numeral is `aria-hidden` — same rationale as `EditorialEntry`'s: it
+ * reads poorly aloud and the heading text already carries the meaning.
+ */
+function DecisionHeading({
+  index,
+  title,
+  /** "lg" is the SPF pilot's bigger magazine-headline scale — opt-in, default unchanged for Harmony/WellPack. */
+  size = "default",
+  className,
+}: {
+  index: number
+  title: string
+  size?: "default" | "lg"
+  className?: string
+}) {
+  return (
+    <div className={cn("flex min-w-0 items-baseline gap-3", className)}>
+      <span
+        aria-hidden="true"
+        className="shrink-0 font-mono text-sm text-brand tabular-nums"
+      >
+        {String(index).padStart(2, "0")}
+      </span>
+      <h3
+        className={cn(
+          "min-w-0 font-bold break-words text-foreground",
+          size === "lg"
+            ? "text-3xl leading-tight tracking-tight md:text-4xl"
+            : "text-xl md:text-2xl",
+        )}
+      >
+        {title}
+      </h3>
+    </div>
+  )
+}
+
+export { CroppedCapture, AssetFrame, SubsectionText, DecisionHeading }

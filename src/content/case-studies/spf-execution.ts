@@ -8,10 +8,6 @@ type ImageBlock = {
 }
 
 type ExecutionContent = {
-  kicker: string
-  introduction: string
-  systemSplit: ImageBlock
-  reuse: ImageBlock
   product: {
     label: string
     authAlts: string[]
@@ -26,10 +22,15 @@ type ExecutionContent = {
     faqAlt: string
     faqCaption: string
   }
-  conclusion: string
   detailsSummary: string
   reference: {
     angularPickers: ImageBlock
+    /** Buttons, cards, text fields — one alt + caption per sheet, in that order. */
+    angularSheets: {
+      label: string
+      paragraphs: string[]
+      items: { alt: string; caption: string }[]
+    }
     sidebarFooter: {
       label: string
       paragraphs: string[]
@@ -57,37 +58,16 @@ type ExecutionContent = {
  */
 const spfExecutionContent: LocalizedContent<ExecutionContent> = {
   en: {
-    kicker: "Execution",
-    introduction:
-      "The system had to prove itself twice — once as components that could be reused, and once as a real product a citizen could actually complete a task in.",
-    systemSplit: {
-      label: "Angular Material, and Exactly Where It Wasn't Enough",
-      paragraphs: [
-        "Angular Material covered the inventory a government portal actually needs — alerts, pickers, navigation, dialogs — each restyled to the same dark-header language rather than left in Material's own defaults. What it couldn't give the system was a header carrying the Kingdom of Belgium's own crest, or a footer that had to read as government-issued at a glance.",
-        "Those were built from nothing, in their own section of the file — Header, Sidebar, Footer — because that's exactly where Angular Material stops being able to carry an identity, and where SPF's had to show.",
-      ],
-      alt: "The custom SPF header component carrying the Kingdom of Belgium's crest, shown at Desktop-1440 and Tablet-1024 breakpoints, in both light and dark variants.",
-      caption: "The header — built from nothing, at Desktop and Tablet widths.",
-    },
-    reuse: {
-      label: "The Same Roles, Doing Real Work",
-      paragraphs: [
-        "A notification system carries the exact same info, success, warning and error roles the token system already defined — and an account-activation stepper reuses that same vocabulary in a real flow a citizen actually completes.",
-        "The same button sits inside a card's actions and an alert's actions. That repetition, component after component, is the actual proof: not a folder of screens that happen to share a file, but one system, used everywhere it needed to be.",
-      ],
-      alt: "The SPF notification/alert component in info, success, warning and error variants — plain, with a text link, with two action buttons, and as a full-width banner — the same semantic color roles defined in the Design System chapter.",
-      caption:
-        "Info, success, warning, error — the same roles the tokens already named.",
-    },
     product: {
       label: "The System, Assembled Into a Real Product",
       authAlts: [
-        "The SPF authentication screen at desktop width — 'Please Authenticate,' with a digital-key option for Belgian citizens and a standard account option for non-Belgians, over a photograph of the ministry's own architecture.",
-        "The same SPF authentication screen at mobile width, on an iPhone — identical crest, photograph and two-button choice, scaled to a single hand.",
+        "The SPF 'Welcome back' sign-in screen at desktop width — email and password fields and a single Sign in button inside the teal-headed card, over a photograph of the ministry's own architecture.",
+        "The SPF authentication screen at mobile width, on a phone — 'Choose your authentication method,' with a digital-key option for Belgian citizens and a no-digital-key option for non-Belgians, same crest and photograph, stacked for a single hand.",
+        "The same SPF authentication screen at tablet width — the two options stacked full-width inside the card, the ministry photograph still framing it.",
       ],
       authCaptions: [
-        "The same choice, the same photograph, at desktop width.",
-        "...and at mobile width. Not a smaller version — the same one.",
+        "Signing back in, over the same photograph, at desktop width.",
+        "The authentication choice at mobile and tablet width. Not a smaller version — the same one.",
       ],
       authParagraph:
         "The choice a citizen makes first — a Belgian digital key, or a standard account for anyone else — renders identically in intent at both ends of the scale: the same crest, the same warm architectural photograph, the same two buttons, whether it's a desktop monitor or a phone held in one hand.",
@@ -106,8 +86,6 @@ const spfExecutionContent: LocalizedContent<ExecutionContent> = {
         "The SPF FAQ page, organized into real categories — Access, Legalisations & Apostilles, and La Banque de données des Actes de l'État Civil — each with its own heading and line illustration, under a header carrying the same crest as the rest of the platform.",
       faqCaption: "A dedicated FAQ page, not just the homepage's accordion.",
     },
-    conclusion:
-      "The crest on the header, the warm photography, the same button component authenticating a citizen and then carrying them into a real page with a real question to answer — carried, unbroken, from the first screen to the last. That continuity is the actual argument for building a system instead of a set of pages: everything downstream inherits it for free.",
     detailsSummary: "Component library reference",
     reference: {
       angularPickers: {
@@ -116,9 +94,29 @@ const spfExecutionContent: LocalizedContent<ExecutionContent> = {
           "The Angular file's own sidebar reads less like a component list and more like an inventory: alerts, badges, avatars, banners, bottom navigation, bottom sheets, breadcrumbs, buttons, cards, carousels, chips, dialogs, dividers, expansion panels, footers, grid system, icons, lists, menus, navigation drawers, paginations, pickers, progress, ratings — each one checked off, not sketched once and left half-finished.",
           "Pickers alone show the discipline: a date calendar, a month selector and a time clock, restyled to the same dark-header language rather than left in Material's own defaults. Nothing here was skinned once and called done.",
         ],
-        alt: "Three Angular Material picker components restyled for SPF — a date calendar, a month selector and a time clock, all sharing the same dark header and rounded-corner language.",
+        alt: "The SPF date-picker documentation sheet, built on Angular Material — modal pickers for a single date, a year and a date range; input pickers for one date or a range; docked desktop pickers with calendar, month and year lists; and a building-blocks matrix of day and year states (enabled, hovered, focused, pressed, disabled), all in the same teal accent and rounded-corner language.",
         caption:
-          "Date, month and time — three pickers, one visual language, not three.",
+          "Modal, input and docked — three date pickers, one visual language, not three.",
+      },
+      angularSheets: {
+        label: "The Rest of the Material Layer",
+        paragraphs: [
+          "The same treatment carries across the rest of the Angular Material layer: floating action buttons in every size and role, cards with their header, media and action slots, and text fields in filled and outlined variants — each documented state by state and restyled to the same teal accent.",
+        ],
+        items: [
+          {
+            alt: "The SPF floating action button (FAB) documentation sheet, built on Angular Material — standard, medium and large FABs and their extended, labelled versions, each in primary, secondary and tertiary roles, filled and container variants, across four interaction states.",
+            caption: "FABs — three sizes, three roles, four states.",
+          },
+          {
+            alt: "The SPF cards documentation sheet, built on Angular Material — vertical cards with header, media, title, supporting text and secondary and primary actions; compact horizontal cards; swappable content slots; and a building-blocks grid of surface and elevation variants.",
+            caption: "Cards — the same slots, vertical or compact.",
+          },
+          {
+            alt: "The SPF text fields documentation sheet, built on Angular Material — filled and outlined fields, with or without a leading search icon and a trailing clear icon, shown in enabled, focused, hovered, error and disabled states with label, input, placeholder and supporting text.",
+            caption: "Text fields — filled or outlined, five states each.",
+          },
+        ],
       },
       sidebarFooter: {
         label: "The Rest of What Angular Couldn't Give It",
@@ -173,37 +171,16 @@ const spfExecutionContent: LocalizedContent<ExecutionContent> = {
     },
   },
   fr: {
-    kicker: "Exécution",
-    introduction:
-      "Le système devait faire ses preuves deux fois : une fois comme composants réutilisables, une fois comme produit réel dans lequel une personne pouvait accomplir une tâche.",
-    systemSplit: {
-      label: "Angular Material, et exactement là où il ne suffisait pas",
-      paragraphs: [
-        "Angular Material couvrait l’inventaire dont un portail public a réellement besoin — alerts, pickers, navigation, dialogs — chacun réadapté au même langage de header sombre plutôt que laissé aux styles par défaut de Material. Ce qu’il ne pouvait pas fournir, c’est un header portant le blason du Royaume de Belgique, ni un footer immédiatement identifiable comme gouvernemental.",
-        "Ceux-ci ont été construits de zéro, dans leur propre section du fichier — Header, Sidebar, Footer — car c’est exactement là qu’Angular Material cesse de porter une identité, et où celle du SPF devait apparaître.",
-      ],
-      alt: "Composant header sur mesure du SPF portant le blason du Royaume de Belgique, présenté aux breakpoints Desktop-1440 et Tablet-1024 dans des variantes claires et sombres.",
-      caption: "Le header, construit de zéro aux largeurs Desktop et Tablet.",
-    },
-    reuse: {
-      label: "Les mêmes rôles, au travail",
-      paragraphs: [
-        "Un système de notifications reprend exactement les rôles info, success, warning et error déjà définis par les tokens — et un stepper d’activation de compte réutilise ce même vocabulaire dans un véritable parcours qu’une personne accomplit réellement.",
-        "Le même bouton se trouve dans les actions d’une carte et celles d’une alerte. Cette répétition, composant après composant, constitue la véritable preuve : non un dossier d’écrans partageant par hasard un fichier, mais un système unique utilisé partout où il devait l’être.",
-      ],
-      alt: "Composant de notification et d’alerte du SPF dans ses variantes info, success, warning et error, en version simple, avec lien texte, deux boutons d’action et bannière pleine largeur.",
-      caption:
-        "Info, success, warning, error : les mêmes rôles déjà nommés par les tokens.",
-    },
     product: {
       label: "Le système, assemblé en produit réel",
       authAlts: [
-        "Écran d’authentification du SPF sur ordinateur, avec l’instruction « Please Authenticate », une option de clé numérique pour les citoyens belges et un compte standard pour les autres, sur une photographie de l’architecture du ministère.",
-        "Même écran d’authentification du SPF sur un iPhone, avec le même blason, la même photographie et les deux mêmes choix adaptés à une utilisation à une main.",
+        "Écran de reconnexion « Welcome back » du SPF sur ordinateur, avec les champs e-mail et mot de passe et un unique bouton « Sign in » dans la carte à en-tête bleu canard, sur une photographie de l’architecture du ministère.",
+        "Écran d’authentification du SPF sur smartphone, avec l’instruction « Choose your authentication method », une option de clé numérique pour les citoyens belges et une option sans clé numérique pour les autres, le même blason et la même photographie, adaptés à une utilisation à une main.",
+        "Même écran d’authentification du SPF au format tablette, avec les deux options en pleine largeur dans la carte et la photographie du ministère toujours visible autour.",
       ],
       authCaptions: [
-        "Le même choix et la même photographie sur ordinateur.",
-        "…et sur mobile. Pas une version réduite : la même interface.",
+        "La reconnexion, sur la même photographie, sur ordinateur.",
+        "Le choix d’authentification sur mobile et tablette. Pas une version réduite : la même interface.",
       ],
       authParagraph:
         "Le premier choix d’une personne — une clé numérique belge ou un compte standard pour les autres — conserve exactement la même intention aux deux extrémités de l’échelle : le même blason, la même photographie architecturale chaleureuse et les deux mêmes boutons, sur un écran d’ordinateur comme sur un téléphone tenu d’une main.",
@@ -223,8 +200,6 @@ const spfExecutionContent: LocalizedContent<ExecutionContent> = {
       faqCaption:
         "Une page FAQ dédiée, pas seulement l’accordéon de la page d’accueil.",
     },
-    conclusion:
-      "Le blason du header, la photographie chaleureuse et le même composant de bouton qui authentifie une personne avant de l’accompagner vers une véritable page et une véritable question restent continus du premier au dernier écran. Cette continuité constitue l’argument réel en faveur d’un système plutôt que d’une collection de pages : tout ce qui suit en hérite sans effort supplémentaire.",
     detailsSummary: "Référence de la bibliothèque de composants",
     reference: {
       angularPickers: {
@@ -233,8 +208,29 @@ const spfExecutionContent: LocalizedContent<ExecutionContent> = {
           "La barre latérale du fichier Angular ressemble moins à une liste de composants qu’à un inventaire : alerts, badges, avatars, banners, bottom navigation, bottom sheets, breadcrumbs, buttons, cards, carousels, chips, dialogs, dividers, expansion panels, footers, grid system, icons, lists, menus, navigation drawers, paginations, pickers, progress et ratings. Chacun est finalisé, pas simplement esquissé puis laissé incomplet.",
           "Les pickers illustrent à eux seuls cette discipline : calendrier de date, sélecteur de mois et horloge, tous adaptés au même langage de header sombre plutôt que laissés avec les styles par défaut de Material. Rien n’a été habillé une seule fois avant d’être considéré comme terminé.",
         ],
-        alt: "Trois composants picker Angular Material adaptés au SPF : calendrier de date, sélecteur de mois et horloge partageant le même header sombre et les mêmes angles arrondis.",
-        caption: "Date, mois et heure : trois pickers, un seul langage visuel.",
+        alt: "Planche de documentation des date pickers du SPF, basée sur Angular Material : pickers modaux pour une date, une année et une plage de dates ; pickers de saisie pour une date ou une plage ; pickers ancrés desktop avec calendrier, liste des mois et des années ; et une matrice des états des jours et des années (enabled, hovered, focused, pressed, disabled), avec le même accent bleu canard et les mêmes angles arrondis.",
+        caption:
+          "Modal, saisie et ancré : trois date pickers, un seul langage visuel.",
+      },
+      angularSheets: {
+        label: "Le reste de la couche Material",
+        paragraphs: [
+          "Le même traitement s’étend au reste de la couche Angular Material : floating action buttons dans toutes les tailles et tous les rôles, cards avec leurs zones header, média et actions, et text fields en variantes filled et outlined. Chacun est documenté état par état et adapté au même accent bleu canard.",
+        ],
+        items: [
+          {
+            alt: "Planche de documentation des floating action buttons (FAB) du SPF, basée sur Angular Material : FAB standard, medium et large et leurs versions étendues avec libellé, chacun en rôles primary, secondary et tertiary, en variantes pleines et container, sur quatre états d’interaction.",
+            caption: "FAB : trois tailles, trois rôles, quatre états.",
+          },
+          {
+            alt: "Planche de documentation des cards du SPF, basée sur Angular Material : cards verticales avec header, média, titre, texte et actions secondary et primary ; cards horizontales compactes ; zones de contenu interchangeables ; et une grille de building blocks des variantes de surface et d’élévation.",
+            caption: "Cards : les mêmes zones, en vertical ou en compact.",
+          },
+          {
+            alt: "Planche de documentation des text fields du SPF, basée sur Angular Material : champs filled et outlined, avec ou sans icône de recherche et icône d’effacement, dans les états enabled, focused, hovered, error et disabled, avec label, saisie, placeholder et texte d’aide.",
+            caption: "Text fields : filled ou outlined, cinq états chacun.",
+          },
+        ],
       },
       sidebarFooter: {
         label: "Le reste de ce qu’Angular ne pouvait pas fournir",

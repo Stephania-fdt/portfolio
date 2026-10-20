@@ -28,6 +28,22 @@ const websitePrototypeVideo = "/videos/harmony/harmony-website-prototype.mp4"
 const appPrototypeVideo = "/videos/harmony/harmony-app-prototype.mp4"
 const designSystemPdf = "/documents/harmony/harmony-design-system.pdf"
 
+/**
+ * Editorial restructure (length + structure pass): four chapters instead
+ * of eight — Overview, Key Decisions, Result, Reflection. Overview folds
+ * in the former Challenge (same "earn the reason" story, told once).
+ * Key Decisions folds in Understanding the Experience's research snapshot
+ * directly ahead of the three decisions it produced (Onboarding,
+ * Dashboard, Community & Gamification) — the same real research
+ * disclosure (survey detail, persona, JTBD, card sort, journey map)
+ * stays intact and zoomable, uncropped, just attached to the decisions it
+ * earned rather than sitting in its own chapter first. Result folds in
+ * Paper Prototype's two testing findings, the final UI gallery, the two
+ * prototype videos, the wireframes disclosure and the accessibility
+ * proof. Reflection folds in the former Accessibility chapter's one
+ * honest limitation alongside Outcomes, Limitations & Learnings — a
+ * limit is a limit regardless of which chapter it used to live in.
+ */
 export const harmonyCaseStudy: CaseStudy = {
   slug: "harmony",
   heroImage: {
@@ -43,51 +59,32 @@ export const harmonyCaseStudy: CaseStudy = {
     {
       heading: "Overview",
       paragraphs: [
-        "A manufacturing ambition — a 100% Made in France connected bracelet — arrived before an audience, a feature set or a reason to choose Harmony over Fitbit or Garmin.",
-        "I worked UX research, information architecture, wireframes and UI end to end, on a four-person team meeting weekly with the client — every finding and interface shown here came out of shared work, not individual output.",
-        "The result is a companion website and app built around one insight: people didn't need more fitness features, they needed help staying motivated over time.",
+        "A manufacturing ambition — a 100% Made in France connected bracelet — arrived before an audience, a feature set or a reason to choose Harmony over Fitbit or Garmin. Connected wearables are a crowded market; Made in France carries real weight with French buyers, but weight alone doesn't make a product relevant.",
+        "I worked UX research, information architecture, wireframes and UI end to end, on a four-person team meeting weekly with the client — every finding and interface shown here came out of shared work, not individual output. Our job was to earn that reason: understand who the bracelet was actually for, and how the product, website and app needed to work together.",
       ],
       facts: [
-        { label: "Duration", value: "06", emphasizeValue: true },
-        { label: "Team", value: "04", emphasizeValue: true },
-        { label: "Research", value: "70+", emphasizeValue: true },
+        { label: "Team size", value: "04", emphasizeValue: true },
+        { label: "Survey responses", value: "70+", emphasizeValue: true },
         { label: "Market", value: "France" },
       ],
       french: {
         heading: "Vue d’ensemble",
         paragraphs: [
-          "Une ambition de fabrication — un bracelet connecté 100% Made in France — est arrivée avant un public défini, des fonctionnalités choisies ou une raison de préférer Harmony à Fitbit ou Garmin.",
-          "J’ai porté la recherche UX, l’architecture de l’information, les wireframes et l’UI de bout en bout, au sein d’une équipe de quatre personnes avec un point hebdomadaire client — chaque résultat et interface présentés ici sont issus d’un travail partagé, pas d’une production individuelle.",
-          "Le résultat est un site et une application construits autour d’un seul insight : les gens n’avaient pas besoin de plus de fonctionnalités sportives, mais d’aide pour rester motivés dans la durée.",
+          "Une ambition de fabrication — un bracelet connecté 100% Made in France — est arrivée avant un public défini, des fonctionnalités choisies ou une raison de préférer Harmony à Fitbit ou Garmin. Les objets connectés forment un marché saturé ; le Made in France a un vrai poids auprès des acheteurs français, mais ce poids seul ne suffit pas à rendre un produit pertinent.",
+          "J’ai porté la recherche UX, l’architecture de l’information, les wireframes et l’UI de bout en bout, au sein d’une équipe de quatre personnes avec un point hebdomadaire client — chaque résultat et interface présentés ici sont issus d’un travail partagé. Notre mission était de construire cette raison : comprendre à qui s’adressait le bracelet, et comment produit, site et application devaient s’articuler.",
         ],
         facts: [
-          { label: "Durée", value: "06", emphasizeValue: true },
-          { label: "Équipe", value: "04", emphasizeValue: true },
-          { label: "Recherche", value: "70+", emphasizeValue: true },
+          { label: "Taille de l’équipe", value: "04", emphasizeValue: true },
+          { label: "Réponses au sondage", value: "70+", emphasizeValue: true },
           { label: "Marché", value: "France" },
         ],
       },
     },
     {
-      heading: "The Challenge",
+      heading: "Key Decisions",
+      title: "From Research to Product",
       paragraphs: [
-        "Connected wearables are a crowded market, and Made in France carries real weight with French buyers — but weight alone doesn’t make a product relevant. The brief had a manufacturing ambition before it had a defined audience, a feature set, or a reason for someone to choose Harmony over Fitbit or Garmin.",
-        "Our challenge was to earn that reason: understand who the bracelet was actually for, which functions mattered to them, and how the physical product, the website and the app needed to work together — rather than default to another feature-led fitness app.",
-      ],
-      french: {
-        heading: "Le défi",
-        paragraphs: [
-          "Les objets connectés forment un marché saturé, et le Made in France a un vrai poids auprès des acheteurs français — mais ce poids ne suffit pas à rendre un produit pertinent. Le brief portait une ambition de fabrication avant d’avoir un public défini, des fonctionnalités choisies ou une raison de préférer Harmony à Fitbit ou Garmin.",
-          "Notre défi était de construire cette raison : comprendre à qui s’adressait réellement le bracelet, quelles fonctions comptaient pour ces personnes, et comment le produit physique, le site et l’application devaient s’articuler — plutôt que de reproduire une énième application fitness pilotée par les fonctionnalités.",
-        ],
-      },
-    },
-    {
-      heading: "Understanding the Experience",
-      paragraphs: [
-        "A field survey — 70+ responses via Google Forms, shared on LinkedIn and wellbeing/sport Facebook groups — found respondents skewed female, active, training for health first. 76% already tracked their activity with a fitness app, smartwatch or bracelet; 60% said Made in France would sway a purchase, but only alongside a credible product.",
-        "The clearest gap was motivation and support over time: complexity, a lack of guidance and no sense of community were why tools got abandoned — not a missing feature. That single insight is what the onboarding, dashboard and community & gamification decisions later in this project overview respond to.",
-        "A persona, Jobs To Be Done, a card sort and a full customer journey turned that evidence into a validated audience and structure — the detail behind that work is in the disclosure below.",
+        "A field survey found respondents skewed female, active, already using some kind of tracking tool. The clearest gap was motivation and support over time — complexity, a lack of guidance and no sense of community were why tools got abandoned, not a missing feature. Three decisions answered that gap directly.",
       ],
       facts: [
         { label: "Already track activity", value: "76%", emphasizeValue: true },
@@ -96,8 +93,97 @@ export const harmonyCaseStudy: CaseStudy = {
           value: "60%",
           emphasizeValue: true,
         },
-        { label: "Train 1–4×/week", value: "66%" },
-        { label: "Top motivator", value: "Health & fitness" },
+      ],
+      subsections: [
+        {
+          title: "Personalized Onboarding",
+          pairWithNext: true,
+          paragraphs: [
+            "Right after sign-up, a five-question quiz builds a training program tailored to the person answering, rather than dropping everyone into the same generic dashboard — people didn't want more features, they wanted the app to already know what they were training for.",
+          ],
+          images: [
+            {
+              src: appOnboarding,
+              alt: "Harmony app onboarding flow: simplified sign-in via Apple, Facebook or Google, device selection and pairing confirmation, then a five-question quiz covering goal, fitness level, weight and height, weekly sport frequency and daily obstacles.",
+              contain: true,
+              zoomable: true,
+              width: 2481,
+              height: 3508,
+            },
+          ],
+          french: {
+            title: "Onboarding personnalisé",
+            paragraphs: [
+              "Juste après l’inscription, un quiz en cinq questions construit un programme adapté à la personne qui répond, plutôt que de déposer tout le monde sur le même dashboard générique — les gens ne voulaient pas plus de fonctionnalités, ils voulaient que l’application sache déjà pour quoi ils s’entraînaient.",
+            ],
+            imageAlts: [
+              "Parcours d’onboarding de l’application Harmony : connexion simplifiée via Apple, Facebook ou Google, sélection et confirmation d’appairage de l’appareil, puis un quiz en cinq questions sur l’objectif, le niveau sportif, le poids et la taille, la fréquence sportive hebdomadaire et les freins au quotidien.",
+            ],
+          },
+        },
+        {
+          title: "Dashboard & Progress Tracking",
+          paragraphs: [
+            "The daily dashboard surfaces the day's key numbers in one readable 'Today' view. It stays personalizable — data that doesn't apply, like menstrual tracking, can be swapped for something that does — directly answering the 'too complex' complaint respondents raised about existing apps.",
+          ],
+          images: [
+            {
+              src: appDashboard,
+              alt: "Harmony app dashboard: a daily 'Today' view with steps, sleep, heart rate, calories and hydration rings, a weekly training program, per-session exercise details, a run-history map with distance and pace, and a training calendar.",
+              contain: true,
+              zoomable: true,
+              width: 2481,
+              height: 3508,
+            },
+          ],
+          french: {
+            title: "Dashboard & suivi de progression",
+            paragraphs: [
+              "Le dashboard quotidien réunit les indicateurs clés du jour dans une vue « Aujourd’hui » lisible. Il reste personnalisable — une donnée qui ne s’applique pas, comme le suivi du cycle menstruel, peut être remplacée par une autre — en réponse directe au reproche de complexité formulé sur les applications existantes.",
+            ],
+            imageAlts: [
+              "Dashboard de l’application Harmony : vue quotidienne « Aujourd’hui » avec anneaux de pas, sommeil, fréquence cardiaque, calories et hydratation, un programme d’entraînement hebdomadaire, le détail de chaque séance, une carte d’historique de course avec distance et allure, et un calendrier d’entraînement.",
+            ],
+          },
+        },
+        {
+          title: "Community & Gamification",
+          paragraphs: [
+            "Groups, friend challenges and community leaderboards give training a social layer respondents said they were missing. Badges and time-boxed challenges — '10km in a month', 'move in August' — reward consistency rather than just logging it: motivation fades without support.",
+          ],
+          imageLayout: "two-up",
+          images: [
+            {
+              src: communityGamification1,
+              alt: "Harmony community screens: challenges and friends tabs, wellbeing/yoga/sleep groups to join, a friends leaderboard, and community challenge cards like '10km in a month'.",
+              label: "Community",
+              contain: true,
+              zoomable: true,
+              width: 2481,
+              height: 3508,
+            },
+            {
+              src: communityGamification2,
+              alt: "Harmony gamification screens: achievement badges by level, an encouraging 'goal reached' message, and time-boxed challenge cards such as 'move in August'.",
+              label: "Gamification",
+              contain: true,
+              zoomable: true,
+              width: 2481,
+              height: 3508,
+            },
+          ],
+          french: {
+            title: "Communauté & gamification",
+            paragraphs: [
+              "Des groupes, des défis entre amis et des classements communautaires apportent la dimension sociale que les répondant·es disaient manquer. Badges et défis limités dans le temps — « 10 km en un mois », « bougez en août » — récompensent la régularité : la motivation s’essouffle sans soutien.",
+            ],
+            imageLabels: ["Communauté", "Gamification"],
+            imageAlts: [
+              "Écrans communauté Harmony : onglets défis et amis, groupes bien-être/yoga/sommeil à rejoindre, classement entre amis, et cartes de défis communautaires comme « 10 km en un mois ».",
+              "Écrans de gamification Harmony : badges de récompense par niveau, message d’encouragement « objectif atteint », et cartes de défis limités dans le temps comme « bougez en août ».",
+            ],
+          },
+        },
       ],
       images: [
         {
@@ -304,11 +390,10 @@ export const harmonyCaseStudy: CaseStudy = {
         ],
       },
       french: {
-        heading: "Comprendre l’expérience",
+        heading: "Décisions clés",
+        title: "De la recherche au produit",
         paragraphs: [
-          "Un questionnaire terrain — plus de 70 réponses via Google Forms, diffusé sur LinkedIn et des groupes Facebook bien-être/sport — a révélé des répondant·es majoritairement des femmes, actives, motivées d’abord par la santé. 76% suivaient déjà leur activité avec une application, une montre ou un bracelet ; 60% déclaraient que le Made in France influencerait un achat, mais seulement associé à un produit crédible.",
-          "Le manque le plus net portait sur la motivation et l’accompagnement dans la durée : complexité, manque de guidage et absence de communauté expliquaient l’abandon des outils — pas une fonctionnalité manquante. C’est à cet insight unique que répondent les décisions d’onboarding, de dashboard et de communauté & gamification présentées plus loin.",
-          "Un persona, des Jobs To Be Done, un tri de cartes et un parcours client complet ont transformé cette preuve en public validé et en structure — le détail de ce travail se trouve dans le contenu déroulant ci-dessous.",
+          "Un questionnaire terrain a révélé des répondant·es majoritairement des femmes, actives, déjà équipées d’un outil de suivi. Le manque le plus net portait sur la motivation et l’accompagnement dans la durée — complexité, manque de guidage et absence de communauté expliquaient l’abandon des outils, pas une fonctionnalité manquante. Trois décisions répondent directement à ce manque.",
         ],
         facts: [
           {
@@ -321,11 +406,9 @@ export const harmonyCaseStudy: CaseStudy = {
             value: "60%",
             emphasizeValue: true,
           },
-          { label: "S’entraînent 1 à 4×/semaine", value: "66%" },
-          { label: "Première motivation", value: "Santé & forme" },
         ],
         imageAlts: [
-          "Vue d’ensemble de l’enquête terrain Harmony : questionnaire Google Forms diffusé sur LinkedIn et des groupes Facebook bien-être, ses objectifs et le profil des 70+ répondant·es (environ 70% de femmes, majoritairement actives).",
+          "Vue d’ensemble de l’enquête terrain Harmony : questionnaire Google Forms diffusé sur LinkedIn et des groupes Facebook bien-être, ses objectifs et le profil des répondant·es (majoritairement des femmes, actives).",
         ],
         imageLabels: ["70+ réponses réelles"],
         imageCaptions: [
@@ -334,144 +417,84 @@ export const harmonyCaseStudy: CaseStudy = {
       },
     },
     {
-      heading: "Paper Prototype & User Testing",
+      heading: "Result",
       paragraphs: [
-        "Before any high-fidelity screen, we tested a hand-sketched homepage, product page and application flow with real people. Navigation to find a connected bracelet was clear; two things weren't.",
-        "Testers wanted help choosing between bracelets based on their own sport habits, and expected to see color options from the homepage rather than needing to open a product page first. Both fed directly into the wireframes and final UI that follow.",
+        "Before any high-fidelity screen, a hand-sketched homepage, product page and application flow were tested with real people — navigation was already clear, but testers wanted help choosing a bracelet by sport habit, and expected to see color options from the homepage. High-fidelity mockups answered both: category pages group bracelets by use (Health, Move, Luxe), and product colors are visible from the homepage.",
+        "We integrated foundational accessibility practices rather than claiming a finished audit: a toolbar (text resizing, grayscale, high/negative contrast), descriptive alt text on every product image, clear inline form errors, and checked color contrast — the footer's white-on-teal combination measures 10.22:1, passing both AA and AAA.",
       ],
+      imageLayout: "three-up",
       images: [
         {
-          src: paperPrototype,
-          alt: "Hand-sketched paper prototypes for Harmony's homepage, testimonial section and application, with a written summary of user-testing findings: navigation was clear, but testers wanted bracelet-choice guidance and visible color options from the homepage.",
-          contain: true,
+          src: finalUiDesktop,
+          alt: "Final desktop UI for Harmony's homepage, product page and category page, in the finished visual language with product colors visible from the homepage. Zoom to see the full sheet.",
+          label: "Desktop",
           zoomable: true,
-          displayWidth: "reference",
+          width: 794,
+          height: 1126,
+          cropAspectClassName: "aspect-[3/4]",
+          cropZoomClassName: "scale-100",
+          cropPositionClassName: "object-top",
+        },
+        {
+          src: finalUiTablet,
+          alt: "Final tablet UI for Harmony's homepage, product page and category page, adapting the desktop layout to a medium viewport. Zoom to see the full sheet.",
+          label: "Tablet",
+          frenchLabel: "Tablette",
+          zoomable: true,
+          width: 710,
+          height: 1154,
+          cropAspectClassName: "aspect-[3/4]",
+          cropZoomClassName: "scale-100",
+          cropPositionClassName: "object-top",
+        },
+        {
+          src: finalUiMobile,
+          alt: "Final mobile UI for Harmony's homepage, product page and category page, adapting the layout to a narrow viewport. Zoom to see the full sheet.",
+          label: "Mobile",
+          zoomable: true,
+          width: 784,
+          height: 1172,
+          cropAspectClassName: "aspect-[3/4]",
+          cropZoomClassName: "scale-100",
+          cropPositionClassName: "object-top",
+        },
+      ],
+      videos: [
+        {
+          src: websitePrototypeVideo,
+          poster: finalUiDesktop,
+          posterAlt:
+            "Poster frame for the Harmony website prototype walkthrough, cropped to the top of the final desktop UI sheet.",
+          frenchPosterAlt:
+            "Image d’aperçu de la présentation du prototype du site Harmony, cadrée sur le haut de la planche de l’interface desktop finale.",
+          label: "Website prototype walkthrough",
+          frenchLabel: "Présentation du prototype du site web",
+          sizeNote: "Video · ~45 MB",
+          frenchSizeNote: "Vidéo · ~45 Mo",
+          displayWidth: "website",
+          width: 794,
+          height: 1126,
+          posterAspectClassName: "aspect-[16/9]",
+          posterZoomClassName: "scale-100",
+          posterPositionClassName: "object-top",
+        },
+        {
+          src: appPrototypeVideo,
+          poster: appDashboard,
+          posterAlt:
+            "Poster frame for the Harmony app prototype walkthrough, cropped to the top of the app dashboard sheet.",
+          frenchPosterAlt:
+            "Image d’aperçu de la présentation du prototype de l’application Harmony, cadrée sur le haut de la planche du tableau de bord.",
+          label: "App prototype walkthrough",
+          frenchLabel: "Présentation du prototype de l’application",
+          sizeNote: "Video · ~54 MB",
+          frenchSizeNote: "Vidéo · ~54 Mo",
+          displayWidth: "mobile",
           width: 2481,
           height: 3508,
-        },
-      ],
-      french: {
-        heading: "Prototype papier & tests utilisateurs",
-        paragraphs: [
-          "Avant tout écran haute-fidélité, nous avons testé une page d’accueil, une page produit et un parcours applicatif dessinés à la main auprès de vraies personnes. La navigation pour trouver un bracelet connecté était claire ; deux points ne l’étaient pas.",
-          "Les testeur·ses voulaient de l’aide pour choisir entre les bracelets selon leurs propres habitudes sportives, et s’attendaient à voir les coloris dès l’accueil plutôt que d’avoir à ouvrir une fiche produit. Ces deux retours ont directement nourri les wireframes et l’interface finale qui suivent.",
-        ],
-        imageAlts: [
-          "Prototypes papier dessinés à la main pour la page d’accueil, la section témoignages et l’application Harmony, avec une synthèse écrite des tests utilisateurs : navigation claire, mais besoin d’aide au choix du bracelet et de coloris visibles dès l’accueil.",
-        ],
-      },
-    },
-    {
-      heading: "Designing the Interaction",
-      paragraphs: [
-        "Three decisions carried the research forward into the product — each answers a specific gap testers and respondents named, not a generic best practice.",
-      ],
-      subsections: [
-        {
-          title: "Personalized Onboarding",
-          paragraphs: [
-            "Straight after sign-up, a five-question quiz — goal, fitness level, weight and height, weekly sport frequency, daily obstacles — builds a training program tailored to the person answering, rather than dropping everyone into the same generic dashboard.",
-            "This is the direct answer to the personalization gap the research surfaced: people didn't want more features, they wanted the app to already know what they were training for.",
-          ],
-          images: [
-            {
-              src: appOnboarding,
-              alt: "Harmony app onboarding flow: simplified sign-in via Apple, Facebook or Google, device selection and pairing confirmation, then a five-question quiz covering goal, fitness level, weight and height, weekly sport frequency and daily obstacles.",
-              contain: true,
-              zoomable: true,
-              width: 2481,
-              height: 3508,
-            },
-          ],
-          french: {
-            title: "Onboarding personnalisé",
-            paragraphs: [
-              "Juste après l’inscription, un quiz en cinq questions — objectif, niveau sportif, poids et taille, fréquence sportive hebdomadaire, freins au quotidien — construit un programme d’entraînement adapté à la personne qui répond, plutôt que de déposer tout le monde sur le même dashboard générique.",
-              "C’est la réponse directe au manque de personnalisation révélé par la recherche : les gens ne voulaient pas plus de fonctionnalités, ils voulaient que l’application sache déjà pour quoi ils s’entraînaient.",
-            ],
-            imageAlts: [
-              "Parcours d’onboarding de l’application Harmony : connexion simplifiée via Apple, Facebook ou Google, sélection et confirmation d’appairage de l’appareil, puis un quiz en cinq questions sur l’objectif, le niveau sportif, le poids et la taille, la fréquence sportive hebdomadaire et les freins au quotidien.",
-            ],
-          },
-        },
-        {
-          title: "Dashboard & Progress Tracking",
-          paragraphs: [
-            "The daily dashboard surfaces steps, sleep, heart rate, calories and hydration as one readable 'Today' view, with a weekly training program, per-session exercise detail and a run history with map, distance and pace underneath it.",
-            "It's built to be simplified, not exhaustive: the dashboard is personalizable, so data that doesn't apply — menstrual tracking, for instance — can be swapped for something that does. That directly answers the 'too complex' complaint respondents raised about existing apps.",
-          ],
-          images: [
-            {
-              src: appDashboard,
-              alt: "Harmony app dashboard: a daily 'Today' view with steps, sleep, heart rate, calories and hydration rings, a weekly training program, per-session exercise details, a run-history map with distance and pace, and a training calendar.",
-              contain: true,
-              zoomable: true,
-              width: 2481,
-              height: 3508,
-            },
-          ],
-          french: {
-            title: "Dashboard & suivi de progression",
-            paragraphs: [
-              "Le dashboard quotidien réunit pas, sommeil, fréquence cardiaque, calories et hydratation dans une vue « Aujourd’hui » lisible, avec un programme d’entraînement hebdomadaire, le détail de chaque séance et un historique de course avec carte, distance et allure en dessous.",
-              "Il est pensé pour être simplifié, pas exhaustif : le dashboard est personnalisable, une donnée qui ne s’applique pas — le suivi du cycle menstruel, par exemple — peut être remplacée par une autre. C’est la réponse directe au reproche de complexité formulé par les répondant·es sur les applications existantes.",
-            ],
-            imageAlts: [
-              "Dashboard de l’application Harmony : vue quotidienne « Aujourd’hui » avec anneaux de pas, sommeil, fréquence cardiaque, calories et hydratation, un programme d’entraînement hebdomadaire, le détail de chaque séance, une carte d’historique de course avec distance et allure, et un calendrier d’entraînement.",
-            ],
-          },
-        },
-        {
-          title: "Community & Gamification",
-          paragraphs: [
-            "Groups (sleep, yoga & fitness, wellbeing), friend challenges and community leaderboards give training a social layer respondents said they were missing. Badges, encouraging in-app messages and time-boxed challenges — '10km in a month', 'move in August' — reward consistency rather than just logging it.",
-            "This is the most direct response to the research's clearest gap: motivation fades without support, so the product adds people, not just more stats.",
-          ],
-          imageLayout: "two-up",
-          images: [
-            {
-              src: communityGamification1,
-              alt: "Harmony community screens: challenges and friends tabs, wellbeing/yoga/sleep groups to join, a friends leaderboard, and community challenge cards like '10km in a month'.",
-              label: "Community",
-              contain: true,
-              zoomable: true,
-              width: 2481,
-              height: 3508,
-            },
-            {
-              src: communityGamification2,
-              alt: "Harmony gamification screens: achievement badges by level, an encouraging 'goal reached' message, and time-boxed challenge cards such as 'move in August'.",
-              label: "Gamification",
-              contain: true,
-              zoomable: true,
-              width: 2481,
-              height: 3508,
-            },
-          ],
-          french: {
-            title: "Communauté & gamification",
-            paragraphs: [
-              "Des groupes (sommeil, yoga & fitness, bien-être), des défis entre amis et des classements communautaires apportent la dimension sociale que les répondant·es disaient manquer. Badges, messages d’encouragement dans l’app et défis limités dans le temps — « 10 km en un mois », « bougez en août » — récompensent la régularité plutôt que le simple enregistrement.",
-              "C’est la réponse la plus directe au manque le plus net révélé par la recherche : la motivation s’essouffle sans soutien, donc le produit ajoute des personnes, pas seulement plus de statistiques.",
-            ],
-            imageLabels: ["Communauté", "Gamification"],
-            imageAlts: [
-              "Écrans communauté Harmony : onglets défis et amis, groupes bien-être/yoga/sommeil à rejoindre, classement entre amis, et cartes de défis communautaires comme « 10 km en un mois ».",
-              "Écrans de gamification Harmony : badges de récompense par niveau, message d’encouragement « objectif atteint », et cartes de défis limités dans le temps comme « bougez en août ».",
-            ],
-          },
-        },
-        {
-          title: "Behind the Decisions",
-          paragraphs: [
-            "Website and app wireframes set this structure before any visual design — desktop, mobile and the app's full loop, all zoned before color or type entered the file. The design system that carried it into every screen — logo, color, type, components — is documented in full below.",
-          ],
-          french: {
-            title: "Derrière les décisions",
-            paragraphs: [
-              "Les wireframes du site et de l’application ont posé cette structure avant tout habillage visuel — desktop, mobile et la boucle complète de l’application, zonés avant toute couleur ou typographie. Le design system qui l’a portée sur chaque écran — logo, couleur, typographie, composants — est documenté intégralement ci-dessous.",
-            ],
-          },
+          posterAspectClassName: "aspect-[3/4]",
+          posterZoomClassName: "scale-100",
+          posterPositionClassName: "object-top",
         },
       ],
       document: {
@@ -481,13 +504,38 @@ export const harmonyCaseStudy: CaseStudy = {
         sizeNote: "~640 KB",
       },
       disclosure: {
-        summary: "Additional wireframes",
-        frenchSummary: "Wireframes supplémentaires",
+        summary: "Wireframes & accessibility detail",
+        frenchSummary: "Wireframes & détail accessibilité",
         sections: [
+          {
+            title: "Paper Prototype",
+            paragraphs: [
+              "The hand-sketched homepage, product page and application flow tested before any high-fidelity screen.",
+            ],
+            images: [
+              {
+                src: paperPrototype,
+                alt: "Hand-sketched paper prototypes for Harmony's homepage, testimonial section and application, with a written summary of user-testing findings: navigation was clear, but testers wanted bracelet-choice guidance and visible color options from the homepage.",
+                contain: true,
+                zoomable: true,
+                width: 2481,
+                height: 3508,
+              },
+            ],
+            french: {
+              title: "Prototype papier",
+              paragraphs: [
+                "La page d’accueil, la page produit et le parcours applicatif dessinés à la main, testés avant tout écran haute-fidélité.",
+              ],
+              imageAlts: [
+                "Prototypes papier dessinés à la main pour la page d’accueil, la section témoignages et l’application Harmony, avec une synthèse écrite des tests utilisateurs : navigation claire, mais besoin d’aide au choix du bracelet et de coloris visibles dès l’accueil.",
+              ],
+            },
+          },
           {
             title: "Website Wireframes",
             paragraphs: [
-              "Zoning set the structural position of each page's key elements — navigation, content, visuals, supporting information — before any visual design, across the homepage, product, category, contact and retailer-map pages. Wireframes for the homepage, product page, category page and contact page then defined the site's structure at both desktop and mobile widths.",
+              "Zoning set the structural position of each page's key elements before any visual design. Wireframes for the homepage, product, category and contact pages then defined the site's structure at desktop and mobile widths.",
             ],
             imageLayout: "two-up",
             images: [
@@ -513,7 +561,7 @@ export const harmonyCaseStudy: CaseStudy = {
             french: {
               title: "Wireframes du site",
               paragraphs: [
-                "Le zoning a fixé la position structurelle des éléments clés de chaque page — navigation, contenu, visuels, informations complémentaires — avant tout habillage visuel, sur l’accueil, la fiche produit, la page catégorie, la page contact et la carte des revendeurs. Les wireframes de l’accueil, de la fiche produit, de la page catégorie et de la page contact ont ensuite défini la structure du site en desktop et en mobile.",
+                "Le zoning a fixé la position structurelle des éléments clés de chaque page avant tout habillage visuel. Les wireframes de l’accueil, de la fiche produit, de la page catégorie et de la page contact ont ensuite défini la structure du site en desktop et en mobile.",
               ],
               imageAlts: [
                 "Wireframes desktop de l’accueil, de la page contact, de la fiche produit et de la page catégorie Harmony, montrant la structure et la hiérarchie de contenu avant l’habillage visuel.",
@@ -524,7 +572,7 @@ export const harmonyCaseStudy: CaseStudy = {
           {
             title: "Mobile App Wireframes",
             paragraphs: [
-              "The companion app's wireframes cover the full loop: a device-pairing and onboarding quiz, the daily dashboard, a training program, progress statistics, community and workout screens — the structural pass behind every high-fidelity screen shown above.",
+              "The companion app's wireframes cover the full loop: pairing and onboarding, the daily dashboard, a training program, progress statistics, community and workout screens.",
             ],
             imageLayout: "two-up",
             images: [
@@ -550,7 +598,7 @@ export const harmonyCaseStudy: CaseStudy = {
             french: {
               title: "Wireframes de l’application",
               paragraphs: [
-                "Les wireframes de l’application couvrent l’ensemble du parcours : appairage de l’appareil et quiz d’onboarding, dashboard quotidien, programme d’entraînement, statistiques de progression, écrans communauté et entraînements — le travail de structure derrière chaque écran haute-fidélité présenté ci-dessus.",
+                "Les wireframes de l’application couvrent l’ensemble du parcours : appairage et onboarding, dashboard quotidien, programme d’entraînement, statistiques de progression, écrans communauté et entraînements.",
               ],
               imageLabels: [
                 "Onboarding & programme",
@@ -562,138 +610,59 @@ export const harmonyCaseStudy: CaseStudy = {
               ],
             },
           },
+          {
+            title: "Accessibility Proof",
+            paragraphs: [
+              "Alt text, inline form errors and the contrast check shown in one sheet.",
+            ],
+            images: [
+              {
+                src: accessibility2,
+                alt: "Examples of descriptive alt text on product images, inline error messages on the contact form, and a contrast check confirming a 10.22:1 ratio (AA and AAA) for white text on the teal footer background.",
+                label: "Alt text, forms & contrast",
+                contain: true,
+                zoomable: true,
+                width: 2481,
+                height: 3508,
+              },
+            ],
+            french: {
+              title: "Preuve d’accessibilité",
+              paragraphs: [
+                "Textes alternatifs, erreurs de formulaire en ligne et vérification de contraste réunis sur une planche.",
+              ],
+              imageAlts: [
+                "Exemples de texte alternatif descriptif sur les images produits, de messages d’erreur en ligne sur le formulaire de contact, et une vérification de contraste confirmant un ratio de 10.22:1 (AA et AAA) pour le texte blanc sur le fond sarcelle du footer.",
+              ],
+              imageLabels: ["Textes alternatifs, formulaires & contraste"],
+            },
+          },
         ],
       },
       french: {
-        heading: "Concevoir l’interaction",
+        heading: "Résultat",
         paragraphs: [
-          "Trois décisions ont porté la recherche jusqu’au produit — chacune répond à un manque précis nommé par les testeur·ses et répondant·es, pas à une bonne pratique générique.",
-        ],
-      },
-    },
-    {
-      heading: "Final Experience",
-      paragraphs: [
-        "High-fidelity mockups carried the wireframes' structure into layout, color, spacing and typography — and answered the two gaps user testing surfaced: product colors are visible from the homepage, and category pages group bracelets by use (Health, Move, Luxe) so choosing one is guided, not a guess.",
-        "The final screens were connected into two interactive Figma prototypes — the site's homepage-to-product journey, and the app's onboarding-to-community loop — so the client could click through the real flow rather than review static frames.",
-      ],
-      imageLayout: "three-up",
-      images: [
-        {
-          src: finalUiDesktop,
-          alt: "Final desktop UI for Harmony's homepage, product page and category page, in the finished visual language with product colors visible from the homepage.",
-          label: "Desktop",
-          contain: true,
-          zoomable: true,
-          width: 794,
-          height: 1126,
-        },
-        {
-          src: finalUiTablet,
-          alt: "Final tablet UI for Harmony's homepage, product page and category page, adapting the desktop layout to a medium viewport.",
-          label: "Tablet",
-          frenchLabel: "Tablette",
-          contain: true,
-          zoomable: true,
-          width: 710,
-          height: 1154,
-        },
-        {
-          src: finalUiMobile,
-          alt: "Final mobile UI for Harmony's homepage, product page and category page, adapting the layout to a narrow viewport.",
-          label: "Mobile",
-          contain: true,
-          zoomable: true,
-          width: 784,
-          height: 1172,
-        },
-      ],
-      videos: [
-        {
-          src: websitePrototypeVideo,
-          poster: finalUiDesktop,
-          posterAlt:
-            "Poster frame for the Harmony website prototype walkthrough, showing the final desktop UI sheet.",
-          frenchPosterAlt:
-            "Image d’aperçu de la présentation du prototype du site Harmony, montrant la planche de l’interface desktop finale.",
-          label: "Website prototype walkthrough",
-          frenchLabel: "Présentation du prototype du site web",
-          sizeNote: "Video · ~45 MB",
-          frenchSizeNote: "Vidéo · ~45 Mo",
-          displayWidth: "website",
-          width: 794,
-          height: 1126,
-        },
-        {
-          src: appPrototypeVideo,
-          poster: appDashboard,
-          posterAlt:
-            "Poster frame for the Harmony app prototype walkthrough, showing the app dashboard sheet.",
-          frenchPosterAlt:
-            "Image d’aperçu de la présentation du prototype de l’application Harmony, montrant la planche du tableau de bord.",
-          label: "App prototype walkthrough",
-          frenchLabel: "Présentation du prototype de l’application",
-          sizeNote: "Video · ~54 MB",
-          frenchSizeNote: "Vidéo · ~54 Mo",
-          displayWidth: "mobile",
-          width: 2481,
-          height: 3508,
-        },
-      ],
-      french: {
-        heading: "Expérience finale",
-        paragraphs: [
-          "Les maquettes haute-fidélité ont porté la structure des wireframes vers la mise en page, la couleur, les espacements et la typographie — et ont répondu aux deux manques révélés par les tests : les coloris produits sont visibles dès l’accueil, et les pages catégorie regroupent les bracelets par usage (Health, Move, Luxe) pour guider le choix plutôt que le laisser au hasard.",
-          "Les écrans finaux ont été reliés dans deux prototypes Figma interactifs — le parcours accueil → produit du site, et la boucle onboarding → communauté de l’application — pour que le client puisse parcourir le vrai flux plutôt que de relire des écrans statiques.",
+          "Avant tout écran haute-fidélité, une page d’accueil, une page produit et un parcours applicatif dessinés à la main ont été testés auprès de vraies personnes — la navigation était déjà claire, mais les testeur·ses voulaient de l’aide pour choisir un bracelet selon leurs habitudes sportives, et s’attendaient à voir les coloris dès l’accueil. Les maquettes haute-fidélité ont répondu aux deux : les pages catégorie regroupent les bracelets par usage (Health, Move, Luxe), et les coloris produits sont visibles dès l’accueil.",
+          "Nous avons intégré des pratiques fondamentales d’accessibilité plutôt que de revendiquer un audit complet : une barre d’outils (redimensionnement du texte, niveaux de gris, contraste élevé/négatif), un texte alternatif descriptif sur chaque image produit, des messages d’erreur clairs, et une vérification des contrastes — le footer en blanc sur sarcelle atteint un ratio de 10.22:1, conforme AA et AAA.",
         ],
         imageAlts: [
-          "Interface desktop finale de l’accueil, de la fiche produit et de la page catégorie Harmony, dans le langage visuel final avec les coloris produits visibles dès l’accueil.",
-          "Interface tablette finale de l’accueil, de la fiche produit et de la page catégorie Harmony, adaptant la mise en page desktop à un écran intermédiaire.",
-          "Interface mobile finale de l’accueil, de la fiche produit et de la page catégorie Harmony, adaptant la mise en page à un écran étroit.",
+          "Interface desktop finale de l’accueil, de la fiche produit et de la page catégorie Harmony, dans le langage visuel final avec les coloris produits visibles dès l’accueil. Zoomer pour voir la planche complète.",
+          "Interface tablette finale de l’accueil, de la fiche produit et de la page catégorie Harmony, adaptant la mise en page desktop à un écran intermédiaire. Zoomer pour voir la planche complète.",
+          "Interface mobile finale de l’accueil, de la fiche produit et de la page catégorie Harmony, adaptant la mise en page à un écran étroit. Zoomer pour voir la planche complète.",
         ],
       },
     },
     {
-      heading: "Accessibility",
+      heading: "Reflection",
       paragraphs: [
-        "We integrated foundational practices rather than claiming a finished audit: an accessibility toolbar (text resizing, grayscale, high/negative contrast, underlined links), descriptive alt text on every product image, clear inline form-error messages, and checked color-contrast ratios — the footer's white-on-teal combination measures 10.22:1, passing both AA and AAA.",
-        "The team's own conclusion, kept as written: Harmony's site is partially accessible. A full audit against WCAG would still be needed before any real production launch.",
-      ],
-      images: [
-        {
-          src: accessibility2,
-          alt: "Examples of descriptive alt text on product images, inline error messages on the contact form, and a contrast check confirming a 10.22:1 ratio (AA and AAA) for white text on the teal footer background.",
-          label: "Alt text, forms & contrast",
-          contain: true,
-          zoomable: true,
-          displayWidth: "reference",
-          width: 2481,
-          height: 3508,
-        },
+        "By the end of the project, research had produced a defined audience and validated priorities. The A/B test and heatmap work referenced in this project are documented plans and methodology, not completed results — the source material doesn't establish a winning variant, and none is claimed here.",
+        "There was no real user base at scale, and Harmony's site is partially accessible — a full WCAG audit would still be needed before any real production launch. What stayed with me is that understanding has to come before designing: not a phase to finish and forget, but the discipline that made every decision after it defensible.",
       ],
       french: {
-        heading: "Accessibilité",
+        heading: "Réflexion",
         paragraphs: [
-          "Nous avons intégré des pratiques fondamentales plutôt que de revendiquer un audit complet : une barre d’outils d’accessibilité (redimensionnement du texte, niveaux de gris, contraste élevé/négatif, liens soulignés), un texte alternatif descriptif sur chaque image produit, des messages d’erreur de formulaire clairs, et une vérification des contrastes — le footer en blanc sur sarcelle atteint un ratio de 10.22:1, conforme AA et AAA.",
-          "La conclusion de l’équipe, reprise telle quelle : le site Harmony est partiellement accessible. Un audit complet au regard des WCAG resterait nécessaire avant toute mise en production réelle.",
-        ],
-        imageAlts: [
-          "Exemples de texte alternatif descriptif sur les images produits, de messages d’erreur en ligne sur le formulaire de contact, et une vérification de contraste confirmant un ratio de 10.22:1 (AA et AAA) pour le texte blanc sur le fond sarcelle du footer.",
-        ],
-        imageLabels: ["Textes alternatifs, formulaires & contraste"],
-      },
-    },
-    {
-      heading: "Outcomes, Limitations & Learnings",
-      paragraphs: [
-        "By the end of the project, research had produced a defined audience and a validated set of priorities; that evidence carried through card sorting, wireframes, a finished responsive site and app UI, and two interactive prototypes. The A/B test and heatmap work here are documented plans and methodology, not completed results — the source material doesn't establish a winning variant, and this project overview doesn't claim one.",
-        "There was no real user base at scale, and accessibility was treated as foundational practice rather than a completed WCAG audit. What stayed with me is that understanding has to come before designing — not a phase to finish and forget, but the discipline that made every decision after it defensible.",
-      ],
-      french: {
-        heading: "Résultats, limites & apprentissages",
-        paragraphs: [
-          "À la fin du projet, la recherche avait produit un public défini et des priorités validées ; cette évidence s’est retrouvée dans le tri de cartes, les wireframes, une interface finie et responsive pour le site et l’application, et deux prototypes interactifs. Le travail d’A/B testing et de heatmap présenté ici documente un plan et une méthodologie, pas des résultats aboutis — les documents source n’établissent pas de variante gagnante, et cette présentation du projet n’en revendique aucune.",
-          "Il n’y a pas eu de base d’utilisateur·rices réelle à grande échelle, et l’accessibilité a été traitée comme une pratique fondationnelle plutôt qu’un audit WCAG complet. Ce qui m’en reste, c’est que comprendre doit précéder concevoir — non comme une étape à finir puis oublier, mais comme la discipline qui a rendu chaque décision suivante défendable.",
+          "À la fin du projet, la recherche avait produit un public défini et des priorités validées. Le travail d’A/B testing et de heatmap mentionné dans ce projet documente un plan et une méthodologie, pas des résultats aboutis — les documents source n’établissent pas de variante gagnante, et aucune n’est revendiquée ici.",
+          "Il n’y a pas eu de base d’utilisateur·rices réelle à grande échelle, et le site Harmony est partiellement accessible — un audit complet au regard des WCAG resterait nécessaire avant toute mise en production réelle. Ce qui m’en reste, c’est que comprendre doit précéder concevoir : non comme une étape à finir puis oublier, mais comme la discipline qui a rendu chaque décision suivante défendable.",
         ],
       },
     },

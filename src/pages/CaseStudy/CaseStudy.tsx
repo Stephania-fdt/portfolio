@@ -31,7 +31,7 @@ type CaseStudyProps = {
  * `CaseStudyDisclosure`) so the two additive, Harmony-only schema
  * extensions don't duplicate this JSX.
  */
-function SectionSubBlock({
+export function SectionSubBlock({
   sub,
   index,
 }: {
@@ -73,6 +73,9 @@ function SectionSubBlock({
                 zoomable={image.zoomable}
                 width={image.width}
                 height={image.height}
+                cropAspectClassName={image.cropAspectClassName}
+                cropZoomClassName={image.cropZoomClassName}
+                cropPositionClassName={image.cropPositionClassName}
               />
               {image.label || image.caption ? (
                 <figcaption className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
@@ -87,6 +90,32 @@ function SectionSubBlock({
       ) : null}
     </div>
   )
+}
+
+/**
+ * Groups consecutive subsections into pairs where one opts in via
+ * `pairWithNext` — each returned group is either a single sub-block or a
+ * two-item pair meant to render side by side on desktop. A subsection
+ * that sets `pairWithNext` but has no following sibling renders alone,
+ * same as if the flag weren't set.
+ */
+function groupSubsections(
+  subsections: CaseStudyDisclosureSection[],
+): CaseStudyDisclosureSection[][] {
+  const groups: CaseStudyDisclosureSection[][] = []
+  let i = 0
+  while (i < subsections.length) {
+    const current = subsections[i]
+    const next = subsections[i + 1]
+    if (current.pairWithNext && next) {
+      groups.push([current, next])
+      i += 2
+    } else {
+      groups.push([current])
+      i += 1
+    }
+  }
+  return groups
 }
 
 /**
@@ -203,13 +232,32 @@ function CaseStudy({ slug, caseStudy }: CaseStudyProps) {
 
               {section.subsections && section.subsections.length > 0 ? (
                 <div className="mt-10">
-                  {section.subsections.map((sub, subIndex) => (
-                    <SectionSubBlock
-                      key={sub.title ?? subIndex}
-                      sub={sub}
-                      index={subIndex}
-                    />
-                  ))}
+                  {groupSubsections(section.subsections).map(
+                    (group, groupIndex) =>
+                      group.length === 2 ? (
+                        <div
+                          key={`${groupIndex}-${group.map((sub) => sub.title).join("-")}`}
+                          className={cn(
+                            "grid gap-8 md:grid-cols-2",
+                            groupIndex > 0 && "mt-14",
+                          )}
+                        >
+                          {group.map((sub, subIndex) => (
+                            <SectionSubBlock
+                              key={sub.title ?? subIndex}
+                              sub={sub}
+                              index={0}
+                            />
+                          ))}
+                        </div>
+                      ) : (
+                        <SectionSubBlock
+                          key={group[0].title ?? groupIndex}
+                          sub={group[0]}
+                          index={groupIndex}
+                        />
+                      ),
+                  )}
                 </div>
               ) : null}
 
@@ -248,6 +296,9 @@ function CaseStudy({ slug, caseStudy }: CaseStudyProps) {
                         selected={image.selected}
                         width={image.width}
                         height={image.height}
+                        cropAspectClassName={image.cropAspectClassName}
+                        cropZoomClassName={image.cropZoomClassName}
+                        cropPositionClassName={image.cropPositionClassName}
                       />
                       {image.label || image.caption ? (
                         <figcaption className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
@@ -281,6 +332,9 @@ function CaseStudy({ slug, caseStudy }: CaseStudyProps) {
                       sizeNote={video.sizeNote}
                       width={video.width}
                       height={video.height}
+                      posterAspectClassName={video.posterAspectClassName}
+                      posterZoomClassName={video.posterZoomClassName}
+                      posterPositionClassName={video.posterPositionClassName}
                       className={cn(
                         "mx-auto w-full",
                         video.displayWidth === "website" && "max-w-[880px]",

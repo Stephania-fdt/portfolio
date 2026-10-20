@@ -10,11 +10,8 @@ type GapBlock = CopyBlock & {
 }
 
 type DesignSystemContent = {
-  kicker: string
-  introduction: string
-  colorRoles: ImageBlock
-  system: CopyBlock
-  conclusion: string
+  /** Alt + caption only now — the decision's own prose lives in `spf-page.ts`; this is just the proof image beside it. */
+  colorRoles: Pick<ImageBlock, "alt" | "caption">
   detailsSummary: string
   reference: {
     typography: ImageBlock
@@ -41,28 +38,11 @@ type DesignSystemContent = {
  */
 const spfDesignSystemContent: LocalizedContent<DesignSystemContent> = {
   en: {
-    kicker: "The Design System",
-    introduction:
-      "Four applications with no shared visual language, and developers rebuilding the same buttons every time — the fix had to be a system, not a style guide. Every color, type size and spacing value resolves to a named role before it resolves to a value, because a hex code in a Figma layer doesn't travel to a developer's codebase. A named variable does.",
     colorRoles: {
-      label: "Color, Resolved by Role",
-      paragraphs: [
-        "Every color resolves to a role before it resolves to a hex value — primary, secondary and tertiary key colors, plus a dedicated feedback set for success, warning, information and error, each paired with its own “on-color” so text never has to guess its own contrast.",
-        "The same semantic name resolves differently across four modes — Light, Light High Contrast, Light Medium Contrast, Dark — because contrast is a decision made in the system, not a property left to whichever screen happens to render it.",
-      ],
       alt: "SPF accent color documentation — primary, secondary and tertiary key colors with hex values and usage notes.",
       caption:
         "Primary, secondary, tertiary — and their feedback counterparts — each with a hex value and its own on-color, so no component has to guess its own contrast.",
     },
-    system: {
-      label: "One System, Four Modes",
-      paragraphs: [
-        "The palette alone runs 174 variables across one collection — eighteen steps per hue, resolving to the same value in all four modes, because a palette is raw material, not yet a decision. Meaning gets assigned one group over: forty-nine semantic roles like Primary, On Primary and Primary Container, each independently defined per mode — Secondary alone resolves to four different hex values depending on which one is active.",
-        "Built and checked in Tokens Studio for Figma, not styled by hand per screen, and exported as structured JSON so a developer opens the same values in their own editor — never a screenshot thrown across the gap between design and engineering.",
-      ],
-    },
-    conclusion:
-      "None of this was designed to look good in a token sheet. It was designed to survive four applications, four contrast modes, and however many developers touched it after — which is the actual test a design system has to pass.",
     detailsSummary: "Design system reference",
     reference: {
       typography: {
@@ -156,28 +136,11 @@ const spfDesignSystemContent: LocalizedContent<DesignSystemContent> = {
     },
   },
   fr: {
-    kicker: "Le Design System",
-    introduction:
-      "Quatre applications sans langage visuel commun, et des développeurs qui recréaient les mêmes boutons à chaque projet : la réponse devait être un système, pas un guide de style. Chaque couleur, taille typographique et valeur d’espacement se résout d’abord vers un rôle nommé avant une valeur, car une couleur hexadécimale dans un calque Figma ne voyage pas jusqu’au code d’un développeur. Une variable nommée, si.",
     colorRoles: {
-      label: "La couleur, résolue par rôle",
-      paragraphs: [
-        "Chaque couleur correspond à un rôle avant de correspondre à une valeur hexadécimale : couleurs clés primaires, secondaires et tertiaires, ainsi qu’un jeu de couleurs de retour dédié au succès, à l’avertissement, à l’information et à l’erreur, chacune associée à sa propre « on-color » pour que le contraste du texte ne soit jamais laissé au hasard.",
-        "Un même nom sémantique se résout différemment selon quatre modes — Light, Light High Contrast, Light Medium Contrast, Dark — car le contraste est une décision prise dans le système, non une propriété laissée au hasard de l’écran qui l’affiche.",
-      ],
       alt: "Documentation des couleurs d’accent du SPF : couleurs clés primaires, secondaires et tertiaires avec valeurs hexadécimales et règles d’usage.",
       caption:
         "Primary, secondary, tertiary — et leurs équivalents de retour — chacune avec sa valeur hexadécimale et sa propre on-color, pour qu’aucun composant n’ait à deviner son propre contraste.",
     },
-    system: {
-      label: "Un système, quatre modes",
-      paragraphs: [
-        "La seule palette compte 174 variables dans une collection : dix-huit niveaux par teinte, résolus vers la même valeur dans les quatre modes, car une palette est une matière première, pas encore une décision. La signification est attribuée dans le groupe voisin : quarante-neuf rôles sémantiques comme Primary, On Primary et Primary Container, chacun défini indépendamment par mode — Secondary seul se résout en quatre valeurs hexadécimales différentes selon le mode actif.",
-        "Construits et contrôlés dans Tokens Studio for Figma plutôt que stylés à la main écran par écran, et exportés en JSON structuré pour qu’un développeur ouvre les mêmes valeurs dans son propre éditeur — jamais une capture d’écran jetée par-dessus la séparation entre design et développement.",
-      ],
-    },
-    conclusion:
-      "Rien de tout cela n’a été conçu pour bien paraître dans une planche de tokens. Cela a été conçu pour résister à quatre applications, quatre modes de contraste, et à tous les développeurs qui l’utiliseraient ensuite — c’est le véritable test qu’un Design System doit réussir.",
     detailsSummary: "Référence du Design System",
     reference: {
       typography: {
