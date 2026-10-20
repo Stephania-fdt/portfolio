@@ -13,18 +13,15 @@ import {
 import { CaseStudyDisclosure } from "@/components/ui/case-study-disclosure"
 import { CaseStudyImage } from "@/components/ui/case-study-image"
 import {
-  AnnotationMark,
   TokensIcon,
   AccessibilityIcon,
 } from "@/pages/case-studies/SPF/illustrations"
-import header from "@/assets/case-studies/spf/components/CUSTOM/HEADER.png"
-import accentColors from "@/assets/case-studies/spf/accessibility/Accent-colors.png"
-import typography from "@/assets/case-studies/spf/foundations/TYPOGRAPHY.png"
+import flag from "@/assets/case-studies/spf/foundations/Flag.png"
+import typography from "@/assets/case-studies/spf/foundations/Typography.png"
 import icons from "@/assets/case-studies/spf/foundations/icons.png"
-import systemColors from "@/assets/case-studies/spf/accessibility/KeyColors-tones.png"
-import tones from "@/assets/case-studies/spf/accessibility/TONES.png"
+import tones from "@/assets/case-studies/spf/accessibility/tones.png"
 import elevationSteps from "@/assets/case-studies/spf/foundations/elevation.png"
-import tokensStudio from "@/assets/case-studies/spf/tokens/tokens2.png"
+import tokensStudio from "@/assets/case-studies/spf/accessibility/Tokens studio.png"
 import tokensCode from "@/assets/case-studies/spf/tokens/code_tokens-theme.png"
 import palette from "@/assets/case-studies/spf/tokens/variables.png"
 import schemes from "@/assets/case-studies/spf/tokens/variables2.png"
@@ -98,23 +95,8 @@ function KeyDecisions() {
             size="lg"
             className="max-w-3xl"
           />
-          <div className="mt-8 grid gap-8 lg:grid-cols-12 lg:gap-12">
-            <div className="lg:col-span-4">
-              <div className="space-y-4 text-base leading-relaxed text-foreground">
-                <Paragraphs paragraphs={content.items[0].paragraphs} />
-              </div>
-            </div>
-            <div className="relative lg:col-span-8">
-              <AnnotationMark className="absolute -top-3 -left-3 z-10 hidden sm:block" />
-              <CroppedCapture
-                src={header}
-                alt="The custom SPF header component carrying the Kingdom of Belgium's crest."
-                caption="The header — built from nothing, exactly where Angular Material stops carrying an identity."
-                aspectClassName="aspect-[4/3]"
-                zoomClassName="scale-[1.9]"
-                positionClassName="object-[30%_25%]"
-              />
-            </div>
+          <div className="mt-8 max-w-2xl space-y-4 text-base leading-relaxed text-foreground">
+            <Paragraphs paragraphs={content.items[0].paragraphs} />
           </div>
         </div>
 
@@ -131,12 +113,6 @@ function KeyDecisions() {
               className="max-w-3xl"
             />
           </div>
-          <div className="mt-8 max-w-4xl">
-            <AssetFrame src={accentColors} alt={designSystem.colorRoles.alt} />
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {designSystem.colorRoles.caption}
-            </p>
-          </div>
           <div className="mt-8 grid gap-8 sm:grid-cols-2">
             {content.items[1].paragraphs.map((paragraph) => (
               <p
@@ -147,6 +123,22 @@ function KeyDecisions() {
               </p>
             ))}
           </div>
+        </div>
+
+        <div className="mt-12">
+          <h3 className="max-w-3xl text-2xl font-semibold tracking-tight sm:text-3xl">
+            {designSystem.belgianIdentity.label}
+          </h3>
+          <div className="mt-4 max-w-3xl space-y-4 text-base leading-relaxed text-muted-foreground">
+            <Paragraphs paragraphs={designSystem.belgianIdentity.paragraphs} />
+          </div>
+          <CaseStudyImage
+            src={flag}
+            alt={designSystem.belgianIdentity.alt}
+            contain
+            zoomable
+            className="mt-6"
+          />
         </div>
 
         {/* Decision 3 — accessibility checked at the token, honest gap stays visible */}
@@ -171,9 +163,7 @@ function KeyDecisions() {
                 src={tokensStudio}
                 alt={designSystem.reference.tokenTooling.alt}
                 zoomable
-                cropAspectClassName="aspect-[4/3]"
-                cropZoomClassName="scale-100"
-                cropPositionClassName="object-[50%_62%]"
+                contain
               />
               <p className="mt-3 font-mono text-2xs tracking-widest text-muted-foreground uppercase">
                 {designSystem.reference.tokenTooling.caption}
@@ -195,15 +185,17 @@ function KeyDecisions() {
                 paragraphs={designSystem.reference.typography.paragraphs}
               />
             </div>
-            <CroppedCapture
-              src={typography}
-              alt={designSystem.reference.typography.alt}
-              caption={designSystem.reference.typography.caption ?? ""}
-              className="mt-6 max-w-2xl"
-              aspectClassName="aspect-[5/1]"
-              zoomClassName="scale-[1.68]"
-              positionClassName="object-[50%_0%]"
-            />
+            <figure className="mt-6">
+              <CaseStudyImage
+                src={typography}
+                alt={designSystem.reference.typography.alt}
+                contain
+                zoomable
+              />
+              <figcaption className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {designSystem.reference.typography.caption}
+              </figcaption>
+            </figure>
           </div>
 
           <div className="mt-10">
@@ -215,14 +207,12 @@ function KeyDecisions() {
                 paragraphs={designSystem.reference.fullColorSystem.paragraphs}
               />
             </div>
-            <div className="mt-6 grid max-w-2xl gap-6">
-              <AssetFrame
-                src={systemColors}
-                alt={designSystem.reference.fullColorSystem.alts[0]}
-              />
-              <AssetFrame
+            <div className="mt-6 grid gap-6">
+              <CaseStudyImage
+                contain
+                zoomable
                 src={tones}
-                alt={designSystem.reference.fullColorSystem.alts[1]}
+                alt={designSystem.reference.fullColorSystem.alt}
               />
             </div>
           </div>
@@ -329,14 +319,11 @@ function KeyDecisions() {
           </div>
 
           <div className="mt-10 grid max-w-2xl gap-6">
-            <CroppedCapture
+            <CaseStudyImage
               src={tokensStudio}
               alt={designSystem.reference.tokenTooling.alt}
-              caption={designSystem.reference.tokenTooling.caption ?? ""}
-              aspectClassName="aspect-[3/4]"
-              zoomClassName="scale-[1.15]"
-              positionClassName="object-[70%_35%]"
-              className="max-w-sm"
+              contain
+              zoomable
             />
             <div>
               <p className="font-mono text-2xs tracking-widest text-brand uppercase">

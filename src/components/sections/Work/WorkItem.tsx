@@ -49,7 +49,6 @@ function WorkItem({
   const { language, copy } = useLanguage()
   const shouldReduceMotion = useReducedMotion()
   const isLead = tier === "lead"
-  const isSecondary = tier === "secondary"
   const usesHomePreview = compact && Boolean(project.homePreviewImage)
   const previewImage = usesHomePreview
     ? project.homePreviewImage
@@ -160,26 +159,16 @@ function WorkItem({
 
       <div className="lg:basis-1/2">
         <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, scale: 1.03 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={shouldReduceMotion ? false : { opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-10% 0px" }}
           transition={transition.slow}
-          className={cn(
-            "flex w-full items-center justify-center overflow-hidden border border-border bg-secondary/50 shadow-xs transition-shadow duration-(--duration-standard) ease-standard",
-            isLead && "aspect-[16/10] md:aspect-[16/11]",
-            isSecondary && "aspect-[16/10]",
-            // Wider on mobile only (3:2 vs the desktop 4:3) — below `md`
-            // this image stacks full-width under its text, so the ratio
-            // directly sets how tall the card gets; desktop (where the
-            // image sits at 60% column width in the two-column row) is
-            // untouched, same aspect-[4/3] as before.
-            usesHomePreview && "aspect-video",
-            !isLead &&
-              !isSecondary &&
-              !usesHomePreview &&
-              "aspect-[3/2] md:aspect-[4/3]",
-            hasCaseStudy && "group-hover:shadow-md",
-          )}
+          className="w-full"
+          style={
+            usesHomePreview && project.homePreviewWidth
+              ? { maxWidth: project.homePreviewWidth, marginInline: "auto" }
+              : undefined
+          }
         >
           {previewImage ? (
             <img
@@ -213,12 +202,7 @@ function WorkItem({
                   : project.previewHeight
               }
               loading="lazy"
-              className={cn(
-                "h-full w-full transition-transform duration-(--duration-slow) ease-standard",
-                usesHomePreview
-                  ? "object-contain"
-                  : "object-cover object-top group-hover:scale-[1.03]",
-              )}
+              className="block h-auto w-full"
             />
           ) : (
             // The "plate" — a drafting sheet before the image is inset,
@@ -228,7 +212,7 @@ function WorkItem({
             // that reads as broken.
             <div
               aria-hidden="true"
-              className="relative flex h-full w-full items-center justify-center"
+              className="relative flex aspect-[4/3] w-full items-center justify-center"
               style={{
                 backgroundImage:
                   "repeating-linear-gradient(to right, var(--color-border) 0, var(--color-border) 1px, transparent 1px, transparent 20%), repeating-linear-gradient(to bottom, var(--color-border) 0, var(--color-border) 1px, transparent 1px, transparent 25%)",

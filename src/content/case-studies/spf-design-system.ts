@@ -2,7 +2,6 @@ import type { LocalizedContent } from "@/i18n"
 
 type CopyBlock = { label: string; paragraphs: string[] }
 type ImageBlock = CopyBlock & { alt: string; caption?: string }
-type MultiImageBlock = CopyBlock & { alts: string[] }
 type GapBlock = CopyBlock & {
   assetStatus: string
   missingAssets: string[]
@@ -10,12 +9,11 @@ type GapBlock = CopyBlock & {
 }
 
 type DesignSystemContent = {
-  /** Alt + caption only now — the decision's own prose lives in `spf-page.ts`; this is just the proof image beside it. */
-  colorRoles: Pick<ImageBlock, "alt" | "caption">
+  belgianIdentity: ImageBlock
   detailsSummary: string
   reference: {
     typography: ImageBlock
-    fullColorSystem: MultiImageBlock
+    fullColorSystem: ImageBlock
     icons: ImageBlock
     layout: GapBlock
     elevation: ImageBlock
@@ -38,10 +36,12 @@ type DesignSystemContent = {
  */
 const spfDesignSystemContent: LocalizedContent<DesignSystemContent> = {
   en: {
-    colorRoles: {
-      alt: "SPF accent color documentation — primary, secondary and tertiary key colors with hex values and usage notes.",
-      caption:
-        "Primary, secondary, tertiary — and their feedback counterparts — each with a hex value and its own on-color, so no component has to guess its own contrast.",
+    belgianIdentity: {
+      label: "A visual identity rooted in the Belgian context",
+      paragraphs: [
+        "The colours of the Belgian flag — black, yellow and red — serve as visual cues in the design system. Used as accents in the interfaces, they reflect the applications’ Belgian identity and create a consistent visual link across services. This national reference sits within the palette without overshadowing readability or the hierarchy of information.",
+      ],
+      alt: "Belgian identity palette: black, yellow and red swatches with their hexadecimal values.",
     },
     detailsSummary: "Design system reference",
     reference: {
@@ -52,19 +52,16 @@ const spfDesignSystemContent: LocalizedContent<DesignSystemContent> = {
           "Travel Web, Visa on Web, Visanet — three different products, one typographic voice: Roboto for interface text, Lora reserved for moments that need to read as editorial rather than functional. The same heading means the same thing, at the same weight, everywhere a citizen might land.",
           "Sizes, line-heights and contrast were set against WCAG's actual thresholds, not a visual guess — the same requirement both typefaces had to pass before either made it into the system.",
         ],
-        alt: "The SPF typography scale in Figma — the Roboto and Lora heading specimens side by side, H1 through H6, regular and bold.",
+        alt: "SPF typography reference showing baseline and emphasized styles for display text, headlines, titles, labels and body text.",
         caption:
           "The type scale — Roboto for interface, Lora reserved for editorial moments.",
       },
       fullColorSystem: {
         label: "The Full Tonal System",
         paragraphs: [
-          'Underneath the roles sits a full tonal system — ten steps per color, light mode and dark mode built from the same scale rather than two separate palettes. Semantic naming means a component asking for "error" gets the correct red whichever mode it\'s rendered in, and contrast holds at every step, not just the ones someone remembered to check.',
+          "The tonal palettes provide the shades assigned to interface roles in light and dark themes. Functional colours retain their distinct roles for errors, warnings, information and confirmations alongside the accents expressing Belgian identity.",
         ],
-        alts: [
-          "SPF system feedback colors — green success, yellow warning, blue information and error, each with its container and on-color pairing.",
-          "The full SPF tonal color system in light and dark mode, from P-10 through P-100 for every color role.",
-        ],
+        alt: "SPF tonal palettes for primary, secondary, tertiary, error and neutral colours, with their roles in light and dark themes.",
       },
       icons: {
         label: "Icons",
@@ -119,11 +116,11 @@ const spfDesignSystemContent: LocalizedContent<DesignSystemContent> = {
         label: "Built and Checked in Tooling",
         paragraphs: [
           "The tokens were built and maintained in Tokens Studio for Figma, not styled by hand per screen — the same Collections-and-Groups structure the Variables panel already showed, organized under one shared structure rather than a palette copied into each new file.",
-          "A tooltip reading “Level AA — Pass, Level AAA — Pass” on a background/text pairing means that contrast check happened here, at the source, before a single component consumed the token — not discovered later in an audit, after it had already shipped everywhere.",
+          "The screenshot shows a contrast check for the Primary / On Primary pairing in Tokens Studio. The displayed AA and AAA results apply to that pairing; this capture alone does not establish accessibility compliance for the applications.",
         ],
-        alt: "Tokens Studio for Figma's panel, showing the material-theme color set under a light theme, with a tooltip reporting a WCAG contrast check: Level AA pass, Level AAA pass.",
+        alt: "Tokens Studio for Figma showing light and dark token sets and a contrast tooltip for Primary #004e58 paired with On Primary #ffffff.",
         caption:
-          "Tokens Studio for Figma — contrast checked at the token, before a component ever consumes it.",
+          "Tokens Studio — contrast check for the displayed Primary / On Primary pairing.",
       },
       tokenCode: {
         label: "Exported as Code",
@@ -136,10 +133,12 @@ const spfDesignSystemContent: LocalizedContent<DesignSystemContent> = {
     },
   },
   fr: {
-    colorRoles: {
-      alt: "Documentation des couleurs d’accent du SPF : couleurs clés primaires, secondaires et tertiaires avec valeurs hexadécimales et règles d’usage.",
-      caption:
-        "Primary, secondary, tertiary — et leurs équivalents de retour — chacune avec sa valeur hexadécimale et sa propre on-color, pour qu’aucun composant n’ait à deviner son propre contraste.",
+    belgianIdentity: {
+      label: "Une identité visuelle ancrée dans le contexte belge",
+      paragraphs: [
+        "Les couleurs du drapeau belge — noir, jaune et rouge — servent de repères visuels dans le design system. Utilisées par touches dans les interfaces, elles rappellent l’identité belge des applications et créent un lien visuel cohérent entre les différents services. Cette référence nationale s’intègre à la palette sans prendre le pas sur la lisibilité ni sur la hiérarchie de l’information.",
+      ],
+      alt: "Palette de l’identité belge : nuances de noir, jaune et rouge avec leurs valeurs hexadécimales.",
     },
     detailsSummary: "Référence du Design System",
     reference: {
@@ -150,19 +149,16 @@ const spfDesignSystemContent: LocalizedContent<DesignSystemContent> = {
           "Travel Web, Visa on Web, Visanet : trois produits différents, une seule voix typographique. Roboto est utilisée pour les textes d’interface et Lora est réservée aux moments qui doivent paraître éditoriaux plutôt que fonctionnels. Un même titre porte le même sens et la même graisse partout où une personne peut arriver.",
           "Les tailles, interlignages et contrastes ont été définis selon les seuils réels des WCAG, non selon une intuition visuelle — la même exigence que les deux polices devaient satisfaire avant d’entrer dans le système.",
         ],
-        alt: "Échelle typographique du SPF dans Figma, avec les spécimens de titres Roboto et Lora côte à côte, de H1 à H6, en regular et bold.",
+        alt: "Référence typographique du SPF : styles de base et accentués pour les grands titres, titres, libellés et textes courants.",
         caption:
           "L’échelle typographique : Roboto pour l’interface, Lora réservée aux moments éditoriaux.",
       },
       fullColorSystem: {
         label: "Le système tonal complet",
         paragraphs: [
-          "Sous ces rôles se trouve un système tonal complet : dix niveaux par couleur, avec des modes clair et sombre construits à partir de la même échelle plutôt que de deux palettes séparées. Grâce aux noms sémantiques, un composant demandant « error » reçoit le bon rouge quel que soit le mode, et le contraste tient à chaque niveau, pas uniquement à ceux que quelqu’un a pensé à vérifier.",
+          "Les palettes tonales fournissent les nuances associées aux rôles d’interface en thèmes clair et sombre. Les couleurs fonctionnelles conservent leurs rôles distincts pour les erreurs, les avertissements, l’information et les confirmations, aux côtés des accents exprimant l’identité belge.",
         ],
-        alts: [
-          "Couleurs système du SPF pour le succès, l’avertissement, l’information et l’erreur, avec leurs containers et on-colors.",
-          "Système tonal complet du SPF en modes clair et sombre, de P-10 à P-100 pour chaque rôle de couleur.",
-        ],
+        alt: "Palettes tonales du SPF pour les couleurs primaires, secondaires, tertiaires, d’erreur et neutres, avec leurs rôles en thèmes clair et sombre.",
       },
       icons: {
         label: "Icônes",
@@ -217,11 +213,11 @@ const spfDesignSystemContent: LocalizedContent<DesignSystemContent> = {
         label: "Construit et contrôlé dans les outils",
         paragraphs: [
           "Les tokens ont été construits et maintenus dans Tokens Studio for Figma, sans stylisation manuelle écran par écran. Ils reprennent la structure Collections-and-Groups déjà visible dans le panneau Variables, organisée dans une structure partagée plutôt que dans une palette copiée dans chaque nouveau fichier.",
-          "Une infobulle indiquant « Level AA — Pass, Level AAA — Pass » pour une association arrière-plan/texte signifie que le contraste a été vérifié ici, à la source, avant qu’un seul composant n’utilise le token — et non découvert plus tard lors d’un audit, après son déploiement général.",
+          "La capture montre un contrôle de contraste de l’association Primary / On Primary dans Tokens Studio. Les résultats AA et AAA affichés concernent cette association ; cette capture seule ne permet pas d’établir la conformité des applications en matière d’accessibilité.",
         ],
-        alt: "Panneau Tokens Studio for Figma montrant les couleurs material-theme en mode clair, avec une infobulle de contrôle WCAG indiquant Level AA pass et Level AAA pass.",
+        alt: "Tokens Studio for Figma présentant les jeux de tokens clairs et sombres et une infobulle de contraste pour Primary #004e58 associé à On Primary #ffffff.",
         caption:
-          "Tokens Studio for Figma : contraste contrôlé au niveau du token, avant son utilisation par un composant.",
+          "Tokens Studio : contrôle du contraste de l’association Primary / On Primary affichée.",
       },
       tokenCode: {
         label: "Exporté sous forme de code",

@@ -89,7 +89,7 @@ const spfPageContent: LocalizedContent<SpfPageContent> = {
         {
           label: "Angular Material as the Base, Custom Where It Counts",
           paragraphs: [
-            "A fully custom system didn't survive contact with reality: time constraints and developer conversations made it impractical. Foundational components come from Angular Material instead — alerts, pickers, navigation, dialogs, restyled to one shared language — and I built custom components from scratch only where SPF's identity actually needed to show: the header carrying the Kingdom of Belgium's crest, the sidebar, the footer.",
+            "A fully custom system didn't survive contact with reality: time constraints and developer conversations made it impractical. Foundational components come from Angular Material instead — alerts, pickers, navigation, dialogs, restyled to one shared language — with custom components where SPF's identity needed to show.",
             "I wasn't the application architect; what I owned was the visual hierarchy of the information itself. That wasn't a retreat from ambition — it let the system actually ship, and still carry SPF's identity exactly where a citizen would notice it.",
           ],
         },
@@ -103,7 +103,7 @@ const spfPageContent: LocalizedContent<SpfPageContent> = {
         {
           label: "Accessibility Checked at the Token, Not the Audit",
           paragraphs: [
-            "Contrast was verified inside Tokens Studio itself — “Level AA — Pass, Level AAA — Pass” — before a single component consumed the token. A disabled button that still reads as a button, dimmed by the same amount across every variant, is a decision, not whatever Angular Material shipped by default.",
+            "Tokens Studio provides contrast checks at the token level. The capture shows AA and AAA results for the displayed Primary / On Primary pairing; these results do not establish accessibility compliance for an entire interface. Disabled states also need deliberate treatment so that controls remain identifiable across variants.",
             "The honest limit: no file in this project documents a visible focus order or a keyboard-only walkthrough of the portal yet, so none is claimed here.",
           ],
         },
@@ -112,7 +112,7 @@ const spfPageContent: LocalizedContent<SpfPageContent> = {
     result: {
       kicker: "Result",
       intro:
-        "The same header, footer and button component that authenticate a citizen carry them into a real homepage, service cards and a dedicated FAQ — proof the system holds a real page together, not just a component sheet.",
+        "The authentication screens bring the shared components together across desktop, mobile and tablet, with a consistent visual hierarchy and sign-in choices.",
       outcome:
         "Designed and shipped, in production since 2023 across the applications shown here — not a completed research program: no file in this project documents formal usability testing against it.",
     },
@@ -158,7 +158,7 @@ const spfPageContent: LocalizedContent<SpfPageContent> = {
         {
           label: "Angular Material en base, du sur-mesure là où ça compte",
           paragraphs: [
-            "Un système entièrement sur mesure n'a pas survécu à la réalité : contraintes de temps et échanges avec les développeurs l'ont rendu impraticable. Les composants fondamentaux viennent d'Angular Material — alerts, pickers, navigation, dialogs, réadaptés à un langage commun — et j'ai construit du sur-mesure uniquement là où l'identité du SPF devait s'exprimer : le header portant le blason du Royaume de Belgique, la sidebar, le footer.",
+            "Un système entièrement sur mesure n'a pas survécu à la réalité : contraintes de temps et échanges avec les développeurs l'ont rendu impraticable. Les composants fondamentaux viennent d'Angular Material — alerts, pickers, navigation, dialogs, réadaptés à un langage commun — avec des composants sur mesure là où l'identité du SPF devait s'exprimer.",
             "Je n'étais pas architecte applicative ; ma responsabilité portait sur la hiérarchie visuelle de l'information. Ce n'était pas un recul d'ambition — cela a permis au système d'être réellement livré, tout en portant l'identité du SPF exactement là où une personne la remarque.",
           ],
         },
@@ -172,7 +172,7 @@ const spfPageContent: LocalizedContent<SpfPageContent> = {
         {
           label: "L'accessibilité vérifiée au token, pas à l'audit",
           paragraphs: [
-            "Le contraste a été vérifié directement dans Tokens Studio — « Level AA — Pass, Level AAA — Pass » — avant qu'un seul composant n'utilise le token. Un bouton désactivé qui reste identifiable comme bouton, atténué de la même manière sur chaque variante, résulte d'une décision, pas du comportement livré par défaut par Angular Material.",
+            "Tokens Studio permet de contrôler le contraste au niveau des tokens. La capture présente les résultats AA et AAA de l’association Primary / On Primary affichée ; ils ne permettent pas d’établir la conformité d’une interface entière en matière d’accessibilité. Les états désactivés demandent aussi un traitement explicite pour que les contrôles restent identifiables entre les variantes.",
             "La limite honnête : aucun fichier de ce projet ne documente encore un ordre de focus visible ou un parcours du portail uniquement au clavier ; aucune affirmation de ce type n'est donc formulée ici.",
           ],
         },
@@ -181,7 +181,7 @@ const spfPageContent: LocalizedContent<SpfPageContent> = {
     result: {
       kicker: "Résultat",
       intro:
-        "Le même header, le même footer et le même composant de bouton qui authentifient une personne l'accompagnent vers une véritable page d'accueil, des cartes de services et une FAQ dédiée — la preuve que le système tient une vraie page ensemble, pas seulement une planche de composants.",
+        "Les écrans d’authentification réunissent les composants partagés sur ordinateur, mobile et tablette, avec une hiérarchie visuelle et des choix de connexion cohérents.",
       outcome:
         "Conçu et livré, en production depuis 2023 sur les applications présentées ici — pas un programme de recherche abouti : aucun fichier de ce projet ne documente de tests d'utilisabilité formels.",
     },

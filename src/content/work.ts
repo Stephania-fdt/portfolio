@@ -6,8 +6,7 @@ import spfHomePreview from "@/assets/case-studies/spf/product/Desktop_authentica
 import portfolioHomeThumbnail from "@/assets/case-studies/portfolio/home-thumbnail.png"
 import harmonyHomeThumbnail from "@/assets/case-studies/harmony/home-thumbnail.webp"
 import harmonyHomePreview from "@/assets/images/harmony/harmony-hero.webp.png"
-import wellpackHomeThumbnail from "@/assets/case-studies/wellpack/home-thumbnail.png"
-import wellpackHomePreview from "@/assets/case-studies/wellpack/home-preview.png"
+import wellpackWebsite from "@/assets/case-studies/wellpack/02-brand/supports/Declinaisaon_siteweb.png"
 import jogaAuraHomeThumbnail from "@/assets/case-studies/joga-aura/home-thumbnail.png"
 
 export type WorkProject = {
@@ -227,14 +226,20 @@ const unorderedWorkProjects: WorkProject[] = [
     ],
     signalTechnologies: ["UX Research", "Design Briefs"],
     href: "/work/wellpack",
-    previewImage: wellpackHomeThumbnail,
-    homePreviewImage: wellpackHomePreview,
+    previewImage: wellpackWebsite,
+    previewWidth: 2180,
+    previewHeight: 1218,
+    previewAlt:
+      "WellPack website presentation showing the homepage, services and platform sections",
+    previewAltFr:
+      "Planche du site web WellPack présentant la page d’accueil, les services et la plateforme",
+    homePreviewImage: wellpackWebsite,
     homePreviewAlt:
-      "WellPack’s completed website homepage hero, showing the final interface and brand system in use",
+      "WellPack website presentation showing the homepage, services and platform sections",
     homePreviewAltFr:
-      "Section d’accueil du site final de WellPack, montrant l’interface et le système de marque en situation",
-    homePreviewWidth: 467,
-    homePreviewHeight: 275,
+      "Planche du site web WellPack présentant la page d’accueil, les services et la plateforme",
+    homePreviewWidth: 2180,
+    homePreviewHeight: 1218,
     hasCaseStudy: true,
   },
   {

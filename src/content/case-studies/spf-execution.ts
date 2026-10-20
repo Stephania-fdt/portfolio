@@ -13,14 +13,6 @@ type ExecutionContent = {
     authAlts: string[]
     authCaptions: string[]
     authParagraph: string
-    portalLabel: string
-    portalParagraph: string
-    portalAlt: string
-    portalCaption: string
-    faqLabel: string
-    faqParagraphs: string[]
-    faqAlt: string
-    faqCaption: string
   }
   detailsSummary: string
   reference: {
@@ -71,20 +63,6 @@ const spfExecutionContent: LocalizedContent<ExecutionContent> = {
       ],
       authParagraph:
         "The choice a citizen makes first — a Belgian digital key, or a standard account for anyone else — renders identically in intent at both ends of the scale: the same crest, the same warm architectural photograph, the same two buttons, whether it's a desktop monitor or a phone held in one hand.",
-      portalLabel: "The Portal, Assembled",
-      portalParagraph:
-        "Once inside, the same header and footer that were built as isolated components now carry an actual homepage — service cards, an FAQ accordion, a rotating set of articles — proving the system wasn't designed to look good in a component sheet. It was designed to hold a real page together.",
-      portalAlt:
-        "The SPF citizen portal homepage — header with crest, a grid of service cards, an FAQ accordion, an article carousel, and the government footer, all built from the same components documented earlier in the project overview.",
-      portalCaption:
-        "The portal homepage — every piece of it already introduced, none of it new.",
-      faqLabel: "Support, Not Buried in an Accordion",
-      faqParagraphs: [
-        "The homepage's FAQ accordion is one entry point. A citizen who navigates there directly gets a dedicated page instead of a scroll-and-hope — real categories (Access; Legalisations & Apostilles; La Banque de données des Actes de l'État Civil), each with its own heading and illustration, not one flat list of questions standing in for all of them.",
-      ],
-      faqAlt:
-        "The SPF FAQ page, organized into real categories — Access, Legalisations & Apostilles, and La Banque de données des Actes de l'État Civil — each with its own heading and line illustration, under a header carrying the same crest as the rest of the platform.",
-      faqCaption: "A dedicated FAQ page, not just the homepage's accordion.",
     },
     detailsSummary: "Component library reference",
     reference: {
@@ -184,21 +162,6 @@ const spfExecutionContent: LocalizedContent<ExecutionContent> = {
       ],
       authParagraph:
         "Le premier choix d’une personne — une clé numérique belge ou un compte standard pour les autres — conserve exactement la même intention aux deux extrémités de l’échelle : le même blason, la même photographie architecturale chaleureuse et les deux mêmes boutons, sur un écran d’ordinateur comme sur un téléphone tenu d’une main.",
-      portalLabel: "Le portail assemblé",
-      portalParagraph:
-        "Une fois connectés, le même header et le même footer construits comme composants isolés portent désormais une véritable page d’accueil : cartes de services, accordéon de FAQ et carrousel d’articles. Le système n’a pas été conçu pour paraître réussi dans une planche de composants, mais pour maintenir une vraie page ensemble.",
-      portalAlt:
-        "Page d’accueil du portail citoyen du SPF avec header et blason, grille de cartes de services, accordéon de FAQ, carrousel d’articles et footer gouvernemental, tous construits avec les composants documentés précédemment.",
-      portalCaption:
-        "La page d’accueil du portail : chaque pièce a déjà été présentée, aucune n’est nouvelle.",
-      faqLabel: "Une aide qui ne reste pas enfouie dans un accordéon",
-      faqParagraphs: [
-        "L’accordéon de FAQ de la page d’accueil constitue un point d’entrée. Une personne qui s’y rend directement obtient une page dédiée plutôt qu’une longue recherche par défilement : de véritables catégories — Accès ; Légalisations & Apostilles ; La Banque de données des Actes de l’État Civil — chacune avec son titre et son illustration, plutôt qu’une liste unique censée les représenter toutes.",
-      ],
-      faqAlt:
-        "Page FAQ du SPF organisée en catégories réelles — Accès, Légalisations & Apostilles et La Banque de données des Actes de l’État Civil — chacune avec son titre et son illustration, sous le même blason que le reste de la plateforme.",
-      faqCaption:
-        "Une page FAQ dédiée, pas seulement l’accordéon de la page d’accueil.",
     },
     detailsSummary: "Référence de la bibliothèque de composants",
     reference: {
